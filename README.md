@@ -5,4 +5,4 @@ A collection of samples that demonstrates how to configure and customize [Geocor
 Coming soon.
 
 ## Documentation
-- Find further documentation on the [Geocortex Development Center](https://developers.geocortex.com/docs/web/overview).
+Find further documentation on the [Geocortex Development Center](https://developers.geocortex.com/docs/web/overview).
