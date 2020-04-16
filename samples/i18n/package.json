@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "build": "../../node_modules/@vertigis/web-sdk/bin/vertigis-web-sdk.js build",
+        "start": "../../node_modules/@vertigis/web-sdk/bin/vertigis-web-sdk.js start"
+    },
+    "dependencies": {}
+}

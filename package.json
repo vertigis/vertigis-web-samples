@@ -1,0 +1,35 @@
+{
+    "name": "vertigis-web-samples",
+    "version": "0.0.0",
+    "description": "A collection of samples that demonstrates how to configure and customize your Web apps.",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/geocortex/vertigis-web-samples.git"
+    },
+    "author": "Ian Schmitz <ianschmitz@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/geocortex/vertigis-web-samples/issues"
+    },
+    "homepage": "https://github.com/geocortex/vertigis-web-samples#readme",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "@geocortex/web": "^5.6.0",
+        "@vertigis/web-sdk": "beta"
+    },
+    "devDependencies": {
+        "husky": "^4.2.5",
+        "prettier": "^2.0.4",
+        "pretty-quick": "^2.0.1",
+        "typescript": "^3.8.3"
+    },
+    "cldr-data-urls-filter": "(cldr-core|cldr-numbers-modern)",
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    }
+}
