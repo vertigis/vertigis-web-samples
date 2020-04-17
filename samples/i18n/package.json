@@ -1,7 +1,10 @@
 {
+    "name": "sample-i18n",
+    "version": "0.0.0",
+    "private": true,
     "scripts": {
-        "build": "../../node_modules/@vertigis/web-sdk/bin/vertigis-web-sdk.js build",
-        "start": "../../node_modules/@vertigis/web-sdk/bin/vertigis-web-sdk.js start"
+        "build": "../node_modules/@vertigis/web-sdk/bin/vertigis-web-sdk.js build",
+        "start": "../node_modules/@vertigis/web-sdk/bin/vertigis-web-sdk.js start"
     },
     "dependencies": {}
 }
