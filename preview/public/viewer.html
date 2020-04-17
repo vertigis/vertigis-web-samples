@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <style>
+            body,
+            html {
+                height: 100%;
+            }
+            body {
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+            iframe {
+                display: block;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <iframe src="/viewer/index.html#no-bootstrap"></iframe>
+        <script>
+            function loadSample({ locale, sample }) {
+                const iframe = document.querySelector("iframe");
+                const iframeDocument = iframe.contentDocument;
+                const iframeWindow = iframe.contentWindow;
+
+                function bootstrap() {
+                    if (!iframeWindow.require) {
+                        console.error("Web frame failed to load");
+                        return;
+                    }
+                    iframeWindow.require(["require", "gwv"], function (
+                        require,
+                        webViewer
+                    ) {
+                        function getAbsoluteUrl(relativePath) {
+                            const a = document.createElement("a");
+                            a.href = relativePath;
+                            return a.href;
+                        }
+                        // Load common web libs as well as our custom bundle
+                        require([
+                            "@geocortex/web-libraries!/common",
+                            "@geocortex/web-libraries!/web",
+                            sample.library,
+                        ], (...libs) => {
+                            const options = {
+                                appConfig: sample.app,
+                                layout: getAbsoluteUrl(sample.layout),
+                                libraries: libs.map((lib) => lib.default),
+                            };
+                            const urlParams = new URLSearchParams(
+                                window.location.search
+                            );
+                            options.locale = locale;
+                            webViewer.bootstrap(options);
+                        });
+                    });
+                }
+
+                if (iframeDocument.readyState === "complete") {
+                    bootstrap();
+                } else {
+                    iframeDocument.addEventListener(
+                        "DOMContentLoaded",
+                        bootstrap
+                    );
+                }
+            }
+        </script>
+    </body>
+</html>
