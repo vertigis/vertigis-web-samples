@@ -34,6 +34,7 @@ function WebViewer(props: WebViewerProps) {
     return (
         <iframe
             className={styles.root}
+            data-cy="viewer-wrapper-frame"
             src={`${process.env.PUBLIC_URL}/viewer.html`}
             title="Sample preview"
             onLoad={(event) => {

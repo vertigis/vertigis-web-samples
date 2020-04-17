@@ -23,7 +23,10 @@
         </style>
     </head>
     <body>
-        <iframe src="/viewer/index.html#no-bootstrap"></iframe>
+        <iframe
+            data-cy="viewer-frame"
+            src="/viewer/index.html#no-bootstrap"
+        ></iframe>
         <script>
             function loadSample({ locale, sample }) {
                 const iframe = document.querySelector("iframe");

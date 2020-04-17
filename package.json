@@ -2,12 +2,9 @@
     "private": true,
     "workspaces": {
         "packages": [
-            "preview",
             "samples",
-            "samples/*"
-        ],
-        "nohoist": [
-            "**"
+            "samples/*",
+            "viewer"
         ]
     },
     "repository": {
@@ -21,12 +18,20 @@
     },
     "homepage": "https://github.com/geocortex/vertigis-web-samples#readme",
     "scripts": {
-        "build": "npm run build:samples",
-        "build:samples": "node ./build.js"
+        "build": "yarn build:samples && yarn build:viewer",
+        "build:samples": "node ./build.js",
+        "build:viewer": "cd viewer && yarn build",
+        "cypress:open": "cypress open",
+        "start": "cd viewer && yarn start"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@geocortex/web": "^5.6.0",
+        "@vertigis/web-sdk": "beta"
+    },
     "devDependencies": {
         "cross-spawn": "7.0.2",
+        "cypress": "^4.4.0",
+        "cypress-iframe": "^1.0.1",
         "husky": "^4.2.5",
         "prettier": "^2.0.4",
         "pretty-quick": "^2.0.1",

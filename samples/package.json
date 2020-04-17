@@ -1,9 +1,0 @@
-{
-    "name": "samples-root",
-    "version": "0.0.0",
-    "private": true,
-    "dependencies": {
-        "@geocortex/web": "^5.6.0",
-        "@vertigis/web-sdk": "beta"
-    }
-}
