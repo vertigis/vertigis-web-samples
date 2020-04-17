@@ -13,7 +13,7 @@ export default function TranslatableText(props) {
             <Typography variant="h3">
                 Typography automatic translation:
             </Typography>
-            <Typography text="language-translatable-text-content" />
+            <Typography>language-translatable-text-content</Typography>
         </LayoutElement>
     );
 }
