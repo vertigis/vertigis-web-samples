@@ -22,6 +22,52 @@ const useStyles = makeStyles((theme) => ({
 const urlParams = new URLSearchParams(window.location.search);
 const locale = urlParams.get("locale");
 
+function loadSample(sample: Sample, iframe: HTMLIFrameElement) {
+    const iframeDocument = iframe.contentDocument;
+
+    if (!iframeDocument) {
+        throw new Error("Web frame failed to load");
+    }
+
+    function bootstrap() {
+        const iframeWindow = iframe.contentWindow as
+            | (Window & { require: any })
+            | null;
+
+        if (!iframeWindow || !iframeWindow.require) {
+            throw new Error("Web frame failed to load");
+        }
+
+        iframeWindow.require(["require", "gwv"], function (require, webViewer) {
+            function getAbsoluteUrl(relativePath) {
+                const a = document.createElement("a");
+                a.href = relativePath;
+                return a.href;
+            }
+            // Load common web libs as well as our custom bundle
+            require([
+                "@geocortex/web-libraries!/common",
+                "@geocortex/web-libraries!/web",
+                sample.library,
+            ], (...libs) => {
+                const options = {
+                    appConfig: sample.app,
+                    layout: getAbsoluteUrl(sample.layout),
+                    libraries: libs.map((lib) => lib.default),
+                    locale,
+                };
+                webViewer.bootstrap(options);
+            });
+        });
+    }
+
+    if (iframeDocument.readyState === "complete") {
+        bootstrap();
+    } else {
+        iframeDocument.addEventListener("DOMContentLoaded", bootstrap);
+    }
+}
+
 function WebViewer(props: WebViewerProps) {
     const { sample } = props;
 
@@ -34,12 +80,12 @@ function WebViewer(props: WebViewerProps) {
     return (
         <iframe
             className={styles.root}
-            data-cy="viewer-wrapper-frame"
-            src={`${process.env.PUBLIC_URL}/viewer.html`}
+            data-cy="viewer-frame"
+            src={`${process.env.PUBLIC_URL}/viewer/index.html#no-bootstrap`}
             title="Sample preview"
             onLoad={(event) => {
-                const iframeWindow = event.currentTarget.contentWindow;
-                (iframeWindow as any).loadSample({ locale, sample });
+                const iframe = event.currentTarget;
+                loadSample(sample, iframe);
             }}
         />
     );
