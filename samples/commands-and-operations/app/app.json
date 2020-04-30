@@ -1,0 +1,44 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "menu",
+            "id": "iwtm-config",
+            "items": [
+                "item://menu-item/run-thing-1",
+                "item://menu-item/run-thing-2",
+                "item://menu-item/view-command-history"
+            ],
+            "title": "Execute Custom behavior",
+            "isLandmark": true
+        },
+        {
+            "$type": "menu-item",
+            "id": "run-thing-1",
+            "title": "Run command 1",
+            "action": {
+                "name": "custom-service.send-message",
+                "arguments": {
+                    "value": "Never Gonna Give You Up"
+                }
+            }
+        },
+        {
+            "$type": "menu-item",
+            "id": "run-thing-2",
+            "title": "Run command 2",
+            "action": {
+                "name": "custom-service.send-message",
+                "arguments": {
+                    "value": "Never Gonna Let You Down"
+                }
+            }
+        },
+        {
+            "$type": "menu-item",
+            "id": "view-command-history",
+            "title": "View Command History",
+            "action": ["custom-service.get-command-history", "ui.alert"]
+        }
+    ]
+}

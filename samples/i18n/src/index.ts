@@ -1,5 +1,4 @@
 import { LibraryRegistry } from "@geocortex/web/config";
-import { ComponentType } from "react";
 import TranslatableText, {
     TranslatableTextModel,
 } from "./components/TranslatableText";
@@ -19,7 +18,7 @@ export default function (registry: LibraryRegistry) {
     registry.registerComponent({
         name: "translatable-text",
         namespace: "your.custom.namespace",
-        getComponentType: () => TranslatableText as ComponentType,
+        getComponentType: () => TranslatableText,
         itemType: "translatable-text",
         title: "Translatable Text",
     });

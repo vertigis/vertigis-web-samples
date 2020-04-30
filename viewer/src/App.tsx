@@ -7,7 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import React, { useEffect, useState } from "react";
 import WebViewer, { Sample } from "./WebViewer";
 
-const samples = ["i18n"] as const;
+const samples = ["commands-and-operations", "i18n"] as const;
 
 async function getSampleData(sampleName: string): Promise<Sample> {
     const [app, layout, library] = await Promise.all([

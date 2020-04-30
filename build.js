@@ -17,13 +17,6 @@ const checkSpawnSyncResult = (syncResult) => {
 
 for (const sampleDir of sampleDirs) {
     checkSpawnSyncResult(
-        spawn.sync("npm", ["install"], {
-            cwd: sampleDir,
-            stdio: "inherit",
-        })
-    );
-
-    checkSpawnSyncResult(
         spawn.sync("npm", ["run", "build"], {
             cwd: sampleDir,
             stdio: "inherit",
