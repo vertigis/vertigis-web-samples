@@ -68,6 +68,10 @@ function loadSample(sample: Sample, iframe: HTMLIFrameElement) {
     }
 }
 
+/**
+ * Loading the viewer programmatically like this is for
+ * convenience, and is NOT recommended in production.
+ */
 function WebViewer(props: WebViewerProps) {
     const { sample } = props;
 
