@@ -4,12 +4,7 @@
     "private": true,
     "dependencies": {
         "@material-ui/core": "^4.9.10",
-        "@types/react": "^16.9.34",
-        "@types/react-dom": "^16.9.7",
-        "@types/react-router-dom": "^5.1.5",
-        "react-router-dom": "^5.1.2",
-        "react-scripts": "3.4.1",
-        "typescript": "~3.8.3"
+        "react-router-dom": "^5.1.2"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -33,6 +28,11 @@
         ]
     },
     "devDependencies": {
-        "http-proxy-middleware": "^1.0.3"
+        "@types/react": "^16.9.34",
+        "@types/react-dom": "^16.9.7",
+        "@types/react-router-dom": "^5.1.5",
+        "http-proxy-middleware": "^1.0.3",
+        "react-scripts": "3.4.1",
+        "typescript": "~3.8.3"
     }
 }
