@@ -25,3 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 import "cypress-iframe";
+
+Cypress.Commands.add("getViewer", () =>
+    cy
+        .frameLoaded('iframe[data-cy="viewer-frame"]')
+        .iframe('iframe[data-cy="viewer-frame"]')
+);
