@@ -2,6 +2,8 @@
 
 ![CI](https://github.com/geocortex/vertigis-web-samples/workflows/CI/badge.svg)
 
+View the samples at [https://vertigis-web-samples.netlify.app](https://vertigis-web-samples.netlify.app).
+
 A collection of samples that demonstrates how to configure and customize [Geocortex Web](https://www.geocortex.com/products/gxw/) apps using the [Geocortex Web SDK](https://developers.geocortex.com/docs/web/sdk-overview).
 
 ## Running the Samples
