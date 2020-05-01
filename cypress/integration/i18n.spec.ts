@@ -15,3 +15,5 @@ describe(sampleName, () => {
             .should("be.visible");
     });
 });
+
+export {};

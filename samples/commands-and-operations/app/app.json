@@ -9,13 +9,13 @@
                 "item://menu-item/run-thing-2",
                 "item://menu-item/view-command-history"
             ],
-            "title": "Execute Custom behavior",
+            "title": "Execute Custom Behavior",
             "isLandmark": true
         },
         {
             "$type": "menu-item",
             "id": "run-thing-1",
-            "title": "Run command 1",
+            "title": "Run Command 1",
             "action": {
                 "name": "custom-service.send-message",
                 "arguments": {
@@ -26,7 +26,7 @@
         {
             "$type": "menu-item",
             "id": "run-thing-2",
-            "title": "Run command 2",
+            "title": "Run Command 2",
             "action": {
                 "name": "custom-service.send-message",
                 "arguments": {
