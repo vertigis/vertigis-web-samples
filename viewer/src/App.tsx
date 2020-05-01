@@ -135,7 +135,7 @@ function App() {
                 </List>
             </Drawer>
             <main className={classes.content}>
-                <WebViewer sample={currentSample} />
+                <WebViewer key={selectedSampleName} sample={currentSample} />
             </main>
         </div>
     );
