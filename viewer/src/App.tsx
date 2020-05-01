@@ -5,6 +5,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import React, { useEffect, useState } from "react";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import WebViewer, { Sample } from "./WebViewer";
 
 const samples = ["commands-and-operations", "i18n"] as const;
@@ -21,6 +22,26 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         layout: layout.default,
         library: library.default,
     };
+}
+
+function ListItemLink(props) {
+    const { children, to, ...other } = props;
+
+    const renderLink = React.useMemo(
+        () =>
+            React.forwardRef<HTMLAnchorElement>((itemProps, ref) => (
+                <RouterLink to={to} ref={ref} {...itemProps} />
+            )),
+        [to]
+    );
+
+    return (
+        <li>
+            <ListItem button component={renderLink as any} {...other}>
+                {children}
+            </ListItem>
+        </li>
+    );
 }
 
 const drawerWidth = 240;
@@ -48,10 +69,22 @@ const useStyles = makeStyles((theme) => ({
 function App() {
     const classes = useStyles();
 
+    const history = useHistory();
+    const selectedSampleName = history.location.pathname.replace(
+        `${process.env.PUBLIC_URL}/`,
+        ""
+    );
     const [currentSample, setCurrentSample] = useState<Sample>();
-    const [selectedSampleName, setSelectedSampleName] = useState<
-        typeof samples[number]
-    >(samples[0]);
+    // const [selectedSampleName, setSelectedSampleName] = useState<
+    //     typeof samples[number]
+    // >(samples[0]);
+
+    useEffect(() => {
+        // Set default path if we're at the base path
+        if (history.location.pathname === `${process.env.PUBLIC_URL}/`) {
+            history.replace(`${process.env.PUBLIC_URL}/${samples[0]}`);
+        }
+    }, [history]);
 
     useEffect(() => {
         if (!selectedSampleName) {
@@ -90,14 +123,14 @@ function App() {
             >
                 <List>
                     {samples.map((sample) => (
-                        <ListItem
-                            button
+                        <ListItemLink
                             key={sample}
-                            onClick={() => setSelectedSampleName(sample)}
+                            // onClick={() => setSelectedSampleName(sample)}
+                            to={`/${sample}`}
                             selected={sample === selectedSampleName}
                         >
                             <ListItemText primary={sample} />
-                        </ListItem>
+                        </ListItemLink>
                     ))}
                 </List>
             </Drawer>
