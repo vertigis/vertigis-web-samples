@@ -6,9 +6,9 @@ View the samples at [https://vertigis-web-samples.netlify.app](https://vertigis-
 
 A collection of samples that demonstrates how to configure and customize [Geocortex Web](https://www.geocortex.com/products/gxw/) apps using the [Geocortex Web SDK](https://developers.geocortex.com/docs/web/sdk-overview).
 
-## Running the Samples
-
 Check out the [hosted samples viewer](https://vertigis-web-samples.netlify.app/) for an easy way to run the samples in your browser without needing to run the project locally. The source for each sample is located within the [samples](samples) folder of this project.
+
+## Running the Samples locally
 
 You will need to install the latest LTS version of [Node.js](https://nodejs.org/), as well as [yarn](https://yarnpkg.com/) to run the project locally. The easiest way to install and update yarn is to run `npm install -g yarn`.
 
