@@ -1,0 +1,29 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "id": "viewer",
+            "$type": "geocortex-web-viewer",
+            "postMessageAllowedOrigin": "*"
+        },
+        {
+            "$type": "menu-item",
+            "id": "button-config",
+            "title": "Send message to parent",
+            "action": [
+                {
+                    "name": "ui.prompt",
+                    "arguments": {
+                        "title": "Enter the message"
+                    }
+                },
+                "viewer.post-message"
+            ]
+        },
+        {
+            "id": "map-config",
+            "$type": "map-extension",
+            "webScene": "https://www.arcgis.com/home/item.html?id=9087ae6c5b34483c84e3d9b475bc5bae"
+        }
+    ]
+}

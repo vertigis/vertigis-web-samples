@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Iframe sample</title>
+        <style>
+            html {
+                box-sizing: border-box;
+            }
+            *,
+            *:before,
+            *:after {
+                box-sizing: inherit;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+                color: #fff;
+                background-color: #333;
+            }
+
+            input,
+            label {
+                display: block;
+            }
+
+            .parent,
+            iframe {
+                height: 100vh;
+            }
+
+            .parent {
+                width: 500px;
+                margin: 0;
+                padding: 1rem;
+                border-right: 2px solid #212121;
+            }
+
+            iframe {
+                flex-grow: 1;
+                border: none;
+            }
+
+            div,
+            hr {
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent">
+            <div>
+                <label>
+                    Lat
+                    <input type="number" id="y" value="48.424" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Long
+                    <input type="number" id="x" value="-123.372" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Elevation
+                    <input type="number" id="z" value="-250" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Heading
+                    <input type="number" id="heading" value="15" />
+                </label>
+            </div>
+            <div>
+                <label>
+                    Tilt
+                    <input type="number" id="tilt" value="115" />
+                </label>
+            </div>
+            <div>
+                <button onclick="zoomToViewpoint()">
+                    Go!
+                </button>
+                <button onclick="zoomToInitialViewpoint()">
+                    Zoom to initial viewpoint
+                </button>
+            </div>
+            <hr />
+            <div>
+                Last Message from viewer:
+            </div>
+            <div>
+                <em id="viewer-message"
+                    >Use the menu in the viewer to send a message
+                </em>
+            </div>
+        </div>
+        <iframe id="viewer" src="/viewer"></iframe>
+        <script>
+            function zoomToViewpoint() {
+                const x = parseFloat(document.getElementById("x").value);
+                const y = parseFloat(document.getElementById("y").value);
+                const z = parseFloat(document.getElementById("z").value);
+                const heading = parseFloat(
+                    document.getElementById("heading").value
+                );
+                const tilt = parseFloat(document.getElementById("tilt").value);
+
+                const iframe = document.getElementById("viewer");
+                iframe.contentWindow.postMessage(
+                    {
+                        id: "geocortex-web",
+                        type: "run-command",
+                        arguments: [
+                            {
+                                name: "map.zoom-to-viewpoint",
+                                arguments: {
+                                    viewpoint: {
+                                        camera: {
+                                            position: {
+                                                x,
+                                                y,
+                                                z,
+                                                spatialReference: {
+                                                    wkid: 4326,
+                                                },
+                                            },
+                                            heading,
+                                            tilt,
+                                        },
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    // WARNING: It's critical to specify an explicit target
+                    // origin instead of "*" to avoid sending messages to a
+                    // malicious origin. See
+                    // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage.
+                    "*"
+                );
+            }
+
+            function zoomToInitialViewpoint() {
+                const iframe = document.getElementById("viewer");
+                iframe.contentWindow.postMessage(
+                    {
+                        id: "geocortex-web",
+                        type: "run-command",
+                        arguments: "map.zoom-to-initial-viewpoint",
+                    },
+                    // WARNING: It's critical to specify an explicit target
+                    // origin instead of "*" to avoid sending messages to a
+                    // malicious origin. See
+                    // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage.
+                    "*"
+                );
+            }
+
+            window.addEventListener(
+                "message",
+                (event) => {
+                    // WARNING: It's critical to verify the sender's origin to
+                    // avoid cross-site scripting attacks. See
+                    // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage.
+                    if (
+                        // Validate that the origin matches the origin of Geocortex Web.
+                        !event.origin.startsWith("http://localhost") &&
+                        event.origin !== location.origin
+                    ) {
+                        return;
+                    }
+
+                    if (!event.data) {
+                        return;
+                    }
+
+                    document.getElementById("viewer-message").innerText =
+                        event.data;
+                },
+                false
+            );
+        </script>
+    </body>
+</html>

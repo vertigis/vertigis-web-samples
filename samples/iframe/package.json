@@ -1,0 +1,19 @@
+{
+    "name": "sample-iframe",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build": "vertigis-web-sdk build",
+        "start": "concurrently -k -n parent,web-sdk \"yarn start:parent\" \"yarn start:sdk\"",
+        "start:parent": "serve parent-app",
+        "start:sdk": "vertigis-web-sdk start"
+    },
+    "dependencies": {
+        "@geocortex/web": "^5.6.0"
+    },
+    "devDependencies": {
+        "@vertigis/web-sdk": "beta",
+        "concurrently": "^5.2.0",
+        "serve": "^11.3.0"
+    }
+}
