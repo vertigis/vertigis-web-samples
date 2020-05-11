@@ -104,7 +104,12 @@
                 </em>
             </div>
         </div>
-        <iframe id="viewer" src="/viewer"></iframe>
+        <!-- 
+            In practice this URL would likely be:
+            https://apps.geocortex.com/webviewer/?app=abc123
+            where `abc123` is the id of your configured application.
+        -->
+        <iframe id="viewer" src="/viewer/index.html"></iframe>
         <script>
             function zoomToViewpoint() {
                 const x = parseFloat(document.getElementById("x").value);
@@ -166,6 +171,8 @@
                 );
             }
 
+            // See `app/app.json` to see how a command was used to send a
+            // postMessage up to this parent page.
             window.addEventListener(
                 "message",
                 (event) => {

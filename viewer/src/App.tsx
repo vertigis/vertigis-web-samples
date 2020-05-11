@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import WebViewer, { Sample } from "./WebViewer";
 
-const samples = ["commands-and-operations", "i18n"] as const;
+const samples = ["commands-and-operations", "i18n", "iframe"] as const;
 
 async function getSampleData(sampleName: string): Promise<Sample> {
     const [app, layout, library] = await Promise.all([
@@ -17,10 +17,21 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         import(`!!file-loader!../../samples/${sampleName}/build/main.js`),
     ]);
 
+    let page;
+
+    try {
+        page = (
+            await import(`!!file-loader!../../samples/${sampleName}/index.html`)
+        ).default;
+    } catch {
+        // This sample doesn't have a custom page. Continue on.
+    }
+
     return {
         app: app.default,
         layout: layout.default,
         library: library.default,
+        page,
     };
 }
 
@@ -75,9 +86,6 @@ function App() {
         ""
     );
     const [currentSample, setCurrentSample] = useState<Sample>();
-    // const [selectedSampleName, setSelectedSampleName] = useState<
-    //     typeof samples[number]
-    // >(samples[0]);
 
     useEffect(() => {
         // Set default path if we're at the base path
@@ -125,7 +133,6 @@ function App() {
                     {samples.map((sample) => (
                         <ListItemLink
                             key={sample}
-                            // onClick={() => setSelectedSampleName(sample)}
                             to={`/${sample}`}
                             selected={sample === selectedSampleName}
                         >

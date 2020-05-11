@@ -5,7 +5,7 @@
     "scripts": {
         "build": "vertigis-web-sdk build",
         "start": "concurrently -k -n parent,web-sdk \"yarn start:parent\" \"yarn start:sdk\"",
-        "start:parent": "serve parent-app",
+        "start:parent": "serve",
         "start:sdk": "vertigis-web-sdk start"
     },
     "dependencies": {
