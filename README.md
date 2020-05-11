@@ -10,11 +10,7 @@ Check out the [hosted samples viewer](https://vertigis-web-samples.netlify.app/)
 
 ## Running the Samples locally
 
-You will need to install the latest LTS version of [Node.js](https://nodejs.org/), as well as [yarn](https://yarnpkg.com/) to run the project locally. The easiest way to install and update yarn is to run `npm install -g yarn`.
-
-### Developing a Sample
-
-Each sample lives in a folder within the [samples](samples) folder.
+You will need to install the latest LTS version of [Node.js](https://nodejs.org/).
 
 #### Running a sample
 
@@ -30,7 +26,9 @@ The tests for each sample live under the [cypress/integration](cypress/integrati
 
 ### Running the Samples Viewer Locally
 
-To run the samples viewer locally, first build all of the sample projects by running `yarn build:samples` in the root of this project, followed by running `yarn start` to start the viewer.
+You will [yarn](https://yarnpkg.com/) installed to run the samples viewer. The easiest way to install and update yarn is to run `npm install -g yarn`.
+
+To run the samples viewer, first build all of the sample projects by running `yarn build:samples` in the root of this project, followed by running `yarn start` to start the viewer.
 
 ## Documentation
 

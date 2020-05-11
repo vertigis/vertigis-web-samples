@@ -4674,7 +4674,7 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
-"dgrid@github:Esri/dgrid#v1.2.1/esri-3.22.0":
+dgrid@Esri/dgrid#v1.2.1/esri-3.22.0:
   version "1.2.1"
   resolved "https://codeload.github.com/Esri/dgrid/tar.gz/200a7fda418bec199f3b76a493fdfa7d4440698b"
 
@@ -4704,7 +4704,7 @@ dijit@1.14.2:
   dependencies:
     dojo "1.14.2"
 
-"dijit@github:Esri/dijit#v1.14.2/esri-3.28.0":
+dijit@Esri/dijit#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dijit/tar.gz/ae2ed989408cbbadefcb4d5811b45fe7269b0e4e"
   dependencies:
@@ -4767,7 +4767,7 @@ dojo-dstore@1.1.2:
   dependencies:
     dojo "^1.9.0"
 
-"dojo-util@github:Esri/dojo-util#v1.14.2/esri-3.28.0":
+dojo-util@Esri/dojo-util#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dojo-util/tar.gz/6cedc661ffef874e75f393f0212a9134dec96cd4"
 
@@ -4776,16 +4776,16 @@ dojo@1.14.2:
   resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.14.2.tgz#45ca90b19068230e1486f68b1531fa4ce0e21280"
   integrity sha512-TI+Ytgfh/VfmHWERp45Jte6NFMdoJTPsvUP/uzJUvAXET8FP2h442LePWWJ/q/xZ4V0V8OtdJhx8It/GB+Zbxg==
 
+dojo@Esri/dojo#v1.14.2/esri-3.28.0:
+  version "1.14.2"
+  resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
+
 dojo@^1.9.0:
   version "1.16.2"
   resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.16.2.tgz#5cc7bcb80afca1b057560ce5ca6fb26275a4785d"
   integrity sha512-cgiT6WFAmcc1p95X7HPPVq3pM+qD4eB+DRWI+z04IWlGh5v4h9wqOdz1s+2mG7x7UYz+EzoGyLB87GDgGUOtIQ==
 
-"dojo@github:Esri/dojo#v1.14.2/esri-3.28.0":
-  version "1.14.2"
-  resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
-
-"dojox@github:Esri/dojox#v1.14.2/esri-3.28.0":
+dojox@Esri/dojox#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dojox/tar.gz/66a4f9a49808332c0573437ea2f9f78901124373"
   dependencies:
