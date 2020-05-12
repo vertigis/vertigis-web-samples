@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const viewerUrl = `${process.env.PUBLIC_URL}/viewer/index.html#no-bootstrap`;
+const viewerFrameCyId = "viewer-frame";
 
 const urlParams = new URLSearchParams(window.location.search);
 const locale = urlParams.get("locale");
@@ -128,6 +129,7 @@ function WebViewer(props: WebViewerProps) {
 
             // Update to use same URL that we use to load our other samples
             nestedFrame.src = viewerUrl;
+            nestedFrame.dataset.cy = viewerFrameCyId;
 
             setSampleHtml(doc.documentElement.innerHTML);
 
@@ -141,23 +143,34 @@ function WebViewer(props: WebViewerProps) {
         };
     }, [sample]);
 
-    if (!sample) {
+    if (!sample || (sample.page && !sampleHtml)) {
         return null;
+    }
+
+    if (sample.page) {
+        return (
+            <iframe
+                className={styles.root}
+                data-cy="viewer-outer-frame"
+                srcDoc={sampleHtml}
+                title="Sample preview"
+                onLoad={(event) => {
+                    const iframe = event.currentTarget;
+                    handleSampleFrameLoad(sample, iframe);
+                }}
+            />
+        );
     }
 
     return (
         <iframe
             className={styles.root}
-            data-cy="viewer-frame"
-            src={sample.page ? undefined : viewerUrl}
-            srcDoc={sample.page ? sampleHtml : undefined}
+            data-cy={viewerFrameCyId}
+            src={viewerUrl}
             title="Sample preview"
             onLoad={(event) => {
                 const iframe = event.currentTarget;
-
-                sample.page
-                    ? handleSampleFrameLoad(sample, iframe)
-                    : loadSample(sample, iframe);
+                loadSample(sample, iframe);
             }}
         />
     );
