@@ -25,8 +25,13 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("getViewer", { prevSubject: "optional" }, (subject) =>
-    ((subject && cy.wrap(subject)) || cy)
-        .find('iframe[data-cy="viewer-frame"]', { log: false })
+    (
+        (subject &&
+            cy
+                .wrap(subject)
+                .find('iframe[data-cy="viewer-frame"]', { log: false })) ||
+        cy.get('iframe[data-cy="viewer-frame"]', { log: false })
+    )
         .its("0.contentDocument.body", { log: false })
         .should("not.be.empty")
         .then((result) => cy.wrap(result, { log: false }))
