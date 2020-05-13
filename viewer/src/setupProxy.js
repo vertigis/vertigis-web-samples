@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-check
 const http = require("http");
 const https = require("https");
 const { createProxyMiddleware } = require("http-proxy-middleware");
