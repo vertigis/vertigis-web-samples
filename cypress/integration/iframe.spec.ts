@@ -1,4 +1,4 @@
-import { getCurrentViewpoint } from "../utils";
+import { expectMapToBeStationary, getCurrentViewpoint } from "../utils";
 
 const sampleName = "iframe";
 
@@ -8,7 +8,8 @@ describe(sampleName, () => {
 
         cy.getNestedViewer()
             .getMap()
-            .then((map) => {
+            .should((map) => {
+                expectMapToBeStationary(map);
                 const viewpoint = getCurrentViewpoint(map);
                 expect(viewpoint.camera.position.z).not.to.equal(-250);
             });
@@ -17,7 +18,8 @@ describe(sampleName, () => {
 
         cy.getNestedViewer()
             .getMap()
-            .then((map) => {
+            .should((map) => {
+                expectMapToBeStationary(map);
                 const viewpoint = getCurrentViewpoint(map);
                 expect(viewpoint.camera.position.z).to.equal(-250);
             });
@@ -29,7 +31,8 @@ describe(sampleName, () => {
 
         cy.getNestedViewer()
             .getMap()
-            .then((map) => {
+            .should((map) => {
+                expectMapToBeStationary(map);
                 const viewpoint = getCurrentViewpoint(map);
                 expect(viewpoint.camera.position.z).not.to.equal(-250);
             });
