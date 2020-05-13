@@ -5,7 +5,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import React, { useEffect, useState } from "react";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import WebViewer, { Sample } from "./WebViewer";
 
 const samples = ["commands-and-operations", "i18n", "iframe"] as const;
@@ -80,8 +80,9 @@ const useStyles = makeStyles((theme) => ({
 function App() {
     const classes = useStyles();
 
+    const location = useLocation();
     const history = useHistory();
-    const selectedSampleName = history.location.pathname.replace(
+    const selectedSampleName = location.pathname.replace(
         `${process.env.PUBLIC_URL}/`,
         ""
     );
@@ -89,10 +90,10 @@ function App() {
 
     useEffect(() => {
         // Set default path if we're at the base path
-        if (history.location.pathname === `${process.env.PUBLIC_URL}/`) {
+        if (location.pathname === `${process.env.PUBLIC_URL}/`) {
             history.replace(`${process.env.PUBLIC_URL}/${samples[0]}`);
         }
-    }, [history]);
+    }, [location, history]);
 
     useEffect(() => {
         if (!selectedSampleName) {
