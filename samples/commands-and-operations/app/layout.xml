@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="your.custom.namespace">
+<layout xmlns="https://geocortex.com/layout/v1">
     <map>
         <iwtm config="iwtm-config"/>
     </map>
