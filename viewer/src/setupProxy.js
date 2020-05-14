@@ -10,14 +10,14 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 const httpAgent = new http.Agent({ keepAlive: true });
 const httpsAgent = new https.Agent({ keepAlive: true });
 
-const gwvUrl = process.env.REACT_APP_GWV_URL;
+const viewerUrl = process.env.REACT_APP_VIEWER_URL;
 
 module.exports = function (app) {
     app.use(
         "/viewer",
         createProxyMiddleware({
-            target: gwvUrl,
-            agent: gwvUrl.startsWith("https") ? httpsAgent : httpAgent,
+            target: viewerUrl,
+            agent: viewerUrl.startsWith("https") ? httpsAgent : httpAgent,
             changeOrigin: true,
             pathRewrite: {
                 // Strip /viewer from path so it isn't forwarded to the target
