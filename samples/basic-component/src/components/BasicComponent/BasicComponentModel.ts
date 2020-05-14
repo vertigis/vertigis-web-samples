@@ -16,7 +16,7 @@ export default class BasicComponentModel extends ComponentModelBase<
     hidden: boolean | undefined;
 
     // This method defines how the model will be serialized and deserialized into
-    // an app item. We override it to include our new property `exampleValue`.
+    // an app item. We override it to include our new property `hidden`.
     protected _getSerializableProperties(): PropertyDefs<
         BasicComponentModelProperties
     > {
