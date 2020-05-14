@@ -1,9 +1,14 @@
-import { makeStyles } from "@material-ui/core/styles";
+import {
+    createMuiTheme,
+    makeStyles,
+    ThemeProvider,
+} from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import React, { useEffect, useState } from "react";
 import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import WebViewer, { Sample } from "./WebViewer";
@@ -83,6 +88,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+    const theme = React.useMemo(
+        () =>
+            createMuiTheme({
+                palette: {
+                    type: prefersDarkMode ? "dark" : "light",
+                },
+            }),
+        [prefersDarkMode]
+    );
+
     const classes = useStyles();
 
     const location = useLocation();
@@ -124,33 +141,38 @@ function App() {
     }, [selectedSampleName]);
 
     return (
-        <div className="App">
-            <CssBaseline />
+        <ThemeProvider theme={theme}>
+            <div className="App">
+                <CssBaseline />
 
-            <Drawer
-                className={classes.drawer}
-                variant="permanent"
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-                anchor="left"
-            >
-                <List>
-                    {samples.map((sample) => (
-                        <ListItemLink
-                            key={sample}
-                            to={`/${sample}`}
-                            selected={sample === selectedSampleName}
-                        >
-                            <ListItemText primary={sample} />
-                        </ListItemLink>
-                    ))}
-                </List>
-            </Drawer>
-            <main className={classes.content}>
-                <WebViewer key={selectedSampleName} sample={currentSample} />
-            </main>
-        </div>
+                <Drawer
+                    className={classes.drawer}
+                    variant="permanent"
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                    anchor="left"
+                >
+                    <List>
+                        {samples.map((sample) => (
+                            <ListItemLink
+                                key={sample}
+                                to={`/${sample}`}
+                                selected={sample === selectedSampleName}
+                            >
+                                <ListItemText primary={sample} />
+                            </ListItemLink>
+                        ))}
+                    </List>
+                </Drawer>
+                <main className={classes.content}>
+                    <WebViewer
+                        key={selectedSampleName}
+                        sample={currentSample}
+                    />
+                </main>
+            </div>
+        </ThemeProvider>
     );
 }
 
