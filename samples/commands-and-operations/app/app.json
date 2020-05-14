@@ -5,40 +5,45 @@
             "$type": "menu",
             "id": "iwtm-config",
             "items": [
-                "item://menu-item/run-thing-1",
-                "item://menu-item/run-thing-2",
-                "item://menu-item/view-command-history"
+                "item://menu-item/send-message",
+                "item://menu-item/view-message-history",
+                "item://menu-item/toggle-can-execute",
+                "item://menu-item/run-command-with-can-execute"
             ],
-            "title": "Execute Custom Behavior",
+            "title": "Execute Custom Action",
             "isLandmark": true
         },
         {
             "$type": "menu-item",
-            "id": "run-thing-1",
-            "title": "Run Command 1",
-            "action": {
-                "name": "custom-service.send-message",
-                "arguments": {
-                    "value": "Never Gonna Give You Up"
-                }
-            }
+            "id": "send-message",
+            "title": "Send a message",
+            "action": [
+                {
+                    "name": "ui.prompt",
+                    "arguments": {
+                        "title": "Enter a message"
+                    }
+                },
+                "custom-service.send-message"
+            ]
         },
         {
             "$type": "menu-item",
-            "id": "run-thing-2",
-            "title": "Run Command 2",
-            "action": {
-                "name": "custom-service.send-message",
-                "arguments": {
-                    "value": "Never Gonna Let You Down"
-                }
-            }
+            "id": "view-message-history",
+            "title": "View message history",
+            "action": ["custom-service.get-message-history", "ui.alert"]
         },
         {
             "$type": "menu-item",
-            "id": "view-command-history",
-            "title": "View Command History",
-            "action": ["custom-service.get-command-history", "ui.alert"]
+            "id": "toggle-can-execute",
+            "title": "Toggle canExecute",
+            "action": "custom-service.toggle-can-execute"
+        },
+        {
+            "$type": "menu-item",
+            "id": "run-command-with-can-execute",
+            "title": "Run command with canExecute",
+            "action": "custom-service.command-with-can-execute"
         }
     ]
 }

@@ -11,9 +11,18 @@ export default function (registry: LibraryRegistry) {
         serviceId: "custom-service",
         executeMethodName: "_handleSendMessage",
     });
-
-    registry.registerOperation("custom-service.get-command-history", {
+    registry.registerCommand("custom-service.toggle-can-execute", {
         serviceId: "custom-service",
-        executeMethodName: "_getCommandHistory",
+        executeMethodName: "_handleToggleCanExecute",
+    });
+    registry.registerCommand("custom-service.command-with-can-execute", {
+        serviceId: "custom-service",
+        executeMethodName: "_handleCommandWithCanExecute",
+        canExecuteMethodName: "_canExecuteCommandWithCanExecute",
+    });
+
+    registry.registerOperation("custom-service.get-message-history", {
+        serviceId: "custom-service",
+        executeMethodName: "_handleGetMessageHistory",
     });
 }
