@@ -8,7 +8,12 @@ import React, { useEffect, useState } from "react";
 import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
 import WebViewer, { Sample } from "./WebViewer";
 
-const samples = ["commands-and-operations", "i18n", "iframe"] as const;
+const samples = [
+    "basic-component",
+    "commands-and-operations",
+    "i18n",
+    "iframe",
+] as const;
 
 async function getSampleData(sampleName: string): Promise<Sample> {
     const [app, layout, library] = await Promise.all([

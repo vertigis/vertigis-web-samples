@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="your.custom.namespace">
-    <map>
-        <custom:translatable-text slot="top-center" padding="0.5"/>
-    </map>
+    <custom:basic config="basic-config-1" />
 </layout>

@@ -1,0 +1,11 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "id": "basic-config-1",
+            "$type": "basic",
+            "title": "Basic Component",
+            "hidden": true
+        }
+    ]
+}
