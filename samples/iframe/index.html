@@ -181,8 +181,13 @@
                     // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage.
                     if (
                         // Validate that the origin matches the origin of Geocortex Web.
-                        !event.origin.startsWith("http://localhost") &&
-                        event.origin !== location.origin
+
+                        // Not running locally
+                        !event.origin.startsWith("http://localhost:") &&
+                        // Not running in prod
+                        !event.origin.endsWith(
+                            "vertigis-web-samples.netlify.app"
+                        )
                     ) {
                         return;
                     }
