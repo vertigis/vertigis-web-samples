@@ -1,0 +1,33 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "id": "map-config",
+            "$type": "map-extension",
+            "onClick": "custom-route-service.add-point",
+            "map": {
+                "baseMap": {
+                    "baseMapLayers": [
+                        {
+                            "id": "streets",
+                            "layerType": "ArcGISTiledMapServiceLayer",
+                            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer",
+                            "title": "Streets"
+                        }
+                    ]
+                },
+                "$initialViewpoint": {
+                    "rotation": 0,
+                    "scale": 36111.909643,
+                    "targetGeometry": {
+                        "spatialReference": {
+                            "wkid": 4326
+                        },
+                        "x": -117.1611,
+                        "y": 32.7157
+                    }
+                }
+            }
+        }
+    ]
+}

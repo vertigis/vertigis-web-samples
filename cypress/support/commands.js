@@ -57,8 +57,10 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
         .and((el) => {
             const mapId = el[0].getAttribute("gcx-id");
             const win = el[0].ownerDocument?.defaultView;
+            const map = win.__maps?.[mapId] || win.__scenes?.[mapId];
 
             // Wait for global map data to be available once initialized
-            expect(win.__maps?.[mapId] || win.__scenes?.[mapId]).to.be.ok;
+            expect(map).to.be.ok;
+            expect(map.ready).to.be.true;
         });
 });

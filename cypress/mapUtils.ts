@@ -1,4 +1,4 @@
-function getMapOrSceneView(mapEl: JQuery<HTMLDivElement>) {
+export function getMapOrSceneView(mapEl: JQuery<HTMLDivElement>) {
     const mapId = mapEl[0].getAttribute("gcx-id")!;
     const win = mapEl[0].ownerDocument?.defaultView! as any;
 

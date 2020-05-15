@@ -15,6 +15,7 @@ import WebViewer, { Sample } from "./WebViewer";
 
 const samples = [
     "basic-component",
+    "basic-service",
     "commands-and-operations",
     "i18n",
     "iframe",
