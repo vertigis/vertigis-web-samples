@@ -1,4 +1,4 @@
-import { expectMapToBeStationary, getCurrentViewpoint } from "../utils";
+import { expectMapToBeStationary, getCurrentViewpoint } from "../mapUtils";
 
 const sampleName = "iframe";
 
