@@ -8,7 +8,7 @@ export default function TranslatableText(props) {
     const { translate } = useContext(UIContext);
 
     return (
-        <LayoutElement {...props} style={{ backgroundColor: "white" }}>
+        <LayoutElement {...props}>
             <Typography variant="h3">Translate function:</Typography>
             <div>{translate("language-translatable-text-content")}</div>
             <Typography variant="h3">
