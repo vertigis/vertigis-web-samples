@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="your.custom.namespace">
+    <text>Try adding `?locale=de` to the end of the URL to force the viewer to render in the German locale.</text>
+    <custom:translatable-text slot="top-center" padding="0.5"/>
+</layout>

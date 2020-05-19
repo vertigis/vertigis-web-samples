@@ -1,0 +1,38 @@
+{
+    "name": "viewer",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.9.10",
+        "react-router-dom": "^5.1.2"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.34",
+        "@types/react-dom": "^16.9.7",
+        "@types/react-router-dom": "^5.1.5",
+        "http-proxy-middleware": "^1.0.3",
+        "react-scripts": "3.4.1",
+        "typescript": "~3.8.3"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

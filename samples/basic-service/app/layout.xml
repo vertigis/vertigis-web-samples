@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1">
+    <map config="map-config">
+        <text width="20">Click on the map to create vehicle stops. When you have two or more stops, the service will run a route task to calculate the driving route.</text>
+    </map>
+</layout>

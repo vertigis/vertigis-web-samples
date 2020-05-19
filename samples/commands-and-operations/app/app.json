@@ -1,0 +1,49 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "menu",
+            "id": "iwtm-config",
+            "items": [
+                "item://menu-item/send-message",
+                "item://menu-item/view-message-history",
+                "item://menu-item/toggle-can-execute",
+                "item://menu-item/run-command-with-can-execute"
+            ],
+            "title": "Execute Custom Action",
+            "isLandmark": true
+        },
+        {
+            "$type": "menu-item",
+            "id": "send-message",
+            "title": "Send a message",
+            "action": [
+                {
+                    "name": "ui.prompt",
+                    "arguments": {
+                        "title": "Enter a message"
+                    }
+                },
+                "custom-service.send-message"
+            ]
+        },
+        {
+            "$type": "menu-item",
+            "id": "view-message-history",
+            "title": "View message history",
+            "action": ["custom-service.get-message-history", "ui.alert"]
+        },
+        {
+            "$type": "menu-item",
+            "id": "toggle-can-execute",
+            "title": "Toggle canExecute",
+            "action": "custom-service.toggle-can-execute"
+        },
+        {
+            "$type": "menu-item",
+            "id": "run-command-with-can-execute",
+            "title": "Run command with canExecute",
+            "action": "custom-service.command-with-can-execute"
+        }
+    ]
+}
