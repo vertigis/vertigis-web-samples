@@ -16,7 +16,7 @@ const validateMarkupLayerSize = (size: number) =>
         });
 
 describe(sampleName, () => {
-    it("controls model state using button", () => {
+    it("plots drive route from map clicks", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         // Should start with 0 graphics in markup layer.
