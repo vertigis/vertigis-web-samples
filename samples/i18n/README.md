@@ -1,3 +1,5 @@
+# Internationalization
+
 This sample demonstrates how to internationalize your application to be supported in multiple locales. To learn more about internationalizing your application, see our documentation in the [Developer Center](https://developers.geocortex.com/docs/web/sdk-internationalization).
 
 The [component in this sample](src/components/TranslatableText/TranslatableText.tsx) uses language strings which are translated at runtime based on the values that were registered in the [entry point of the custom library](src/index.ts).
