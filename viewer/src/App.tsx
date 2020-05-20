@@ -13,11 +13,11 @@ import Sample from "./Sample";
 import SampleViewer from "./SampleViewer";
 
 const samples = [
-    "basic-component",
-    "basic-service",
-    "commands-and-operations",
-    "i18n",
-    "iframe",
+    { id: "basic-component", title: "Basic Component" },
+    { id: "basic-service", title: "Basic Service" },
+    { id: "commands-and-operations", title: "Commands and Operations" },
+    { id: "i18n", title: "Internationalization" },
+    { id: "iframe", title: "Iframe Embedded" },
 ] as const;
 
 async function getSampleData(sampleName: string): Promise<Sample> {
@@ -92,11 +92,11 @@ function App() {
 
     const location = useLocation();
     const history = useHistory();
-    const selectedSampleName = location.pathname.replace(
+    const selectedSampleId = location.pathname.replace(
         `${process.env.PUBLIC_URL}/`,
         ""
     );
-    const [currentSample, setCurrentSample] = useState<Sample>();
+    const [selectedSample, setCurrentSample] = useState<Sample>();
 
     useEffect(() => {
         // Set default path if we're at the base path
@@ -106,7 +106,7 @@ function App() {
     }, [location, history]);
 
     useEffect(() => {
-        if (!selectedSampleName) {
+        if (!selectedSampleId) {
             setCurrentSample(undefined);
             return;
         }
@@ -114,7 +114,7 @@ function App() {
         let didCancel = false;
 
         (async () => {
-            const loadedSample = await getSampleData(selectedSampleName);
+            const loadedSample = await getSampleData(selectedSampleId);
 
             if (didCancel) {
                 return;
@@ -126,7 +126,7 @@ function App() {
         return () => {
             didCancel = true;
         };
-    }, [selectedSampleName]);
+    }, [selectedSampleId]);
 
     return (
         <GcxThemeProvider theme={theme}>
@@ -135,19 +135,19 @@ function App() {
                 <List className={classes.drawer}>
                     {samples.map((sample) => (
                         <ListItemLink
-                            key={sample}
-                            to={`/${sample}`}
-                            selected={sample === selectedSampleName}
+                            key={sample.id}
+                            to={`/${sample.id}`}
+                            selected={sample.id === selectedSampleId}
                         >
-                            <ListItemText primary={sample} />
+                            <ListItemText primary={sample.title} />
                         </ListItemLink>
                     ))}
                 </List>
                 <main className={classes.content}>
-                    {currentSample && (
+                    {selectedSample && (
                         <SampleViewer
-                            key={selectedSampleName}
-                            sample={currentSample}
+                            key={selectedSampleId}
+                            sample={selectedSample}
                         />
                     )}
                 </main>
