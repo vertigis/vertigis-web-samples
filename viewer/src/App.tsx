@@ -101,7 +101,7 @@ function App() {
     useEffect(() => {
         // Set default path if we're at the base path
         if (location.pathname === `${process.env.PUBLIC_URL}/`) {
-            history.replace(`${process.env.PUBLIC_URL}/${samples[0]}`);
+            history.replace(`${process.env.PUBLIC_URL}/${samples[0].id}`);
         }
     }, [location, history]);
 
