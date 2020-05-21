@@ -9,7 +9,7 @@ interface WebViewerProps {
 const useStyles = makeStyles((theme) => ({
     root: {
         border: 0,
-        height: "100%",
+        flexGrow: 1,
         width: "100%",
     },
 }));

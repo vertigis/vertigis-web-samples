@@ -23,6 +23,7 @@ interface TabPanelProps {
 const useTabPanelStyles = makeStyles((theme) => ({
     root: {
         borderLeft: `1px solid ${theme.palette.grey[400]}`,
+        display: "flex",
         flexGrow: 1,
     },
     hidden: {
