@@ -1,21 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
-
-export interface Sample {
-    app: any;
-    layout: any;
-    library: any;
-    page: any;
-}
+import Sample from "./Sample";
 
 interface WebViewerProps {
-    sample: Sample | undefined;
+    sample: Sample;
 }
 
 const useStyles = makeStyles((theme) => ({
     root: {
         border: 0,
-        height: "100%",
+        flexGrow: 1,
         width: "100%",
     },
 }));

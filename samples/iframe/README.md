@@ -1,6 +1,8 @@
+# Geocortex Web embedded in iframe
+
 This sample demonstrates how to embed Geocortex Web within another application. This can be extremely useful for integrating with other systems and applications to create powerful integration use cases.
 
-In this example we didn't create any custom code using the Geocortex Web SDK, as it may not be required in all cases. However using the Web SDK can allow you to create a highly flexible translation layer to bridge the communication between Geocortex Web and other applications.
+In this example we didn't create any custom code using the Geocortex Web SDK, as it may not be required in all cases. However, using the Web SDK can allow you to create a highly flexible translation layer to bridge the communication between Geocortex Web and other applications.
 
 The [parent HTML page in this sample](index.html) shows an example of embedding Geocortex Web within another application. It subscribes to [`postMessage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) events from the Geocortex Web frame, as well as sends `postMessage` events to Geocortex Web when clicking on buttons within the parent page.
 

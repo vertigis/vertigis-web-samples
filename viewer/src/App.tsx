@@ -1,39 +1,39 @@
 import {
-    createMuiTheme,
+    createTheme,
     makeStyles,
-    ThemeProvider,
-} from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+    GcxThemeProvider,
+} from "@vertigis/react-ui/styles";
+import CssBaseline from "@vertigis/react-ui/CssBaseline";
+import List from "@vertigis/react-ui/List";
+import ListItem from "@vertigis/react-ui/ListItem";
+import ListItemText from "@vertigis/react-ui/ListItemText";
 import React, { useEffect, useState } from "react";
 import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
-import WebViewer, { Sample } from "./WebViewer";
+import Sample from "./Sample";
+import SampleViewer from "./SampleViewer";
 
 const samples = [
-    "basic-component",
-    "basic-service",
-    "commands-and-operations",
-    "i18n",
-    "iframe",
+    { id: "basic-component", title: "Basic Component" },
+    { id: "basic-service", title: "Basic Service" },
+    { id: "commands-and-operations", title: "Commands and Operations" },
+    { id: "i18n", title: "Internationalization" },
+    { id: "iframe", title: "Iframe Embedded" },
 ] as const;
 
 async function getSampleData(sampleName: string): Promise<Sample> {
-    const [app, layout, library] = await Promise.all([
+    const [app, layout, library, readme] = await Promise.all([
         import(`../../samples/${sampleName}/app/app.json`),
         import(`!!file-loader!../../samples/${sampleName}/app/layout.xml`),
         import(`!!file-loader!../../samples/${sampleName}/build/main.js`),
+        import(`!!file-loader!../../samples/${sampleName}/README.md`),
     ]);
 
     let page;
 
     try {
-        page = (
-            await import(`!!file-loader!../../samples/${sampleName}/index.html`)
-        ).default;
+        page = await import(
+            `!!file-loader!../../samples/${sampleName}/index.html`
+        );
     } catch {
         // This sample doesn't have a custom page. Continue on.
     }
@@ -42,7 +42,9 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         app: app.default,
         layout: layout.default,
         library: library.default,
-        page,
+        page: page && page.default,
+        readme: readme.default,
+        repositoryBasePath: `https://github.com/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
     };
 }
 
@@ -66,60 +68,45 @@ function ListItemLink(props) {
     );
 }
 
-const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
+        flexDirection: "row",
         overflow: "hidden",
     },
     drawer: {
-        width: drawerWidth,
         flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
     },
     content: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         padding: 0,
-        paddingLeft: drawerWidth,
         height: "100vh",
     },
 }));
 
+const theme = createTheme();
+
 function App() {
-    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-    const theme = React.useMemo(
-        () =>
-            createMuiTheme({
-                palette: {
-                    type: prefersDarkMode ? "dark" : "light",
-                },
-            }),
-        [prefersDarkMode]
-    );
-
     const classes = useStyles();
 
     const location = useLocation();
     const history = useHistory();
-    const selectedSampleName = location.pathname.replace(
+    const selectedSampleId = location.pathname.replace(
         `${process.env.PUBLIC_URL}/`,
         ""
     );
-    const [currentSample, setCurrentSample] = useState<Sample>();
+    const [selectedSample, setCurrentSample] = useState<Sample>();
 
     useEffect(() => {
         // Set default path if we're at the base path
         if (location.pathname === `${process.env.PUBLIC_URL}/`) {
-            history.replace(`${process.env.PUBLIC_URL}/${samples[0]}`);
+            history.replace(`${process.env.PUBLIC_URL}/${samples[0].id}`);
         }
     }, [location, history]);
 
     useEffect(() => {
-        if (!selectedSampleName) {
+        if (!selectedSampleId) {
             setCurrentSample(undefined);
             return;
         }
@@ -127,7 +114,7 @@ function App() {
         let didCancel = false;
 
         (async () => {
-            const loadedSample = await getSampleData(selectedSampleName);
+            const loadedSample = await getSampleData(selectedSampleId);
 
             if (didCancel) {
                 return;
@@ -139,41 +126,33 @@ function App() {
         return () => {
             didCancel = true;
         };
-    }, [selectedSampleName]);
+    }, [selectedSampleId]);
 
     return (
-        <ThemeProvider theme={theme}>
-            <div className="App">
-                <CssBaseline />
-
-                <Drawer
-                    className={classes.drawer}
-                    variant="permanent"
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                    anchor="left"
-                >
-                    <List>
-                        {samples.map((sample) => (
-                            <ListItemLink
-                                key={sample}
-                                to={`/${sample}`}
-                                selected={sample === selectedSampleName}
-                            >
-                                <ListItemText primary={sample} />
-                            </ListItemLink>
-                        ))}
-                    </List>
-                </Drawer>
+        <GcxThemeProvider theme={theme}>
+            <CssBaseline />
+            <div className={classes.root}>
+                <List className={classes.drawer}>
+                    {samples.map((sample) => (
+                        <ListItemLink
+                            key={sample.id}
+                            to={`/${sample.id}`}
+                            selected={sample.id === selectedSampleId}
+                        >
+                            <ListItemText primary={sample.title} />
+                        </ListItemLink>
+                    ))}
+                </List>
                 <main className={classes.content}>
-                    <WebViewer
-                        key={selectedSampleName}
-                        sample={currentSample}
-                    />
+                    {selectedSample && (
+                        <SampleViewer
+                            key={selectedSampleId}
+                            sample={selectedSample}
+                        />
+                    )}
                 </main>
             </div>
-        </ThemeProvider>
+        </GcxThemeProvider>
     );
 }
 
