@@ -1,0 +1,9 @@
+.UILibraryComponent {
+    display: flex;
+    flex-direction: column;
+}
+
+.UILibraryComponent-TabPanel {
+    padding: 1rem;
+    flex-grow: 1;
+}
