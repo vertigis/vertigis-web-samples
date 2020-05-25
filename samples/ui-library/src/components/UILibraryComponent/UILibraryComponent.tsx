@@ -46,7 +46,7 @@ export default function UILibraryComponent(
                     <Tab label="Typography" {...tabA11yProps(3)} />
                 </Tabs>
                 <TabPanel value={tabValue} index={0}>
-                    <Buttons />
+                    <Buttons model={props.model} />
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
                     <FormControls />

@@ -1,33 +1,54 @@
 import Button from "@geocortex/web/ui/button";
 import React from "react";
+import UILibraryComponentModel from "./UILibraryComponentModel";
 
-export default function Buttons() {
+interface ButtonsProps {
+    model: UILibraryComponentModel;
+}
+
+export default function Buttons({ model }: ButtonsProps) {
+    const handleClick = (
+        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        model.messages.commands.ui.alert.execute({
+            message: "Button clicked!",
+        });
+    };
+
     return (
         <>
-            <Button emphasis="low" size="small">
+            <Button onClick={handleClick} emphasis="low" size="small">
                 Low emphasis small
             </Button>
-            <Button emphasis="low">Low emphasis medium</Button>
-            <Button emphasis="low" size="large">
+            <Button onClick={handleClick} emphasis="low">
+                Low emphasis medium
+            </Button>
+            <Button onClick={handleClick} emphasis="low" size="large">
                 Medium emphasis large
             </Button>
-            <Button emphasis="low" disabled>
+            <Button onClick={handleClick} emphasis="low" disabled>
                 Low emphasis disabled
             </Button>
-            <Button size="small">Medium emphasis small</Button>
-            <Button>Medium emphasis medium</Button>
-            <Button size="large">Medium emphasis large</Button>
-            <Button emphasis="low" disabled>
+            <Button onClick={handleClick} size="small">
+                Medium emphasis small
+            </Button>
+            <Button onClick={handleClick}>Medium emphasis medium</Button>
+            <Button onClick={handleClick} size="large">
+                Medium emphasis large
+            </Button>
+            <Button onClick={handleClick} emphasis="low" disabled>
                 Medium emphasis disabled
             </Button>
-            <Button emphasis="high" size="small">
+            <Button onClick={handleClick} emphasis="high" size="small">
                 High emphasis small
             </Button>
-            <Button emphasis="high">High emphasis medium</Button>
-            <Button emphasis="high" size="large">
+            <Button onClick={handleClick} emphasis="high">
+                High emphasis medium
+            </Button>
+            <Button onClick={handleClick} emphasis="high" size="large">
                 High emphasis large
             </Button>
-            <Button emphasis="high" disabled>
+            <Button onClick={handleClick} emphasis="high" disabled>
                 High emphasis disabled
             </Button>
         </>
