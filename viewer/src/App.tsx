@@ -18,6 +18,7 @@ const samples = [
     { id: "commands-and-operations", title: "Commands and Operations" },
     { id: "i18n", title: "Internationalization" },
     { id: "iframe", title: "Iframe Embedded" },
+    { id: "ui-library", title: "UI Library" },
 ] as const;
 
 async function getSampleData(sampleName: string): Promise<Sample> {
