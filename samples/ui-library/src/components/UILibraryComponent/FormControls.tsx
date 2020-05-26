@@ -152,7 +152,7 @@ function SelectDemo() {
     };
 
     return (
-        <div>
+        <>
             <div>
                 <FormControl>
                     <FormLabel id="demo-simple-select-label">Age</FormLabel>
@@ -333,7 +333,7 @@ function SelectDemo() {
                     </Select>
                 </FormControl>
             </div>
-        </div>
+        </>
     );
 }
 

@@ -1,16 +1,15 @@
+import { UIContext } from "@geocortex/web/ui";
 import Button from "@geocortex/web/ui/button";
 import React from "react";
 import UILibraryComponentModel from "./UILibraryComponentModel";
 
-interface ButtonsProps {
-    model: UILibraryComponentModel;
-}
+export default function Buttons() {
+    const { commands } = React.useContext(UIContext);
 
-export default function Buttons({ model }: ButtonsProps) {
     const handleClick = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
-        model.messages.commands.ui.alert.execute({
+        commands.ui.alert.execute({
             message: "Button clicked!",
         });
     };

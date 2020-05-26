@@ -33,31 +33,29 @@ export default function UILibraryComponent(
 
     return (
         <LayoutElement {...props} stretch className="UILibraryComponent">
-            <div>
-                <Tabs
-                    value={tabValue}
-                    onChange={handleTabChange}
-                    aria-label="simple tabs example"
-                    indicatorColor="primary"
-                >
-                    <Tab label="Buttons" {...tabA11yProps(0)} />
-                    <Tab label="Form Controls" {...tabA11yProps(1)} />
-                    <Tab label="Lists" {...tabA11yProps(2)} />
-                    <Tab label="Typography" {...tabA11yProps(3)} />
-                </Tabs>
-                <TabPanel value={tabValue} index={0}>
-                    <Buttons model={props.model} />
-                </TabPanel>
-                <TabPanel value={tabValue} index={1}>
-                    <FormControls />
-                </TabPanel>
-                <TabPanel value={tabValue} index={2}>
-                    <Lists />
-                </TabPanel>
-                <TabPanel value={tabValue} index={3}>
-                    <TypographyDemo />
-                </TabPanel>
-            </div>
+            <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                aria-label="simple tabs example"
+                indicatorColor="primary"
+            >
+                <Tab label="Buttons" {...tabA11yProps(0)} />
+                <Tab label="Form Controls" {...tabA11yProps(1)} />
+                <Tab label="Lists" {...tabA11yProps(2)} />
+                <Tab label="Typography" {...tabA11yProps(3)} />
+            </Tabs>
+            <TabPanel value={tabValue} index={0}>
+                <Buttons />
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
+                <FormControls />
+            </TabPanel>
+            <TabPanel value={tabValue} index={2}>
+                <Lists />
+            </TabPanel>
+            <TabPanel value={tabValue} index={3}>
+                <TypographyDemo />
+            </TabPanel>
         </LayoutElement>
     );
 }
