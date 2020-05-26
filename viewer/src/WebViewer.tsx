@@ -8,9 +8,9 @@ interface WebViewerProps {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        border: 0,
+        border: `1px solid ${theme.palette.divider}`,
         flexGrow: 1,
-        width: "100%",
+        minHeight: 500,
     },
 }));
 

@@ -10,7 +10,6 @@
     },
     "dependencies": {
         "@vertigis/react-ui": "^4.2.0",
-        "classnames": "^2.2.6",
         "marked": "^1.1.0",
         "react-router-dom": "^5.1.2"
     },

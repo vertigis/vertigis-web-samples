@@ -76,13 +76,15 @@ const useStyles = makeStyles((theme) => ({
         overflow: "hidden",
     },
     drawer: {
+        borderRight: `1px solid ${theme.palette.divider}`,
         flexShrink: 0,
     },
     content: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
-        padding: 0,
+        padding: 32,
         height: "100vh",
+        overflowY: "auto",
     },
 }));
 

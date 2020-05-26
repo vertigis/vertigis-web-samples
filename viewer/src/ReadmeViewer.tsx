@@ -9,8 +9,7 @@ interface ReadmeViewerProps {
 
 const useStyles = makeStyles({
     root: {
-        padding: "1rem",
-        paddingBlockStart: 0,
+        paddingBlockStart: 16,
     },
 });
 
