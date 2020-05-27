@@ -26,7 +26,7 @@ describe(sampleName, () => {
         // One graphic for first stop
         validateMarkupLayerSize(1);
 
-        cy.getViewer().getMap().click(600, 500);
+        cy.getViewer().getMap().click(600, 450);
         // Two more graphics for second stop + route
         validateMarkupLayerSize(3);
     });
