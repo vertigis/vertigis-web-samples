@@ -4,6 +4,10 @@ import {
     GcxThemeProvider,
 } from "@vertigis/react-ui/styles";
 import CssBaseline from "@vertigis/react-ui/CssBaseline";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@vertigis/react-ui/IconButton";
+import MenuIcon from "@vertigis/react-ui/icons/Menu";
 import List from "@vertigis/react-ui/List";
 import ListItem from "@vertigis/react-ui/ListItem";
 import ListItemText from "@vertigis/react-ui/ListItemText";
@@ -69,15 +73,14 @@ function ListItemLink(props) {
     );
 }
 
+const drawerWidth = 240;
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
         flexDirection: "row",
         overflow: "hidden",
-    },
-    drawer: {
-        borderRight: `1px solid ${theme.palette.divider}`,
-        flexShrink: 0,
+        position: "relative",
     },
     content: {
         flexGrow: 1,
@@ -85,6 +88,26 @@ const useStyles = makeStyles((theme) => ({
         padding: 32,
         height: "100vh",
         overflowY: "auto",
+        [theme.breakpoints.down("sm")]: {
+            paddingBlockStart: "48px",
+        },
+    },
+    drawer: {
+        [theme.breakpoints.up("md")]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    menuButton: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        [theme.breakpoints.up("md")]: {
+            display: "none",
+        },
     },
 }));
 
@@ -100,6 +123,7 @@ function App() {
         ""
     );
     const [selectedSample, setCurrentSample] = useState<Sample>();
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
     useEffect(() => {
         // Set default path if we're at the base path
@@ -131,21 +155,65 @@ function App() {
         };
     }, [selectedSampleId]);
 
+    const handleOpenMobileDrawer = () => {
+        setMobileOpen(true);
+    };
+
+    const handleCloseMobileDrawer = () => {
+        setMobileOpen(false);
+    };
+
+    const drawer = (
+        <List>
+            {samples.map((sample) => (
+                <ListItemLink
+                    key={sample.id}
+                    to={`/${sample.id}`}
+                    selected={sample.id === selectedSampleId}
+                    onClick={handleCloseMobileDrawer}
+                >
+                    <ListItemText primary={sample.title} />
+                </ListItemLink>
+            ))}
+        </List>
+    );
+
     return (
         <GcxThemeProvider theme={theme}>
             <CssBaseline />
             <div className={classes.root}>
-                <List className={classes.drawer}>
-                    {samples.map((sample) => (
-                        <ListItemLink
-                            key={sample.id}
-                            to={`/${sample.id}`}
-                            selected={sample.id === selectedSampleId}
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleOpenMobileDrawer}
+                    className={classes.menuButton}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <nav className={classes.drawer} aria-label="samples">
+                    <Hidden mdUp implementation="css">
+                        <Drawer
+                            classes={{ paper: classes.drawerPaper }}
+                            variant="temporary"
+                            open={mobileOpen}
+                            onClose={handleCloseMobileDrawer}
+                            ModalProps={{
+                                keepMounted: true, // Better open performance on mobile.
+                            }}
                         >
-                            <ListItemText primary={sample.title} />
-                        </ListItemLink>
-                    ))}
-                </List>
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                    <Hidden smDown implementation="css">
+                        <Drawer
+                            classes={{ paper: classes.drawerPaper }}
+                            variant="permanent"
+                            open
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                </nav>
                 <main className={classes.content}>
                     {selectedSample && (
                         <SampleViewer
