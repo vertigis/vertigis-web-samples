@@ -26,7 +26,7 @@ The tests for each sample live under the [cypress/integration](cypress/integrati
 
 #### Running the Samples Viewer Locally
 
-You will [yarn](https://yarnpkg.com/) installed to run the samples viewer. The easiest way to install and update yarn is to run `npm install -g yarn`.
+You will need [yarn](https://yarnpkg.com/) installed to run the samples viewer. The easiest way to install and update yarn is to run `npm install -g yarn`.
 
 To run the samples viewer, first build all of the sample projects by running `yarn build:samples` in the root of this project, followed by running `yarn start` to start the viewer.
 
