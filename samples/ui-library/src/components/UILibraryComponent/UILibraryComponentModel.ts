@@ -2,7 +2,7 @@ import {
     ComponentModelBase,
     ComponentModelProperties,
     serializable,
-} from "@geocortex/web/models";
+} from "@vertigis/web/models";
 
 interface UILibraryComponentModelProperties extends ComponentModelProperties {}
 

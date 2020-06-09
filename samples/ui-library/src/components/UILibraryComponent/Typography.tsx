@@ -1,10 +1,10 @@
-import Typography from "@geocortex/web/ui/typography";
+import Typography from "@vertigis/web/ui/Typography";
 import React from "react";
 
 export default function TypographyDemo() {
     return (
         <>
-            <Typography variant="h1" component="h2" gutterBottom>
+            <Typography variant="h1" gutterBottom>
                 h1. Heading
             </Typography>
             <Typography variant="h2" gutterBottom>
