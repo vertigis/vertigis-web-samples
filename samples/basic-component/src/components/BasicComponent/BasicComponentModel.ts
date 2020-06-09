@@ -3,7 +3,7 @@ import {
     ComponentModelProperties,
     PropertyDefs,
     serializable,
-} from "@geocortex/web/models";
+} from "@vertigis/web/models";
 
 interface BasicComponentModelProperties extends ComponentModelProperties {
     hidden?: boolean;
