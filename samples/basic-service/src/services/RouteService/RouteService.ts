@@ -1,4 +1,4 @@
-import { ServiceBase } from "@geocortex/web/services";
+import { ServiceBase } from "@vertigis/web/services";
 import Geometry from "esri/geometry/Geometry";
 import Graphic from "esri/Graphic";
 import SimpleLineSymbol from "esri/symbols/SimpleLineSymbol";
@@ -6,6 +6,7 @@ import SimpleMarkerSymbol from "esri/symbols/SimpleMarkerSymbol";
 import RouteTask from "esri/tasks/RouteTask";
 import FeatureSet from "esri/tasks/support/FeatureSet";
 import RouteParameters from "esri/tasks/support/RouteParameters";
+import { command } from "@vertigis/web/messaging";
 
 const pointSymbol = new SimpleMarkerSymbol({
     outline: {
@@ -26,6 +27,7 @@ export default class RouteService extends ServiceBase {
     });
     stops = new FeatureSet();
 
+    @command("custom-route-service.add-point")
     protected _handleAddPointCommand(result: { geometry: Geometry }) {
         const promises: Promise<any>[] = [];
 
