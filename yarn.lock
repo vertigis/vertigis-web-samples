@@ -1959,10 +1959,10 @@
   resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-26.3.1.tgz#13a39b7c01e90c94a103168d5d6e926a7718a8dc"
   integrity sha512-+nHf12ZKipc3Ah5XMzcXnQdaoof2CWuIdCiMotpG1zbITLaJS4qXJFgMR4fLj/4eS5vymGK/4yv/u75h60wENA==
 
-"@vertigis/web-sdk@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@vertigis/web-sdk/-/web-sdk-1.0.0.tgz#cc7cc64945490f08d9606c0a27bf163963d7dfcc"
-  integrity sha512-UqIjvvMLM63JbQyst0HGIdIurzUoZASiwYWp/K5dZPL9uybICzctPQSt7EdvVrnKRv/6mv90RYSCsXIWUx7W+g==
+"@vertigis/web-sdk@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@vertigis/web-sdk/-/web-sdk-1.0.1.tgz#8ee6b35fee599f1216130950a3ebb552f4d6c0bc"
+  integrity sha512-9djdgVmlE4sJ1JDi4KgddAwnZW/QoOdA21GPlQPSO1ZZP+aYj3HGaHxcFSZNuzB5A+4JyLVPXK3WHN09hKUsPQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^3.1.0"
     "@typescript-eslint/parser" "^3.1.0"
@@ -4738,7 +4738,7 @@ dojo-dstore@1.1.2:
   dependencies:
     dojo "^1.9.0"
 
-dojo@1.14.2, "dojo@github:Esri/dojo#v1.14.2/esri-3.28.0":
+dojo@1.14.2, dojo@Esri/dojo#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
 
@@ -4747,7 +4747,7 @@ dojo@^1.9.0:
   resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.16.2.tgz#5cc7bcb80afca1b057560ce5ca6fb26275a4785d"
   integrity sha512-cgiT6WFAmcc1p95X7HPPVq3pM+qD4eB+DRWI+z04IWlGh5v4h9wqOdz1s+2mG7x7UYz+EzoGyLB87GDgGUOtIQ==
 
-"dojox@github:Esri/dojox#v1.14.2/esri-3.28.0":
+dojox@Esri/dojox#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dojox/tar.gz/66a4f9a49808332c0573437ea2f9f78901124373"
   dependencies:

@@ -12,7 +12,7 @@
         "@vertigis/web": "^5.7.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.0.0",
+        "@vertigis/web-sdk": "^1.0.1",
         "concurrently": "^5.2.0",
         "serve": "^11.3.0"
     }

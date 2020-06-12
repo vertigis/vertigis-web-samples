@@ -10,6 +10,6 @@
         "@vertigis/web": "^5.7.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.0.0"
+        "@vertigis/web-sdk": "^1.0.1"
     }
 }
