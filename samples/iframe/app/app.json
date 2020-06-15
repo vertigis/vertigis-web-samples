@@ -9,6 +9,7 @@
         {
             "$type": "menu-item",
             "id": "button-config",
+            "icon": null,
             "title": "Send message to parent",
             "action": [
                 {

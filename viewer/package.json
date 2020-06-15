@@ -19,7 +19,7 @@
         "@types/react-router-dom": "^5.1.5",
         "http-proxy-middleware": "^1.0.3",
         "react-scripts": "3.4.1",
-        "typescript": "~3.8.3"
+        "typescript": "~3.9.5"
     },
     "eslintConfig": {
         "extends": "react-app"
