@@ -4,7 +4,7 @@
 
 View the samples at [https://vertigis-web-samples.netlify.app](https://vertigis-web-samples.netlify.app).
 
-This project includes a collection of samples that demonstrates how to configure and customize [Geocortex Web](https://www.geocortex.com/products/gxw/) apps using the [Geocortex Web SDK](https://developers.geocortex.com/docs/web/sdk-overview). Before diving into the SDK, be sure to check out our [Developer Center](https://developers.geocortex.com/docs/web/overview) to learn the various concepts of building and configuring Geocortex Web applications. There is a surprising amount that can be accomplished through [layout](https://developers.geocortex.com/docs/web/configuration-layout), [app config](https://developers.geocortex.com/docs/web/configuration-app-config), and [Geocortex Workflow](https://www.geocortex.com/products/geocortex-workflow/) which can be [configured in the app config](https://developers.geocortex.com/docs/web/tutorial-run-workflow-app-config) without even needing to use the SDK!
+This project includes a collection of samples that demonstrates how to configure and customize [Geocortex Web](https://www.geocortex.com/products/gxw/) apps using the [Geocortex Web SDK](https://developers.geocortex.com/docs/web/sdk-overview/). Before diving into the SDK, be sure to check out our [Developer Center](https://developers.geocortex.com/docs/web/overview/) to learn the various concepts of building and configuring Geocortex Web applications. There is a surprising amount that can be accomplished through [layout](https://developers.geocortex.com/docs/web/configuration-layout-getting-started/), [app config](https://developers.geocortex.com/docs/web/configuration-app-config-getting-started/), and [Geocortex Workflow](https://www.geocortex.com/products/geocortex-workflow/) which can be [configured in the app config](https://developers.geocortex.com/docs/web/tutorial-run-workflow-app-config/) without even needing to use the SDK!
 
 Check out the [hosted samples viewer](https://vertigis-web-samples.netlify.app/) for an easy way to run the samples in your browser without needing to run the project locally. The source for each sample is located within the [samples](samples) folder of this project.
 
@@ -32,4 +32,4 @@ To run the samples viewer, first build all of the sample projects by running `ya
 
 ## Documentation
 
-You can learn more on the [Geocortex Developer Center](https://developers.geocortex.com/docs/web/overview).
+You can learn more on the [Geocortex Developer Center](https://developers.geocortex.com/docs/web/overview/).
