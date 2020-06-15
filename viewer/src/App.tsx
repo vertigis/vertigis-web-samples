@@ -37,7 +37,7 @@ async function getSampleData(sampleName: string): Promise<Sample> {
 
     try {
         page = await import(
-            `!!file-loader!../../samples/${sampleName}/index.html`
+            `!!file-loader!../../samples/${sampleName}/app/parent.html`
         );
     } catch {
         // This sample doesn't have a custom page. Continue on.
@@ -50,7 +50,9 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         page: page && page.default,
         readme: readme.default,
         repositoryBasePath: `https://github.com/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
-        codesandboxLink: `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
+        codesandboxLink: !!page
+            ? `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/?initialpath=/parent.html`
+            : `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
     };
 }
 

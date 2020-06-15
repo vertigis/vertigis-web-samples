@@ -110,7 +110,7 @@
             https://apps.geocortex.com/webviewer/?app=abc123
             where `abc123` is the id of your configured application.
         -->
-        <iframe id="viewer" src="/viewer/index.html"></iframe>
+        <iframe id="viewer" src="/index.html"></iframe>
         <script>
             function zoomToViewpoint() {
                 const x = parseFloat(document.getElementById("x").value);
@@ -188,7 +188,9 @@
                         // Not running in prod
                         !event.origin.endsWith(
                             "vertigis-web-samples.netlify.app"
-                        )
+                        ) &&
+                        // Not running on codesandbox
+                        !event.origin.endsWith("codesandbox.io")
                     ) {
                         return;
                     }
