@@ -13,6 +13,7 @@
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.0.1",
+        "typescript": "~3.9.5",
         "concurrently": "^5.2.0",
         "serve": "^11.3.0"
     }
