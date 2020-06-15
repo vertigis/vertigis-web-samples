@@ -4,17 +4,13 @@
     "private": true,
     "scripts": {
         "build": "vertigis-web-sdk build",
-        "start": "concurrently -k -n parent,web-sdk \"yarn start:parent\" \"yarn start:sdk\"",
-        "start:parent": "serve",
-        "start:sdk": "vertigis-web-sdk start"
+        "start": "vertigis-web-sdk start"
     },
     "dependencies": {
         "@vertigis/web": "^5.7.0"
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.0.1",
-        "typescript": "~3.9.5",
-        "concurrently": "^5.2.0",
-        "serve": "^11.3.0"
+        "typescript": "~3.9.5"
     }
 }
