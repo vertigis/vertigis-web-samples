@@ -1,5 +1,5 @@
-import { UIContext } from "@geocortex/web/ui";
-import Button from "@geocortex/web/ui/button";
+import { UIContext } from "@vertigis/web/ui";
+import Button from "@vertigis/web/ui/Button";
 import React from "react";
 import UILibraryComponentModel from "./UILibraryComponentModel";
 

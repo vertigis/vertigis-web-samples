@@ -1,4 +1,4 @@
-import { LibraryRegistry } from "@geocortex/web/config";
+import { LibraryRegistry } from "@vertigis/web/config";
 import TranslatableText, {
     TranslatableTextModel,
 } from "./components/TranslatableText";
@@ -23,7 +23,7 @@ export default function (registry: LibraryRegistry) {
         title: "Translatable Text",
     });
     registry.registerModel({
-        getModelType: () => TranslatableTextModel,
+        getModel: () => new TranslatableTextModel(),
         itemType: "translatable-text",
     });
 }

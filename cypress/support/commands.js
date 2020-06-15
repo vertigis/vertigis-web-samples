@@ -60,7 +60,7 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
             const map = win.__maps?.[mapId] || win.__scenes?.[mapId];
 
             // Wait for global map data to be available once initialized
-            expect(map).to.be.ok;
+            expect(!!map).to.be.true;
             expect(map.ready).to.be.true;
         });
 });

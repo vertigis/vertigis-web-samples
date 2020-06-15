@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { LayoutElement } from "@geocortex/web/components";
-import { UIContext } from "@geocortex/web/ui";
-import Button from "@geocortex/web/ui/button";
-import Typography from "@geocortex/web/ui/typography";
+import { LayoutElement } from "@vertigis/web/components";
+import { UIContext } from "@vertigis/web/ui";
+import Button from "@vertigis/web/ui/Button";
+import Typography from "@vertigis/web/ui/Typography";
 
 export default function TranslatableText(props) {
     const { translate } = useContext(UIContext);

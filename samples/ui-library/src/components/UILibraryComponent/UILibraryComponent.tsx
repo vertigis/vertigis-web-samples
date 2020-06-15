@@ -2,9 +2,9 @@ import React from "react";
 import {
     LayoutElement,
     LayoutElementProperties,
-} from "@geocortex/web/components";
-import Tab from "@geocortex/web/ui/tab";
-import Tabs from "@geocortex/web/ui/tabs";
+} from "@vertigis/web/components";
+import Tab from "@vertigis/web/ui/Tab";
+import Tabs from "@vertigis/web/ui/Tabs";
 import UILibraryComponentModel from "./UILibraryComponentModel";
 import Buttons from "./Buttons";
 import FormControls from "./FormControls";

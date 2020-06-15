@@ -1,4 +1,4 @@
-import { LibraryRegistry } from "@geocortex/web/config";
+import { LibraryRegistry } from "@vertigis/web/config";
 import UILibraryComponent, {
     UILibraryComponentModel,
 } from "./components/UILibraryComponent";
@@ -12,7 +12,7 @@ export default function (registry: LibraryRegistry) {
         title: "UI Library",
     });
     registry.registerModel({
-        getModelType: () => UILibraryComponentModel,
+        getModel: (config) => new UILibraryComponentModel(config),
         itemType: "ui-library",
     });
 }

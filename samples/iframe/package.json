@@ -9,10 +9,10 @@
         "start:sdk": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@geocortex/web": "^5.6.0"
+        "@vertigis/web": "^5.7.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "beta",
+        "@vertigis/web-sdk": "^1.0.1",
         "concurrently": "^5.2.0",
         "serve": "^11.3.0"
     }

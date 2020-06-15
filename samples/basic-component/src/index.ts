@@ -1,4 +1,4 @@
-import { LibraryRegistry } from "@geocortex/web/config";
+import { LibraryRegistry } from "@vertigis/web/config";
 import BasicComponent, {
     BasicComponentModel,
 } from "./components/BasicComponent";
@@ -12,7 +12,7 @@ export default function (registry: LibraryRegistry) {
         title: "Basic",
     });
     registry.registerModel({
-        getModelType: () => BasicComponentModel,
+        getModel: (config) => new BasicComponentModel(config),
         itemType: "basic",
     });
 }

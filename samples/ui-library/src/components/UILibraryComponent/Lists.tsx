@@ -1,5 +1,5 @@
-import MenuItem from "@geocortex/web/ui/menu-item";
-import MenuList from "@geocortex/web/ui/menu-list";
+import MenuItem from "@vertigis/web/ui/MenuItem";
+import MenuList from "@vertigis/web/ui/MenuList";
 import React from "react";
 
 export default function Lists() {

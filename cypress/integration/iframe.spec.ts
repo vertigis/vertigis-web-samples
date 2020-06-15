@@ -14,7 +14,7 @@ describe(sampleName, () => {
                 expect(viewpoint.camera.position.z).not.to.equal(-250);
             });
 
-        cy.getViewerParent().find("button").contains("Go!").click();
+        cy.getViewerParent().contains("button", "Go!").click();
 
         cy.getNestedViewer()
             .getMap()
@@ -25,8 +25,7 @@ describe(sampleName, () => {
             });
 
         cy.getViewerParent()
-            .find("button")
-            .contains("Zoom to initial viewpoint")
+            .contains("button", "Zoom to initial viewpoint")
             .click();
 
         cy.getNestedViewer()
@@ -42,8 +41,7 @@ describe(sampleName, () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         cy.getNestedViewer()
-            .find("button")
-            .contains("Send message to parent")
+            .contains("button", "Send message to parent")
             .click();
 
         cy.getNestedViewer()

@@ -2,10 +2,10 @@ import React from "react";
 import {
     LayoutElement,
     LayoutElementProperties,
-} from "@geocortex/web/components";
-import { useWatchAndRerender } from "@geocortex/web/ui";
-import Button from "@geocortex/web/ui/button";
-import Typography from "@geocortex/web/ui/typography";
+} from "@vertigis/web/components";
+import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
+import Button from "@vertigis/web/ui/Button";
+import Typography from "@vertigis/web/ui/Typography";
 import BasicComponentModel from "./BasicComponentModel";
 import "./BasicComponent.css";
 

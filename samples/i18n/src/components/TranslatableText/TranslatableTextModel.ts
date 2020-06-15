@@ -1,4 +1,4 @@
-import { ComponentModelBase, serializable } from "@geocortex/web/models";
+import { ComponentModelBase, serializable } from "@vertigis/web/models";
 
 @serializable
 export default class TranslatableTextModel extends ComponentModelBase {}

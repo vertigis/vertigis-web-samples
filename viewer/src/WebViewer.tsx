@@ -42,7 +42,7 @@ function loadSample(sample: Sample, iframe: HTMLIFrameElement) {
             throw new Error("Web frame failed to load");
         }
 
-        iframeWindow.require(["require", "gwv"], function (require, webViewer) {
+        iframeWindow.require(["require", "web"], function (require, webViewer) {
             function getAbsoluteUrl(relativePath) {
                 const a = document.createElement("a");
                 a.href = relativePath;
@@ -51,8 +51,8 @@ function loadSample(sample: Sample, iframe: HTMLIFrameElement) {
 
             // Load common web libs as well as our custom bundle
             require([
-                "@geocortex/web-libraries!/common",
-                "@geocortex/web-libraries!/web",
+                "@vertigis/web-libraries!/common",
+                "@vertigis/web-libraries!/web",
                 sample.library,
             ], (...libs) => {
                 const options = {

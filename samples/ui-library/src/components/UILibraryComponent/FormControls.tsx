@@ -1,14 +1,14 @@
-import Checkbox from "@geocortex/web/ui/checkbox";
-import FormControl from "@geocortex/web/ui/form-control";
-import FormControlLabel from "@geocortex/web/ui/form-control-label";
-import FormHelperText from "@geocortex/web/ui/form-helper-text";
-import FormLabel from "@geocortex/web/ui/form-label";
-import Input from "@geocortex/web/ui/input";
-import MenuItem from "@geocortex/web/ui/menu-item";
-import Radio from "@geocortex/web/ui/radio";
-import RadioGroup from "@geocortex/web/ui/radio-group";
-import Select from "@geocortex/web/ui/select";
-import Typography from "@geocortex/web/ui/typography";
+import Checkbox from "@vertigis/web/ui/Checkbox";
+import FormControl from "@vertigis/web/ui/FormControl";
+import FormControlLabel from "@vertigis/web/ui/FormControlLabel";
+import FormHelperText from "@vertigis/web/ui/FormHelperText";
+import FormLabel from "@vertigis/web/ui/FormLabel";
+import Input from "@vertigis/web/ui/Input";
+import MenuItem from "@vertigis/web/ui/MenuItem";
+import Radio from "@vertigis/web/ui/Radio";
+import RadioGroup from "@vertigis/web/ui/RadioGroup";
+import Select from "@vertigis/web/ui/Select";
+import Typography from "@vertigis/web/ui/Typography";
 import React from "react";
 
 function CheckboxDemo() {
