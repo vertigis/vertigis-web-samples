@@ -29,6 +29,13 @@ export default function SampleViewer({ sample }: SampleViewerProps) {
             >
                 View the source code on GitHub
             </a>
+            <a
+                href={sample.codesandboxLink}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Edit this sample in CodeSandbox
+            </a>
             <ReadmeViewer sample={sample} />
         </div>
     );

@@ -50,6 +50,7 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         page: page && page.default,
         readme: readme.default,
         repositoryBasePath: `https://github.com/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
+        codesandboxLink: `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
     };
 }
 

@@ -11,4 +11,6 @@ export default interface Sample {
     readme: string;
     /** The absolute URL to the base path of this sample in the repository. */
     repositoryBasePath: string;
+    /** The absolute URL to edit this sample in codesandbox. */
+    codesandboxLink: string;
 }
