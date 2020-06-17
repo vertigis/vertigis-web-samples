@@ -33,10 +33,10 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         import(`!!file-loader!../../samples/${sampleName}/README.md`),
     ]);
 
-    let page;
+    let parentPage;
 
     try {
-        page = await import(
+        parentPage = await import(
             `!!file-loader!../../samples/${sampleName}/app/parent.html`
         );
     } catch {
@@ -47,10 +47,10 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         app: app.default,
         layout: layout.default,
         library: library.default,
-        page: page && page.default,
+        page: parentPage && parentPage.default,
         readme: readme.default,
         repositoryBasePath: `https://github.com/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
-        codesandboxLink: !!page
+        codesandboxLink: !!parentPage
             ? `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/?initialpath=/parent.html`
             : `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
     };
