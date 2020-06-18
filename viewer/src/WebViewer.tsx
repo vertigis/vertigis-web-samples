@@ -102,14 +102,14 @@ function WebViewer(props: WebViewerProps) {
     const [sampleHtml, setSampleHtml] = useState<string>();
 
     useEffect(() => {
-        if (!sample?.page) {
+        if (!sample?.parentPage) {
             return;
         }
 
         let didCancel = false;
 
         (async () => {
-            const response = await fetch(sample.page);
+            const response = await fetch(sample.parentPage);
             const html = await response.text();
 
             const doc = new DOMParser().parseFromString(html, "text/html");
@@ -137,11 +137,11 @@ function WebViewer(props: WebViewerProps) {
         };
     }, [sample]);
 
-    if (!sample || (sample.page && !sampleHtml)) {
+    if (!sample || (sample.parentPage && !sampleHtml)) {
         return null;
     }
 
-    if (sample.page) {
+    if (sample.parentPage) {
         return (
             <iframe
                 className={styles.root}

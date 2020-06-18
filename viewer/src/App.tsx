@@ -47,7 +47,7 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         app: app.default,
         layout: layout.default,
         library: library.default,
-        page: parentPage && parentPage.default,
+        parentPage: parentPage && parentPage.default,
         readme: readme.default,
         repositoryBasePath: `https://github.com/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
         codesandboxLink: !!parentPage

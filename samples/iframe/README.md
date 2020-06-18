@@ -4,7 +4,7 @@ This sample demonstrates how to embed Geocortex Web within another application. 
 
 In this example we didn't create any custom code using the Geocortex Web SDK, as it may not be required in all cases. However, using the Web SDK can allow you to create a highly flexible translation layer to bridge the communication between Geocortex Web and other applications.
 
-The [parent HTML page in this sample](index.html) shows an example of embedding Geocortex Web within another application. It subscribes to [`postMessage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) events from the Geocortex Web frame, as well as sends `postMessage` events to Geocortex Web when clicking on buttons within the parent page.
+The [parent HTML page in this sample](app/parent.html) shows an example of embedding Geocortex Web within another application. It subscribes to [`postMessage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) events from the Geocortex Web frame, as well as sends `postMessage` events to Geocortex Web when clicking on buttons within the parent page.
 
 The [app config in this sample](app/app.json) configures the application to support `postMessage`. By default, Geocortex Web will not send or receieve `postMessage` events unless explicitly configured to do so. The app config also configures a menu item to invoke the `viewer.post-message` command which will send the input argument of the command to the parent frame.
 
