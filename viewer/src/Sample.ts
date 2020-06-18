@@ -6,9 +6,11 @@ export default interface Sample {
     /** The path to the custom library JavaScript bundle. */
     library: string;
     /** The path to the optional custom HTML parent page. */
-    page: string;
+    parentPage: string;
     /** The path to the readme of the sample. */
     readme: string;
     /** The absolute URL to the base path of this sample in the repository. */
     repositoryBasePath: string;
+    /** The absolute URL to edit this sample in codesandbox. */
+    codesandboxLink: string;
 }

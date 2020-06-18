@@ -33,11 +33,11 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         import(`!!file-loader!../../samples/${sampleName}/README.md`),
     ]);
 
-    let page;
+    let parentPage;
 
     try {
-        page = await import(
-            `!!file-loader!../../samples/${sampleName}/index.html`
+        parentPage = await import(
+            `!!file-loader!../../samples/${sampleName}/app/parent.html`
         );
     } catch {
         // This sample doesn't have a custom page. Continue on.
@@ -47,9 +47,12 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         app: app.default,
         layout: layout.default,
         library: library.default,
-        page: page && page.default,
+        parentPage: parentPage && parentPage.default,
         readme: readme.default,
         repositoryBasePath: `https://github.com/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
+        codesandboxLink: !!parentPage
+            ? `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/?initialpath=/parent.html`
+            : `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
     };
 }
 
