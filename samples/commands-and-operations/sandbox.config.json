@@ -4,5 +4,7 @@
     "view": "browser",
     "template": "node",
     "port": 3000,
-    "startScript": "SOCK_PORT=443 npm start"
+    "container": {
+        "startScript": "start-in-sandbox"
+    }
 }
