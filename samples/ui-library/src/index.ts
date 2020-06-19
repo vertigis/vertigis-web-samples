@@ -7,7 +7,7 @@ export default function (registry: LibraryRegistry) {
     registry.registerComponent({
         name: "ui-library",
         namespace: "your.custom.namespace",
-        getComponentType: () => UILibraryComponent as any,
+        getComponentType: () => UILibraryComponent,
         itemType: "ui-library",
         title: "UI Library",
     });

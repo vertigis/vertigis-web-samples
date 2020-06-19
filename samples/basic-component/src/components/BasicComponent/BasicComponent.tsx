@@ -20,7 +20,7 @@ const BasicComponent = (
     return (
         <LayoutElement {...props} className="BasicComponent">
             <Typography variant="h2" gutterBottom>
-                I'm a basic component
+                I am a basic component
             </Typography>
             {/* Change the underlying model property value to trigger a re-render */}
             <Button onClick={() => (model.hidden = !model.hidden)}>

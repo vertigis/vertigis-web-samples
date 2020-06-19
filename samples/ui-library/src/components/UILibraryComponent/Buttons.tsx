@@ -1,18 +1,14 @@
 import { UIContext } from "@vertigis/web/ui";
 import Button from "@vertigis/web/ui/Button";
 import React from "react";
-import UILibraryComponentModel from "./UILibraryComponentModel";
 
 export default function Buttons() {
     const { commands } = React.useContext(UIContext);
 
-    const handleClick = (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
+    const handleClick = () =>
         commands.ui.alert.execute({
             message: "Button clicked!",
         });
-    };
 
     return (
         <>

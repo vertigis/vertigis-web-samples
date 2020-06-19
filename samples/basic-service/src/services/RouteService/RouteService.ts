@@ -60,6 +60,6 @@ export default class RouteService extends ServiceBase {
         const routeResult = (data as any).routeResults[0].route;
         // Use our own symbol
         routeResult.symbol = routeSymbol;
-        this.messages.commands.map.addMarkup.execute(routeResult);
+        await this.messages.commands.map.addMarkup.execute(routeResult);
     }
 }
