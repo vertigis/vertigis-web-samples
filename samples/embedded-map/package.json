@@ -1,0 +1,19 @@
+{
+    "name": "sample-embedded-map",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build": "vertigis-web-sdk build",
+        "start": "vertigis-web-sdk start",
+        "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
+    },
+    "dependencies": {
+        "@vertigis/web": "^5.7.0",
+        "mapillary-js": "^2.20.0"
+    },
+    "devDependencies": {
+        "@vertigis/web-sdk": "^1.1.0",
+        "typescript": "~3.9.5"
+    },
+    "cldr-data-urls-filter": "(cldr-core|cldr-numbers-modern)"
+}
