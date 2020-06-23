@@ -1,4 +1,10 @@
 {
     "schemaVersion": "1.0",
-    "items": []
+    "items": [
+        {
+            "$type": "map-extension",
+            "id": "map-config",
+            "webScene": "https://www.arcgis.com/home/item.html?id=c7da180e4ca4414caa923d2e2724eb5c"
+        }
+    ]
 }

@@ -1,32 +1,49 @@
-import React, { useEffect, useRef, useState } from "react";
-import { LayoutElement } from "@vertigis/web/components";
-import { generateUuid } from "@vertigis/arcgis-extensions/utilities/uuid";
-import { Viewer } from "mapillary-js/";
+import React, { useEffect } from "react";
+import {
+    LayoutElement,
+    LayoutElementProperties,
+} from "@vertigis/web/components";
 // import "mapillary-js/dist/mapillary.min.css";
+import EmbeddedMapModel from "./EmbeddedMapModel";
 import "./EmbeddedMap.css";
+import { useWatchAndRerender } from "@vertigis/web/ui";
 
-export default function EmbeddedMap(props) {
-    const [hostElementId] = useState(generateUuid());
-    const mapillaryInstance = useRef();
+export default function EmbeddedMap(
+    props: LayoutElementProperties<EmbeddedMapModel>
+) {
+    const { model } = props;
+
+    useWatchAndRerender(model, "map");
 
     useEffect(() => {
+        if (!model.map) {
+            return;
+        }
+
         const styles = document.createElement("link");
         styles.href =
             "https://unpkg.com/mapillary-js@2.20.0/dist/mapillary.min.css";
         styles.rel = "stylesheet";
         document.head.appendChild(styles);
 
-        mapillaryInstance.current = new Viewer(
-            hostElementId,
-            "QjI1NnU0aG5FZFZISE56U3R5aWN4Zzo3NTM1MjI5MmRjODZlMzc0",
-            "zarcRdNFZwg3FkXNcsFeGw"
-        );
-    }, [hostElementId]);
+        // Trigger render on browser window resize
+        const resizeHandler = () => {
+            model.resize();
+        };
+        window.addEventListener("resize", resizeHandler);
+
+        (async () => {
+            await model.initializeEmbeddedMap();
+        })();
+
+        return () => {
+            window.removeEventListener("resize", resizeHandler);
+        };
+    }, [model]);
 
     return (
         <LayoutElement {...props} stretch>
-            Map goes here
-            <div id={hostElementId} className="EmbeddedMap-map-container"></div>
+            <div id={model.id} className="EmbeddedMap-map-container"></div>
         </LayoutElement>
     );
 }
