@@ -5,7 +5,6 @@ import {
 } from "@vertigis/web/components";
 // import "mapillary-js/dist/mapillary.min.css";
 import EmbeddedMapModel from "./EmbeddedMapModel";
-import "./EmbeddedMap.css";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 
 export default function EmbeddedMap(
@@ -33,6 +32,7 @@ export default function EmbeddedMap(
             await model.initializeEmbeddedMap();
         })();
 
+        // Clean up when this component is unmounted from the DOM.
         return () => model.destroyEmbeddedMap();
     }, [map, model]);
 

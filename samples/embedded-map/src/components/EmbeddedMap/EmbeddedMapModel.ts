@@ -23,7 +23,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     @importModel("map-extension")
     map: MapExtension | undefined;
 
-    private readonly _handles: IHandle[] = [];
     private _mly: any | undefined;
 
     async initializeEmbeddedMap() {
@@ -100,19 +99,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         });
     }
 
-    protected async _onDestroy(): Promise<void> {
-        await super._onDestroy();
-
-        // Clean up event handlers
-        for (const handle of this._handles) {
-            handle.remove();
-        }
-
-        // Clean up Mapillary if needed. This would generally be handled when the
-        // component is deactivated.
-        await this.destroyEmbeddedMap();
-    }
-
     private _onWindowResize = (): void => {
         if (this._mly) {
             this._mly.resize();
@@ -122,6 +108,10 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     // Throttle the updates to the Map to avoid overwhelming with pan/zoom
     // commands.
     private _onPerspectiveChange = throttle(async () => {
+        if (!this.map || !this._mly) {
+            return;
+        }
+
         const [{ lat, lon }, bearing] = await Promise.all([
             this._mly.getPosition(),
             this._mly.getBearing(),
