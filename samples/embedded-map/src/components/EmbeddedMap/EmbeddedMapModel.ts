@@ -5,8 +5,7 @@ import {
     importModel,
 } from "@vertigis/web/models";
 import Point from "esri/geometry/Point";
-import { Viewer } from "mapillary-js/";
-import { throttle } from "@vertigis/web/ui";
+import { Viewer } from "mapillary-js";
 
 /**
  *  Convert Mapillary bearing to a Scene's camera rotation.
@@ -20,27 +19,22 @@ function getCameraRotationFromBearing(bearing: number): number {
 
 @serializable
 export default class EmbeddedMapModel extends ComponentModelBase {
-    private _map: MapExtension | undefined;
-    get map() {
-        return this._map;
-    }
     @importModel("map-extension")
-    set map(map: MapExtension | undefined) {
-        this._map = map;
-        // TODO: What if map was previously set but becomes undefined? What
-        // should we do?
-    }
+    map: MapExtension | undefined;
 
-    private _mly: any;
+    private readonly _handles: IHandle[] = [];
+    private _mly: any | undefined;
 
     async initializeEmbeddedMap() {
-        if (!this.isInitialized || !this.map) {
+        if (!this.isInitialized || !this.map || this._mly) {
             return;
         }
 
         this._mly = new Viewer(
             this.id,
-            "QjI1NnU0aG5FZFZISE56U3R5aWN4Zzo3NTM1MjI5MmRjODZlMzc0",
+            // For demonstration purposes only.
+            // Replace this with your own client ID from mapillary.com
+            "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm",
             "iSGUzGWPuQ7BbRdc7jhEjj",
             {
                 component: {
@@ -53,7 +47,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         // Viewer size is dynamic so resize should be called every time the window size changes.
         window.addEventListener("resize", this._onWindowResize);
 
-        // Create location marker based on current location from street view
+        // Create location marker based on current location from Mapillary
         const [{ lat, lon }, bearing] = await Promise.all([
             this._mly.getPosition(),
             this._mly.getBearing(),
@@ -84,23 +78,47 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         this._mly.on(Viewer.povchanged, this._onPerspectiveChange);
     }
 
-    protected async _onDestroy() {
-        await super._onDestroy();
+    async destroyEmbeddedMap(): Promise<void> {
+        if (!this._mly) {
+            return;
+        }
+
         window.removeEventListener("resize", this._onWindowResize);
-        // TODO: How to clean up mly? They don't expose destroy or anything
-        // AFAIK.
+
+        this._mly.off(Viewer.nodechanged, this._onPerspectiveChange);
+        this._mly.off(Viewer.povchanged, this._onPerspectiveChange);
+
+        // Activating the cover appears to be the best way to "clean up" Mapillary.
+        // https://github.com/mapillary/mapillary-js/blob/8b6fc2f36e3011218954d95d601062ff6aa41ad9/src/viewer/ComponentController.ts#L184-L192
+        this._mly.activateCover();
         this._mly = undefined;
+
+        await this.messages.commands.locationMarker.remove.execute({
+            id: this.id,
+            maps: this.map,
+        });
+    }
+
+    protected async _onDestroy(): Promise<void> {
+        await super._onDestroy();
+
+        // Clean up event handlers
+        for (const handle of this._handles) {
+            handle.remove();
+        }
+
+        // Clean up Mapillary if needed. This would generally be handled when the
+        // component is deactivated.
+        await this.destroyEmbeddedMap();
     }
 
     private _onWindowResize = (): void => {
-        if (this.mly) {
+        if (this._mly) {
             this._mly.resize();
         }
     };
 
-    // Many events are fired during node transitions or bearing/tilt
-    // changes. Throttle so we don't spam the map.
-    private _onPerspectiveChange = throttle(async () => {
+    private _onPerspectiveChange = async () => {
         const [{ lat, lon }, bearing] = await Promise.all([
             this._mly.getPosition(),
             this._mly.getBearing(),
@@ -126,5 +144,5 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 },
             }),
         ]);
-    }, 16);
+    };
 }

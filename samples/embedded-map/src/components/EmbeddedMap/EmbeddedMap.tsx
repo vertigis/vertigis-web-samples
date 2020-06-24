@@ -27,9 +27,13 @@ export default function EmbeddedMap(
         styles.rel = "stylesheet";
         document.head.appendChild(styles);
 
-        (async () => {
+        // We initialize from here as we need to ensure the HTML element is in
+        // the DOM before initializing the embedded map.
+        void (async () => {
             await model.initializeEmbeddedMap();
         })();
+
+        return () => model.destroyEmbeddedMap();
     }, [map, model]);
 
     return (
