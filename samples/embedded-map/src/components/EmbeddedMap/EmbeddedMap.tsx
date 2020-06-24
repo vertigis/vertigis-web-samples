@@ -12,11 +12,12 @@ export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
 ) {
     const { model } = props;
+    const { map } = model;
 
     useWatchAndRerender(model, "map");
 
     useEffect(() => {
-        if (!model.map) {
+        if (!map) {
             return;
         }
 
@@ -26,20 +27,10 @@ export default function EmbeddedMap(
         styles.rel = "stylesheet";
         document.head.appendChild(styles);
 
-        // Trigger render on browser window resize
-        const resizeHandler = () => {
-            model.resize();
-        };
-        window.addEventListener("resize", resizeHandler);
-
         (async () => {
             await model.initializeEmbeddedMap();
         })();
-
-        return () => {
-            window.removeEventListener("resize", resizeHandler);
-        };
-    }, [model]);
+    }, [map, model]);
 
     return (
         <LayoutElement {...props} stretch>

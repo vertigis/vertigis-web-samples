@@ -8,6 +8,16 @@ import Point from "esri/geometry/Point";
 import { Viewer } from "mapillary-js/";
 import { throttle } from "@vertigis/web/ui";
 
+/**
+ *  Convert Mapillary bearing to a Scene's camera rotation.
+ *  @param bearing Mapillary bearing in degrees (degrees relative to due north).
+ *  @returns Scene camera rotation in degrees (degrees rotation of due north).
+ */
+
+function getCameraRotationFromBearing(bearing: number): number {
+    return 360 - bearing;
+}
+
 @serializable
 export default class EmbeddedMapModel extends ComponentModelBase {
     private _map: MapExtension | undefined;
@@ -34,11 +44,14 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             "iSGUzGWPuQ7BbRdc7jhEjj",
             {
                 component: {
-                    // Initialize immediately
+                    // Initialize the view immediately without user interaction.
                     cover: false,
                 },
             }
         );
+
+        // Viewer size is dynamic so resize should be called every time the window size changes.
+        window.addEventListener("resize", this._onWindowResize);
 
         // Create location marker based on current location from street view
         const [{ lat, lon }, bearing] = await Promise.all([
@@ -47,17 +60,18 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         ]);
         const centerPoint = new Point({ latitude: lat, longitude: lon });
         await Promise.all([
-            commands.locationMarker.create.execute({
+            this.messages.commands.locationMarker.create.execute({
                 fov: 30,
                 geometry: centerPoint,
-                heading: Math.floor(bearing),
+                heading: bearing,
                 id: this.id,
-                maps: model.map,
+                maps: this.map,
                 // userDraggable: true,
             }),
-            commands.map.zoomToViewpoint.execute({
-                maps: model.map,
+            this.messages.commands.map.zoomToViewpoint.execute({
+                maps: this.map,
                 viewpoint: {
+                    rotation: getCameraRotationFromBearing(bearing),
                     targetGeometry: centerPoint,
                     scale: 3000,
                 },
@@ -70,18 +84,19 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         this._mly.on(Viewer.povchanged, this._onPerspectiveChange);
     }
 
-    resize(): void {
-        if (this.mly) {
-            this._mly.resize();
-        }
-    }
-
     protected async _onDestroy() {
         await super._onDestroy();
+        window.removeEventListener("resize", this._onWindowResize);
         // TODO: How to clean up mly? They don't expose destroy or anything
         // AFAIK.
         this._mly = undefined;
     }
+
+    private _onWindowResize = (): void => {
+        if (this.mly) {
+            this._mly.resize();
+        }
+    };
 
     // Many events are fired during node transitions or bearing/tilt
     // changes. Throttle so we don't spam the map.
@@ -98,13 +113,14 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         await Promise.all([
             this.messages.commands.locationMarker.update.execute({
                 geometry: centerPoint,
-                heading: Math.floor(bearing),
+                heading: bearing,
                 id: this.id,
-                maps: model.map,
+                maps: this.map,
             }),
             this.messages.commands.map.zoomToViewpoint.execute({
-                maps: model.map,
+                maps: this.map,
                 viewpoint: {
+                    rotation: getCameraRotationFromBearing(bearing),
                     targetGeometry: centerPoint,
                     scale: 3000,
                 },
