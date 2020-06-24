@@ -4,6 +4,7 @@ import {
     serializable,
     importModel,
 } from "@vertigis/web/models";
+import { throttle } from "@vertigis/web/ui";
 import Point from "esri/geometry/Point";
 import { Viewer } from "mapillary-js";
 
@@ -35,7 +36,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             // For demonstration purposes only.
             // Replace this with your own client ID from mapillary.com
             "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm",
-            "iSGUzGWPuQ7BbRdc7jhEjj",
+            "gLV8Jn5A6b6rbVRy2xhkMA",
             {
                 component: {
                     // Initialize the view immediately without user interaction.
@@ -67,7 +68,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 viewpoint: {
                     rotation: getCameraRotationFromBearing(bearing),
                     targetGeometry: centerPoint,
-                    scale: 3000,
+                    scale: 6000,
                 },
             }),
         ]);
@@ -118,7 +119,9 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         }
     };
 
-    private _onPerspectiveChange = async () => {
+    // Throttle the updates to the Map to avoid overwhelming with pan/zoom
+    // commands.
+    private _onPerspectiveChange = throttle(async () => {
         const [{ lat, lon }, bearing] = await Promise.all([
             this._mly.getPosition(),
             this._mly.getBearing(),
@@ -140,9 +143,9 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 viewpoint: {
                     rotation: getCameraRotationFromBearing(bearing),
                     targetGeometry: centerPoint,
-                    scale: 3000,
+                    scale: 6000,
                 },
             }),
         ]);
-    };
+    }, 128);
 }
