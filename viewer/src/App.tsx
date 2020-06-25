@@ -4,8 +4,8 @@ import {
     GcxThemeProvider,
 } from "@vertigis/react-ui/styles";
 import CssBaseline from "@vertigis/react-ui/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
+import Drawer from "@vertigis/react-ui/Drawer";
+import Hidden from "@vertigis/react-ui/Hidden";
 import IconButton from "@vertigis/react-ui/IconButton";
 import MenuIcon from "@vertigis/react-ui/icons/Menu";
 import List from "@vertigis/react-ui/List";

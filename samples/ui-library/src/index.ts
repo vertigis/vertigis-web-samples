@@ -3,7 +3,7 @@ import UILibraryComponent, {
     UILibraryComponentModel,
 } from "./components/UILibraryComponent";
 
-export default function (registry: LibraryRegistry) {
+export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerComponent({
         name: "ui-library",
         namespace: "your.custom.namespace",

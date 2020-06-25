@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
-import { LayoutElement } from "@vertigis/web/components";
+import {
+    LayoutElement,
+    LayoutElementProperties,
+} from "@vertigis/web/components";
 import { UIContext } from "@vertigis/web/ui";
 import Button from "@vertigis/web/ui/Button";
 import Typography from "@vertigis/web/ui/Typography";
+import TranslatableTextModel from "./TranslatableTextModel";
 
-export default function TranslatableText(props) {
+export default function TranslatableText(
+    props: LayoutElementProperties<TranslatableTextModel>
+) {
     const { translate } = useContext(UIContext);
 
     return (

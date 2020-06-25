@@ -11,7 +11,7 @@ import "./BasicComponent.css";
 
 const BasicComponent = (
     props: LayoutElementProperties<BasicComponentModel>
-) => {
+): React.ReactElement => {
     const { model } = props;
 
     // Watch for changes to the hidden property on the model

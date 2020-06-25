@@ -16,8 +16,9 @@ const checkSpawnSyncResult = (syncResult) => {
 };
 
 for (const sampleDir of sampleDirs) {
+    console.log("Building sample: ", sampleDir);
     checkSpawnSyncResult(
-        spawn.sync("npm", ["run", "build"], {
+        spawn.sync("yarn", ["build"], {
             cwd: sampleDir,
             stdio: "inherit",
         })
