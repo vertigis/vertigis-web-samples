@@ -2,7 +2,7 @@ import { UIContext } from "@vertigis/web/ui";
 import Button from "@vertigis/web/ui/Button";
 import React from "react";
 
-export default function Buttons() {
+export default function Buttons(): React.ReactElement {
     const { commands } = React.useContext(UIContext);
 
     const handleClick = () =>

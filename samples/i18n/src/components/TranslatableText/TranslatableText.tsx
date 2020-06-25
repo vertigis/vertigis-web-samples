@@ -10,7 +10,7 @@ import TranslatableTextModel from "./TranslatableTextModel";
 
 export default function TranslatableText(
     props: LayoutElementProperties<TranslatableTextModel>
-) {
+): React.ReactElement {
     const { translate } = useContext(UIContext);
 
     return (

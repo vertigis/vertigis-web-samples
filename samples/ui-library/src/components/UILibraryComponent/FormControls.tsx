@@ -337,7 +337,7 @@ function SelectDemo() {
     );
 }
 
-export default function FormControls() {
+export default function FormControls(): React.ReactElement {
     return (
         <>
             <Typography gutterBottom variant="h2">

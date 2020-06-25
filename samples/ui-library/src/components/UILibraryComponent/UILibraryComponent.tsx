@@ -21,7 +21,7 @@ function tabA11yProps(index: number) {
 
 export default function UILibraryComponent(
     props: LayoutElementProperties<UILibraryComponentModel>
-) {
+): React.ReactElement {
     const [tabValue, setTabValue] = React.useState(0);
 
     return (
