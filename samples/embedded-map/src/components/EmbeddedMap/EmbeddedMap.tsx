@@ -9,7 +9,7 @@ import { useWatchAndRerender } from "@vertigis/web/ui";
 
 export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
-) {
+): React.ReactElement {
     const { model } = props;
     const { map } = model;
 
