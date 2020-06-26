@@ -12,7 +12,7 @@
         "mapillary-js": "^2.20.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.1.0",
+        "@vertigis/web-sdk": "^1.2.0",
         "typescript": "~3.9.5"
     },
     "cldr-data-urls-filter": "(cldr-core|cldr-numbers-modern)"
