@@ -426,10 +426,10 @@
   resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-26.3.1.tgz#13a39b7c01e90c94a103168d5d6e926a7718a8dc"
   integrity sha512-+nHf12ZKipc3Ah5XMzcXnQdaoof2CWuIdCiMotpG1zbITLaJS4qXJFgMR4fLj/4eS5vymGK/4yv/u75h60wENA==
 
-"@vertigis/web-sdk@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@vertigis/web-sdk/-/web-sdk-1.1.1.tgz#661d998f8537da0eba0caedcb361c45ae15d1196"
-  integrity sha512-fF4VXe8X8wkKD2JIgVIa4G0kEijxSmlCs1z4XBmdl9dt4KFxQHeWG8U0cqI3++ZGCqOGHC7OCNy0CJvzVKp2RQ==
+"@vertigis/web-sdk@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@vertigis/web-sdk/-/web-sdk-1.2.0.tgz#f3fffeb014e3b620ad620fd10664d64bc1eae3d9"
+  integrity sha512-tE7zRdy/zZ2kq576YFDFlZETMExSfoB3GfBFdy4hhgFuj0e3wQSQeBP15MC/roWFcZEbh29qffjpZXXOO1b6oA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^3.3.0"
     "@typescript-eslint/parser" "^3.3.0"
