@@ -12,7 +12,7 @@ import Lists from "./Lists";
 import TypographyDemo from "./Typography";
 import "./UILibraryComponent.css";
 
-function tabA11yProps(index: any) {
+function tabA11yProps(index: number) {
     return {
         id: `simple-tab-${index}`,
         "aria-controls": `simple-tabpanel-${index}`,
@@ -21,21 +21,16 @@ function tabA11yProps(index: any) {
 
 export default function UILibraryComponent(
     props: LayoutElementProperties<UILibraryComponentModel>
-) {
+): React.ReactElement {
     const [tabValue, setTabValue] = React.useState(0);
-
-    const handleTabChange = (
-        event: React.ChangeEvent<{}>,
-        newValue: number
-    ) => {
-        setTabValue(newValue);
-    };
 
     return (
         <LayoutElement {...props} stretch className="UILibraryComponent">
             <Tabs
                 value={tabValue}
-                onChange={handleTabChange}
+                onChange={(event, newValue) => {
+                    setTabValue(newValue);
+                }}
                 aria-label="simple tabs example"
                 indicatorColor="primary"
             >
@@ -62,8 +57,8 @@ export default function UILibraryComponent(
 
 interface TabPanelProps {
     children?: React.ReactNode;
-    index: any;
-    value: any;
+    index: number;
+    value: number;
 }
 
 function TabPanel(props: TabPanelProps) {

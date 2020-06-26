@@ -28,8 +28,10 @@ export default class RouteService extends ServiceBase {
     stops = new FeatureSet();
 
     @command("custom-route-service.add-point")
-    protected _handleAddPointCommand(result: { geometry: Geometry }) {
-        const promises: Promise<any>[] = [];
+    protected async _handleAddPointCommand(result: {
+        geometry: Geometry;
+    }): Promise<void> {
+        const promises: Promise<void>[] = [];
 
         const graphic = new Graphic({
             geometry: result.geometry,
@@ -43,10 +45,10 @@ export default class RouteService extends ServiceBase {
             promises.push(this._solveRoute());
         }
 
-        return Promise.all(promises);
+        await Promise.all(promises);
     }
 
-    protected async _solveRoute() {
+    protected async _solveRoute(): Promise<void> {
         const routeParams = new RouteParameters({
             stops: this.stops,
             outSpatialReference: {
@@ -60,6 +62,6 @@ export default class RouteService extends ServiceBase {
         const routeResult = (data as any).routeResults[0].route;
         // Use our own symbol
         routeResult.symbol = routeSymbol;
-        this.messages.commands.map.addMarkup.execute(routeResult);
+        await this.messages.commands.map.addMarkup.execute(routeResult);
     }
 }

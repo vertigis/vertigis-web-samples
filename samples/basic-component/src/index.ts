@@ -3,11 +3,11 @@ import BasicComponent, {
     BasicComponentModel,
 } from "./components/BasicComponent";
 
-export default function (registry: LibraryRegistry) {
+export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerComponent({
         name: "basic",
         namespace: "your.custom.namespace",
-        getComponentType: () => BasicComponent as any,
+        getComponentType: () => BasicComponent,
         itemType: "basic",
         title: "Basic",
     });
