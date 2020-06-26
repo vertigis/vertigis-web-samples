@@ -4,13 +4,15 @@
     "private": true,
     "scripts": {
         "build": "vertigis-web-sdk build",
-        "start": "vertigis-web-sdk start"
+        "start": "vertigis-web-sdk start",
+        "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
     },
     "dependencies": {
         "@vertigis/web": "^5.7.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.0.1",
+        "@vertigis/web-sdk": "^1.2.0",
         "typescript": "~3.9.5"
-    }
+    },
+    "cldr-data-urls-filter": "(cldr-core|cldr-numbers-modern)"
 }

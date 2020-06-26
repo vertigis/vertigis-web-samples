@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@vertigis/react-ui/styles";
 import React, { useEffect, useState } from "react";
 import Sample from "./Sample";
 

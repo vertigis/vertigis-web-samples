@@ -5,7 +5,7 @@ import TranslatableText, {
 import enLanguageValues from "./en.json";
 import deLanguageValues from "./de.json";
 
-export default function (registry: LibraryRegistry) {
+export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerLanguageResources({
         locale: "en",
         getValues: () => enLanguageValues,

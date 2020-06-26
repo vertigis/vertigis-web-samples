@@ -20,10 +20,10 @@ export default class CustomService extends ServiceBase {
     }
 
     @command("custom-service.toggle-can-execute")
-    protected _handleToggleCanExecute(): void {
+    protected async _handleToggleCanExecute(): Promise<void> {
         this._canExecuteCustomAlertCommand = !this
             ._canExecuteCustomAlertCommand;
-        this.messages
+        await this.messages
             .command("custom-service.command-with-can-execute")
             .canExecuteChanged.publish();
     }
@@ -34,8 +34,8 @@ export default class CustomService extends ServiceBase {
     }
 
     @command("custom-service.command-with-can-execute")
-    protected _handleCommandWithCanExecute(): void {
-        this.messages.commands.ui.alert.execute({
+    protected async _handleCommandWithCanExecute(): Promise<void> {
+        await this.messages.commands.ui.alert.execute({
             message: "It worked!",
         });
     }

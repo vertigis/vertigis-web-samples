@@ -9,12 +9,12 @@
         "eject": "react-scripts eject"
     },
     "dependencies": {
-        "@vertigis/react-ui": "^4.2.0",
+        "@vertigis/react-ui": "^5.0.0",
         "marked": "^1.1.0",
         "react-router-dom": "^5.1.2"
     },
     "devDependencies": {
-        "@types/react": "^16.9.34",
+        "@types/react": "^16.9.41",
         "@types/react-dom": "^16.9.7",
         "@types/react-router-dom": "^5.1.5",
         "http-proxy-middleware": "^1.0.3",

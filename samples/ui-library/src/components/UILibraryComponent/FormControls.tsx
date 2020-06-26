@@ -261,7 +261,7 @@ function SelectDemo() {
                         id="demo-simple-select-error"
                         value={age}
                         onChange={handleChange}
-                        renderValue={(value) => `⚠️  - ${value}`}
+                        renderValue={(value) => `⚠️  - ${value as string}`}
                     >
                         <MenuItem value="">
                             <em>None</em>
@@ -337,7 +337,7 @@ function SelectDemo() {
     );
 }
 
-export default function FormControls() {
+export default function FormControls(): React.ReactElement {
     return (
         <>
             <Typography gutterBottom variant="h2">
