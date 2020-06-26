@@ -185,17 +185,26 @@
 
                         // Not running locally
                         !event.origin.startsWith("http://localhost:") &&
-                        // Not running in prod
+                        // Not running in production sample viewer
                         !event.origin.endsWith(
                             "vertigis-web-samples.netlify.app"
                         ) &&
-                        // Not running on codesandbox
+                        // Not running on Codesandbox
                         !event.origin.endsWith("codesandbox.io")
                     ) {
                         return;
                     }
 
+                    // If there's no data payload then we can ignore this
+                    // message.
                     if (!event.data) {
+                        return;
+                    }
+
+                    // Codesandbox sends postMessage events that are picked up
+                    // by this event handler. We're only interested in the
+                    // string event data from Geocortex Web.
+                    if (typeof event.data !== "string") {
                         return;
                     }
 
