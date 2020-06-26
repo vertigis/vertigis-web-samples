@@ -25,7 +25,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
     private _mly: any | undefined;
 
-    async initializeEmbeddedMap() {
+    initializeEmbeddedMap = async (): Promise<void> => {
         if (!this.isInitialized || !this.map || this._mly) {
             return;
         }
@@ -76,9 +76,9 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         // their bearing/tilt position changes.
         this._mly.on(Viewer.nodechanged, this._onPerspectiveChange);
         this._mly.on(Viewer.povchanged, this._onPerspectiveChange);
-    }
+    };
 
-    async destroyEmbeddedMap(): Promise<void> {
+    destroyEmbeddedMap = async (): Promise<void> => {
         if (!this._mly) {
             return;
         }
@@ -97,7 +97,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             id: this.id,
             maps: this.map,
         });
-    }
+    };
 
     private _onWindowResize = (): void => {
         if (this._mly) {

@@ -11,7 +11,7 @@ export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
 ): React.ReactElement {
     const { model } = props;
-    const { map } = model;
+    const { initializeEmbeddedMap, destroyEmbeddedMap, map } = model;
 
     useWatchAndRerender(model, "map");
 
@@ -29,12 +29,12 @@ export default function EmbeddedMap(
         // We initialize from here as we need to ensure the HTML element is in
         // the DOM before initializing the embedded map.
         void (async () => {
-            await model.initializeEmbeddedMap();
+            await initializeEmbeddedMap();
         })();
 
         // Clean up when this component is unmounted from the DOM.
-        return () => model.destroyEmbeddedMap();
-    }, [map, model]);
+        return () => destroyEmbeddedMap();
+    }, [initializeEmbeddedMap, destroyEmbeddedMap, map]);
 
     return (
         <LayoutElement {...props} stretch>
