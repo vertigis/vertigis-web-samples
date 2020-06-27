@@ -3,9 +3,10 @@ import {
     LayoutElement,
     LayoutElementProperties,
 } from "@vertigis/web/components";
-// import "mapillary-js/dist/mapillary.min.css";
 import EmbeddedMapModel from "./EmbeddedMapModel";
 import { useWatchAndRerender } from "@vertigis/web/ui";
+// Import the necessary CSS for the Mapillary viewer to be styled correctly.
+import "mapillary-js/dist/mapillary.min.css";
 
 export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
@@ -19,13 +20,6 @@ export default function EmbeddedMap(
         if (!map) {
             return;
         }
-
-        const styles = document.createElement("link");
-        styles.href =
-            "https://unpkg.com/mapillary-js@2.20.0/dist/mapillary.min.css";
-        styles.rel = "stylesheet";
-        document.head.appendChild(styles);
-
         // We initialize from here as we need to ensure the HTML element is in
         // the DOM before initializing the embedded map.
         void (async () => {
