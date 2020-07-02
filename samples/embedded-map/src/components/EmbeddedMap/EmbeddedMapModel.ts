@@ -30,6 +30,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             return;
         }
 
+        // Initialize an instance of the Mapillary viewer.
         this._mly = new Viewer(
             this.id,
             // For demonstration purposes only.
@@ -47,7 +48,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         // Viewer size is dynamic so resize should be called every time the window size changes.
         window.addEventListener("resize", this._onWindowResize);
 
-        // Create location marker based on current location from Mapillary
+        // Create location marker based on current location from Mapillary and
+        // pan/zoom Geocortex map to the location.
         const [{ lat, lon }, bearing] = await Promise.all([
             this._mly.getPosition(),
             this._mly.getBearing(),
@@ -83,8 +85,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             return;
         }
 
+        // Clean up event handlers.
         window.removeEventListener("resize", this._onWindowResize);
-
         this._mly.off(Viewer.nodechanged, this._onPerspectiveChange);
         this._mly.off(Viewer.povchanged, this._onPerspectiveChange);
 
