@@ -62,7 +62,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 heading: bearing,
                 id: this.id,
                 maps: this.map,
-                // userDraggable: true,
             }),
             this.messages.commands.map.zoomToViewpoint.execute({
                 maps: this.map,
