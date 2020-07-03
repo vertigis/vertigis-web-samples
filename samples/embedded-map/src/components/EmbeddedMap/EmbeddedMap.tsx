@@ -3,32 +3,46 @@ import {
     LayoutElement,
     LayoutElementProperties,
 } from "@vertigis/web/components";
-import EmbeddedMapModel from "./EmbeddedMapModel";
-import { useWatchAndRerender } from "@vertigis/web/ui";
+import { Viewer } from "mapillary-js";
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.min.css";
+import EmbeddedMapModel from "./EmbeddedMapModel";
 
 export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
 ): React.ReactElement {
     const { model } = props;
-    const { initializeEmbeddedMap, destroyEmbeddedMap, map } = model;
-
-    useWatchAndRerender(model, "map");
 
     useEffect(() => {
-        if (!map) {
-            return;
-        }
-        // We initialize from here as we need to ensure the HTML element is in
-        // the DOM before initializing the embedded map.
-        void (async () => {
-            await initializeEmbeddedMap();
-        })();
+        const mapillary = new Viewer(
+            model.id,
+            model.mapillaryKey,
+            // Mapillary node to start on.
+            "gLV8Jn5A6b6rbVRy2xhkMA",
+            {
+                component: {
+                    // Initialize the view immediately without user interaction.
+                    cover: false,
+                },
+            }
+        );
+        model.mapillary = mapillary;
+
+        const handleWindowResize = () => {
+            mapillary.resize();
+        };
+
+        // Viewer size is dynamic so resize should be called every time the window size changes.
+        window.addEventListener("resize", handleWindowResize);
 
         // Clean up when this component is unmounted from the DOM.
-        return () => destroyEmbeddedMap();
-    }, [initializeEmbeddedMap, destroyEmbeddedMap, map]);
+        return () => {
+            window.removeEventListener("resize", handleWindowResize);
+            // Clear out the Mapillary instance property. This will take care of
+            // cleaning up.
+            model.mapillary = undefined;
+        };
+    }, [model, model.id, model.mapillaryKey]);
 
     return (
         <LayoutElement {...props} stretch>
