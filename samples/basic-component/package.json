@@ -11,8 +11,8 @@
         "@vertigis/web": "^5.7.0"
     },
     "devDependencies": {
-        "@vertigis/web-sdk": "^1.2.0",
-        "typescript": "~3.9.5"
+        "@vertigis/web-sdk": "^1.3.1",
+        "typescript": "~3.9.6"
     },
     "cldr-data-urls-filter": "(cldr-core|cldr-numbers-modern)"
 }
