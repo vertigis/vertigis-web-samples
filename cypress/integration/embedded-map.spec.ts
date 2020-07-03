@@ -5,7 +5,7 @@ const sampleName = "embedded-map";
 // Although we provide the exact number from the street view position when
 // setting the location marker and map center positions, the actual position of
 // the map and marker won't be exact.
-const numberPrecision = 1e-10;
+const numberPrecision = 1e-6;
 
 const expectMapAndMarkerCenter = (lat: number, lon: number) =>
     cy
