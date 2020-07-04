@@ -1,0 +1,32 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "menu-item",
+            "id": "map-button-config-1",
+            "title": "Identify",
+            "action": [
+                {
+                    "name": "sketching.capture-geometry",
+                    "arguments": {
+                        "geometryType": "extent"
+                    }
+                },
+                "geometry.add-pixel-tolerance",
+                "tasks.identify",
+                "results.display",
+                "three-dimensional-graph.show"
+            ]
+        },
+        {
+            "$type": "results",
+            "id": "results-config-1",
+            "onFeatureClick": ["results.display-details"]
+        },
+        {
+            "id": "map-config-1",
+            "$type": "map-extension",
+            "webMap": "https://www.arcgis.com/home/item.html?id=0ba877a4185448cb832af9a661031e31"
+        }
+    ]
+}
