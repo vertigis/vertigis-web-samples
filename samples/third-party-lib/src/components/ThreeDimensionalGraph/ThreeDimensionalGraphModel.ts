@@ -8,10 +8,9 @@ import {
     PropertyDefs,
     ComponentModelProperties,
 } from "@vertigis/web/models";
+import { BrandingService } from "@vertigis/web/branding/BrandingService";
 import { command, Features } from "@vertigis/web/messaging";
-import type Graphic from "esri/Graphic";
-import Query from "esri/tasks/support/Query";
-import QueryTask from "esri/tasks/QueryTask";
+import { inject, FrameworkServiceType } from "@vertigis/web/services";
 import type {
     GraphData as ForceGraphData,
     LinkObject,
@@ -25,11 +24,13 @@ interface ThreeDimensionalGraphModelProperties
 }
 
 export interface SurveyorNodeObject extends ForceNodeObject {
+    id: string;
     type: "surveyor";
 }
 
 export interface SurveyNodeObject extends ForceNodeObject {
-    type: "inspection";
+    id: number;
+    type: "survey";
     date: number;
     hydrantNum: string;
     result: "PASS" | "FAIL";
@@ -46,59 +47,93 @@ export interface GraphData extends ForceGraphData {
 export default class ThreeDimensionalGraphModel extends ComponentModelBase<
     ThreeDimensionalGraphModelProperties
 > {
-    // This will be populated from the app configuration item reference configured in getSerializableProperties
+    @inject(FrameworkServiceType.BRANDING)
+    brandingService: BrandingService | undefined;
+
+    // This will be populated from the app configuration item reference
+    // configured in this._getSerializableProperties
     surveyTableExtension: TableExtension | undefined;
 
-    // TODO: import branding service and get the theme's branding background color to set on the graph
-
-    inspections: Feature[] = [];
+    selectedSurveyId: number | undefined;
+    hydrants: Record<string, Feature> = {};
+    surveys: Record<number, Feature> = {};
     graphData: GraphData = { links: [], nodes: [] };
 
-    handleNodeClick = async (node: NodeObject) => {
+    getNodeLabel = (node: NodeObject): string => {
+        if (node.type === "surveyor") {
+            return `Surveyor: ${node.id}`;
+        }
+
+        return `Hydrant Survey<br />
+        Survey ID: ${node.id}<br />
+        Hydrant number: ${node.hydrantNum}<br />
+        Result: ${node.result}<br />
+        Date: ${new Date(node.date).toLocaleString()}`;
+    };
+
+    getNodeColor = (node: NodeObject): string => {
+        if (node.type === "surveyor") {
+            return (
+                this.brandingService?.activeTheme.colors
+                    .get("primaryForeground")
+                    .toHex() ?? "white"
+            );
+        }
+
+        // Show similar color as the focus highlight on the map
+        // when the node is selected.
+        if (node.id === this.selectedSurveyId) {
+            return "teal";
+        }
+
+        if (node.result === "FAIL") {
+            return "red";
+        }
+
+        return "green";
+    };
+
+    handleNodeClick = async (node: NodeObject): Promise<void> => {
         if (node.type === "surveyor") {
             return;
         }
 
-        const inspection = this.inspections.find(
-            (inspection) => inspection.attributes.get("OBJECTID") === node.id
-        );
-        if (!inspection) {
+        const survey = this.surveys[node.id];
+        const hydrant = this.hydrants[node.hydrantNum];
+        if (!survey || !hydrant) {
             return;
         }
 
-        // .replaceFocus instead?
+        this.selectedSurveyId = node.id;
+        // TODO: Focus persists after closing details panel.
         await this.messages.commands.highlights.clearFocus.execute();
-        await this.messages.commands.highlights.addFocus.execute(inspection);
-        await this.messages.commands.results.displayDetails.execute(inspection);
+        await this.messages.commands.highlights.addFocus.execute(hydrant);
+        await this.messages.commands.results.displayDetails.execute(survey);
     };
 
-    handleNodeHover = async (node: NodeObject) => {
-        if (node.type === "surveyor") {
+    handleNodeHover = async (node: NodeObject | null): Promise<void> => {
+        // Nothing to do for surveyor nodes.
+        if (!node || node.type === "surveyor") {
             return;
         }
 
-        const inspection = this.inspections.find(
-            (inspection) => inspection.attributes.get("OBJECTID") === node.id
-        );
-        if (!inspection) {
-            return;
+        const hydrant = this.hydrants[node.hydrantNum];
+        if (hydrant) {
+            await this.messages.commands.highlights.pulse.execute(hydrant);
         }
-
-        // TODO: Find the hydrant that this inspection maps to and use in the commands
-
-        // .replaceFocus instead?
-        await this.messages.commands.highlights.clearFocus.execute();
-        await this.messages.commands.highlights.addFocus.execute(inspection);
     };
 
-    @command("three-dimensional-graph.display")
+    // Handle this command even when the component is inactive, which gives us
+    // an opportunity to activate it.
+    @command("three-dimensional-graph.display", { targetInactive: true })
     protected async _handleDisplayGraph(inFeatures: Features): Promise<void> {
+        await this.messages.commands.ui.activate.execute(this);
+
         const features = await toFeatureArray(inFeatures);
         const hydrantFeatures = features
             // We're only interested in the fire hydrant features.
             .filter(
                 (feature) =>
-                    // TODO: I'm sure there's a better way to filter this...
                     typeof feature.attributes.get("HYDRANT_NUM") === "string"
             );
         const hydrantIds = hydrantFeatures.map(
@@ -107,43 +142,28 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
                 `'${feature.attributes.get("HYDRANT_NUM") as string}'`
         );
 
-        let inspections: Feature[] = [];
+        let surveys: Feature[] = [];
         const surveyors: Record<string, boolean> = {};
         const newGraphData: GraphData = { links: [], nodes: [] };
 
         if (hydrantIds.length) {
-            // Query for the inspections.
+            // Query for the surveys.
             const queryService = new QueryService();
             const result = queryService.query(
                 this.surveyTableExtension,
                 `HYDRANT_NUM IN (${hydrantIds.join(",")})`
             );
-            inspections = await toFeatureArray(new FeatureStream(result));
+            surveys = await toFeatureArray(new FeatureStream(result));
 
-            // const queryTask = new QueryTask({
-            //     url:
-            //         "https://services.arcgis.com/p3UBboyC0NH1uCie/ArcGIS/rest/services/CapitalCity_Web_Editable_gdb/FeatureServer/1",
-            // });
-            // const query = new Query();
-            // query.outFields = ["*"];
-            // query.where = `HYDRANT_NUM IN (${hydrantIds.join(",")})`;
-            // const result2 = await queryTask.execute(query);
-
-            // Parse the inspections and create the graph nodes/links.
-            for (const inspection of inspections) {
-                const hydrantNum: string = inspection.attributes.get(
-                    "HYDRANT_NUM"
+            // Parse the surveys and create the graph nodes/links.
+            for (const survey of surveys) {
+                const hydrantNum: string = survey.attributes.get("HYDRANT_NUM");
+                const surveyor: string = survey.attributes.get("SURVEYOR");
+                const surveyId: number = survey.attributes.get("OBJECTID");
+                const surveyResult: "PASS" | "FAIL" = survey.attributes.get(
+                    "RESULT"
                 );
-                const surveyor: string = inspection.attributes.get("SURVEYOR");
-                const inspectionId: number = inspection.attributes.get(
-                    "OBJECTID"
-                );
-                const inspectionResult:
-                    | "PASS"
-                    | "FAIL" = inspection.attributes.get("RESULT");
-                const inspectionDate: number = inspection.attributes.get(
-                    "SURVEY_DATE"
-                );
+                const surveyDate: number = survey.attributes.get("SURVEY_DATE");
 
                 // Initialize an empty array for this inspector if it doesn't exist
                 // already.
@@ -158,24 +178,42 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
                     surveyors[surveyor] = true;
                 }
 
-                // Create a node for the inspection
+                // Create a node for the survey
                 newGraphData.nodes.push({
-                    id: inspectionId,
-                    type: "inspection",
-                    date: inspectionDate,
+                    id: surveyId,
+                    type: "survey",
+                    date: surveyDate,
                     hydrantNum,
-                    result: inspectionResult,
+                    result: surveyResult,
                 });
 
-                // Create a link between the inspection and the surveyor
+                // Create a link between the survey and the surveyor
                 newGraphData.links.push({
                     source: surveyor,
-                    target: inspectionId,
+                    target: surveyId,
                 });
             }
         }
 
-        this.inspections = inspections;
+        // Hold on to the features for easy access later on in click/hover events from the graph.
+        this.hydrants = hydrantFeatures.reduce<Record<string, Feature>>(
+            (acc, hydrant) => {
+                const hydrantNum: string = hydrant.attributes.get(
+                    "HYDRANT_NUM"
+                );
+                acc[hydrantNum] = hydrant;
+                return acc;
+            },
+            {}
+        );
+        this.surveys = surveys.reduce<Record<number, Feature>>(
+            (acc, survey) => {
+                const surveyId: number = survey.attributes.get("OBJECTID");
+                acc[surveyId] = survey;
+                return acc;
+            },
+            {}
+        );
         this.graphData = newGraphData;
     }
 

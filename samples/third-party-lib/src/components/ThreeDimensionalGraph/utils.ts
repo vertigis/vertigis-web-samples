@@ -8,6 +8,8 @@ import {
     isFeatureList,
 } from "@vertigis/web/messaging";
 
+// NOTE: These utilities will be exposed in a later version of Geocortex Web.
+
 export async function toFeatureArray(features: Features): Promise<Feature[]> {
     if (isFeatureStream(features)) {
         return features.toArray();
