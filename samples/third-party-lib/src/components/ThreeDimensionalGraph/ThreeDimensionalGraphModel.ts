@@ -50,8 +50,7 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
     @inject(FrameworkServiceType.BRANDING)
     brandingService: BrandingService | undefined;
 
-    // This will be populated from the app configuration item reference
-    // configured in this._getSerializableProperties
+    // This will be populated from the app config item reference.
     surveyTableExtension: TableExtension | undefined;
 
     selectedSurveyId: number | undefined;
@@ -105,7 +104,6 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
         }
 
         this.selectedSurveyId = node.id;
-        // TODO: Focus persists after closing details panel.
         await this.messages.commands.highlights.clearFocus.execute();
         await this.messages.commands.highlights.addFocus.execute(hydrant);
         await this.messages.commands.results.displayDetails.execute(survey);

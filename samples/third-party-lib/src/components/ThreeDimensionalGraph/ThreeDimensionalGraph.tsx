@@ -5,12 +5,12 @@ import {
 } from "@vertigis/web/components";
 import { useWatch, useWatchAndRerender } from "@vertigis/web/ui";
 import { ForceGraph3D } from "react-force-graph";
-import EmbeddedMapModel from "./ThreeDimensionalGraphModel";
+import ThreeDimensionalGraphModel from "./ThreeDimensionalGraphModel";
 import useDimensions from "./useDimensions";
 import "./ThreeDimensionalGraph.css";
 
 export default function ThreeDimensionalGraph(
-    props: LayoutElementProperties<EmbeddedMapModel>
+    props: LayoutElementProperties<ThreeDimensionalGraphModel>
 ): React.ReactElement {
     const { model } = props;
     const [rootRef, rootDimensions] = useDimensions<HTMLDivElement>();

@@ -1,7 +1,7 @@
 # Embedded Third-party Map
 
-This sample demonstrates how to embed and facilitate bi-directional communication with a third-party map technology. In this sample we've embedded [Mapillary](https://www.mapillary.com/) to present street-level imagery alongside the Geocortex Map component.
+This sample demonstrates how to install and import 3rd-party [npm](https://www.npmjs.com/) packages. In this sample we've installed the [`react-force-graph`](https://github.com/vasturiano/react-force-graph) package as a [project dependency](package.json) of this sample to visualize fire hydrant surveys.
 
-The [model in this sample](src/components/EmbeddedMap/EmbeddedMapModel.ts) initializes the Mapillary viewer by referencing their [mapillary-js JavaScript library](https://github.com/mapillary/mapillary-js) that was installed as a [project dependency](package.json) of this sample.
+The [layout](app/layout.xml) includes a button that has a configured [command chain](https://developers.geocortex.com/docs/web/configuration-commands-operations/#command-chains) in the [app config](app/app.json), which includes a custom command implemented in the [model in this sample](src/components/ThreeDimensionalGraph/ThreeDimensionalGraphModel.ts).
 
-The Geocortex Map component is controlled by using the [`map.zoom-to-viewpoint`](https://developers.geocortex.com/docs/web/api-commands-operations-events#command-map.zoom-to-viewpoint) and [`location-marker.*`](https://developers.geocortex.com/docs/web/api-commands-operations-events#command-location-marker.create) commands in response to events from the Mapillary viewer.
+Clicking on a survey result node in the 3d graph view will display the fire hydrant survey details using the [`results.display-details`](https://developers.geocortex.com/docs/web/api-commands-operations-events#command-results.display-details) command. The hydrants are highlighted on the Geocortex Map by using the [`highlights.*`](https://developers.geocortex.com/docs/web/api-commands-operations-events#command-highlights.add) commands.
