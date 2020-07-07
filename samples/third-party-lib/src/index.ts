@@ -12,11 +12,11 @@ export default function (registry: LibraryRegistry): void {
         title: "3D Graph",
     });
     registry.registerModel({
-        getModel: () => new ThreeDimensionalGraphModel(),
+        getModel: (properties) => new ThreeDimensionalGraphModel(properties),
         itemType: "three-dimensional-graph",
     });
     registry.registerCommand({
-        name: "three-dimensional-graph.show",
+        name: "three-dimensional-graph.display",
         itemType: "three-dimensional-graph",
     });
 }

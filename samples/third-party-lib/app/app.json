@@ -15,8 +15,13 @@
                 "geometry.add-pixel-tolerance",
                 "tasks.identify",
                 "results.display",
-                "three-dimensional-graph.show"
+                "three-dimensional-graph.display"
             ]
+        },
+        {
+            "$type": "three-dimensional-graph",
+            "id": "three-dimensional-graph-1",
+            "surveyTableExtension": "item://table-extension/survey-table-extension"
         },
         {
             "$type": "results",
@@ -26,7 +31,16 @@
         {
             "id": "map-config-1",
             "$type": "map-extension",
-            "webMap": "https://www.arcgis.com/home/item.html?id=0ba877a4185448cb832af9a661031e31"
+            "webMap": "https://www.arcgis.com/home/item.html?id=0ba877a4185448cb832af9a661031e31",
+            "tableExtensions": ["item://table-extension/survey-table-extension"]
+        },
+        {
+            "$type": "table-extension",
+            "id": "survey-table-extension",
+            "table": {
+                "$ref": "Victoria_Fire_Hydrants_7555",
+                "$tableType": "ArcGISServiceTable"
+            }
         }
     ]
 }

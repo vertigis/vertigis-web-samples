@@ -9,7 +9,6 @@
     },
     "dependencies": {
         "@vertigis/web": "^5.7.0",
-        "mapillary-js": "^2.20.0",
         "react-force-graph": "^1.35.0"
     },
     "devDependencies": {

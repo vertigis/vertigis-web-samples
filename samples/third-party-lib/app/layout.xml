@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="your.custom.namespace">
     <split>
-        <results-list active="false" config="results-config-1" />
-        <feature-details active="false" config="feature-details-config-1" />
+        <stack>
+            <panel>
+                <results-list active="false" config="results-config-1" />
+                <feature-details active="false" config="feature-details-config-1" />
+            </panel>
+            <custom:three-dimensional-graph config="three-dimensional-graph-1" />
+        </stack>
         <map config="map-config-1">
             <button config="map-button-config-1" />
         </map>
-        <custom:three-dimensional-graph />
     </split>
 </layout>
