@@ -3,7 +3,7 @@
     <split>
         <stack resizable="true">
             <custom:three-dimensional-graph active="false" config="three-dimensional-graph-1" margin="1" />
-                <feature-details active="false" config="feature-details-config-1" height="23" />
+            <feature-details active="false" config="feature-details-config-1" height="23" />
         </stack>
         <map config="map-config-1">
             <button config="map-button-config-1" />
