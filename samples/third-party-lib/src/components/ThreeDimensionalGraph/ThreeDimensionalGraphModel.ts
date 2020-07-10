@@ -1,5 +1,6 @@
 import { Feature } from "@vertigis/arcgis-extensions/data/Feature";
 import { FeatureStream } from "@vertigis/arcgis-extensions/data/FeatureStream";
+import { LayerExtension } from "@vertigis/arcgis-extensions/mapping/LayerExtension";
 import { TableExtension } from "@vertigis/arcgis-extensions/data/TableExtension";
 import { QueryService } from "@vertigis/arcgis-extensions/tasks/query/QueryService";
 import {
@@ -10,6 +11,7 @@ import {
 } from "@vertigis/web/models";
 import { BrandingService } from "@vertigis/web/branding/BrandingService";
 import { command, Features } from "@vertigis/web/messaging";
+import { sanitizeHtml, stripHtml } from "@vertigis/web/ui";
 import { inject, FrameworkServiceType } from "@vertigis/web/services";
 import type {
     GraphData as ForceGraphData,
@@ -20,6 +22,7 @@ import { toFeatureArray } from "./utils";
 
 interface ThreeDimensionalGraphModelProperties
     extends ComponentModelProperties {
+    hydrantLayerExtension?: LayerExtension;
     surveyTableExtension?: TableExtension;
 }
 
@@ -50,7 +53,8 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
     @inject(FrameworkServiceType.BRANDING)
     brandingService: BrandingService | undefined;
 
-    // This will be populated from the app config item reference.
+    // These will be populated from the app config item reference.
+    hydrantLayerExtension: LayerExtension | undefined;
     surveyTableExtension: TableExtension | undefined;
 
     selectedSurveyId: number | undefined;
@@ -59,15 +63,21 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
     graphData: GraphData = { links: [], nodes: [] };
 
     getNodeLabel = (node: NodeObject): string => {
+        // WARNING: Be careful when using string concatenation that will be used
+        // in the DOM. In this case, the force-graph library supports supplying
+        // HTML content as a string. There's potential for malicious HTML to be
+        // contained within the feature data that we are displaying here, and
+        // thus we must sanitize it before rendering it in the DOM.
+
         if (node.type === "surveyor") {
-            return `Surveyor: ${node.id}`;
+            return stripHtml(`Surveyor: ${node.id}`);
         }
 
-        return `Hydrant Survey<br />
+        return sanitizeHtml(`Hydrant Survey<br />
         Survey ID: ${node.id}<br />
         Hydrant number: ${node.hydrantNum}<br />
         Result: ${node.result}<br />
-        Date: ${new Date(node.date).toLocaleString()}`;
+        Date: ${new Date(node.date).toLocaleString()}`);
     };
 
     getNodeColor = (node: NodeObject): string => {
@@ -77,19 +87,15 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
                     .get("primaryForeground")
                     .toHex() ?? "white"
             );
-        }
-
-        // Show similar color as the focus highlight on the map
-        // when the node is selected.
-        if (node.id === this.selectedSurveyId) {
+        } else if (node.id === this.selectedSurveyId) {
+            // Show similar color as the focus highlight on the map
+            // when the node is selected.
             return "teal";
-        }
-
-        if (node.result === "FAIL") {
+        } else if (node.result === "FAIL") {
             return "red";
+        } else {
+            return "green";
         }
-
-        return "green";
     };
 
     handleNodeClick = async (node: NodeObject): Promise<void> => {
@@ -128,12 +134,9 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
         await this.messages.commands.ui.activate.execute(this);
 
         const features = await toFeatureArray(inFeatures);
-        const hydrantFeatures = features
-            // We're only interested in the fire hydrant features.
-            .filter(
-                (feature) =>
-                    typeof feature.attributes.get("HYDRANT_NUM") === "string"
-            );
+        const hydrantFeatures = features.filter(
+            (feature) => feature.source === this.hydrantLayerExtension
+        );
         const hydrantIds = hydrantFeatures.map(
             (feature) =>
                 // Wrap in quotes as this field is a string type.
@@ -220,6 +223,10 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
     > {
         return {
             ...super._getSerializableProperties(),
+            // Specifying the serialize modes of these properties is necessary
+            // for them to be populated from app config on initialization of
+            // this model.
+            hydrantLayerExtension: ["initial"],
             surveyTableExtension: ["initial"],
         };
     }

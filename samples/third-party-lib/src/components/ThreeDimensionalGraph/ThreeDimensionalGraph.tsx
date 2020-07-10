@@ -30,13 +30,20 @@ export default function ThreeDimensionalGraph(
             .get("primaryForeground")
             .toHex() ?? "white";
 
+    const { graphData } = model;
+
     return (
         <LayoutElement {...props} stretch>
-            <div ref={rootRef} className="ThreeDimensionalGraph">
+            <div
+                ref={rootRef}
+                className="ThreeDimensionalGraph"
+                // Keep track of node count to ease testing.
+                data-node-count={graphData.nodes.length}
+            >
                 <ForceGraph3D
                     ref={graphRef}
                     backgroundColor={bgColor}
-                    graphData={model.graphData}
+                    graphData={graphData}
                     linkColor={fgColor}
                     width={rootDimensions?.width}
                     height={rootDimensions?.height}

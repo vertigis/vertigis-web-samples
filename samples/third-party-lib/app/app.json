@@ -23,6 +23,7 @@
         {
             "$type": "three-dimensional-graph",
             "id": "three-dimensional-graph-1",
+            "hydrantLayerExtension": "item://layer-extension/victoria-fire-hydrants",
             "surveyTableExtension": "item://table-extension/victoria-fire-hydrant-surveys"
         },
         {
