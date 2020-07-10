@@ -4,24 +4,57 @@ const sampleName = "third-party-lib";
 
 const getMapCanvas = () => cy.getViewer().getMap().find("canvas");
 
+const performExtentIdentify = (
+    fromX: number,
+    fromY: number,
+    toX: number,
+    toY: number
+) =>
+    getMapCanvas()
+        // `pointerId` isn't sent by cypress, and the Esri map relies on this property.
+        // See https://github.com/cypress-io/cypress/issues/5660
+        .trigger("pointerdown", fromX, fromY, { pointerId: 1 })
+        .trigger("pointermove", toX, toY, { pointerId: 1 })
+        .trigger("pointerup", toX, toY, { pointerId: 1 });
+
 describe(sampleName, () => {
-    it("shows graph as a result of performing an identify", () => {
+    it("renders graph as a result of performing an identify", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         // Wait for the map to be initialized.
         cy.getViewer().getMap();
 
-        cy.getViewer().contains("button", "Identify").click();
-
         // Perform extent identify.
-        getMapCanvas()
-            // `pointerId` isn't sent by cypress, and the Esri map relies on this property.
-            // See https://github.com/cypress-io/cypress/issues/5660
-            .trigger("pointerdown", 400, 100, { pointerId: 1 })
-            .trigger("pointermove", 600, 450, { pointerId: 1 })
-            .trigger("pointerup", 600, 450, { pointerId: 1 });
+        cy.getViewer().contains("button", "Identify").click();
+        performExtentIdentify(400, 100, 600, 450);
 
-        // Graph should be visible
-        cy.getViewer().find(".ThreeDimensionalGraph").should("exist");
+        // Graph should be visible and have nodes rendered.
+        cy.getViewer()
+            .find(".ThreeDimensionalGraph")
+            .should("exist")
+            .should(($graphComponent) => {
+                const nodeCount = Number.parseInt(
+                    $graphComponent[0].dataset.nodeCount ?? ""
+                );
+
+                // Minimum would be one surveyor and one survey.
+                expect(nodeCount).to.be.at.least(2);
+            });
+
+        // Identify again in an area that shouldn't have any results.
+        cy.getViewer().contains("button", "Identify").click();
+        performExtentIdentify(1, 1, 3, 3);
+
+        // Graph should be visible and have no nodes rendered.
+        cy.getViewer()
+            .find(".ThreeDimensionalGraph")
+            .should("exist")
+            .should(($graphComponent) => {
+                const nodeCount = Number.parseInt(
+                    $graphComponent[0].dataset.nodeCount ?? ""
+                );
+
+                expect(nodeCount).to.equal(0);
+            });
     });
 });
