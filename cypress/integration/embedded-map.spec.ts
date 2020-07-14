@@ -43,13 +43,13 @@ describe(sampleName, () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         // Center is set initially to match street view position.
-        expectMapAndMarkerCenter(51.91075394724828, 4.482735763121212);
+        expectMapAndMarkerCenter(51.91078005950694, 4.482707136338764);
 
         // There isn't a great way to find the "up" arrow.
         // However, it's always in the same location in the DOM.
         cy.getViewer().find(".DirectionsCircle").eq(2).click();
 
         // Center is updated to match new street view position.
-        expectMapAndMarkerCenter(51.91071168256558, 4.482791490528446);
+        expectMapAndMarkerCenter(51.91073083283029, 4.482760320410177);
     });
 });
