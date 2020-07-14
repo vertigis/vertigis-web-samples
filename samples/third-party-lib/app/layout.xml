@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="your.custom.namespace">
+    <split>
+        <stack resizable="true">
+            <custom:three-dimensional-graph active="false" config="three-dimensional-graph-1" margin="1" />
+            <feature-details active="false" height="23" />
+        </stack>
+        <map config="map-config-1">
+            <button config="map-button-config-1" />
+        </map>
+    </split>
+</layout>

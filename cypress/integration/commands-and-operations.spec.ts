@@ -1,7 +1,7 @@
 const sampleName = "commands-and-operations";
 
 const openIwtm = () =>
-    cy.getViewer().find("button").contains("Execute Custom Action").click();
+    cy.getViewer().contains("button", "Execute Custom Action").click();
 
 const getMenuItem = (menuItemText: string) =>
     cy.getViewer().contains('[role="menuitem"]', menuItemText);

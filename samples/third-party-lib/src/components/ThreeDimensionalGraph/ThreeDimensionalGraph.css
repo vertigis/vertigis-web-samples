@@ -1,0 +1,11 @@
+.ThreeDimensionalGraph > * {
+    position: absolute;
+}
+
+.ThreeDimensionalGraph .scene-tooltip,
+.ThreeDimensionalGraph .scene-nav-info,
+.ThreeDimensionalGraph .graph-tooltip {
+    /* This CSS var is define by Geocortex Web based on the application's
+    configured branding settings. */
+    color: var(--primaryForeground);
+}

@@ -23,6 +23,7 @@ const samples = [
     { id: "embedded-map", title: "Embedded Map" },
     { id: "i18n", title: "Internationalization" },
     { id: "iframe", title: "Iframe Embedded" },
+    { id: "third-party-lib", title: "3rd-party Library" },
     { id: "ui-library", title: "UI Library" },
 ] as const;
 

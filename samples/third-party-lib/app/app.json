@@ -1,0 +1,98 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "menu-item",
+            "id": "map-button-config-1",
+            "title": "Identify",
+            "action": [
+                {
+                    "name": "sketching.capture-geometry",
+                    "arguments": {
+                        "geometryType": "extent"
+                    }
+                },
+                "geometry.add-pixel-tolerance",
+                "highlights.clear",
+                "highlights.clear-focus",
+                "tasks.identify",
+                "highlights.add",
+                "three-dimensional-graph.display"
+            ]
+        },
+        {
+            "$type": "three-dimensional-graph",
+            "id": "three-dimensional-graph-1",
+            "hydrantLayerExtension": "item://layer-extension/victoria-fire-hydrants",
+            "surveyTableExtension": "item://table-extension/victoria-fire-hydrant-surveys"
+        },
+        {
+            "id": "map-config-1",
+            "$type": "map-extension",
+            "webMap": "https://www.arcgis.com/home/item.html?id=0ba877a4185448cb832af9a661031e31",
+            "tableExtensions": [
+                "item://table-extension/victoria-fire-hydrant-surveys"
+            ],
+            "layerExtensions": [
+                "item://layer-extension/victoria-tax-parcels",
+                "item://layer-extension/victoria-buildings",
+                "item://layer-extension/victoria-water-lines",
+                "item://layer-extension/victoria-fire-hydrants"
+            ]
+        },
+        {
+            "$type": "table-extension",
+            "id": "victoria-fire-hydrant-surveys",
+            "table": {
+                "$ref": "Victoria_Fire_Hydrants_7555",
+                "$tableType": "ArcGISServiceTable"
+            }
+        },
+        {
+            "$type": "layer-extension",
+            "id": "victoria-tax-parcels",
+            "layer": {
+                "$ref": "Victoria_Tax_Parcels_2202",
+                "layerType": "ArcGISFeatureLayer"
+            },
+            "taskSettings": {
+                "enableIdentify": false
+            }
+        },
+        {
+            "$type": "layer-extension",
+            "id": "victoria-buildings",
+            "layer": {
+                "$ref": "Victoria_Buildings_4805",
+                "layerType": "ArcGISFeatureLayer"
+            },
+            "taskSettings": {
+                "enableIdentify": false
+            }
+        },
+        {
+            "$type": "layer-extension",
+            "id": "victoria-water-lines",
+            "layer": {
+                "$ref": "Victoria_Water_Lines_3600",
+                "layerType": "ArcGISFeatureLayer"
+            },
+            "taskSettings": {
+                "enableIdentify": false
+            }
+        },
+        {
+            "$type": "layer-extension",
+            "id": "victoria-fire-hydrants",
+            "layer": {
+                "$ref": "Victoria_Fire_Hydrants_8780",
+                "layerType": "ArcGISFeatureLayer"
+            }
+        },
+        {
+            "$type": "branding",
+            "id": "branding",
+            "activeTheme": "dark"
+        }
+    ]
+}
