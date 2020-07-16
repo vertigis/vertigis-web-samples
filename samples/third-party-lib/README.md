@@ -1,4 +1,4 @@
-# Embedded Third-party Map
+# 3rd-Party Library
 
 This sample demonstrates how to install and import 3rd-party [npm](https://www.npmjs.com/) packages. In this sample we've installed the [`react-force-graph`](https://github.com/vasturiano/react-force-graph) package as a [project dependency](package.json) of this sample to visualize fire hydrant surveys.
 
