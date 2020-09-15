@@ -32,17 +32,17 @@ const expectMarkerCenter = (lat: number, lon: number) =>
         });
 
 describe(sampleName, () => {
-    it("synchronizes map and marker position with street view position", () => {
+    it("synchronizes marker position with street view position", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
-        // Center is set initially to match street view position.
+        // Marker is set initially to match street view position.
         expectMarkerCenter(51.91079805555349, 4.4827030555555485);
 
-        // There isn't a great way to find the "up" arrow.
-        // However, it's always in the same location in the DOM.
-        cy.getViewer().find(".DirectionsCircle").eq(1).click();
+        // Find the forward arrow by querying for the mapillary node id that
+        // represents the next node in the forward direction.
+        cy.getViewer().find('[data-key="NljCybzY4GmNGx-u2Xoo-Q"]').click();
 
-        // Center is updated to match new street view position.
+        // Marker is updated to match new street view position.
         expectMarkerCenter(51.91076853799338, 4.482757781374804);
     });
 });
