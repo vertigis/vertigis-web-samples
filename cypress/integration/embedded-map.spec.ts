@@ -7,19 +7,12 @@ const sampleName = "embedded-map";
 // the map and marker won't be exact.
 const numberPrecision = 1e-6;
 
-const expectMapAndMarkerCenter = (lat: number, lon: number) =>
+const expectMarkerCenter = (lat: number, lon: number) =>
     cy
         .getViewer()
         .getMap()
         .should((mapEl) => {
             const mapView = getMapOrSceneView(mapEl);
-
-            // Check map center
-            expect(mapView.center.latitude).to.be.closeTo(lat, numberPrecision);
-            expect(mapView.center.longitude).to.be.closeTo(
-                lon,
-                numberPrecision
-            );
 
             // Check location marker center
             const locationMarker = mapView.map.allLayers
@@ -43,13 +36,13 @@ describe(sampleName, () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         // Center is set initially to match street view position.
-        expectMapAndMarkerCenter(51.91078005950694, 4.482707136338764);
+        expectMarkerCenter(51.91079805555349, 4.4827030555555485);
 
         // There isn't a great way to find the "up" arrow.
         // However, it's always in the same location in the DOM.
-        cy.getViewer().find(".DirectionsCircle").eq(2).click();
+        cy.getViewer().find(".DirectionsCircle").eq(1).click();
 
         // Center is updated to match new street view position.
-        expectMapAndMarkerCenter(51.91073083283029, 4.482760320410177);
+        expectMarkerCenter(51.91076853799338, 4.482757781374804);
     });
 });
