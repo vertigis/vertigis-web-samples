@@ -123,7 +123,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 viewpoint: {
                     rotation: getCameraRotationFromBearing(bearing),
                     targetGeometry: centerPoint,
-                    scale: 6000,
+                    scale: 3000,
                 },
             }),
         ]);
@@ -164,7 +164,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 viewpoint: {
                     rotation: getCameraRotationFromBearing(bearing),
                     targetGeometry: centerPoint,
-                    scale: 6000,
+                    scale: 3000,
                 },
             }),
         ]);

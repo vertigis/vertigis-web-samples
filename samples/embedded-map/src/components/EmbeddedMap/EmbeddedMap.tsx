@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
     LayoutElement,
     LayoutElementProperties,
@@ -12,10 +12,11 @@ export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
 ): React.ReactElement {
     const { model } = props;
+    const mlyRootEl = useRef<HTMLDivElement>();
 
     useEffect(() => {
         const mapillary = new Viewer(
-            model.id,
+            mlyRootEl.current,
             model.mapillaryKey,
             // Mapillary node to start on.
             "gLV8Jn5A6b6rbVRy2xhkMA",
@@ -46,7 +47,7 @@ export default function EmbeddedMap(
 
     return (
         <LayoutElement {...props} stretch>
-            <div id={model.id} className="EmbeddedMap-map-container"></div>
+            <div ref={mlyRootEl} className="EmbeddedMap-map-container"></div>
         </LayoutElement>
     );
 }
