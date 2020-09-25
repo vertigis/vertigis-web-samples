@@ -45,7 +45,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     private _lastMarkerUpdate: LocationMarkerEvent;
     private _updating = false;
     private _viewerUpdateHandle: IHandle;
-    private _mouseUp = true;
 
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
@@ -143,6 +142,27 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         }
     }
 
+    async recenter(): Promise<void> {
+        const [{ lat, lon }, bearing] = await Promise.all([
+            this.mapillary.getPosition(),
+            this.mapillary.getBearing(),
+        ]);
+
+        const centerPoint = new Point({
+            latitude: lat,
+            longitude: lon,
+        });
+
+        await this.messages.commands.map.zoomToViewpoint.execute({
+            maps: this.map,
+            viewpoint: {
+                rotation: getCameraRotationFromBearing(bearing),
+                targetGeometry: centerPoint,
+                scale: 3000,
+            },
+        });
+    }
+
     /**
      * Setup the initial state of the maps such as the location marker and map
      * position.
@@ -175,14 +195,16 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 maps: this.map,
                 userDraggable: true,
             }),
-            this.messages.commands.map.zoomToViewpoint.execute({
-                maps: this.map,
-                viewpoint: {
-                    rotation: getCameraRotationFromBearing(bearing),
-                    targetGeometry: centerPoint,
-                    scale: 3000,
-                },
-            }),
+            this.syncGcxMap
+                ? this.messages.commands.map.zoomToViewpoint.execute({
+                      maps: this.map,
+                      viewpoint: {
+                          rotation: getCameraRotationFromBearing(bearing),
+                          targetGeometry: centerPoint,
+                          scale: 3000,
+                      },
+                  })
+                : undefined,
         ]);
     }
 
@@ -200,14 +222,12 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     private async _moveCloseToPosition(
         pos: MapillaryCameraPosition
     ): Promise<void> {
-        // This currently only works in Web Mercator
         const { latitude, longitude } = pos.geometry;
 
         if (
             this._currentPosition?.geometry?.latitude === latitude &&
             this._currentPosition?.geometry?.longitude === longitude
         ) {
-            // no documented way to do this
             return;
         }
 
@@ -258,37 +278,21 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 id: this.id,
                 maps: this.map,
             }),
-            this.messages.commands.map.zoomToViewpoint.execute({
-                maps: this.map,
-                viewpoint: {
-                    rotation: getCameraRotationFromBearing(bearing),
-                    targetGeometry: centerPoint,
-                    scale: 3000,
-                },
-            }),
-        ]);
-
-        this._updating = false;
+            this.syncGcxMap
+                ? this.messages.commands.map.zoomToViewpoint.execute({
+                      maps: this.map,
+                      viewpoint: {
+                          rotation: getCameraRotationFromBearing(bearing),
+                          targetGeometry: centerPoint,
+                          scale: 3000,
+                      },
+                  })
+                : undefined,
+        ]).finally(() => (this._updating = false));
     }, 128);
 
     private _activateCover() {
         this._updating = false;
         this.mapillary.activateCover();
     }
-
-    // /**
-    //  * If we drag the viewer location marker to a place where no mapillary imagery can be found
-    //  * we want to update the view to reflect this. Normally mapillary will not show a message and just
-    //  * not update, which can be confusing.
-    //  */
-    // private _showNoImageMessage(show) {
-    //     const noImageMessage = document.getElementById("mapillary-no-image-message");
-    //     if (noImageMessage) {
-    //         noImageMessage.style.display = show ? "block" : "none";
-    //     }
-    //     const mapillaryUI = document.getElementsByClassName("mapillary-js-dom");
-    //     if (mapillaryUI && mapillaryUI[0]) {
-    //         (mapillaryUI[0] as HTMLDivElement).style.display = show ? "none" : "block";
-    //     }
-    // }
 }

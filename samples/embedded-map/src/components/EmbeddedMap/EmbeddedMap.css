@@ -1,0 +1,18 @@
+.EmbeddedMap-button {
+    z-index: 3;
+    position: absolute;
+    top: calc(50% + 10px);
+    background-color: #ffffff30;
+}
+
+.EmbeddedMap-sync-button {
+    right: 0.5em;
+}
+
+.EmbeddedMap-recenter-button {
+    right: 2.5em;
+}
+
+.EmbeddedMap-button.selected {
+    background-color: #ffffff70;
+}
