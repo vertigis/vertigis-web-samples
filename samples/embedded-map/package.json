@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "@vertigis/web": "^5.8.0",
+        "@vertigis/viewer-spec": "32.3.0",
         "mapillary-js": "^2.21.0"
     },
     "devDependencies": {

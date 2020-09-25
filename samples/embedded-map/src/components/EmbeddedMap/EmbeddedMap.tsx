@@ -3,7 +3,7 @@ import {
     LayoutElement,
     LayoutElementProperties,
 } from "@vertigis/web/components";
-import { Viewer } from "mapillary-js";
+import { Viewer, TransitionMode } from "mapillary-js";
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.min.css";
 import EmbeddedMapModel from "./EmbeddedMapModel";
@@ -19,12 +19,18 @@ export default function EmbeddedMap(
             mlyRootEl.current,
             model.mapillaryKey,
             // Mapillary node to start on.
-            "gLV8Jn5A6b6rbVRy2xhkMA",
+            null,
             {
                 component: {
-                    // Initialize the view immediately without user interaction.
                     cover: false,
+                    marker: {
+                        visibleBBoxSize: 100,
+                    },
+                    mouse: {
+                        doubleClickZoom: false,
+                    },
                 },
+                transitionMode: TransitionMode.Instantaneous,
             }
         );
         model.mapillary = mapillary;

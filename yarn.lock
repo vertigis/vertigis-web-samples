@@ -483,6 +483,11 @@
   resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-29.5.0.tgz#16486a349bbb981c1e700785f7f433e917dfaf4a"
   integrity sha512-3VE48J60CC2ev2VgKhf8p5FBh5B201ohIWLVxThorDk5FQV70ZrU3kxvNQ15kj2G5SfVYZ9l7ZIyXmT8IKvj4g==
 
+"@vertigis/viewer-spec@32.3.0":
+  version "32.3.0"
+  resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-32.3.0.tgz#b8e65126e3709d23fc9eccbe80b2ef697837ca71"
+  integrity sha512-CR3guKwUUnTf2EViPBNiwnqMifVg6oLf1hHgkKPLfXP/PHqz5z+jo4Y8PGSzNMvjyUxc/M4qSgCk9HJu1nLKLQ==
+
 "@vertigis/web-sdk@^1.3.2":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@vertigis/web-sdk/-/web-sdk-1.3.2.tgz#7f5800984f8a7513f697a75066645405152cbb67"
@@ -2613,7 +2618,7 @@ debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
-"debug@github:ngokevin/debug#noTimestamp":
+debug@ngokevin/debug#noTimestamp:
   version "2.2.0"
   resolved "https://codeload.github.com/ngokevin/debug/tar.gz/ef5f8e66d49ce8bc64c6f282c15f8b7164409e3a"
 
@@ -2796,7 +2801,7 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-"document-register-element@github:dmarcos/document-register-element#8ccc532b7f3744be954574caf3072a5fd260ca90":
+document-register-element@dmarcos/document-register-element#8ccc532b7f3744be954574caf3072a5fd260ca90:
   version "0.5.4"
   resolved "https://codeload.github.com/dmarcos/document-register-element/tar.gz/8ccc532b7f3744be954574caf3072a5fd260ca90"
 
@@ -2807,21 +2812,16 @@ dojo-dstore@1.1.2:
   dependencies:
     dojo "^1.9.0"
 
-dojo@1.14.2:
+dojo@1.14.2, dojo@Esri/dojo#v1.14.2/esri-3.28.0:
   version "1.14.2"
-  resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.14.2.tgz#45ca90b19068230e1486f68b1531fa4ce0e21280"
-  integrity sha512-TI+Ytgfh/VfmHWERp45Jte6NFMdoJTPsvUP/uzJUvAXET8FP2h442LePWWJ/q/xZ4V0V8OtdJhx8It/GB+Zbxg==
+  resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
 
 dojo@^1.9.0:
   version "1.16.3"
   resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.16.3.tgz#f9d2343184b5e5ffda2ee5666029da20508e1013"
   integrity sha512-+mPovtmbULx5V69lWji496gMfhXuL1WCC0KBq0hig4Tz6WGAYxTOJV6ch3bewNzSJHmaHiSsIMYkW8jcUrhLIQ==
 
-"dojo@github:Esri/dojo#v1.14.2/esri-3.28.0":
-  version "1.14.2"
-  resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
-
-"dojox@github:Esri/dojox#v1.14.2/esri-3.28.0":
+dojox@Esri/dojox#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dojox/tar.gz/66a4f9a49808332c0573437ea2f9f78901124373"
   dependencies:
@@ -8305,7 +8305,7 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-"three-bmfont-text@github:dmarcos/three-bmfont-text#1babdf8507c731a18f8af3b807292e2b9740955e":
+three-bmfont-text@dmarcos/three-bmfont-text#1babdf8507c731a18f8af3b807292e2b9740955e:
   version "2.3.0"
   resolved "https://codeload.github.com/dmarcos/three-bmfont-text/tar.gz/1babdf8507c731a18f8af3b807292e2b9740955e"
   dependencies:
