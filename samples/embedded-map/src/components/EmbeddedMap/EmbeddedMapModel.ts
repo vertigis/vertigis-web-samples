@@ -179,18 +179,20 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // Create location marker based on current location from Mapillary and
         // pan/zoom Geocortex map to the location.
-        const [{ lat, lon }, bearing] = await Promise.all([
+        const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
             this.mapillary.getPosition(),
-            this.mapillary.getBearing(),
+            this.mapillary.getPointOfView(),
+            this.mapillary.getFieldOfView(),
         ]);
 
         // Create a location marker and zoom to it if synced
         const centerPoint = new Point({ latitude: lat, longitude: lon });
         await Promise.all([
             this.messages.commands.locationMarker.create.execute({
-                fov: 30,
+                fov,
                 geometry: centerPoint,
                 heading: bearing,
+                tilt: tilt + 90,
                 id: this.id,
                 maps: this.map,
                 userDraggable: true,
@@ -262,9 +264,10 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         this._updating = true;
 
-        const [{ lat, lon }, bearing] = await Promise.all([
+        const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
             this.mapillary.getPosition(),
-            this.mapillary.getBearing(),
+            this.mapillary.getPointOfView(),
+            this.mapillary.getFieldOfView(),
         ]);
 
         const centerPoint = new Point({
@@ -275,6 +278,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             this.messages.commands.locationMarker.update.execute({
                 geometry: centerPoint,
                 heading: bearing,
+                tilt: tilt + 90,
+                fov,
                 id: this.id,
                 maps: this.map,
             }),
