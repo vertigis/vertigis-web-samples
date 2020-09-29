@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
-import { Viewer } from "mapillary-js";
+import { Viewer, TransitionMode } from "mapillary-js";
 import {
     LayoutElement,
     LayoutElementProperties,
@@ -32,6 +32,7 @@ export default function EmbeddedMap(
 
     useEffect(() => {
         const mapillary = new Viewer(mlyRootEl.current, model.mapillaryKey);
+        mapillary.setTransitionMode(TransitionMode.Instantaneous);
         model.mapillary = mapillary;
 
         const handleWindowResize = () => {

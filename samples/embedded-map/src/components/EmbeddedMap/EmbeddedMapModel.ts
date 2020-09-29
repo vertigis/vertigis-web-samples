@@ -19,10 +19,12 @@ function getCameraRotationFromBearing(bearing: number): number {
     return 360 - bearing;
 }
 
-interface MapillaryCameraPosition {
-    geometry: __esri.geometry.Point;
-    heading?: number;
-    tilt?: number;
+interface MapillaryCamera {
+    latitude: number;
+    longitude: number;
+    heading: number;
+    tilt: number;
+    fov: number;
 }
 
 interface GcxMap extends MapExtension {
@@ -41,7 +43,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
     syncGcxMap = true;
 
-    private _currentPosition: MapillaryCameraPosition;
+    private _currentPosition: { latitude: number; longitude: number };
     private _lastMarkerUpdate: LocationMarkerEvent;
     private _updating = false;
     private _viewerUpdateHandle: IHandle;
@@ -124,18 +126,12 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                         this._lastMarkerUpdate
                     ) {
                         this._updating = true;
-                        const {
-                            geometry,
-                            heading,
-                            tilt,
-                        } = this._lastMarkerUpdate;
+
+                        const { latitude, longitude } = this._lastMarkerUpdate
+                            .geometry as __esri.geometry.Point;
                         delete this._lastMarkerUpdate;
 
-                        void this._moveCloseToPosition({
-                            geometry: geometry as __esri.geometry.Point,
-                            heading,
-                            tilt,
-                        });
+                        void this._moveCloseToPosition(latitude, longitude);
                     }
                 };
             }
@@ -143,20 +139,21 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     }
 
     async recenter(): Promise<void> {
-        const [{ lat, lon }, bearing] = await Promise.all([
-            this.mapillary.getPosition(),
-            this.mapillary.getBearing(),
-        ]);
+        const {
+            latitude,
+            longitude,
+            heading,
+        } = await this._getMapillaryCamera();
 
         const centerPoint = new Point({
-            latitude: lat,
-            longitude: lon,
+            latitude,
+            longitude,
         });
 
         await this.messages.commands.map.zoomToViewpoint.execute({
             maps: this.map,
             viewpoint: {
-                rotation: getCameraRotationFromBearing(bearing),
+                rotation: getCameraRotationFromBearing(heading),
                 targetGeometry: centerPoint,
                 scale: 3000,
             },
@@ -175,24 +172,29 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         await whenDefinedOnce(this.map.view, "center");
 
         // Set mapillary to this location
-        await this._moveCloseToPosition({ geometry: this.map.view.center });
+        await this._moveCloseToPosition(
+            this.map.view.center.latitude,
+            this.map.view.center.longitude
+        );
 
         // Create location marker based on current location from Mapillary and
         // pan/zoom Geocortex map to the location.
-        const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
-            this.mapillary.getPosition(),
-            this.mapillary.getPointOfView(),
-            this.mapillary.getFieldOfView(),
-        ]);
+        const {
+            latitude,
+            longitude,
+            heading,
+            tilt,
+            fov,
+        } = await this._getMapillaryCamera();
 
         // Create a location marker and zoom to it if synced
-        const centerPoint = new Point({ latitude: lat, longitude: lon });
+        const centerPoint = new Point({ latitude, longitude });
         await Promise.all([
             this.messages.commands.locationMarker.create.execute({
                 fov,
                 geometry: centerPoint,
-                heading: bearing,
-                tilt: tilt + 90,
+                heading,
+                tilt,
                 id: this.id,
                 maps: this.map,
                 userDraggable: true,
@@ -201,7 +203,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
                       viewpoint: {
-                          rotation: getCameraRotationFromBearing(bearing),
+                          rotation: getCameraRotationFromBearing(heading),
                           targetGeometry: centerPoint,
                           scale: 3000,
                       },
@@ -222,13 +224,12 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     }
 
     private async _moveCloseToPosition(
-        pos: MapillaryCameraPosition
+        latitude: number,
+        longitude: number
     ): Promise<void> {
-        const { latitude, longitude } = pos.geometry;
-
         if (
-            this._currentPosition?.geometry?.latitude === latitude &&
-            this._currentPosition?.geometry?.longitude === longitude
+            this._currentPosition?.latitude === latitude &&
+            this._currentPosition?.longitude === longitude
         ) {
             return;
         }
@@ -264,21 +265,23 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         this._updating = true;
 
-        const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
-            this.mapillary.getPosition(),
-            this.mapillary.getPointOfView(),
-            this.mapillary.getFieldOfView(),
-        ]);
-
+        const {
+            latitude,
+            longitude,
+            heading,
+            tilt,
+            fov,
+        } = await this._getMapillaryCamera();
         const centerPoint = new Point({
-            latitude: lat,
-            longitude: lon,
+            latitude,
+            longitude,
         });
+
         await Promise.all([
             this.messages.commands.locationMarker.update.execute({
                 geometry: centerPoint,
-                heading: bearing,
-                tilt: tilt + 90,
+                heading,
+                tilt,
                 fov,
                 id: this.id,
                 maps: this.map,
@@ -287,7 +290,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
                       viewpoint: {
-                          rotation: getCameraRotationFromBearing(bearing),
+                          rotation: getCameraRotationFromBearing(heading),
                           targetGeometry: centerPoint,
                           scale: 3000,
                       },
@@ -295,6 +298,30 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 : undefined,
         ]).finally(() => (this._updating = false));
     }, 128);
+
+    // Gets the current POV of the mapillary camera
+    private async _getMapillaryCamera(): Promise<MapillaryCamera> {
+        if (!this.mapillary) {
+            return;
+        }
+
+        const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
+            this.mapillary.getPosition(),
+            this.mapillary.getPointOfView() as Promise<{
+                bearing: number;
+                tilt: number;
+            }>,
+            this.mapillary.getFieldOfView(),
+        ]);
+
+        return {
+            latitude: lat,
+            longitude: lon,
+            heading: bearing,
+            tilt: tilt + 90,
+            fov,
+        };
+    }
 
     private _activateCover() {
         this._updating = false;
