@@ -1,18 +1,22 @@
 .EmbeddedMap-button {
     z-index: 3;
     position: absolute;
-    top: calc(50% + 10px);
+    top: 0.5rem;
     background-color: #ffffff30;
 }
 
 .EmbeddedMap-sync-button {
-    right: 0.5em;
+    right: 0.5rem;
 }
 
 .EmbeddedMap-recenter-button {
-    right: 2.5em;
+    right: 5rem;
 }
 
 .EmbeddedMap-button.selected {
     background-color: #ffffff70;
+}
+
+.gcx-embedded-map {
+    height: 100%;
 }

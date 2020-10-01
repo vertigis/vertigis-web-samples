@@ -187,7 +187,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             fov,
         } = await this._getMapillaryCamera();
 
-        // Create a location marker and zoom to it if synced
         const centerPoint = new Point({ latitude, longitude });
         await Promise.all([
             this.messages.commands.locationMarker.create.execute({
@@ -198,7 +197,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 id: this.id,
                 maps: this.map,
                 userDraggable: true,
-            }),
+            } as any),
             this.syncGcxMap
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
@@ -285,7 +284,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 fov,
                 id: this.id,
                 maps: this.map,
-            }),
+            } as any),
             this.syncGcxMap
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
