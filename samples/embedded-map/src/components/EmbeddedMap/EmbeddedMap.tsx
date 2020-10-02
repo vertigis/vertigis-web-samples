@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Viewer, TransitionMode } from "mapillary-js";
 import {
@@ -13,6 +13,7 @@ import CenterMap from "@vertigis/web/ui/icons/CenterMap";
 import "mapillary-js/dist/mapillary.min.css";
 import EmbeddedMapModel from "./EmbeddedMapModel";
 import "./EmbeddedMap.css";
+import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
 
 declare const ResizeObserver;
 
@@ -21,16 +22,16 @@ export default function EmbeddedMap(
 ): React.ReactElement {
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>();
-    const [sync, setSync] = useState(model.syncGcxMap);
 
     const onSyncToggle = () => {
-        model.syncGcxMap = !model.syncGcxMap;
-        setSync(model.syncGcxMap);
+        model.sync = !model.sync;
     };
 
     const onRecenter = () => {
         void model.recenter();
     };
+
+    useWatchAndRerender(model, "sync");
 
     useEffect(() => {
         const mapillary = new Viewer(mlyRootEl.current, model.mapillaryKey);
@@ -43,7 +44,7 @@ export default function EmbeddedMap(
 
         // Viewer size is dynamic so resize should be called every time the viewport size changes.
         const resizeObserver = new ResizeObserver(handleViewportResize);
-        const viewportDiv = mlyRootEl.current.parentElement;
+        const viewportDiv = mlyRootEl.current; // mlyRootEl.current.parentElement;
         resizeObserver.observe(viewportDiv);
 
         // Clean up when this component is unmounted from the DOM.
@@ -62,11 +63,11 @@ export default function EmbeddedMap(
                     className={clsx(
                         "EmbeddedMap-button",
                         "EmbeddedMap-sync-button",
-                        { selected: sync }
+                        { selected: model.sync }
                     )}
                     onClick={onSyncToggle}
                 >
-                    <Sync color={sync ? "primary" : "secondary"} />
+                    <Sync color={model.sync ? "primary" : "secondary"} />
                 </IconButton>
                 <IconButton
                     className="EmbeddedMap-button EmbeddedMap-recenter-button"

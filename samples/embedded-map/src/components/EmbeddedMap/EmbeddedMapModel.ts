@@ -1,5 +1,4 @@
 import { MapExtension } from "@vertigis/arcgis-extensions/mapping/MapExtension";
-import { LocationMarkerEvent } from "@vertigis/viewer-spec/messaging/registry/location-marker";
 import {
     ComponentModelBase,
     serializable,
@@ -41,12 +40,35 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     readonly imageQueryUrl = "https://a.mapillary.com/v3/images";
     readonly searchRadius = 500; // meters
 
-    syncGcxMap = true;
-
     private _currentPosition: { latitude: number; longitude: number };
-    private _lastMarkerUpdate: LocationMarkerEvent;
+    private _lastMarkerUpdate: any;
     private _updating = false;
     private _viewerUpdateHandle: IHandle;
+
+    mouseDownHandler = (): void => (this._lastMarkerUpdate = undefined);
+    mouseUpHandler = (): void => {
+        if (
+            this.mapillary?.isNavigable &&
+            !this._updating &&
+            this._lastMarkerUpdate
+        ) {
+            this._updating = true;
+
+            const { latitude, longitude } = this._lastMarkerUpdate
+                .geometry as __esri.geometry.Point;
+            this._lastMarkerUpdate = undefined;
+
+            void this._moveCloseToPosition(latitude, longitude);
+        }
+    };
+
+    private _syncGcxMap = true;
+    get sync(): boolean {
+        return this._syncGcxMap;
+    }
+    set sync(val: boolean) {
+        this._syncGcxMap = !!val;
+    }
 
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
@@ -114,27 +136,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 this._syncMaps.bind(this)
             );
 
-            if (!document.body.onmousedown) {
-                document.body.onmousedown = () => delete this._lastMarkerUpdate;
-            }
-
-            if (!document.body.onmouseup) {
-                document.body.onmouseup = () => {
-                    if (
-                        this.mapillary?.isNavigable &&
-                        !this._updating &&
-                        this._lastMarkerUpdate
-                    ) {
-                        this._updating = true;
-
-                        const { latitude, longitude } = this._lastMarkerUpdate
-                            .geometry as __esri.geometry.Point;
-                        delete this._lastMarkerUpdate;
-
-                        void this._moveCloseToPosition(latitude, longitude);
-                    }
-                };
-            }
+            document.body.addEventListener("mousedown", this.mouseDownHandler);
+            document.body.addEventListener("mouseup", this.mouseUpHandler);
         }
     }
 
@@ -198,7 +201,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 maps: this.map,
                 userDraggable: true,
             } as any),
-            this.syncGcxMap
+            this.sync
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
                       viewpoint: {
@@ -218,7 +221,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         });
     }
 
-    private _handleViewerUpdate(event: LocationMarkerEvent): void {
+    private _handleViewerUpdate(event: any): void {
         this._lastMarkerUpdate = event;
     }
 
@@ -285,7 +288,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 id: this.id,
                 maps: this.map,
             } as any),
-            this.syncGcxMap
+            this.sync
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
                       viewpoint: {

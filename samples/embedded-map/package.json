@@ -9,12 +9,12 @@
     },
     "dependencies": {
         "@vertigis/web": "^5.8.0",
-        "@vertigis/viewer-spec": "32.3.0",
         "mapillary-js": "^2.21.0"
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.3.2",
-        "typescript": "~4.0.2"
+        "typescript": "~4.0.2",
+        "clsx": "1.1.1"
     },
     "cldr-data-urls-filter": "(cldr-core|cldr-numbers-modern)"
 }

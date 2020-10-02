@@ -483,11 +483,6 @@
   resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-29.5.0.tgz#16486a349bbb981c1e700785f7f433e917dfaf4a"
   integrity sha512-3VE48J60CC2ev2VgKhf8p5FBh5B201ohIWLVxThorDk5FQV70ZrU3kxvNQ15kj2G5SfVYZ9l7ZIyXmT8IKvj4g==
 
-"@vertigis/viewer-spec@32.3.0":
-  version "32.3.0"
-  resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-32.3.0.tgz#b8e65126e3709d23fc9eccbe80b2ef697837ca71"
-  integrity sha512-CR3guKwUUnTf2EViPBNiwnqMifVg6oLf1hHgkKPLfXP/PHqz5z+jo4Y8PGSzNMvjyUxc/M4qSgCk9HJu1nLKLQ==
-
 "@vertigis/web-sdk@^1.3.2":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@vertigis/web-sdk/-/web-sdk-1.3.2.tgz#7f5800984f8a7513f697a75066645405152cbb67"
