@@ -40,10 +40,10 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     readonly imageQueryUrl = "https://a.mapillary.com/v3/images";
     readonly searchRadius = 500; // meters
 
-    private _currentPosition: { latitude: number; longitude: number };
     private _lastMarkerUpdate: any;
     private _updating = false;
     private _viewerUpdateHandle: IHandle;
+    private _handleMarkerUpdate = true;
 
     mouseDownHandler = (): void => (this._lastMarkerUpdate = undefined);
     mouseUpHandler = (): void => {
@@ -222,20 +222,16 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     }
 
     private _handleViewerUpdate(event: any): void {
-        this._lastMarkerUpdate = event;
+        if (this._handleMarkerUpdate) {
+            this._lastMarkerUpdate = event;
+        }
+        this._handleMarkerUpdate = true;
     }
 
     private async _moveCloseToPosition(
         latitude: number,
         longitude: number
     ): Promise<void> {
-        if (
-            this._currentPosition?.latitude === latitude &&
-            this._currentPosition?.longitude === longitude
-        ) {
-            return;
-        }
-
         const url = `${this.imageQueryUrl}?client_id=${this.mapillaryKey}&closeto=${longitude},${latitude}&radius=${this.searchRadius}`;
 
         const response = await fetch(url, {
@@ -251,7 +247,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         if (imgkey) {
             await this.mapillary.moveToKey(imgkey);
-            this._currentPosition = this.mapillary.getPosition();
             this._updating = false;
         } else {
             this._activateCover();
@@ -274,10 +269,13 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             tilt,
             fov,
         } = await this._getMapillaryCamera();
+
         const centerPoint = new Point({
             latitude,
             longitude,
         });
+
+        this._handleMarkerUpdate = false;
 
         await Promise.all([
             this.messages.commands.locationMarker.update.execute({
