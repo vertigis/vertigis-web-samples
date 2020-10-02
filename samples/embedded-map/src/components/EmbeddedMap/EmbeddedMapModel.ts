@@ -195,7 +195,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 id: this.id,
                 maps: this.map,
                 userDraggable: true,
-            } as any),
+            }),
             this.sync
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
@@ -284,7 +284,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 fov,
                 id: this.id,
                 maps: this.map,
-            } as any),
+            }),
             this.sync
                 ? this.messages.commands.map.zoomToViewpoint.execute({
                       maps: this.map,
