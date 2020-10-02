@@ -17,6 +17,10 @@
     background-color: #ffffff70;
 }
 
-.gcx-embedded-map {
+.EmbeddedMap-map-container {
+    height: 100%;
+}
+
+.mapillary-js {
     height: 100%;
 }

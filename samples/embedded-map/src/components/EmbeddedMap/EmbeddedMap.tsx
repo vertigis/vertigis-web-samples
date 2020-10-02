@@ -15,6 +15,8 @@ import EmbeddedMapModel from "./EmbeddedMapModel";
 import "./EmbeddedMap.css";
 import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
 
+// This line should be removed when this issue is resolved:
+// https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/908
 declare const ResizeObserver;
 
 export default function EmbeddedMap(
@@ -44,7 +46,7 @@ export default function EmbeddedMap(
 
         // Viewer size is dynamic so resize should be called every time the viewport size changes.
         const resizeObserver = new ResizeObserver(handleViewportResize);
-        const viewportDiv = mlyRootEl.current; // mlyRootEl.current.parentElement;
+        const viewportDiv = mlyRootEl.current;
         resizeObserver.observe(viewportDiv);
 
         // Clean up when this component is unmounted from the DOM.
@@ -57,7 +59,7 @@ export default function EmbeddedMap(
     }, [model, model.id, model.mapillaryKey]);
 
     return (
-        <div className={"gcx-component gcx-stretchy"}>
+        <LayoutElement {...props} stretch>
             <div className="EmbeddedMap-ui-container">
                 <IconButton
                     className={clsx(
@@ -67,7 +69,7 @@ export default function EmbeddedMap(
                     )}
                     onClick={onSyncToggle}
                 >
-                    <Sync color={model.sync ? "primary" : "secondary"} />
+                    <Sync color={model.sync ? "primary" : "disabled"} />
                 </IconButton>
                 <IconButton
                     className="EmbeddedMap-button EmbeddedMap-recenter-button"
@@ -76,9 +78,13 @@ export default function EmbeddedMap(
                     <CenterMap />
                 </IconButton>
             </div>
-            <LayoutElement {...props}>
+            <div
+                className={
+                    "EmbeddedMap-map-container gcx-component gcx-stretchy"
+                }
+            >
                 <div ref={mlyRootEl} />
-            </LayoutElement>
-        </div>
+            </div>
+        </LayoutElement>
     );
 }

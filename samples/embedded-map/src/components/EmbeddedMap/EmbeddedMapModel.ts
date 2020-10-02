@@ -6,6 +6,7 @@ import {
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
 import Point from "esri/geometry/Point";
+import SceneView from "esri/views/SceneView";
 import { whenDefinedOnce } from "esri/core/watchUtils";
 import { Viewer } from "mapillary-js";
 
@@ -27,7 +28,7 @@ interface MapillaryCamera {
 }
 
 interface GcxMap extends MapExtension {
-    view: __esri.SceneView;
+    view: SceneView;
 }
 
 @serializable
@@ -40,7 +41,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     readonly imageQueryUrl = "https://a.mapillary.com/v3/images";
     readonly searchRadius = 500; // meters
 
-    private _lastMarkerUpdate: any;
+    private _lastMarkerUpdate: { latitude: number; longitude: number };
     private _updating = false;
     private _viewerUpdateHandle: IHandle;
     private _handleMarkerUpdate = true;
@@ -54,21 +55,15 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         ) {
             this._updating = true;
 
-            const { latitude, longitude } = this._lastMarkerUpdate
-                .geometry as __esri.geometry.Point;
+            const { latitude, longitude } = this._lastMarkerUpdate;
             this._lastMarkerUpdate = undefined;
 
             void this._moveCloseToPosition(latitude, longitude);
         }
     };
 
-    private _syncGcxMap = true;
-    get sync(): boolean {
-        return this._syncGcxMap;
-    }
-    set sync(val: boolean) {
-        this._syncGcxMap = !!val;
-    }
+    // Set this to false to start with the maps unsynced
+    sync = true;
 
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
@@ -106,9 +101,9 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             this.mapillary.on(Viewer.nodechanged, this._onPerspectiveChange);
             this.mapillary.on(Viewer.povchanged, this._onPerspectiveChange);
 
-            // Change the mapillary viewer position when the location marker is moved
+            // Change the mapillary viewer position when the location marker is moved.
             this._viewerUpdateHandle = this.messages.events.locationMarker.updated.subscribe(
-                this._handleViewerUpdate.bind(this)
+                (event) => this._handleViewerUpdate(event)
             );
         }
     }
@@ -223,7 +218,11 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
     private _handleViewerUpdate(event: any): void {
         if (this._handleMarkerUpdate) {
-            this._lastMarkerUpdate = event;
+            const updatePoint = event.geometry as Point;
+            this._lastMarkerUpdate = {
+                latitude: updatePoint.latitude,
+                longitude: updatePoint.longitude,
+            };
         }
         this._handleMarkerUpdate = true;
     }
