@@ -266,10 +266,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
      */
     private _onNodeChange = (node: Node) => {
         if (node.merged) {
-            this._currentNodePosition = {
-                lat: node.latLon[0],
-                lon: node.latLon[1],
-            }
+            this._currentNodePosition = node.latLon;
 
             // Set the initial marker position for this node.
             this._onPerspectiveChange();

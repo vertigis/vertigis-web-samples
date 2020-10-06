@@ -5,7 +5,7 @@ const sampleName = "embedded-map";
 // Although we provide the exact number from the street view position when
 // setting the location marker and map center positions, the actual position of
 // the map and marker won't be exact.
-const numberPrecision = 1e-6;
+const numberPrecision = 1e-5;
 
 const expectMapAndMarkerCenter = (lat: number, lon: number) =>
     cy
@@ -42,21 +42,17 @@ describe(sampleName, () => {
     it("synchronizes marker position with street view position", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
-        // TODO: Enable tests. The use of `getPosition` from the mly API seems
-        // to be non-deterministic as the logic appears to be using the camera
-        // to calculate position instead of using the node directly.
-        // https://github.com/mapillary/mapillary-js/blob/aa67afe85dacba0e738df2891b599d6b2371c510/src/viewer/Viewer.ts#L591-L606
+        // The following test depends on the web scene being used and the current
+        // state of the mapillary database. 
 
         // Marker is set initially to match street view position.
-        // expectMapAndMarkerCenter(51.91078005950694, 4.482707136338764);
+        expectMapAndMarkerCenter(51.908070806028164, 4.486175772780554);
 
         // Find the forward arrow by querying for the mapillary node id that
         // represents the next node in the forward direction.
-        // This value is subject to change if either the web map used changes
-        // or if the mapillary dataset gets updated with new imagery
         cy.getViewer().find('[data-key="f_wCfca88pFHl-CM1EKtLg"]').click();
 
         // Marker is updated to match new street view position.
-        // expectMapAndMarkerCenter(51.91073083283029, 4.482760320410177);
+        expectMapAndMarkerCenter(51.908175485049426, 4.4862970380600515);
     });
 });
