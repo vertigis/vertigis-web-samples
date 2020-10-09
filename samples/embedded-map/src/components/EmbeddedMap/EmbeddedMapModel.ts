@@ -63,14 +63,28 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         // A new instance is being set - add the event handlers.
         if (instance) {
 
-            void (async () => {
-                // Wait for the initial sync to be setup before listening for
-                // events from Mapillary.
-                await this._syncMaps();
+            const syncMaps = async (node: Node) => {
+                if (node.merged) {
 
-                // Listen for changes to the currently displayed mapillary node
-                this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
-            })();
+                    this._currentNodePosition = node.latLon;
+
+                    // Wait for initial sync
+                    await this._syncMaps();
+
+                    // Remove this handler
+                    this.mapillary.off(Viewer.nodechanged, syncMaps);
+
+                    // Listen for changes to the currently displayed mapillary node
+                    this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
+
+                    // Handle further pov changes on this node
+                    this.mapillary.on(Viewer.povchanged, this._onPerspectiveChange);
+                }
+            }
+
+            // Wait for the first mapillary node to be ready before attempting
+            // to sync the maps
+            this.mapillary.on(Viewer.nodechanged, syncMaps); 
         }
     }
 
