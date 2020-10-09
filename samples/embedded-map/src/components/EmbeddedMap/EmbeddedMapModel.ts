@@ -131,9 +131,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // A new instance is being set - sync the map.
         if (instance) {
-            this.messages.events.map.initialized.subscribe(
-                this._syncMaps.bind(this)
-            );
+            this.messages.events.map.initialized.subscribe(() => this._syncMaps());
 
             document.body.addEventListener("mousedown", this.mouseDownHandler);
             document.body.addEventListener("mouseup", this.mouseUpHandler);
@@ -337,7 +335,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // Will return a raw GPS value if the node position has not yet been calculated.
         const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
-            this._currentNodePosition.lat && this._currentNodePosition.lon ? this._currentNodePosition : this.mapillary.getPosition(),
+            this._currentNodePosition ?? this.mapillary.getPosition(),
             this.mapillary.getPointOfView() as Promise<{
                 bearing: number;
                 tilt: number;
