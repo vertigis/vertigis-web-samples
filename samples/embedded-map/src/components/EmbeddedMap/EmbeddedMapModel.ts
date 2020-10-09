@@ -66,13 +66,13 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             const syncMaps = async (node: Node) => {
                 if (node.merged) {
 
+                    // Remove this handler
+                    this.mapillary.off(Viewer.nodechanged, syncMaps);
+
                     this._currentNodePosition = node.latLon;
 
                     // Wait for initial sync
                     await this._syncMaps();
-
-                    // Remove this handler
-                    this.mapillary.off(Viewer.nodechanged, syncMaps);
 
                     // Listen for changes to the currently displayed mapillary node
                     this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
