@@ -6,8 +6,6 @@ import {
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
 import Point from "esri/geometry/Point";
-import SceneView from "esri/views/SceneView";
-import { whenDefinedOnce } from "esri/core/watchUtils";
 import { Viewer, Node } from "mapillary-js";
 
 /**
@@ -27,10 +25,6 @@ interface MapillaryCamera {
     fov: number;
 }
 
-interface GcxMap extends MapExtension {
-    view: SceneView;
-}
-
 @serializable
 export default class EmbeddedMapModel extends ComponentModelBase {
     // For demonstration purposes only.
@@ -38,37 +32,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     readonly mapillaryKey =
         "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm";
 
-    readonly imageQueryUrl = "https://a.mapillary.com/v3/images";
-    readonly searchRadius = 500; // meters
-
-    // The latest location recieved from a locationmarker.update event
-    private _currentMarkerPosition: { latitude: number; longitude: number };
-
     // The computed position of the current Mapillary node
     private _currentNodePosition: { lat: number; lon: number }; 
-
-    private _updating = false;
-    private _viewerUpdateHandle: IHandle;
-    private _handleMarkerUpdate = true;
-
-    mouseDownHandler = (): void => (this._currentMarkerPosition = undefined);
-    mouseUpHandler = (): void => {
-        if (
-            this.mapillary?.isNavigable &&
-            !this._updating &&
-            this._currentMarkerPosition
-        ) {
-            this._updating = true;
-
-            const { latitude, longitude } = this._currentMarkerPosition;
-            this._currentMarkerPosition = undefined;
-
-            void this._moveCloseToPosition(latitude, longitude);
-        }
-    };
-
-    // Set this to false to start with the maps unsynced
-    sync = true;
 
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
@@ -77,10 +42,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     set mapillary(instance: any | undefined) {
         if (instance === this._mapillary) {
             return;
-        }
-
-        if (this._viewerUpdateHandle) {
-            this._viewerUpdateHandle.remove();
         }
 
         // If an instance already exists, clean it up first.
@@ -102,22 +63,23 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         // A new instance is being set - add the event handlers.
         if (instance) {
 
-            // Listen for changes to the currently displayed mapillary node
-            this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
+            void (async () => {
+                // Wait for the initial sync to be setup before listening for
+                // events from Mapillary.
+                await this._syncMaps();
 
-            // Change the current mapillary node when the location marker is moved.
-            this._viewerUpdateHandle = this.messages.events.locationMarker.updated.subscribe(
-                (event) => this._handleViewerUpdate(event)
-            );
+                // Listen for changes to the currently displayed mapillary node
+                this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
+            })();
         }
     }
 
-    private _map: GcxMap | undefined;
-    get map(): GcxMap | undefined {
+    private _map: MapExtension | undefined;
+    get map(): MapExtension | undefined {
         return this._map;
     }
     @importModel("map-extension")
-    set map(instance: GcxMap | undefined) {
+    set map(instance: MapExtension | undefined) {
         if (instance === this._map) {
             return;
         }
@@ -131,35 +93,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // A new instance is being set - sync the map.
         if (instance) {
-            this.messages.events.map.initialized.subscribe(
-                this._syncMaps.bind(this)
-            );
-
-            document.body.addEventListener("mousedown", this.mouseDownHandler);
-            document.body.addEventListener("mouseup", this.mouseUpHandler);
+            void this._syncMaps()
         }
-    }
-
-    async recenter(): Promise<void> {
-        const {
-            latitude,
-            longitude,
-            heading,
-        } = await this._getMapillaryCamera();
-
-        const centerPoint = new Point({
-            latitude,
-            longitude,
-        });
-
-        await this.messages.commands.map.zoomToViewpoint.execute({
-            maps: this.map,
-            viewpoint: {
-                rotation: getCameraRotationFromBearing(heading),
-                targetGeometry: centerPoint,
-                scale: 3000,
-            },
-        });
     }
 
     /**
@@ -170,14 +105,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         if (!this.map || !this.mapillary) {
             return;
         }
-
-        await whenDefinedOnce(this.map.view, "center");
-
-        // Set mapillary to this location
-        await this._moveCloseToPosition(
-            this.map.view.center.latitude,
-            this.map.view.center.longitude
-        );
 
         // Create location marker based on current location from Mapillary and
         // pan/zoom Geocortex map to the location.
@@ -198,18 +125,15 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 tilt,
                 id: this.id,
                 maps: this.map,
-                userDraggable: true,
             }),
-            this.sync
-                ? this.messages.commands.map.zoomToViewpoint.execute({
-                      maps: this.map,
-                      viewpoint: {
-                          rotation: getCameraRotationFromBearing(heading),
-                          targetGeometry: centerPoint,
-                          scale: 3000,
-                      },
-                  })
-                : undefined,
+            this.messages.commands.map.zoomToViewpoint.execute({
+                maps: this.map,
+                viewpoint: {
+                    rotation: getCameraRotationFromBearing(heading),
+                    targetGeometry: centerPoint,
+                    scale: 3000,
+                },
+            })
         ]);
     }
 
@@ -218,42 +142,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             id: this.id,
             maps: this.map,
         });
-    }
-
-    private _handleViewerUpdate(event: any): void {
-        if (this._handleMarkerUpdate) {
-            const updatePoint = event.geometry as Point;
-            this._currentMarkerPosition = {
-                latitude: updatePoint.latitude,
-                longitude: updatePoint.longitude,
-            };
-        }
-        this._handleMarkerUpdate = true;
-    }
-
-    private async _moveCloseToPosition(
-        latitude: number,
-        longitude: number
-    ): Promise<void> {
-        const url = `${this.imageQueryUrl}?client_id=${this.mapillaryKey}&closeto=${longitude},${latitude}&radius=${this.searchRadius}`;
-
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        const data = await response.json();
-
-        const imgkey = data?.features?.[0]?.properties?.key;
-
-        if (imgkey) {
-            await this.mapillary.moveToKey(imgkey);
-            this._updating = false;
-        } else {
-            this._activateCover();
-        }
     }
 
     /**
@@ -284,11 +172,9 @@ export default class EmbeddedMapModel extends ComponentModelBase {
      * Handles pov changes once the node position is known.
      */
     private _onPerspectiveChange = throttle(async () => {
-        if (!this.map || !this.mapillary || this._updating) {
+        if (!this.map || !this.mapillary) {
             return;
         }
-
-        this._updating = true;
 
         const {
             latitude,
@@ -303,7 +189,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             longitude,
         });
 
-        this._handleMarkerUpdate = false;
 
         await Promise.all([
             this.messages.commands.locationMarker.update.execute({
@@ -314,17 +199,15 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 id: this.id,
                 maps: this.map,
             }),
-            this.sync
-                ? this.messages.commands.map.zoomToViewpoint.execute({
-                      maps: this.map,
-                      viewpoint: {
-                          rotation: getCameraRotationFromBearing(heading),
-                          targetGeometry: centerPoint,
-                          scale: 3000,
-                      },
-                  })
-                : undefined,
-        ]).finally(() => (this._updating = false));
+            this.messages.commands.map.zoomToViewpoint.execute({
+                maps: this.map,
+                viewpoint: {
+                    rotation: getCameraRotationFromBearing(heading),
+                    targetGeometry: centerPoint,
+                    scale: 3000,
+                },
+            })
+        ]);
     }, 128);
 
     /**
@@ -337,7 +220,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // Will return a raw GPS value if the node position has not yet been calculated.
         const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
-            this._currentNodePosition.lat && this._currentNodePosition.lon ? this._currentNodePosition : this.mapillary.getPosition(),
+            this._currentNodePosition ?? this.mapillary.getPosition(),
             this.mapillary.getPointOfView() as Promise<{
                 bearing: number;
                 tilt: number;
@@ -352,10 +235,5 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             tilt: tilt + 90,
             fov,
         };
-    }
-
-    private _activateCover() {
-        this._updating = false;
-        this.mapillary.activateCover();
     }
 }
