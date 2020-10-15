@@ -227,9 +227,9 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     /**
      * Gets the current POV of the mapillary camera
      */
-    private async _getMapillaryCamera(): Promise<MapillaryCamera> {
+    private async _getMapillaryCamera(): Promise<MapillaryCamera | undefined> {
         if (!this.mapillary) {
-            return;
+            return undefined;
         }
 
         // Will return a raw GPS value if the node position has not yet been calculated.
