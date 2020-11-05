@@ -1,4 +1,4 @@
-import { MapExtension } from "@vertigis/arcgis-extensions/mapping/MapExtension";
+import { MapModel } from "@vertigis/web/mapping";
 import {
     ComponentModelBase,
     serializable,
@@ -33,7 +33,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm";
 
     // The computed position of the current Mapillary node
-    private _currentNodePosition: { lat: number; lon: number }; 
+    private _currentNodePosition: { lat: number; lon: number };
 
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
@@ -62,10 +62,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // A new instance is being set - add the event handlers.
         if (instance) {
-
             const syncMaps = async (node: Node) => {
                 if (node.merged) {
-
                     // Remove this handler
                     this.mapillary.off(Viewer.nodechanged, syncMaps);
 
@@ -78,22 +76,25 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                     this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
 
                     // Handle further pov changes on this node
-                    this.mapillary.on(Viewer.povchanged, this._onPerspectiveChange);
+                    this.mapillary.on(
+                        Viewer.povchanged,
+                        this._onPerspectiveChange
+                    );
                 }
-            }
+            };
 
             // Wait for the first mapillary node to be ready before attempting
             // to sync the maps
-            this.mapillary.on(Viewer.nodechanged, syncMaps); 
+            this.mapillary.on(Viewer.nodechanged, syncMaps);
         }
     }
 
-    private _map: MapExtension | undefined;
-    get map(): MapExtension | undefined {
+    private _map: MapModel | undefined;
+    get map(): MapModel | undefined {
         return this._map;
     }
     @importModel("map-extension")
-    set map(instance: MapExtension | undefined) {
+    set map(instance: MapModel | undefined) {
         if (instance === this._map) {
             return;
         }
@@ -107,7 +108,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // A new instance is being set - sync the map.
         if (instance) {
-            void this._syncMaps()
+            void this._syncMaps();
         }
     }
 
@@ -147,7 +148,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                     targetGeometry: centerPoint,
                     scale: 3000,
                 },
-            })
+            }),
         ]);
     }
 
@@ -175,7 +176,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
             // Handle further pov changes.
             this.mapillary.on(Viewer.povchanged, this._onPerspectiveChange);
-
         } else {
             this._currentNodePosition = undefined;
             this.mapillary.off(Viewer.povchanged, this._onPerspectiveChange);
@@ -203,7 +203,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             longitude,
         });
 
-
         await Promise.all([
             this.messages.commands.locationMarker.update.execute({
                 geometry: centerPoint,
@@ -220,7 +219,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                     targetGeometry: centerPoint,
                     scale: 3000,
                 },
-            })
+            }),
         ]);
     }, 128);
 
