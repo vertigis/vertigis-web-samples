@@ -1,4 +1,4 @@
-# Integrating ArcGIS Widgets
+# Integrating ArcGIS JavaScript 4.x API Widgets
 
 This sample demonstrates how to integrate an existing [ArcGIS JavaScript API 4.x widget](https://developers.arcgis.com/javascript/latest/sample-code/intro-widgets/index.html) in your application by wrapping the widget in a Geocortex Web component.
 
