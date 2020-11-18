@@ -1,0 +1,8 @@
+.Daylight {
+    background-color: var(--primaryBackground);
+}
+
+.Daylight-select {
+    /* Match the Esri widget spacing. */
+    margin: 0 12px;
+}
