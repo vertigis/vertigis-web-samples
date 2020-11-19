@@ -30,7 +30,15 @@ const Daylight = (
 
     // Memoize the callbacks to avoid destroying and re-creating the widget
     // during every render of this component.
-    const onWidgetCreated = useCallback((widget) => setWidget(widget), []);
+    const onWidgetCreated = useCallback(
+        (widget: EsriDaylight) => {
+            // Synchronize values from model
+            widget.dateOrSeason = props.model.dateOrSeason;
+
+            setWidget(widget);
+        },
+        [props.model]
+    );
     const onWidgetDestroyed = useCallback(() => setWidget(null), []);
 
     return (
@@ -40,16 +48,18 @@ const Daylight = (
                 onWidgetCreated={onWidgetCreated}
                 onWidgetDestroyed={onWidgetDestroyed}
             />
-            <Select
-                className="Daylight-select"
-                onChange={(event) => {
-                    props.model.dateOrSeason = event.target.value as any;
-                }}
-                value={props.model.dateOrSeason}
-            >
-                <MenuItem value="date">Date</MenuItem>
-                <MenuItem value="season">Season</MenuItem>
-            </Select>
+            {widget && (
+                <Select
+                    className="Daylight-select"
+                    onChange={(event) => {
+                        props.model.dateOrSeason = event.target.value as any;
+                    }}
+                    value={props.model.dateOrSeason}
+                >
+                    <MenuItem value="date">Date</MenuItem>
+                    <MenuItem value="season">Season</MenuItem>
+                </Select>
+            )}
         </LayoutElement>
     );
 };

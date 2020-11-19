@@ -4,7 +4,8 @@
         {
             "id": "daylight-config-1",
             "$type": "daylight",
-            "title": "Daylight Component"
+            "title": "Daylight Component",
+            "dateOrSeason": "season"
         },
         {
             "$type": "map-extension",

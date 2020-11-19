@@ -5,7 +5,7 @@ import { ComponentModelBase } from "@vertigis/web/models";
 import React, { useEffect, useRef } from "react";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 
-async function injectCssIfNeeded(): Promise<void> {
+function injectCssIfNeeded(): Promise<void> {
     const styleLinkHref = `https://js.arcgis.com/${version}/esri/themes/light/main.css`;
 
     // Don't inject again if stylesheet already in the document.
@@ -24,10 +24,13 @@ async function injectCssIfNeeded(): Promise<void> {
     });
 }
 
-export function createEsriMapWidget<M extends ModelWithMap>(
-    widgetType: MapWidgetConstructor
-): React.ComponentType<MapWidgetProps<M>> {
-    return function EsriWidget(props: MapWidgetProps<M>) {
+export function createEsriMapWidget<
+    M extends ModelWithMap,
+    W extends MapWidget
+>(
+    widgetType: MapWidgetConstructor<W>
+): React.ComponentType<MapWidgetProps<M, W>> {
+    return function EsriWidget(props: MapWidgetProps<M, W>) {
         const { model, onWidgetCreated, onWidgetDestroyed } = props;
         const rootRef = useRef<HTMLDivElement>();
 
@@ -39,7 +42,7 @@ export function createEsriMapWidget<M extends ModelWithMap>(
             }
 
             let isCancelled = false;
-            let widget: MapWidget | undefined;
+            let widget: W | undefined;
 
             function createWidget() {
                 // If we give Esri's widget a DOM element managed by React, it will
@@ -87,16 +90,18 @@ export type MapOrSceneView = MapView | SceneView;
 export interface MapWidget extends __esri.Widget {
     view: MapOrSceneView;
 }
-export type MapWidgetConstructor = new (
-    props: __esri.WidgetProperties & {
-        view: MapOrSceneView;
-        container: HTMLElement;
-    }
-) => MapWidget;
+export interface MapWidgetConstructor<W extends MapWidget> {
+    new (
+        props: __esri.WidgetProperties & {
+            view: MapOrSceneView;
+            container: HTMLElement;
+        }
+    ): W;
+}
 // TODO: Use correct type for `map` after 5.10 release.
 export type ModelWithMap = ComponentModelBase & { map: any };
-export interface MapWidgetProps<M extends ModelWithMap> {
+export interface MapWidgetProps<M extends ModelWithMap, W extends MapWidget> {
     model: M;
-    onWidgetCreated?: (widget: MapWidget) => void;
+    onWidgetCreated?: (widget: W) => void;
     onWidgetDestroyed?: () => void;
 }
