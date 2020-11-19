@@ -1,0 +1,41 @@
+.Daylight {
+    background-color: var(--primaryBackground);
+}
+
+.Daylight-select {
+    /* Match the Esri widget spacing. */
+    margin: 0 12px 12px 12px;
+}
+
+/* Update the esri widget styling to roughly match the host application theme. */
+.Daylight .esri-widget,
+.Daylight .esri-select,
+.Daylight .esri-widget--button {
+    background-color: var(--primaryBackground);
+    font-family: var(--defaultFont);
+    color: var(--primaryForeground);
+}
+
+.Daylight .esri-widget__heading,
+.Daylight .esri-widget__anchor {
+    color: var(--primaryForeground);
+}
+
+.Daylight .esri-widget__anchor:hover {
+    color: var(--primaryAccentLarge);
+}
+
+.Daylight .esri-slider__tick,
+.Daylight .esri-slider__track {
+    border-color: var(--primaryBackground) !important;
+    background-color: var(--buttonBorder);
+}
+
+.Daylight .esri-select,
+.Daylight .esri-date-picker,
+.Daylight .esri-widget--button,
+.Daylight .esri-widget--button:hover {
+    background-color: var(--primaryBackground);
+    border-color: var(--inputBorder);
+    color: var(--primaryForeground);
+}
