@@ -43,7 +43,9 @@ describe(sampleName, () => {
 
         // Now should be in date mode.
         cy.getViewer()
-            .contains('[role="button"]', "2015-06-01")
+            // Date pattern can be in a few different formats depending on locale.
+            // `en-CA`, `en-US`, etc.
+            .contains('[role="button"]', /2015-06-01|06\/01\/2015/)
             .should("exist");
     });
 });
