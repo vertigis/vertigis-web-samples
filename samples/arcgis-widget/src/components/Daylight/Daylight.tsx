@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { generateId } from "@vertigis/arcgis-extensions/Entity";
+import { generateUuid } from "@vertigis/arcgis-extensions/utilities/uuid";
 import {
     LayoutElement,
     LayoutElementProperties,
@@ -20,8 +20,8 @@ const Daylight = (
     props: LayoutElementProperties<DaylightModel>
 ): React.ReactElement => {
     const [widget, setWidget] = useState<EsriDaylight | null>();
-    // A unique DOM id to be used for a11y purposes.
-    const [selectId] = useState(generateId());
+    // A unique DOM ID to be used for a11y purposes.
+    const [selectId] = useState(generateUuid());
 
     // Any time the `dateOrSeason` model property changes we need to re-render the
     // component so our UI is consistent, as well as set the Esri widget
@@ -54,24 +54,20 @@ const Daylight = (
                 onWidgetDestroyed={onWidgetDestroyed}
             />
             {widget && (
-                <>
-                    <FormControl className="Daylight-select">
-                        <FormLabel htmlFor={selectId}>
-                            Date Picker Mode
-                        </FormLabel>
-                        <Select
-                            id={selectId}
-                            onChange={(event) => {
-                                props.model.dateOrSeason = event.target
-                                    .value as any;
-                            }}
-                            value={props.model.dateOrSeason}
-                        >
-                            <MenuItem value="date">Date</MenuItem>
-                            <MenuItem value="season">Season</MenuItem>
-                        </Select>
-                    </FormControl>
-                </>
+                <FormControl className="Daylight-select">
+                    <FormLabel htmlFor={selectId}>Date Picker Mode</FormLabel>
+                    <Select
+                        id={selectId}
+                        onChange={(event) => {
+                            props.model.dateOrSeason = event.target
+                                .value as any;
+                        }}
+                        value={props.model.dateOrSeason}
+                    >
+                        <MenuItem value="date">Date</MenuItem>
+                        <MenuItem value="season">Season</MenuItem>
+                    </Select>
+                </FormControl>
             )}
         </LayoutElement>
     );
