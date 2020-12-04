@@ -17,6 +17,7 @@ import Sample from "./Sample";
 import SampleViewer from "./SampleViewer";
 
 const samples = [
+    { id: "arcgis-widget", title: "ArcGIS Widget" },
     { id: "basic-component", title: "Basic Component" },
     { id: "basic-service", title: "Basic Service" },
     { id: "commands-and-operations", title: "Commands and Operations" },
