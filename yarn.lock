@@ -2760,12 +2760,7 @@ dojo-dstore@1.1.2:
   dependencies:
     dojo "^1.9.0"
 
-dojo@1.14.2:
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.14.2.tgz#45ca90b19068230e1486f68b1531fa4ce0e21280"
-  integrity sha512-TI+Ytgfh/VfmHWERp45Jte6NFMdoJTPsvUP/uzJUvAXET8FP2h442LePWWJ/q/xZ4V0V8OtdJhx8It/GB+Zbxg==
-
-dojo@Esri/dojo#v1.14.2/esri-3.28.0:
+dojo@1.14.2, dojo@Esri/dojo#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
 

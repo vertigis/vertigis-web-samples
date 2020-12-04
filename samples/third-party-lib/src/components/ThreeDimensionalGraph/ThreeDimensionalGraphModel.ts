@@ -158,13 +158,17 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
 
             // Parse the surveys and create the graph nodes/links.
             for (const survey of surveys) {
-                const hydrantNum: string = survey.attributes.get("HYDRANT_NUM");
-                const surveyor: string = survey.attributes.get("SURVEYOR");
-                const surveyId: number = survey.attributes.get("OBJECTID");
-                const surveyResult: "PASS" | "FAIL" = survey.attributes.get(
-                    "RESULT"
-                );
-                const surveyDate: number = survey.attributes.get("SURVEY_DATE");
+                const hydrantNum = survey.attributes.get(
+                    "HYDRANT_NUM"
+                ) as string;
+                const surveyor = survey.attributes.get("SURVEYOR") as string;
+                const surveyId = survey.attributes.get("OBJECTID") as number;
+                const surveyResult = survey.attributes.get("RESULT") as
+                    | "PASS"
+                    | "FAIL";
+                const surveyDate = survey.attributes.get(
+                    "SURVEY_DATE"
+                ) as number;
 
                 // Initialize an empty array for this inspector if it doesn't exist
                 // already.
@@ -199,9 +203,9 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
         // Hold on to the features for easy access later on in click/hover events from the graph.
         this.hydrants = hydrantFeatures.reduce<Record<string, Feature>>(
             (acc, hydrant) => {
-                const hydrantNum: string = hydrant.attributes.get(
+                const hydrantNum = hydrant.attributes.get(
                     "HYDRANT_NUM"
-                );
+                ) as string;
                 acc[hydrantNum] = hydrant;
                 return acc;
             },
@@ -209,7 +213,7 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
         );
         this.surveys = surveys.reduce<Record<number, Feature>>(
             (acc, survey) => {
-                const surveyId: number = survey.attributes.get("OBJECTID");
+                const surveyId = survey.attributes.get("OBJECTID") as number;
                 acc[surveyId] = survey;
                 return acc;
             },
