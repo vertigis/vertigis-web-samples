@@ -29,7 +29,7 @@ const Daylight = (
     useWatchAndRerender(props.model, "dateOrSeason");
     useWatch(props.model, "dateOrSeason", (newValue) => {
         if (widget) {
-            widget.dateOrSeason = newValue;
+            widget.dateOrSeason = newValue as "date" | "season";
         }
     });
 
