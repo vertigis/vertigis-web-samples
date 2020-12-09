@@ -8,7 +8,7 @@ describe(sampleName, () => {
         cy.getViewer().contains("BOO!").should("be.visible");
 
         cy.getViewer().find("button").contains("Hide Me").click();
-        cy.getViewer().contains("BOO!").should("not.be.visible");
+        cy.getViewer().contains("BOO!").should("not.exist");
     });
 });
 
