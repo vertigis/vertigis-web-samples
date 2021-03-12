@@ -185,6 +185,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     /**
      * Handles pov changes once the node position is known.
      */
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     private _onPerspectiveChange = throttle(async () => {
         if (!this.map || !this.mapillary) {
             return;
