@@ -1,6 +1,7 @@
 {
     "chromeWebSecurity": false,
     "defaultCommandTimeout": 60000,
+    "responseTimeout": 60000,
     "numTestsKeptInMemory": 0,
     "video": false,
     "viewportWidth": 1280,
