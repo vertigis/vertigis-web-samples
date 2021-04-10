@@ -9,7 +9,7 @@
         "type": "git",
         "url": "git+https://github.com/geocortex/vertigis-web-samples.git"
     },
-    "author": "Ian Schmitz <ianschmitz@gmail.com>",
+    "author": "VertiGIS",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/geocortex/vertigis-web-samples/issues"
@@ -26,9 +26,9 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "concurrently": "^6.0.0",
+        "concurrently": "^6.0.1",
         "cross-env": "^7.0.3",
-        "cypress": "^6.6.0",
+        "cypress": "^7.0.1",
         "husky": "^4.3.6",
         "prettier": "^2.2.1",
         "pretty-quick": "^3.1.0",
