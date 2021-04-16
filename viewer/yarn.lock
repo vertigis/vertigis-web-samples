@@ -2044,16 +2044,16 @@
     "@typescript-eslint/types" "4.17.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vertigis/react-ui@^7.2.1":
-  version "7.8.2"
-  resolved "https://registry.yarnpkg.com/@vertigis/react-ui/-/react-ui-7.8.2.tgz#1c237be4c912a5f724fbc86360ff795b1b8330b2"
-  integrity sha512-M2w72zMR5SEjsyTwucWV4auNOrlk/aRN5J9jcFW4FWYFuBgdVKo1edemTSC8oxp5wxvKUYwvmiXxK4B23woapA==
+"@vertigis/react-ui@^8.1.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@vertigis/react-ui/-/react-ui-8.2.0.tgz#ed4d9eb4b1e2233fc60aad2582a4894e8d7e6b0e"
+  integrity sha512-9A+gSbdU7C8QbZkOv9fLyakJBns1KYuY/6niNcM01hDi42xk6s2DsXWdCbRLs/bUEWiTlhitd0HHv9As/QCYyA==
   dependencies:
     "@material-ui/core" "4.11.3"
     "@material-ui/icons" "4.11.2"
     "@material-ui/styles" "^4.11.3"
     clsx "^1.1.1"
-    lodash "^4.17.20"
+    lodash "^4.17.21"
     tslib "^2.1.0"
 
 "@webassemblyjs/ast@1.9.0":
@@ -7168,7 +7168,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.5:
+"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==

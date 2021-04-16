@@ -149,32 +149,32 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@material-ui/core@4.11.0":
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.0.tgz#b69b26e4553c9e53f2bfaf1053e216a0af9be15a"
-  integrity sha512-bYo9uIub8wGhZySHqLQ833zi4ZML+XCBE1XwJ8EuUVSpTWWG57Pm+YugQToJNFsEyiKFhPh8DPD0bgupz8n01g==
+"@material-ui/core@4.11.3":
+  version "4.11.3"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.3.tgz#f22e41775b0bd075e36a7a093d43951bf7f63850"
+  integrity sha512-Adt40rGW6Uds+cAyk3pVgcErpzU/qxc7KBR94jFHBYretU4AtWZltYcNsbeMn9tXL86jjVL1kuGcIHsgLgFGRw==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/styles" "^4.10.0"
-    "@material-ui/system" "^4.9.14"
+    "@material-ui/styles" "^4.11.3"
+    "@material-ui/system" "^4.11.3"
     "@material-ui/types" "^5.1.0"
-    "@material-ui/utils" "^4.10.2"
+    "@material-ui/utils" "^4.11.2"
     "@types/react-transition-group" "^4.2.0"
     clsx "^1.0.4"
     hoist-non-react-statics "^3.3.2"
     popper.js "1.16.1-lts"
     prop-types "^15.7.2"
-    react-is "^16.8.0"
+    react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
 
-"@material-ui/icons@4.9.1":
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.9.1.tgz#fdeadf8cb3d89208945b33dbc50c7c616d0bd665"
-  integrity sha512-GBitL3oBWO0hzBhvA9KxqcowRUsA0qzwKkURyC8nppnC3fw54KPKZ+d4V1Eeg/UnDRSzDaI9nGCdel/eh9AQMg==
+"@material-ui/icons@4.11.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz#b3a7353266519cd743b6461ae9fdfcb1b25eb4c5"
+  integrity sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ==
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-"@material-ui/styles@^4.10.0":
+"@material-ui/styles@^4.11.3":
   version "4.11.3"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.11.3.tgz#1b8d97775a4a643b53478c895e3f2a464e8916f2"
   integrity sha512-HzVzCG+PpgUGMUYEJ2rTEmQYeonGh41BYfILNFb/1ueqma+p1meSdu4RX6NjxYBMhf7k+jgfHFTTz+L1SXL/Zg==
@@ -196,7 +196,7 @@
     jss-plugin-vendor-prefixer "^10.5.1"
     prop-types "^15.7.2"
 
-"@material-ui/system@^4.9.14":
+"@material-ui/system@^4.11.3":
   version "4.11.3"
   resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-4.11.3.tgz#466bc14c9986798fd325665927c963eb47cc4143"
   integrity sha512-SY7otguNGol41Mu2Sg6KbBP1ZRFIbFLHGK81y4KYbsV2yIcaEPOmsCK6zwWlp+2yTV3J/VwT6oSBARtGIVdXPw==
@@ -211,7 +211,7 @@
   resolved "https://registry.yarnpkg.com/@material-ui/types/-/types-5.1.0.tgz#efa1c7a0b0eaa4c7c87ac0390445f0f88b0d88f2"
   integrity sha512-7cqRjrY50b8QzRSYyhSpx4WRw2YuO0KKIGQEVk5J8uoz2BanawykgZGoWEqKm7pVIbzFDN0SpPcVV4IhOFkl8A==
 
-"@material-ui/utils@^4.10.2", "@material-ui/utils@^4.11.2":
+"@material-ui/utils@^4.11.2":
   version "4.11.2"
   resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-4.11.2.tgz#f1aefa7e7dff2ebcb97d31de51aecab1bb57540a"
   integrity sha512-Uul8w38u+PICe2Fg2pDKCaIG7kOyhowZ9vjiC1FsVwPABTW8vPPKfF6OvxRq3IiBaI1faOJmgdvMG7rMJARBhA==
@@ -336,12 +336,12 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
-"@types/react-dom@16.9.10":
-  version "16.9.10"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.10.tgz#4485b0bec3d41f856181b717f45fd7831101156f"
-  integrity sha512-ItatOrnXDMAYpv6G8UCk2VhbYVTjZT9aorLtA/OzDN9XJ2GKcfam68jutoAcILdRjsRUO8qb7AmyObF77Q8QFw==
+"@types/react-dom@17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.2.tgz#35654cf6c49ae162d5bc90843d5437dc38008d43"
+  integrity sha512-Icd9KEgdnFfJs39KyRyr0jQ7EKhq8U6CcHRMGAS45fp5qgUvxL3ujUCfWFttUK2UErqZNj97t9gsVPNAqcwoCg==
   dependencies:
-    "@types/react" "^16"
+    "@types/react" "*"
 
 "@types/react-transition-group@^4.2.0":
   version "4.4.1"
@@ -357,27 +357,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@17.0.3":
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.3.tgz#ba6e215368501ac3826951eef2904574c262cc79"
   integrity sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@16.14.2":
-  version "16.14.2"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.2.tgz#85dcc0947d0645349923c04ccef6018a1ab7538c"
-  integrity sha512-BzzcAlyDxXl2nANlabtT4thtvbbnhee8hMmH/CcJrISDBVcJS1iOsP1f0OAgSdGE0MsY9tqcrb9YoZcOFv9dbQ==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^3.0.2"
-
-"@types/react@^16":
-  version "16.14.5"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.5.tgz#2c39b5cadefaf4829818f9219e5e093325979f4d"
-  integrity sha512-YRRv9DNZhaVTVRh9Wmmit7Y0UFhEVqXqCSw3uazRWMxa2x85hWQZ5BN24i7GXZbaclaLXEcodEeIHsjBA8eAMw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -506,34 +489,34 @@
     "@typescript-eslint/types" "4.17.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vertigis/arcgis-extensions@27.2.3":
-  version "27.2.3"
-  resolved "https://registry.yarnpkg.com/@vertigis/arcgis-extensions/-/arcgis-extensions-27.2.3.tgz#d9c7ca58a26be059bb3046a3cb7e89c74625ba93"
-  integrity sha512-7R985JW032JqJKG4rx7T7lc3dO4yk9DTak3rR4oTo0p4oEFfQARIVLNVtanHdsRBgdrbDqXpiGgQo1LpoVyb6A==
+"@vertigis/arcgis-extensions@29.0.5":
+  version "29.0.5"
+  resolved "https://registry.yarnpkg.com/@vertigis/arcgis-extensions/-/arcgis-extensions-29.0.5.tgz#ff9629ae65e64b4da6a44e231411cc66547d87c1"
+  integrity sha512-tsFtrz5Duy4abl77nsEDNaB3iTxP6nvOnPMOMGsngjlpDdGiqc3Uvh86LNnuOQ53fpwDAENdJo6kc9AvhQs/uw==
   dependencies:
     alasql "~0.6.2"
     arcgis-js-api "~4.16.2"
     elasticlunr "~0.9.5"
     esri-proj-codes "~1.0.3"
-    moment-timezone "~0.5.31"
+    moment-timezone "~0.5.33"
     shpjs "~3.4.3"
 
-"@vertigis/react-ui@7.7.0":
-  version "7.7.0"
-  resolved "https://registry.yarnpkg.com/@vertigis/react-ui/-/react-ui-7.7.0.tgz#740e93b8f5989ff3c2fe6529619de0ff8d6428d3"
-  integrity sha512-XfN1dMVfzkJTw5/Sadd5soHl4yX4CrP8NLOPb+JII6xoTXRjbv8/VBGFAB0sXjF9lfnw7QiTPUbLTlHTc3jIuQ==
+"@vertigis/react-ui@8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@vertigis/react-ui/-/react-ui-8.1.0.tgz#1005900cb56f3ca7ed11f7d7e783fcecf32b3125"
+  integrity sha512-ajnhmMvz2ze26Ktk32sWGjGDaeWXQjUDUNRHc+oq/VFjDPrweUX9pgEQM1dKjuANkyh0IZOAPLjeACdIBBUMlQ==
   dependencies:
-    "@material-ui/core" "4.11.0"
-    "@material-ui/icons" "4.9.1"
-    "@material-ui/styles" "^4.10.0"
+    "@material-ui/core" "4.11.3"
+    "@material-ui/icons" "4.11.2"
+    "@material-ui/styles" "^4.11.3"
     clsx "^1.1.1"
-    lodash "^4.17.20"
-    tslib "^2.0.3"
+    lodash "^4.17.21"
+    tslib "^2.1.0"
 
-"@vertigis/viewer-spec@36.16.0":
-  version "36.16.0"
-  resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-36.16.0.tgz#cd84e0303a1d498b30ea50e70de9ae8265296900"
-  integrity sha512-MiuKTlnDWq3OHbYNiSid1KPzcTKkY9E71QnZUCzACWkEUoccX+/nOdabx2zzdaXklvGlsRhUCLSecT4YV+M64g==
+"@vertigis/viewer-spec@38.4.0":
+  version "38.4.0"
+  resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-38.4.0.tgz#4805ebd9fbbde10001bffb009a4d5d6c8df1cbea"
+  integrity sha512-aLl9Y2zp4vZt9B338apiQDe3C3mRNyv5M3CqZkthFrJd4y5te30XGgnWf3gbgII3GB47z2E+7TBmGFvqeyF5CA==
 
 "@vertigis/web-sdk@^1.3.6":
   version "1.3.6"
@@ -563,19 +546,19 @@
     webpack "^4.44.1"
     webpack-dev-server "^3.11.0"
 
-"@vertigis/web@^5.11.0":
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/@vertigis/web/-/web-5.11.0.tgz#a747d5f31e507bf7d4505851380174828f7096d2"
-  integrity sha512-dFXXFwbSDgHz+HFMMxBsGtzZO9mqQJXOzvd/fPsBGs3e+Pd93DJ714tN48gr1e9/fj6RmLQaM4oZLPUonzL2Jg==
+"@vertigis/web@^5.12.0":
+  version "5.12.0"
+  resolved "https://registry.yarnpkg.com/@vertigis/web/-/web-5.12.0.tgz#07f74c8e18ab08ac608f6c572821ce152f7fb23a"
+  integrity sha512-ZC3YJCti3yZVbdZi0hm0UWFnCpXu+zdo6aorsY2qqFS2NX3GyzmYEKxYFNcJUcKp1hp7lBPrKqk+/nraWs3vug==
   dependencies:
-    "@types/react" "16.14.2"
-    "@types/react-dom" "16.9.10"
+    "@types/react" "17.0.3"
+    "@types/react-dom" "17.0.2"
     "@types/react-window" "1.8.2"
-    "@vertigis/arcgis-extensions" "27.2.3"
-    "@vertigis/react-ui" "7.7.0"
-    "@vertigis/viewer-spec" "36.16.0"
-    react "16.13.1"
-    react-dom "16.13.1"
+    "@vertigis/arcgis-extensions" "29.0.5"
+    "@vertigis/react-ui" "8.1.0"
+    "@vertigis/viewer-spec" "38.4.0"
+    react "17.0.1"
+    react-dom "17.0.1"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
@@ -5685,7 +5668,7 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-moment-timezone@~0.5.31:
+moment-timezone@~0.5.33:
   version "0.5.33"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.33.tgz#b252fd6bb57f341c9b59a5ab61a8e51a73bbd22c"
   integrity sha512-PTc2vcT8K9J5/9rDEPe5czSIKgLoGsH8UNpA4qZTVw0Vd/Uz19geE9abbIOQKaAQFcnQ3v5YEXrbSc5BpshH+w==
@@ -7126,15 +7109,14 @@ rbush@^3.0.1:
   dependencies:
     quickselect "^2.0.0"
 
-react-dom@16.13.1:
-  version "16.13.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
-  integrity sha512-81PIMmVLnCNLO/fFOQxdQkvEq/+Hfpv24XNJfpyZhTRfO0QcmQIF/PgCa1zCOj2w1hrn12MFLyaJ/G0+Mxtfag==
+react-dom@17.0.1:
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"
+  integrity sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.19.1"
+    scheduler "^0.20.1"
 
 react-force-graph@^1.39.2:
   version "1.39.2"
@@ -7148,7 +7130,7 @@ react-force-graph@^1.39.2:
     prop-types "^15.7.2"
     react-kapsule "^2.2.1"
 
-react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1:
+react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -7176,14 +7158,13 @@ react-transition-group@^4.4.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@16.13.1:
-  version "16.13.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
-  integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
+react@17.0.1:
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz#6e0600416bd57574e3f86d92edba3d9008726127"
+  integrity sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.2"
 
 read-pkg@^5.2.0:
   version "5.2.0"
@@ -7506,10 +7487,10 @@ sax@>=0.6.0, sax@~1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-scheduler@^0.19.1:
-  version "0.19.1"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
-  integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
+scheduler@^0.20.1:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
+  integrity sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -8525,6 +8506,11 @@ tslib@^2.0.3:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
   integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
+
+tslib@^2.1.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
+  integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
 
 tsutils@^3.17.1:
   version "3.21.0"
