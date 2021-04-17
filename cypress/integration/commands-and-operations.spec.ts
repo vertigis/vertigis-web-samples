@@ -26,6 +26,9 @@ describe(sampleName, () => {
     it("executes commands and operations", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         // Send first message
         openIwtm();
         clickMenuItem("Send a message");

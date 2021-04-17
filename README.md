@@ -30,7 +30,7 @@ Each sample follows the same pattern as the Geocortex Web SDK. The easiest way t
 
 The tests for each sample are located in the [cypress/integration](cypress/integration) directory.
 
-The samples will need to be built prior to running the test using `yarn build:samples`. You can run the tests in interactive watch mode using `yarn test:watch`, or run all of the tests using `yarn test` from the root of this project.
+The samples will need to be built prior to running the test using `yarn build:samples`. You can run the tests in interactive watch mode using `yarn test:watch`, this will allow you to run individual tests, or use `yarn test` from the root of this project to run all of the tests .
 
 ### Running the Samples Viewer Locally
 

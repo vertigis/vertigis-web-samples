@@ -19,6 +19,9 @@ describe(sampleName, () => {
     it("plots drive route from map clicks", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         // Should start with 0 graphics in markup layer.
         validateMarkupLayerSize(0);
 

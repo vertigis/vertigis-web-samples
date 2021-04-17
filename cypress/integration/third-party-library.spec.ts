@@ -21,6 +21,9 @@ describe(sampleName, () => {
     it("renders graph as a result of performing an identify", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         // Wait for the map to be initialized.
         cy.getViewer().getMap();
 

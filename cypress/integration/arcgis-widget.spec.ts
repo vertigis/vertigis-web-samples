@@ -20,6 +20,9 @@ describe(sampleName, () => {
     it("has the widget connected to the scene view", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         findWidgetSelect().select("Summer");
         expectLightingDate("2015-06-21T11:42:01.000Z");
 
@@ -29,6 +32,9 @@ describe(sampleName, () => {
 
     it("controls the widget state from the date mode select", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
+
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
 
         // Should default to season mode.
         findWidgetSelect().should("have.value", "spring");

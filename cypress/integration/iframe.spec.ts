@@ -6,6 +6,9 @@ describe(sampleName, () => {
     it("sends message from parent to viewer", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         cy.getNestedViewer()
             .getMap()
             .should((map) => {
@@ -39,6 +42,9 @@ describe(sampleName, () => {
 
     it("sends message from viewer to parent", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
+
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
 
         cy.getNestedViewer()
             .contains("button", "Send message to parent")

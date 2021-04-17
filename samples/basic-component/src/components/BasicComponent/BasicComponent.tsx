@@ -23,7 +23,10 @@ const BasicComponent = (
                 I am a basic component
             </Typography>
             {/* Change the underlying model property value to trigger a re-render */}
-            <Button onClick={() => (model.hidden = !model.hidden)}>
+            <Button
+                data-test="BasicComponent-btn"
+                onClick={() => (model.hidden = !model.hidden)}
+            >
                 {model.hidden ? "Show Me" : "Hide Me"}
             </Button>
             {!model.hidden && <Typography>BOO!</Typography>}
