@@ -7,7 +7,7 @@ describe(sampleName, () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         // Close the licensing alert
-        cy.getViewer().find(`button[title="Close"]`).click();
+        cy.getNestedViewer().find(`button[title="Close"]`).click();
 
         cy.getNestedViewer()
             .getMap()
@@ -44,7 +44,7 @@ describe(sampleName, () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         // Close the licensing alert
-        cy.getViewer().find(`button[title="Close"]`).click();
+        cy.getNestedViewer().find(`button[title="Close"]`).click();
 
         cy.getNestedViewer()
             .contains("button", "Send message to parent")
