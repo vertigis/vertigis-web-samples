@@ -52,7 +52,7 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
 
     return cy
         .wrap(subject, { log: false })
-        .find(selector, { log: false, timeout: 1200000 })
+        .find(selector, { log: false, timeout: 120000 })
         .and((el) => {
             const mapId = el[0].getAttribute("gcx-id");
             const win = el[0].ownerDocument?.defaultView;
