@@ -46,6 +46,9 @@ describe(sampleName, () => {
     it("synchronizes marker position with street view position", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         // TODO: Enable commented assertions. The use of `getPosition` from the mly API seems
         // to be non-deterministic as the logic appears to be using the camera
         // to calculate position instead of using the node directly.

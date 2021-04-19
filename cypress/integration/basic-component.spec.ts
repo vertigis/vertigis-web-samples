@@ -4,6 +4,9 @@ describe(sampleName, () => {
     it("controls model state using button", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         cy.getViewer().find(`[data-test="BasicComponent-btn"]`).click();
         cy.getViewer().contains("BOO!").should("be.visible");
 
