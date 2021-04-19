@@ -52,7 +52,7 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
 
     return cy
         .wrap(subject, { log: false })
-        .find(selector, { log: false, timeout: 120000 })
+        .find(selector, { log: false, timeout: 60000 })
         .and((el) => {
             const mapId = el[0].getAttribute("gcx-id");
             const win = el[0].ownerDocument?.defaultView;
@@ -60,16 +60,6 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
 
             // Wait for global map data to be available once initialized
             expect(!!map, "expect map to be created").to.be.true;
-            // As per
-            // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-View.html#ready
-            // `ready` depends on the view having a map, a container with a size
-            // greater than 0, a spatial reference, a center, and a scale. On
-            // the build server the window is not actually shown so the
-            // container has a size of 0 so we fudge the size so `ready` resolves.
-            if (!map.ready) {
-                map.container.style.width = "1000px";
-                map.container.style.height = "1000px";
-            }
             expect(map.ready, "expect map to be ready").to.be.true;
         });
 });
