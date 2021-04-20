@@ -26,9 +26,9 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "concurrently": "^6.0.1",
+        "concurrently": "^6.0.2",
         "cross-env": "^7.0.3",
-        "cypress": "^7.0.1",
+        "cypress": "^7.1.0",
         "husky": "^4.3.6",
         "prettier": "^2.2.1",
         "pretty-quick": "^3.1.0",
