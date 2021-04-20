@@ -2,6 +2,7 @@
     "chromeWebSecurity": false,
     "defaultCommandTimeout": 60000,
     "responseTimeout": 60000,
+    "retries": { "runMode": 2 },
     "numTestsKeptInMemory": 0,
     "video": false,
     "viewportWidth": 1280,

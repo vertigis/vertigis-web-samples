@@ -20,15 +20,15 @@
         "build:samples": "yarn workspaces run build",
         "build:viewer": "cd viewer && yarn build",
         "postinstall": "cd viewer && yarn",
-        "test": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress run --browser chrome\"",
+        "test": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress run --browser firefox\"",
         "test:watch": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress open\"",
         "start": "cd viewer && cross-env BROWSER=none yarn start"
     },
     "dependencies": {},
     "devDependencies": {
-        "concurrently": "^5.3.0",
+        "concurrently": "^6.0.2",
         "cross-env": "^7.0.3",
-        "cypress": "^6.3.0",
+        "cypress": "^7.1.0",
         "husky": "^4.3.6",
         "prettier": "^2.2.1",
         "pretty-quick": "^3.1.0",
