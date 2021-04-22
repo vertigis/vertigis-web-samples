@@ -34,7 +34,7 @@ The samples will need to be built prior to running the test using `yarn build:sa
 
 ### Running the Samples Viewer Locally
 
-To run the samples viewer, first build all of the sample projects by running `yarn build:samples` in the root of this project, followed by running `yarn start` to start the viewer.
+To run the samples viewer, you must first build all of the sample projects by running `yarn build:samples` in the root of this project, followed by running `yarn start` to start the viewer.
 
 ## Documentation
 
