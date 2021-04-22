@@ -52,7 +52,7 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
 
     return cy
         .wrap(subject, { log: false })
-        .find(selector, { log: false, timeout: 60000 })
+        .find(selector, { log: false, timeout: 45000 })
         .and((el) => {
             const mapId = el[0].getAttribute("gcx-id");
             const win = el[0].ownerDocument?.defaultView;
@@ -63,26 +63,3 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
             expect(map.ready, "expect map to be ready").to.be.true;
         });
 });
-
-Cypress.Commands.add(
-    "clickMap",
-    { prevSubject: "element" },
-    (subject, x, y) => {
-        cy.wrap(subject, { log: false })
-            // .click() fails in firefox as `pointerId` isn't sent by cypress, and
-            // the Esri map relies on this property.
-            // See https://github.com/cypress-io/cypress/issues/5660
-            .trigger("pointerdown", {
-                pointerId: Cypress.browser.name === "chrome" ? 1 : 0,
-                button: 0,
-                x,
-                y,
-            })
-            .trigger("pointerup", {
-                pointerId: Cypress.browser.name === "chrome" ? 1 : 0,
-                button: 0,
-                x,
-                y,
-            });
-    }
-);
