@@ -1979,7 +1979,7 @@ concat-stream@^1.5.0, concat-stream@^1.6.2:
 
 concurrently@^6.1.0:
   version "6.1.0"
-  resolved "https://packages.latitudegeo.com/npm/latitude/concurrently/-/concurrently-6.1.0.tgz#00d22525d3fcdce7f34cc7f3c9753f90a57d6208"
+  resolved "https://registry.yarnpkg.com/concurrently/-/concurrently-6.1.0.tgz#00d22525d3fcdce7f34cc7f3c9753f90a57d6208"
   integrity sha1-ANIlJdP83OfzTMfzyXU/kKV9Ygg=
   dependencies:
     chalk "^4.1.0"
@@ -2359,7 +2359,7 @@ cyclist@^1.0.1:
 
 cypress@^7.3.0:
   version "7.3.0"
-  resolved "https://packages.latitudegeo.com/npm/latitude/cypress/-/cypress-7.3.0.tgz#17345b8d18681c120f033e7d8fd0f0271e9d0d51"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-7.3.0.tgz#17345b8d18681c120f033e7d8fd0f0271e9d0d51"
   integrity sha1-FzRbjRhoHBIPAz59j9DwJx6dDVE=
   dependencies:
     "@cypress/listr-verbose-renderer" "^0.4.1"
@@ -6852,7 +6852,7 @@ present@0.0.6:
 
 prettier@^2.3.0:
   version "2.3.0"
-  resolved "https://packages.latitudegeo.com/npm/latitude/prettier/-/prettier-2.3.0.tgz#b6a5bf1284026ae640f17f7ff5658a7567fc0d18"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.0.tgz#b6a5bf1284026ae640f17f7ff5658a7567fc0d18"
   integrity sha1-tqW/EoQCauZA8X9/9WWKdWf8DRg=
 
 pretty-bytes@^5.6.0:
@@ -8590,7 +8590,7 @@ typescript@~4.2.3:
 
 typescript@~4.2.4:
   version "4.2.4"
-  resolved "https://packages.latitudegeo.com/npm/latitude/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
   integrity sha1-hhC1l0feAo/aiYqK7w4QPxVtCWE=
 
 unbox-primitive@^1.0.0:
