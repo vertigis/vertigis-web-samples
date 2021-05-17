@@ -61,5 +61,6 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
             // Wait for global map data to be available once initialized
             expect(!!map, "expect map to be created").to.be.true;
             expect(map.ready, "expect map to be ready").to.be.true;
+            expect(map.updating, "expected map to finish updating").to.be.false;
         });
 });
