@@ -1977,10 +1977,10 @@ concat-stream@^1.5.0, concat-stream@^1.6.2:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-concurrently@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/concurrently/-/concurrently-6.0.2.tgz#4ecdfc78a72a6f626a3a5d3c2a7a81962f3663e3"
-  integrity sha512-u+1Q0dJG5BidgUTpz9CU16yoHTt/oApFDQ3mbvHwSDgMjU7aGqy0q8ZQyaZyaNxdwRKTD872Ux3Twc6//sWA+Q==
+concurrently@^6.1.0:
+  version "6.1.0"
+  resolved "https://packages.latitudegeo.com/npm/latitude/concurrently/-/concurrently-6.1.0.tgz#00d22525d3fcdce7f34cc7f3c9753f90a57d6208"
+  integrity sha1-ANIlJdP83OfzTMfzyXU/kKV9Ygg=
   dependencies:
     chalk "^4.1.0"
     date-fns "^2.16.1"
@@ -2357,10 +2357,10 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
-cypress@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-7.1.0.tgz#6cb5dc22c6271a9d7a79a2477251a95afc77e531"
-  integrity sha512-AptQP9fVtN/FfOv8rJ9hTGJE2XQFc8saLHT38r/EeyWhzp0q/+P/DYRTDtjGZHeLTCNznAUrT4lal8jm+ouS7Q==
+cypress@^7.3.0:
+  version "7.3.0"
+  resolved "https://packages.latitudegeo.com/npm/latitude/cypress/-/cypress-7.3.0.tgz#17345b8d18681c120f033e7d8fd0f0271e9d0d51"
+  integrity sha1-FzRbjRhoHBIPAz59j9DwJx6dDVE=
   dependencies:
     "@cypress/listr-verbose-renderer" "^0.4.1"
     "@cypress/request" "^2.88.5"
@@ -6850,10 +6850,10 @@ present@0.0.6:
   resolved "https://registry.yarnpkg.com/present/-/present-0.0.6.tgz#9eeff700daa9e998613352e47f7ac2324d4faf02"
   integrity sha1-nu/3ANqp6ZhhM1Lkf3rCMk1PrwI=
 
-prettier@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
-  integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
+prettier@^2.3.0:
+  version "2.3.0"
+  resolved "https://packages.latitudegeo.com/npm/latitude/prettier/-/prettier-2.3.0.tgz#b6a5bf1284026ae640f17f7ff5658a7567fc0d18"
+  integrity sha1-tqW/EoQCauZA8X9/9WWKdWf8DRg=
 
 pretty-bytes@^5.6.0:
   version "5.6.0"
@@ -8587,6 +8587,11 @@ typescript@~4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.3.tgz#39062d8019912d43726298f09493d598048c1ce3"
   integrity sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==
+
+typescript@~4.2.4:
+  version "4.2.4"
+  resolved "https://packages.latitudegeo.com/npm/latitude/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
+  integrity sha1-hhC1l0feAo/aiYqK7w4QPxVtCWE=
 
 unbox-primitive@^1.0.0:
   version "1.0.0"

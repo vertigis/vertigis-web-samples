@@ -26,13 +26,13 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "concurrently": "^6.0.2",
+        "concurrently": "^6.1.0",
         "cross-env": "^7.0.3",
-        "cypress": "^7.1.0",
+        "cypress": "^7.3.0",
         "husky": "^4.3.6",
-        "prettier": "^2.2.1",
+        "prettier": "^2.3.0",
         "pretty-quick": "^3.1.0",
-        "typescript": "~4.2.3"
+        "typescript": "~4.2.4"
     },
     "husky": {
         "hooks": {
