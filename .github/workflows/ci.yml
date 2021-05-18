@@ -25,3 +25,10 @@ jobs:
             - run: yarn build
 
             - run: yarn test
+
+            - name: Save Cypress videos
+              uses: actions/upload-artifact@v2
+              if: failure()
+              with:
+                  name: cypress-videos
+                  path: cypress/videos/
