@@ -4,6 +4,9 @@ describe(sampleName, () => {
     it("shows english text", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         cy.getViewer().contains("I will be translated.").should("be.visible");
     });
 

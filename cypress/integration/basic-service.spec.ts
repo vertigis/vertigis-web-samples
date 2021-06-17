@@ -19,14 +19,19 @@ describe(sampleName, () => {
     it("plots drive route from map clicks", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         // Should start with 0 graphics in markup layer.
         validateMarkupLayerSize(0);
 
         cy.getViewer().getMap().click(400, 100);
+
         // One graphic for first stop
         validateMarkupLayerSize(1);
 
-        cy.getViewer().getMap().click(600, 450);
+        cy.getViewer().getMap().click(600, 350);
+
         // Two more graphics for second stop + route
         validateMarkupLayerSize(3);
     });

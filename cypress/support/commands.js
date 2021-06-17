@@ -52,7 +52,7 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
 
     return cy
         .wrap(subject, { log: false })
-        .find(selector, { log: false, timeout: 30000 })
+        .find(selector, { log: false, timeout: 45000 })
         .and((el) => {
             const mapId = el[0].getAttribute("gcx-id");
             const win = el[0].ownerDocument?.defaultView;
@@ -60,6 +60,10 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
 
             // Wait for global map data to be available once initialized
             expect(!!map, "expect map to be created").to.be.true;
+            expect(map.map.loadStatus, "expect map to be loaded").to.equal(
+                "loaded"
+            );
             expect(map.ready, "expect map to be ready").to.be.true;
+            expect(map.updating, "expected map to finish updating").to.be.false;
         });
 });

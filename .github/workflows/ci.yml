@@ -12,13 +12,23 @@ jobs:
         steps:
             - uses: actions/checkout@v2
 
-            - name: Use Node.js 14
-              uses: actions/setup-node@v1
+            # Fixes https://github.com/expo/expo-github-action/issues/20
+            - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+            - name: Setup Node.js 14
+              uses: actions/setup-node@v2
               with:
-                  node-version: 14.x
+                  node-version: "14"
 
             - run: yarn
 
             - run: yarn build
 
             - run: yarn test
+
+            - name: Save Cypress videos
+              uses: actions/upload-artifact@v2
+              if: failure()
+              with:
+                  name: cypress-videos
+                  path: cypress/videos/

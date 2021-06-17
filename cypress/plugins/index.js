@@ -12,6 +12,8 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
+let browserInfoLogged = false;
+
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -27,8 +29,16 @@ module.exports = (on, config) => {
             // Coerce Chrome into enabling GPU accel as it often will default to
             // software only on Linux systems.
             launchOptions.args.push("--ignore-gpu-blacklist");
-
-            return launchOptions;
         }
+
+        if (!browserInfoLogged) {
+            console.log("Browser information:");
+            console.log(browser);
+            console.log("Browser launch options:");
+            console.log(launchOptions.args);
+            browserInfoLogged = true;
+        }
+
+        return launchOptions;
     });
 };
