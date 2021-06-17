@@ -123,13 +123,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // Create location marker based on current location from Mapillary and
         // pan/zoom Geocortex map to the location.
-        const {
-            latitude,
-            longitude,
-            heading,
-            tilt,
-            fov,
-        } = await this._getMapillaryCamera();
+        const { latitude, longitude, heading, tilt, fov } =
+            await this._getMapillaryCamera();
 
         const centerPoint = new Point({ latitude, longitude });
         await Promise.all([
@@ -191,13 +186,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             return;
         }
 
-        const {
-            latitude,
-            longitude,
-            heading,
-            tilt,
-            fov,
-        } = await this._getMapillaryCamera();
+        const { latitude, longitude, heading, tilt, fov } =
+            await this._getMapillaryCamera();
 
         const centerPoint = new Point({
             latitude,

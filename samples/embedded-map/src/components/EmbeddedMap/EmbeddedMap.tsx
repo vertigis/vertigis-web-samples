@@ -30,7 +30,7 @@ export default function EmbeddedMap(
                     // Initialize the view immediately without user interaction.
                     cover: false,
                 },
-                transitionMode: TransitionMode.Instantaneous
+                transitionMode: TransitionMode.Instantaneous,
             }
         );
         model.mapillary = mapillary;

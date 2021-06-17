@@ -5,6 +5,4 @@ import {
 } from "@vertigis/web/models";
 
 @serializable
-export default class UILibraryComponentModel extends ComponentModelBase<
-    ComponentModelProperties
-> {}
+export default class UILibraryComponentModel extends ComponentModelBase<ComponentModelProperties> {}

@@ -21,8 +21,8 @@ export default class CustomService extends ServiceBase {
 
     @command("custom-service.toggle-can-execute")
     protected async _handleToggleCanExecute(): Promise<void> {
-        this._canExecuteCustomAlertCommand = !this
-            ._canExecuteCustomAlertCommand;
+        this._canExecuteCustomAlertCommand =
+            !this._canExecuteCustomAlertCommand;
         await this.messages
             .command("custom-service.command-with-can-execute")
             .canExecuteChanged.publish();

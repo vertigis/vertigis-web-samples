@@ -22,8 +22,7 @@ const routeSymbol = new SimpleLineSymbol({
 
 export default class RouteService extends ServiceBase {
     routeTask = new RouteTask({
-        url:
-            "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route",
+        url: "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route",
     });
     stops = new FeatureSet();
 

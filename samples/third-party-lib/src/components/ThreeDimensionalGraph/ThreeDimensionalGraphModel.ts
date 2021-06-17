@@ -47,9 +47,7 @@ export interface GraphData extends ForceGraphData {
 }
 
 @serializable
-export default class ThreeDimensionalGraphModel extends ComponentModelBase<
-    ThreeDimensionalGraphModelProperties
-> {
+export default class ThreeDimensionalGraphModel extends ComponentModelBase<ThreeDimensionalGraphModelProperties> {
     @inject(FrameworkServiceType.BRANDING)
     brandingService: BrandingService | undefined;
 
@@ -222,9 +220,7 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<
         this.graphData = newGraphData;
     }
 
-    protected _getSerializableProperties(): PropertyDefs<
-        ThreeDimensionalGraphModelProperties
-    > {
+    protected _getSerializableProperties(): PropertyDefs<ThreeDimensionalGraphModelProperties> {
         return {
             ...super._getSerializableProperties(),
             // Specifying the serialize modes of these properties is necessary
