@@ -9,10 +9,10 @@ import Radio from "@vertigis/web/ui/Radio";
 import RadioGroup from "@vertigis/web/ui/RadioGroup";
 import Select from "@vertigis/web/ui/Select";
 import Typography from "@vertigis/web/ui/Typography";
-import React from "react";
+import { ChangeEvent, ReactElement, useState } from "react";
 
 function CheckboxDemo() {
-    const [state, setState] = React.useState({
+    const [state, setState] = useState({
         gilad: true,
         jason: false,
         antoine: false,
@@ -20,7 +20,7 @@ function CheckboxDemo() {
 
     const { gilad, jason, antoine } = state;
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [event.target.name]: event.target.checked });
     };
 
@@ -69,9 +69,9 @@ function CheckboxDemo() {
 }
 
 function InputDemo() {
-    const [value, setValue] = React.useState("");
+    const [value, setValue] = useState("");
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValue((event.target as HTMLInputElement).value);
     };
 
@@ -102,9 +102,9 @@ function InputDemo() {
 }
 
 function RadioDemo() {
-    const [value, setValue] = React.useState("female");
+    const [value, setValue] = useState("female");
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValue((event.target as HTMLInputElement).value);
     };
 
@@ -145,9 +145,9 @@ function RadioDemo() {
 }
 
 function SelectDemo() {
-    const [age, setAge] = React.useState("");
+    const [age, setAge] = useState("");
 
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
         setAge(event.target.value as string);
     };
 
@@ -337,7 +337,7 @@ function SelectDemo() {
     );
 }
 
-export default function FormControls(): React.ReactElement {
+export default function FormControls(): ReactElement {
     return (
         <>
             <Typography gutterBottom variant="h2">

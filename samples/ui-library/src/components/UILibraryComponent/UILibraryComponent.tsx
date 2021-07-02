@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import {
     LayoutElement,
     LayoutElementProperties,
@@ -21,8 +21,8 @@ function tabA11yProps(index: number) {
 
 export default function UILibraryComponent(
     props: LayoutElementProperties<UILibraryComponentModel>
-): React.ReactElement {
-    const [tabValue, setTabValue] = React.useState(0);
+): ReactElement {
+    const [tabValue, setTabValue] = useState(0);
 
     return (
         <LayoutElement {...props} stretch className="UILibraryComponent">
@@ -56,7 +56,7 @@ export default function UILibraryComponent(
 }
 
 interface TabPanelProps {
-    children?: React.ReactNode;
+    children?: ReactNode;
     index: number;
     value: number;
 }

@@ -1,7 +1,7 @@
 import Typography from "@vertigis/web/ui/Typography";
-import React from "react";
+import { ReactElement } from "react";
 
-export default function TypographyDemo(): React.ReactElement {
+export default function TypographyDemo(): ReactElement {
     return (
         <>
             <Typography variant="h1" gutterBottom>

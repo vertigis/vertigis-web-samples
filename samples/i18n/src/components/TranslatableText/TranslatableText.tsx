@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { ReactElement, useContext } from "react";
 import {
     LayoutElement,
     LayoutElementProperties,
@@ -10,7 +10,7 @@ import TranslatableTextModel from "./TranslatableTextModel";
 
 export default function TranslatableText(
     props: LayoutElementProperties<TranslatableTextModel>
-): React.ReactElement {
+): ReactElement {
     // The type of the `UIContext` functions will be fixed in 5.8 to be arrow functions.
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const { translate } = useContext(UIContext);

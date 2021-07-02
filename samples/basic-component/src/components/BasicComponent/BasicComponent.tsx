@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import {
     LayoutElement,
     LayoutElementProperties,
@@ -11,7 +11,7 @@ import "./BasicComponent.css";
 
 const BasicComponent = (
     props: LayoutElementProperties<BasicComponentModel>
-): React.ReactElement => {
+): ReactElement => {
     const { model } = props;
 
     // Watch for changes to the hidden property on the model

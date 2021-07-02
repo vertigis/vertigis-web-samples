@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { ComponentProps, ReactElement, useRef } from "react";
 import {
     LayoutElement,
     LayoutElementProperties,
@@ -11,10 +11,10 @@ import "./ThreeDimensionalGraph.css";
 
 export default function ThreeDimensionalGraph(
     props: LayoutElementProperties<ThreeDimensionalGraphModel>
-): React.ReactElement {
+): ReactElement {
     const { model } = props;
     const [rootRef, rootDimensions] = useDimensions<HTMLDivElement>();
-    const graphRef: React.ComponentProps<typeof ForceGraph3D>["ref"] = useRef();
+    const graphRef: ComponentProps<typeof ForceGraph3D>["ref"] = useRef();
 
     useWatchAndRerender(model, "graphData");
     // Force the nodes/links to re-render when the selected survey changes. This
