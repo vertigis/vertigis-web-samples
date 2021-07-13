@@ -62,8 +62,10 @@ describe(sampleName, () => {
         // expectMapAndMarkerCenter(51.910794210150954, 4.482710573867893);
 
         // Find the forward arrow by querying for the mapillary node id that
-        // represents the next node in the forward direction.
-        cy.getViewer().find('[data-key="6YM7-YAF5IMObwarROA2ZA"]').click();
+        // represents the next node in the forward direction. Note that it's
+        // possible that this value might change over time and might need to be
+        // updated.
+        cy.getViewer().find('[data-key="jLUVld0s4wOj4CG8Dv9Jng"]').click();
 
         // Marker is updated to match new street view position.
         // expectMapAndMarkerCenter(51.910737342093, 4.482764649480002);

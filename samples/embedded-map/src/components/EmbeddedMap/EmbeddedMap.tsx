@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 import { Viewer, TransitionMode } from "mapillary-js";
 import {
     LayoutElement,
@@ -15,7 +15,7 @@ declare const ResizeObserver;
 
 export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
-): React.ReactElement {
+): ReactElement {
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>();
 

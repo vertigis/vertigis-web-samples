@@ -2,7 +2,7 @@ import { version } from "esri/kernel";
 import MapView from "esri/views/MapView";
 import SceneView from "esri/views/SceneView";
 import { ComponentModelBase } from "@vertigis/web/models";
-import React, { useEffect, useRef } from "react";
+import { ComponentType, useEffect, useRef } from "react";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 
 function injectCssIfNeeded(): Promise<void> {
@@ -27,9 +27,7 @@ function injectCssIfNeeded(): Promise<void> {
 export function createEsriMapWidget<
     M extends ModelWithMap,
     W extends MapWidget
->(
-    widgetType: MapWidgetConstructor<W>
-): React.ComponentType<MapWidgetProps<M, W>> {
+>(widgetType: MapWidgetConstructor<W>): ComponentType<MapWidgetProps<M, W>> {
     return function EsriWidget(props: MapWidgetProps<M, W>) {
         const { model, onWidgetCreated, onWidgetDestroyed } = props;
         const rootRef = useRef<HTMLDivElement>();

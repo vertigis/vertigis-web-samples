@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { ReactElement, useCallback, useState } from "react";
 import { generateUuid } from "@vertigis/arcgis-extensions/utilities/uuid";
 import {
     LayoutElement,
@@ -18,7 +18,7 @@ const DaylightWrapper = createEsriMapWidget(EsriDaylight);
 
 const Daylight = (
     props: LayoutElementProperties<DaylightModel>
-): React.ReactElement => {
+): ReactElement => {
     const [widget, setWidget] = useState<EsriDaylight | null>();
     // A unique DOM ID to be used for a11y purposes.
     const [selectId] = useState(generateUuid());
