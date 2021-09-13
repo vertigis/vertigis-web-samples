@@ -6,7 +6,7 @@ import {
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
 import Point from "esri/geometry/Point";
-import { Viewer, Node } from "mapillary-js";
+import { Viewer, Image } from "mapillary-js";
 
 /**
  *  Convert Mapillary bearing to a Scene's camera rotation.
@@ -33,7 +33,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm";
 
     // The computed position of the current Mapillary node
-    private _currentNodePosition: { lat: number; lon: number };
+    private _currentNodePosition: { lat: number; lng: number };
 
     private _mapillary: any | undefined;
     get mapillary(): any | undefined {
@@ -62,12 +62,12 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // A new instance is being set - add the event handlers.
         if (instance) {
-            const syncMaps = async (node: Node) => {
+            const syncMaps = async (node: Image) => {
                 if (node.merged) {
                     // Remove this handler
                     this.mapillary.off(Viewer.nodechanged, syncMaps);
 
-                    this._currentNodePosition = node.latLon;
+                    this._currentNodePosition = node.lngLat;
 
                     // Wait for initial sync
                     await this._syncMaps();
@@ -162,9 +162,9 @@ export default class EmbeddedMapModel extends ComponentModelBase {
      * position of the camera. See:
      * https://bl.ocks.org/oscarlorentzon/16946cb9eedfad2a64669cb1121e6c75
      */
-    private _onNodeChange = (node: Node) => {
+    private _onNodeChange = (node: Image) => {
         if (node.merged) {
-            this._currentNodePosition = node.latLon;
+            this._currentNodePosition = node.lngLat;
 
             // Set the initial marker position for this node.
             this._onPerspectiveChange();

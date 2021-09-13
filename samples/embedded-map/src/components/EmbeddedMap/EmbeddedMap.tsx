@@ -20,19 +20,17 @@ export default function EmbeddedMap(
     const mlyRootEl = useRef<HTMLDivElement>();
 
     useEffect(() => {
-        const mapillary = new Viewer(
-            mlyRootEl.current,
-            model.mapillaryKey,
+        const mapillary = new Viewer({
             // Mapillary node to start on.
-            "gLV8Jn5A6b6rbVRy2xhkMA",
-            {
-                component: {
-                    // Initialize the view immediately without user interaction.
-                    cover: false,
-                },
-                transitionMode: TransitionMode.Instantaneous,
-            }
-        );
+            imageId: "gLV8Jn5A6b6rbVRy2xhkMA",
+            accessToken: model.mapillaryKey,
+            container: mlyRootEl.current,
+            component: {
+                // Initialize the view immediately without user interaction.
+                cover: false,
+            },
+            transitionMode: TransitionMode.Instantaneous,
+        });
         model.mapillary = mapillary;
 
         const handleViewportResize = () => {
