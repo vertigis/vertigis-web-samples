@@ -6,12 +6,8 @@ import {
 } from "@vertigis/web/components";
 
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
-import "mapillary-js/dist/mapillary.min.css";
+import "mapillary-js/dist/mapillary.css";
 import EmbeddedMapModel from "./EmbeddedMapModel";
-
-// This line should be removed when this issue is resolved:
-// https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/908
-declare const ResizeObserver;
 
 export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
@@ -21,8 +17,7 @@ export default function EmbeddedMap(
 
     useEffect(() => {
         const mapillary = new Viewer({
-            // Mapillary node to start on.
-            imageId: "gLV8Jn5A6b6rbVRy2xhkMA",
+            imageId: "2935399116683438",
             accessToken: model.mapillaryKey,
             container: mlyRootEl.current,
             component: {

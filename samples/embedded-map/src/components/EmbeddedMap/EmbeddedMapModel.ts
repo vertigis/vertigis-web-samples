@@ -6,7 +6,7 @@ import {
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
 import Point from "esri/geometry/Point";
-import { Viewer, Image } from "mapillary-js";
+import { IViewer, LngLat, ViewerImageEvent } from "mapillary-js";
 
 /**
  *  Convert Mapillary bearing to a Scene's camera rotation.
@@ -30,16 +30,16 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     // For demonstration purposes only.
     // Replace this with your own client ID from mapillary.com
     readonly mapillaryKey =
-        "ZU5PcllvUTJIX24wOW9LSkR4dlE5UTo3NTZiMzY4ZjBlM2U2Nzlm";
+        "MLY|4368114249947049|5de1ba3613612972e37b2bc1117fa40a";
 
-    // The computed position of the current Mapillary node
-    private _currentNodePosition: { lat: number; lng: number };
+    // The computed position of the current Mapillary image
+    private _currentImagePosition: LngLat;
 
-    private _mapillary: any | undefined;
-    get mapillary(): any | undefined {
+    private _mapillary: IViewer | undefined;
+    get mapillary(): IViewer | undefined {
         return this._mapillary;
     }
-    set mapillary(instance: any | undefined) {
+    set mapillary(instance: IViewer | undefined) {
         if (instance === this._mapillary) {
             return;
         }
@@ -47,8 +47,8 @@ export default class EmbeddedMapModel extends ComponentModelBase {
         // If an instance already exists, clean it up first.
         if (this._mapillary) {
             // Clean up event handlers.
-            this.mapillary.off(Viewer.nodechanged, this._onNodeChange);
-            this.mapillary.off(Viewer.povchanged, this._onPerspectiveChange);
+            this.mapillary.off("image", this._onImageChange);
+            this.mapillary.off("pov", this._onPerspectiveChange);
 
             // Activating the cover appears to be the best way to "clean up" Mapillary.
             // https://github.com/mapillary/mapillary-js/blob/8b6fc2f36e3011218954d95d601062ff6aa41ad9/src/viewer/ComponentController.ts#L184-L192
@@ -62,30 +62,28 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // A new instance is being set - add the event handlers.
         if (instance) {
-            const syncMaps = async (node: Image) => {
-                if (node.merged) {
+            const syncMaps = async (event: ViewerImageEvent) => {
+                const { image } = event;
+                if (image.merged) {
                     // Remove this handler
-                    this.mapillary.off(Viewer.nodechanged, syncMaps);
+                    this.mapillary.off("image", syncMaps as any);
 
-                    this._currentNodePosition = node.lngLat;
+                    this._currentImagePosition = image.lngLat;
 
                     // Wait for initial sync
                     await this._syncMaps();
 
-                    // Listen for changes to the currently displayed mapillary node
-                    this.mapillary.on(Viewer.nodechanged, this._onNodeChange);
+                    // Listen for changes to the currently displayed mapillary image
+                    this.mapillary.on("image", this._onImageChange);
 
-                    // Handle further pov changes on this node
-                    this.mapillary.on(
-                        Viewer.povchanged,
-                        this._onPerspectiveChange
-                    );
+                    // Handle further pov changes on this image
+                    this.mapillary.on("pov", this._onPerspectiveChange);
                 }
             };
 
-            // Wait for the first mapillary node to be ready before attempting
+            // Wait for the first mapillary image to be ready before attempting
             // to sync the maps
-            this.mapillary.on(Viewer.nodechanged, syncMaps);
+            this.mapillary.on("image", syncMaps as any);
         }
     }
 
@@ -155,30 +153,30 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     }
 
     /**
-     * When the 'merged' property is set on the node we know that the position
+     * When the 'merged' property is set on the image we know that the position
      * reported will be the computed location rather than a raw GPS value. We
      * ignore all updates sent while the computed position is unknown as the raw
      * GPS value can be inaccurate and will not exactly match the observed
-     * position of the camera. See:
-     * https://bl.ocks.org/oscarlorentzon/16946cb9eedfad2a64669cb1121e6c75
+     * position of the camera.
      */
-    private _onNodeChange = (node: Image) => {
-        if (node.merged) {
-            this._currentNodePosition = node.lngLat;
+    private _onImageChange = (event: ViewerImageEvent) => {
+        const { image } = event;
+        if (image.merged) {
+            this._currentImagePosition = image.lngLat;
 
-            // Set the initial marker position for this node.
+            // Set the initial marker position for this image.
             this._onPerspectiveChange();
 
             // Handle further pov changes.
-            this.mapillary.on(Viewer.povchanged, this._onPerspectiveChange);
+            this.mapillary.on("pov", this._onPerspectiveChange);
         } else {
-            this._currentNodePosition = undefined;
-            this.mapillary.off(Viewer.povchanged, this._onPerspectiveChange);
+            this._currentImagePosition = undefined;
+            this.mapillary.off("pov", this._onPerspectiveChange);
         }
     };
 
     /**
-     * Handles pov changes once the node position is known.
+     * Handles pov changes once the image position is known.
      */
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     private _onPerspectiveChange = throttle(async () => {
@@ -222,19 +220,16 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             return undefined;
         }
 
-        // Will return a raw GPS value if the node position has not yet been calculated.
-        const [{ lat, lon }, { bearing, tilt }, fov] = await Promise.all([
-            this._currentNodePosition ?? this.mapillary.getPosition(),
-            this.mapillary.getPointOfView() as Promise<{
-                bearing: number;
-                tilt: number;
-            }>,
+        // Will return a raw GPS value if the image position has not yet been calculated.
+        const [{ lat, lng }, { bearing, tilt }, fov] = await Promise.all([
+            this._currentImagePosition ?? this.mapillary.getPosition(),
+            this.mapillary.getPointOfView(),
             this.mapillary.getFieldOfView(),
         ]);
 
         return {
             latitude: lat,
-            longitude: lon,
+            longitude: lng,
             heading: bearing,
             tilt: tilt + 90,
             fov,
