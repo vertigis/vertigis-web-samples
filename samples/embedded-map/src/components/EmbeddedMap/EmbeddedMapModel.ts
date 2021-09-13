@@ -5,7 +5,7 @@ import {
     importModel,
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
-import Point from "esri/geometry/Point";
+import Point from "@arcgis/core/geometry/Point";
 import { IViewer, LngLat, ViewerImageEvent } from "mapillary-js";
 
 /**
