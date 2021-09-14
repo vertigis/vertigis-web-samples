@@ -30,7 +30,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
     // For demonstration purposes only.
     // Replace this with your own client ID from mapillary.com
     readonly mapillaryKey =
-        "MLY|4368114249947049|5de1ba3613612972e37b2bc1117fa40a";
+        "MLY|4371038552987952|3051b8de90b9a19c55ba2e5edd9376db";
 
     // The computed position of the current Mapillary image
     private _currentImagePosition: LngLat;
