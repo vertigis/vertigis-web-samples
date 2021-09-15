@@ -43,31 +43,30 @@ const expectMapAndMarkerCenter = (lat: number, lon: number) =>
         });
 
 describe(sampleName, () => {
+    // The following test depends on the web scene being used and the current
+    // state of the mapillary database.
     it("synchronizes marker position with street view position", () => {
         cy.visit(`http://localhost:3000/${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
 
-        // TODO: Enable commented assertions. The use of `getPosition` from the mly API seems
-        // to be non-deterministic as the logic appears to be using the camera
-        // to calculate position instead of using the node directly.
+        // The use of `getPosition` from the mly API seems to be
+        // non-deterministic as the logic appears to be using the camera to
+        // calculate position instead of using the image directly.
         // https://github.com/geocortex/vertigis-web-samples/pull/17/files/2688f92a704c8037ade11017df6d7c0319abbf81#r498361346
-        // https://github.com/mapillary/mapillary-js/blob/aa67afe85dacba0e738df2891b599d6b2371c510/src/viewer/Viewer.ts#L591-L606
-
-        // The following test depends on the web scene being used and the current
-        // state of the mapillary database.
+        // https://github.com/mapillary/mapillary-js/blob/main/src/viewer/Viewer.ts#L610
 
         // Marker is set initially to match street view position.
-        // expectMapAndMarkerCenter(51.910794210150954, 4.482710573867893);
+        expectMapAndMarkerCenter(51.90797166666704, 4.489869999999996);
 
-        // Find the forward arrow by querying for the mapillary node id that
-        // represents the next node in the forward direction. Note that it's
+        // Find the forward arrow by querying for the mapillary image id that
+        // represents the next image in the forward direction. Note that it's
         // possible that this value might change over time and might need to be
         // updated.
-        // cy.getViewer().find('[data-key="jLUVld0s4wOj4CG8Dv9Jng"]').click();
+        cy.getViewer().find('[data-id="1876951449133876"]').click();
 
         // Marker is updated to match new street view position.
-        // expectMapAndMarkerCenter(51.910737342093, 4.482764649480002);
+        expectMapAndMarkerCenter(51.908061666667, 4.4896200000001);
     });
 });
