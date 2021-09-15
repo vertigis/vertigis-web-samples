@@ -9,10 +9,6 @@ import {
 import "mapillary-js/dist/mapillary.css";
 import EmbeddedMapModel from "./EmbeddedMapModel";
 
-// This line should be removed when this issue is resolved:
-// https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/908
-declare const ResizeObserver;
-
 export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
 ): ReactElement {
