@@ -9,19 +9,7 @@ const performExtentIdentify = (
     fromY: number,
     toX: number,
     toY: number
-) =>
-    getMapCanvas()
-        // `pointerId` isn't sent by cypress, and the Esri map relies on this property.
-        // See https://github.com/cypress-io/cypress/issues/5660
-        .trigger("pointerdown", fromX, fromY, {
-            pointerId: Cypress.browser.name === "chrome" ? 1 : 0,
-        })
-        .trigger("pointermove", toX, toY, {
-            pointerId: Cypress.browser.name === "chrome" ? 1 : 0,
-        })
-        .trigger("pointerup", toX, toY, {
-            pointerId: Cypress.browser.name === "chrome" ? 1 : 0,
-        });
+) => getMapCanvas().click().trigger("pointermove", toX, toY).click();
 
 describe(sampleName, () => {
     it("renders graph as a result of performing an identify", () => {
