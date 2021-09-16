@@ -9,7 +9,7 @@ import FormControl from "@vertigis/web/ui/FormControl";
 import FormLabel from "@vertigis/web/ui/FormLabel";
 import MenuItem from "@vertigis/web/ui/MenuItem";
 import Select from "@vertigis/web/ui/Select";
-import EsriDaylight from "esri/widgets/Daylight";
+import EsriDaylight from "@arcgis/core/widgets/Daylight";
 import DaylightModel from "./DaylightModel";
 import { createEsriMapWidget } from "./EsriMapWidget";
 import "./Daylight.css";

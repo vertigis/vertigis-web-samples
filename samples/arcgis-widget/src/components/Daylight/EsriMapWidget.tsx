@@ -1,6 +1,6 @@
-import { version } from "esri/kernel";
-import MapView from "esri/views/MapView";
-import SceneView from "esri/views/SceneView";
+import { version } from "@arcgis/core/kernel";
+import MapView from "@arcgis/core/views/MapView";
+import SceneView from "@arcgis/core/views/SceneView";
 import { ComponentModelBase } from "@vertigis/web/models";
 import { ComponentType, useEffect, useRef } from "react";
 import { useWatchAndRerender } from "@vertigis/web/ui";

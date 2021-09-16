@@ -1,11 +1,11 @@
 import { ServiceBase } from "@vertigis/web/services";
-import Geometry from "esri/geometry/Geometry";
-import Graphic from "esri/Graphic";
-import SimpleLineSymbol from "esri/symbols/SimpleLineSymbol";
-import SimpleMarkerSymbol from "esri/symbols/SimpleMarkerSymbol";
-import RouteTask from "esri/tasks/RouteTask";
-import FeatureSet from "esri/tasks/support/FeatureSet";
-import RouteParameters from "esri/tasks/support/RouteParameters";
+import Geometry from "@arcgis/core/geometry/Geometry";
+import Graphic from "@arcgis/core/Graphic";
+import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
+import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
+import RouteTask from "@arcgis/core/tasks/RouteTask";
+import FeatureSet from "@arcgis/core/tasks/support/FeatureSet";
+import RouteParameters from "@arcgis/core/tasks/support/RouteParameters";
 import { command } from "@vertigis/web/messaging";
 
 const pointSymbol = new SimpleMarkerSymbol({
