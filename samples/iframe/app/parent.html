@@ -177,7 +177,7 @@
                     // avoid cross-site scripting attacks. See
                     // https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage.
                     if (
-                        // Validate that the origin matches the origin of Geocortex Web.
+                        // Validate that the origin matches the origin of VertiGIS Studio Web.
 
                         // Not running locally
                         !event.origin.startsWith("http://localhost:") &&
@@ -199,7 +199,7 @@
 
                     // Codesandbox sends postMessage events that are picked up
                     // by this event handler. We're only interested in the
-                    // string event data from Geocortex Web.
+                    // string event data from VertiGIS Studio Web.
                     if (typeof event.data !== "string") {
                         return;
                     }

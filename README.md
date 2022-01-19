@@ -1,10 +1,10 @@
-# Geocortex Web SDK Samples
+# VertiGIS Studio Web SDK Samples
 
 ![CI](https://github.com/geocortex/vertigis-web-samples/workflows/CI/badge.svg)
 
 View the samples at [https://vertigis-web-samples.netlify.app](https://vertigis-web-samples.netlify.app).
 
-This project includes a collection of samples that demonstrates how to configure and customize [Geocortex Web](https://www.geocortex.com/products/gxw/) apps using the [Geocortex Web SDK](https://developers.geocortex.com/docs/web/sdk-overview/). Before diving into the SDK, be sure to check out our [Developer Center](https://developers.geocortex.com/docs/web/overview/) to learn the various concepts of building and configuring Geocortex Web applications. There is a surprising amount that can be accomplished through [layout](https://developers.geocortex.com/docs/web/configuration-layout-getting-started/), [app config](https://developers.geocortex.com/docs/web/configuration-app-config-getting-started/), and [Geocortex Workflow](https://www.geocortex.com/products/geocortex-workflow/) which can be [configured in the app config](https://developers.geocortex.com/docs/web/tutorial-run-workflow-app-config/) without even needing to use the SDK!
+This project includes a collection of samples that demonstrates how to configure and customize [VertiGIS Studio Web](https://www.geocortex.com/products/gxw/) apps using the [VertiGIS Studio Web SDK](https://developers.geocortex.com/docs/web/sdk-overview/). Before diving into the SDK, be sure to check out our [Developer Center](https://developers.geocortex.com/docs/web/overview/) to learn the various concepts of building and configuring VertiGIS Studio Web applications. There is a surprising amount that can be accomplished through [layout](https://developers.geocortex.com/docs/web/configuration-layout-getting-started/), [app config](https://developers.geocortex.com/docs/web/configuration-app-config-getting-started/), and [VertiGIS Workflow](https://www.geocortex.com/products/geocortex-workflow/) which can be [configured in the app config](https://developers.geocortex.com/docs/web/tutorial-run-workflow-app-config/) without even needing to use the SDK!
 
 Check out the [hosted samples viewer](https://vertigis-web-samples.netlify.app/) for an easy way to run the samples in your browser without needing to run the project locally. The source for each sample is located within the [samples](samples) directory of this project.
 
@@ -20,11 +20,11 @@ Alternatively you may install the dependencies for a single sample project by ru
 
 ### Running a sample
 
-Run `yarn start` or `npm start` within the root of a sample directory. For example you can run the `i18n` sample by running `yarn start` within the [samples/i18n](samples/i18n) directory. This will launch the Geocortex Web SDK development server.
+Run `yarn start` or `npm start` within the root of a sample directory. For example you can run the `i18n` sample by running `yarn start` within the [samples/i18n](samples/i18n) directory. This will launch the VertiGIS Studio Web SDK development server.
 
 ### Creating a new sample
 
-Each sample follows the same pattern as the Geocortex Web SDK. The easiest way to create a new sample is to copy an existing sample directory, and rename the `name` property in the `package.json` of your sample to suit. Once created you will need to add your sample to the samples viewer `samples` array in [the viewer source](viewer/src/App.tsx) to have it show up in the list of samples.
+Each sample follows the same pattern as the VertiGIS Studio Web SDK. The easiest way to create a new sample is to copy an existing sample directory, and rename the `name` property in the `package.json` of your sample to suit. Once created you will need to add your sample to the samples viewer `samples` array in [the viewer source](viewer/src/App.tsx) to have it show up in the list of samples.
 
 ### Testing
 
@@ -38,4 +38,4 @@ To run the samples viewer, first build all of the sample projects by running `ya
 
 ## Documentation
 
-You can learn more on the [Geocortex Developer Center](https://developers.geocortex.com/docs/web/overview/).
+You can learn more on the [VertiGIS Studio Developer Center](https://developers.geocortex.com/docs/web/overview/).

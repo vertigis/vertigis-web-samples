@@ -20,8 +20,8 @@ export default function TranslatableText(
             <Typography variant="h3">Translate function:</Typography>
             <div>{translate("language-translatable-text-content")}</div>
             <Typography variant="h3">
-                The provided Geocortex Web React UI library components will
-                handle translation for you:
+                The provided VertiGIS Studio Web React UI library components
+                will handle translation for you:
             </Typography>
             <Typography>language-translatable-text-content</Typography>
             <Button>language-translatable-text-content</Button>
