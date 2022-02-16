@@ -8,7 +8,7 @@
         "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
     },
     "dependencies": {
-        "@vertigis/web": "^5.14.0"
+        "@vertigis/web": "^5.16.0"
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.4.0",
