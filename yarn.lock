@@ -619,10 +619,10 @@
   resolved "https://registry.yarnpkg.com/@vertigis/viewer-spec/-/viewer-spec-45.2.0.tgz#445e967fdcae36eee9b65f7974f75b5c6913c729"
   integrity sha512-i5C+ma5uzfAkUeSq7TVbAyQ7D2ma0NF+ZNW6HXQx9y9AB6CGvFmrNwDU8XBJXiBEEskMwIoyn1GZlbgYMEZv+g==
 
-"@vertigis/web-sdk@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@vertigis/web-sdk/-/web-sdk-1.4.0.tgz#e486af18cba710303e5d2024ade9400873a0ab42"
-  integrity sha512-ZYoZvXv50pfTjAfwYHz69aip64ZvEGyM0jGN1Ksj9lHzflsJWOsek2DH+E+PYpsZKm9Yc0gIPehBKGstc1uCvA==
+"@vertigis/web-sdk@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@vertigis/web-sdk/-/web-sdk-1.4.1.tgz#fc75093f9bf60b75da1757c9e0c31f702b9a72a0"
+  integrity sha512-ypQbZHWu37VwYgFazuaQuWossH430t+3/9Gl3+PSITqIYVd38horYlqGkNroQclZDyEsGjuCkkhUz0AOrUOxJA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.27.0"
     "@typescript-eslint/parser" "^4.27.0"
