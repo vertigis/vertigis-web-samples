@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="custom.d23fb98c">
+    <map config="map-1">        
+        <button config="button-1" slot="top-right" width="22" />
+    </map>
+</layout>
