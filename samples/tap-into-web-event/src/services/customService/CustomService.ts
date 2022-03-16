@@ -3,7 +3,7 @@ import { command, MapsLike, ViewpointLike } from "@vertigis/web/messaging";
 
 export default class CustomService extends ServiceBase {
     private _history: ViewpointLike[] = [];
-    private movedBecauseCommand = false;
+    private skipSaveNextViewpoint = false;
 
     @command("custom-service.push-viewpoint")
     protected _handlePushViewpoint(args: {
@@ -12,14 +12,15 @@ export default class CustomService extends ServiceBase {
     }): void {
         // Don't update the history if the reason the viewpoint changed was our
         // `goToPreviousViewPoint` command
-        if (!this.movedBecauseCommand) {
+        if (!this.skipSaveNextViewpoint) {
             this._history.push(args.viewpoint);
         }
-        this.movedBecauseCommand = false;
+        this.skipSaveNextViewpoint = false;
     }
 
     @command("custom-service.go-to-previous-viewpoint")
     protected async _handleGoToPreviousViewpoint(): Promise<void> {
+        // TODO: Remove casting once 5.17 is shipped
         const currentViewpoint: {
             maps: MapsLike;
             viewpoint: ViewpointLike;
@@ -27,21 +28,23 @@ export default class CustomService extends ServiceBase {
             maps: MapsLike;
             viewpoint: ViewpointLike;
         };
-        let previousViewpoint = this._history.pop();
-        while (
-            previousViewpoint &&
-            currentViewpoint.viewpoint === previousViewpoint
+        let _previousViewpoint = this._history.pop();
+        // The last viewpoint on the stack may be the current viewpoint as the
+        // viewpoint is pushed after the map's viewpoint has changed.
+        if (
+            _previousViewpoint &&
+            currentViewpoint.viewpoint === _previousViewpoint
         ) {
-            previousViewpoint = this._history.pop();
+            _previousViewpoint = this._history.pop();
         }
-        if (previousViewpoint) {
+        if (_previousViewpoint) {
             await this.messages.commands.map.goToViewpoint.execute(
-                previousViewpoint
+                _previousViewpoint
             );
         } else {
             // If we don't have anymore viewpoints, go back to the initial viewpoint
             await this.messages.commands.map.goToInitialViewpoint.execute();
         }
-        this.movedBecauseCommand = true;
+        this.skipSaveNextViewpoint = true;
     }
 }

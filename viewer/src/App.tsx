@@ -21,7 +21,7 @@ const samples = [
     { id: "basic-component", title: "Basic Component" },
     { id: "basic-service", title: "Basic Service" },
     { id: "commands-and-operations", title: "Commands and Operations" },
-    { id: "previous-viewpoint", title: "Go to Previous Viewpoint" },
+    { id: "tap-into-web-event", title: "Tap into a Web event" },
     { id: "embedded-map", title: "Embedded Map" },
     { id: "i18n", title: "Internationalization" },
     { id: "iframe", title: "Iframe Embedded" },
