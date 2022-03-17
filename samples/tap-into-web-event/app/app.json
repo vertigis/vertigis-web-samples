@@ -1,0 +1,24 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "menu-item",
+            "id": "button-1",
+            "icon": "station-locator",
+            "title": "Go to previous extent",
+            "action": "custom-service.go-to-previous-viewpoint"
+        },
+        {
+            "$type": "map-extension",
+            "id": "map-1",
+            "onViewpointChanged": "custom-service.push-viewpoint",
+            "webMap": "https://www.arcgis.com/home/item.html?id=97e38e28b80444b38fde3a5c6c8f8360"
+        },
+        {
+            "$type": "layout",
+            "id": "default",
+            "title": "Default",
+            "url": "./layout.xml"
+        }
+    ]
+}
