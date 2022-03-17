@@ -3,7 +3,7 @@ import { command, MapsLike, ViewpointLike } from "@vertigis/web/messaging";
 
 export default class CustomService extends ServiceBase {
     private _history: ViewpointLike[] = [];
-    private skipSaveNextViewpoint = false;
+    private _skipSaveNextViewpoint = false;
 
     @command("custom-service.push-viewpoint")
     protected _handlePushViewpoint(args: {
@@ -12,10 +12,10 @@ export default class CustomService extends ServiceBase {
     }): void {
         // Don't update the history if the reason the viewpoint changed was our
         // `goToPreviousViewPoint` command
-        if (!this.skipSaveNextViewpoint) {
+        if (!this._skipSaveNextViewpoint) {
             this._history.push(args.viewpoint);
         }
-        this.skipSaveNextViewpoint = false;
+        this._skipSaveNextViewpoint = false;
     }
 
     @command("custom-service.go-to-previous-viewpoint")
@@ -28,23 +28,23 @@ export default class CustomService extends ServiceBase {
             maps: MapsLike;
             viewpoint: ViewpointLike;
         };
-        let _previousViewpoint = this._history.pop();
+        let previousViewpoint = this._history.pop();
         // The last viewpoint on the stack may be the current viewpoint as the
         // viewpoint is pushed after the map's viewpoint has changed.
         if (
-            _previousViewpoint &&
-            currentViewpoint.viewpoint === _previousViewpoint
+            previousViewpoint &&
+            currentViewpoint.viewpoint === previousViewpoint
         ) {
-            _previousViewpoint = this._history.pop();
+            previousViewpoint = this._history.pop();
         }
-        if (_previousViewpoint) {
+        if (previousViewpoint) {
             await this.messages.commands.map.goToViewpoint.execute(
-                _previousViewpoint
+                previousViewpoint
             );
         } else {
             // If we don't have anymore viewpoints, go back to the initial viewpoint
             await this.messages.commands.map.goToInitialViewpoint.execute();
         }
-        this.skipSaveNextViewpoint = true;
+        this._skipSaveNextViewpoint = true;
     }
 }
