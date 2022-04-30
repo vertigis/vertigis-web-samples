@@ -1,4 +1,7 @@
 {
+    "compilerOptions": {
+        "experimentalDecorators": true
+    },
     "extends": "@vertigis/web-sdk/config/tsconfig.json",
     "include": ["src"]
 }

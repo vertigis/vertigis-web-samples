@@ -11,8 +11,15 @@
         {
             "$type": "map-extension",
             "id": "map-1",
+            "onInitialized": "custom-service.set-initial-viewpoint",
             "onViewpointChanged": "custom-service.push-viewpoint",
             "webMap": "https://www.arcgis.com/home/item.html?id=97e38e28b80444b38fde3a5c6c8f8360"
+        },
+        {
+            "id": "text-1",
+            "icon": "text",
+            "text": "If you refresh the page, the extent of the map won't change.",
+            "$type": "text"
         },
         {
             "$type": "layout",

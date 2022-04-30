@@ -16,4 +16,9 @@ export default function (registry: LibraryRegistry): void {
         name: "custom-service.push-viewpoint",
         serviceId: "custom-service",
     });
+
+    registry.registerCommand({
+        name: "custom-service.set-initial-viewpoint",
+        serviceId: "custom-service",
+    });
 }
