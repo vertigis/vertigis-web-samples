@@ -48,13 +48,13 @@ Cypress.Commands.add("getViewerParent", () =>
 Cypress.Commands.add("getNestedViewer", () => cy.getViewerParent().getViewer());
 
 Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
-    const selector = id ? `[gcx-id="${id}"]` : ".gcx-map";
+    const selector = id ? `[data-layout-id="${id}"]` : ".gcx-map";
 
     return cy
         .wrap(subject, { log: false })
         .find(selector, { log: false, timeout: 45000 })
         .and((el) => {
-            const mapId = el[0].getAttribute("gcx-id");
+            const mapId = el[0].getAttribute("data-layout-id");
             const win = el[0].ownerDocument?.defaultView;
             const map = win.__maps?.[mapId] || win.__scenes?.[mapId];
 
