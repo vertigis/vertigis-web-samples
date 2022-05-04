@@ -7,7 +7,7 @@ import Input from "@vertigis/web/ui/Input";
 import MenuItem from "@vertigis/web/ui/MenuItem";
 import Radio from "@vertigis/web/ui/Radio";
 import RadioGroup from "@vertigis/web/ui/RadioGroup";
-import Select from "@vertigis/web/ui/Select";
+import Select, { SelectChangeEvent } from "@vertigis/web/ui/Select";
 import Typography from "@vertigis/web/ui/Typography";
 import { ChangeEvent, ReactElement, useState } from "react";
 
@@ -147,7 +147,7 @@ function RadioDemo() {
 function SelectDemo() {
     const [age, setAge] = useState("");
 
-    const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
+    const handleChange = (event: SelectChangeEvent<unknown>) => {
         setAge(event.target.value as string);
     };
 

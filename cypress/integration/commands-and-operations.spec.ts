@@ -71,8 +71,8 @@ describe(sampleName, () => {
         openIwtm();
         getMenuItem("Run command with canExecute").should(
             "have.attr",
-            "aria-disabled",
-            "false"
+            "data-test",
+            "enabled"
         );
 
         // Click the item which should open a dialog
