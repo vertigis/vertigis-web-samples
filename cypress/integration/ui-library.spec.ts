@@ -7,7 +7,7 @@ describe(sampleName, () => {
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
 
-        cy.getViewer().contains("button", "Medium emphasis medium").click();
+        cy.getViewer().contains("button", "Medium Emphasis M").click();
         cy.getViewer().find('[role="dialog"]').contains("button", "OK").click();
     });
 
