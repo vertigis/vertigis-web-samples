@@ -1,24 +1,27 @@
 import { ReactElement, useCallback, useState } from "react";
 import { generateUuid } from "@vertigis/arcgis-extensions/utilities/uuid";
-import {
-    LayoutElement,
-    LayoutElementProperties,
-} from "@vertigis/web/components";
+import type Accessor from "@arcgis/core/core/Accessor";
 import { useWatch, useWatchAndRerender } from "@vertigis/web/ui";
 import FormControl from "@vertigis/web/ui/FormControl";
 import FormLabel from "@vertigis/web/ui/FormLabel";
 import MenuItem from "@vertigis/web/ui/MenuItem";
 import Select from "@vertigis/web/ui/Select";
+import {
+    createEsriMapWidget,
+    MapWidgetProps,
+} from "@vertigis/web/ui/esriUtils";
 import EsriDaylight from "@arcgis/core/widgets/Daylight";
 import DaylightModel from "./DaylightModel";
-import { createEsriMapWidget } from "./EsriMapWidget";
 import "./Daylight.css";
 
-const DaylightWrapper = createEsriMapWidget(EsriDaylight);
+export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 
-const Daylight = (
-    props: LayoutElementProperties<DaylightModel>
-): ReactElement => {
+const DaylightWidgetWrapper = createEsriMapWidget<
+    DaylightModel & Accessor,
+    EsriDaylight
+>(EsriDaylight, true, true);
+
+const Daylight = (props: DaylightWidgetProps): ReactElement => {
     const [widget, setWidget] = useState<EsriDaylight | null>();
     // A unique DOM ID to be used for a11y purposes.
     const [selectId] = useState(generateUuid());
@@ -47,12 +50,12 @@ const Daylight = (
     const onWidgetDestroyed = useCallback(() => setWidget(null), []);
 
     return (
-        <LayoutElement {...props} className="Daylight">
-            <DaylightWrapper
-                model={props.model}
-                onWidgetCreated={onWidgetCreated}
-                onWidgetDestroyed={onWidgetDestroyed}
-            />
+        <DaylightWidgetWrapper
+            className="Daylight"
+            onWidgetCreated={onWidgetCreated}
+            onWidgetDestroyed={onWidgetDestroyed}
+            {...props}
+        >
             {widget && (
                 <FormControl className="Daylight-select">
                     <FormLabel htmlFor={selectId}>Date Picker Mode</FormLabel>
@@ -69,7 +72,7 @@ const Daylight = (
                     </Select>
                 </FormControl>
             )}
-        </LayoutElement>
+        </DaylightWidgetWrapper>
     );
 };
 

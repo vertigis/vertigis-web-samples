@@ -5,7 +5,7 @@ import {
     PropertyDefs,
     serializable,
 } from "@vertigis/web/models";
-import { ItemType } from "@vertigis/arcgis-extensions/ItemType";
+import { MapModel } from "@vertigis/web/mapping/MapModel";
 
 export interface DaylightModelProperties extends ComponentModelProperties {
     dateOrSeason?: "season" | "date";
@@ -13,9 +13,8 @@ export interface DaylightModelProperties extends ComponentModelProperties {
 
 @serializable
 export default class DaylightModel extends ComponentModelBase<DaylightModelProperties> {
-    // TODO: Use correct type for `map` after 5.10 release.
-    @importModel(ItemType.MAP_EXTENSION)
-    map: any | undefined;
+    @importModel("map-extension")
+    map: MapModel | undefined;
 
     dateOrSeason: DaylightModelProperties["dateOrSeason"];
 
