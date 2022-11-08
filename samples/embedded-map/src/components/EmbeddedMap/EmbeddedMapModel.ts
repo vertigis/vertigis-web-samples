@@ -66,6 +66,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
                 const { image } = event;
                 if (image.merged) {
                     // Remove this handler
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                     this.mapillary.off("image", syncMaps as any);
 
                     this._currentImagePosition = image.lngLat;
@@ -83,6 +84,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
             // Wait for the first mapillary image to be ready before attempting
             // to sync the maps
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             this.mapillary.on("image", syncMaps as any);
         }
     }

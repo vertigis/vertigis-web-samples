@@ -86,8 +86,9 @@ export default function UILibraryComponent(
                                 value={
                                     brandingService.activeTheme.id === "dark"
                                 }
-                                onChange={async (e, checked) => {
-                                    await commands.ui.setTheme.execute(
+                                onChange={(e, checked) => {
+                                    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+                                    commands.ui.setTheme.execute(
                                         checked ? "dark" : "light"
                                     );
                                 }}
@@ -99,8 +100,9 @@ export default function UILibraryComponent(
                         control={
                             <Switch
                                 value={brandingService.density === "compact"}
-                                onChange={async (e, checked) => {
-                                    await commands.ui.setDensity.execute(
+                                onChange={(e, checked) => {
+                                    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+                                    commands.ui.setDensity.execute(
                                         checked ? "compact" : "standard"
                                     );
                                 }}
@@ -111,7 +113,7 @@ export default function UILibraryComponent(
                 <Tabs
                     value={tabValue}
                     onChange={(event, newValue) => {
-                        setTabValue(newValue);
+                        setTabValue(newValue as React.SetStateAction<number>);
                     }}
                     aria-label="simple tabs example"
                     indicatorColor="primary"
