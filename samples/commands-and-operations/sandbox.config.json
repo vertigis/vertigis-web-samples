@@ -4,8 +4,8 @@
     "view": "browser",
     "template": "node",
     "port": 3000,
-    "node": "14",
     "container": {
-        "startScript": "start-in-sandbox"
+        "startScript": "start-in-sandbox",
+        "node": "14"
     }
 }
