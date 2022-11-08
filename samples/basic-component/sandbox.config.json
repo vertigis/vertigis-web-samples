@@ -4,6 +4,7 @@
     "view": "browser",
     "template": "node",
     "port": 3000,
+    "node": "12",
     "container": {
         "startScript": "start-in-sandbox"
     }
