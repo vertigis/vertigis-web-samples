@@ -3,9 +3,9 @@ import Geometry from "@arcgis/core/geometry/Geometry";
 import Graphic from "@arcgis/core/Graphic";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
-import RouteTask from "@arcgis/core/tasks/RouteTask";
+import { solve } from "@arcgis/core/rest/route";
 import FeatureSet from "@arcgis/core/tasks/support/FeatureSet";
-import RouteParameters from "@arcgis/core/tasks/support/RouteParameters";
+import RouteParameters from "@arcgis/core/rest/support/RouteParameters";
 import { command } from "@vertigis/web/messaging";
 
 const pointSymbol = new SimpleMarkerSymbol({
@@ -20,10 +20,9 @@ const routeSymbol = new SimpleLineSymbol({
     width: 3,
 });
 
+const ROUTE_URL = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route";
+
 export default class RouteService extends ServiceBase {
-    routeTask = new RouteTask({
-        url: "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route",
-    });
     stops = new FeatureSet();
 
     @command("custom-route-service.add-point")
@@ -55,10 +54,8 @@ export default class RouteService extends ServiceBase {
             },
         });
 
-        const data = await this.routeTask.solve(routeParams);
-        // The TypeScript return type of `solve` is incorrect.
-        // The data contains `routeResults` which is an array of `RouteResult`.
-        const routeResult = (data as any).routeResults[0].route;
+        const data = await solve(ROUTE_URL, routeParams);
+        const routeResult = data.routeResults[0].route;
         // Use our own symbol
         routeResult.symbol = routeSymbol;
         await this.messages.commands.map.addMarkup.execute(routeResult);

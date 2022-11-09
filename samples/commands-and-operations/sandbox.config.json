@@ -5,6 +5,7 @@
     "template": "node",
     "port": 3000,
     "container": {
-        "startScript": "start-in-sandbox"
+        "startScript": "start-in-sandbox",
+        "node": "14"
     }
 }

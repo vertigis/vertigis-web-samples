@@ -26,7 +26,7 @@ export default class CustomService extends ServiceBase {
         const lastViewpoint = localStorage.getItem(EXTENT_KEY);
         if (lastViewpoint) {
             await this.messages.commands.map.goToViewpoint.execute(
-                JSON.parse(lastViewpoint)
+                JSON.parse(lastViewpoint) as ViewpointLike 
             );
         }
     }

@@ -11,10 +11,12 @@ const ButtonRow = (props) => (
 export default function Buttons(): ReactElement {
     const { commands } = useContext(UIContext);
 
-    const handleClick = () =>
+    const handleClick = () => {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         commands.ui.alert.execute({
             message: "Button clicked!",
         });
+    };
 
     return (
         <Stack spacing={2}>
