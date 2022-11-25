@@ -20,6 +20,7 @@
         "build:samples": "yarn workspaces run build",
         "build:viewer": "cd viewer && yarn build",
         "postinstall": "cd viewer && yarn",
+        "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\"",
         "test": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress run --browser chrome\"",
         "test:watch": "concurrently -k -s first -n cra,cypress \"yarn start\" \"cypress open\"",
         "start": "cd viewer && cross-env BROWSER=none yarn start"
@@ -28,15 +29,16 @@
     "devDependencies": {
         "concurrently": "^7.1.0",
         "cross-env": "^7.0.3",
-        "cypress": "^7.5.0",
-        "husky": "^4.3.6",
-        "prettier": "^2.6.2",
-        "pretty-quick": "^3.1.3",
-        "typescript": "~4.5.5"
+        "cypress": "^8.7.0",
+        "lint-staged": "^13.0.3",
+        "prettier": "^2.8.0",
+        "simple-git-hooks": "^2.8.1",
+        "typescript": "~4.8.4"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
+    "simple-git-hooks": {
+        "pre-commit": "npx lint-staged"
+    },
+    "lint-staged": {
+        "*.{js,json,ts,tsx,md,xml}": "prettier --write"
     }
 }

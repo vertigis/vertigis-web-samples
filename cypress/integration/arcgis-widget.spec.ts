@@ -20,7 +20,7 @@ const findWidgetSelect = () =>
 // on the github build agent.
 xdescribe(sampleName, () => {
     it("has the widget connected to the scene view", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -33,7 +33,7 @@ xdescribe(sampleName, () => {
     });
 
     it("controls the widget state from the date mode select", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();

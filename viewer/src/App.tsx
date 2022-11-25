@@ -30,9 +30,9 @@ const samples = [
 async function getSampleData(sampleName: string): Promise<Sample> {
     const [app, layout, library, readme] = await Promise.all([
         import(`../../samples/${sampleName}/app/app.json`),
-        import(`!!file-loader!../../samples/${sampleName}/app/layout.xml`),
+        import(`../../samples/${sampleName}/app/layout.xml`),
         import(`!!file-loader!../../samples/${sampleName}/build/main.js`),
-        import(`!!file-loader!../../samples/${sampleName}/README.md`),
+        import(`../../samples/${sampleName}/README.md`),
     ]);
 
     let parentPage;

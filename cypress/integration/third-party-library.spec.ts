@@ -9,11 +9,16 @@ const performExtentIdentify = (
     fromY: number,
     toX: number,
     toY: number
-) => getMapCanvas().click().trigger("pointermove", toX, toY).click();
+) =>
+    getMapCanvas()
+        .trigger("pointermove", fromX, fromY)
+        .click()
+        .trigger("pointermove", toX, toY)
+        .click();
 
 describe(sampleName, () => {
     it("renders graph as a result of performing an identify", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -40,7 +45,7 @@ describe(sampleName, () => {
 
         // Identify again in an area that shouldn't have any results.
         cy.getViewer().contains("button", "Identify").click();
-        performExtentIdentify(1, 1, 3, 3);
+        getMapCanvas().trigger("pointermove", 10, 10).click().click();
 
         // Graph should be visible and have no nodes rendered.
         cy.getViewer()

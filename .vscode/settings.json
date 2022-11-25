@@ -1,11 +1,12 @@
 {
     "cSpell.words": [
+        "arcgis",
         "Chainable",
+        "codesandbox",
+        "craco",
         "Geocortex",
         "Mapillary",
         "Rerender",
-        "arcgis",
-        "codesandbox",
         "serializable",
         "vertigis"
     ]

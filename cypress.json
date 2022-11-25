@@ -6,5 +6,6 @@
     "numTestsKeptInMemory": 0,
     "video": true,
     "viewportWidth": 1280,
-    "viewportHeight": 720
+    "viewportHeight": 720,
+    "baseUrl": "http://localhost:3002/"
 }

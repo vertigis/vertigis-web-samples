@@ -3,8 +3,8 @@ import Geometry from "@arcgis/core/geometry/Geometry";
 import Graphic from "@arcgis/core/Graphic";
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
-import { solve } from "@arcgis/core/rest/route";
-import FeatureSet from "@arcgis/core/tasks/support/FeatureSet";
+import route from "@arcgis/core/rest/route";
+import FeatureSet from "@arcgis/core/rest/support/FeatureSet";
 import RouteParameters from "@arcgis/core/rest/support/RouteParameters";
 import { command } from "@vertigis/web/messaging";
 
@@ -20,7 +20,8 @@ const routeSymbol = new SimpleLineSymbol({
     width: 3,
 });
 
-const ROUTE_URL = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route";
+const ROUTE_URL =
+    "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route";
 
 export default class RouteService extends ServiceBase {
     stops = new FeatureSet();
@@ -54,7 +55,9 @@ export default class RouteService extends ServiceBase {
             },
         });
 
-        const data = await solve(ROUTE_URL, routeParams);
+        const data = await route.solve(ROUTE_URL, routeParams);
+        // The TypeScript return type of `solve` is incorrect.
+        // The data contains `routeResults` which is an array of `RouteResult`.
         const routeResult = data.routeResults[0].route;
         // Use our own symbol
         routeResult.symbol = routeSymbol;

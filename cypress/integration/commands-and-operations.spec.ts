@@ -24,7 +24,7 @@ const clickDialogOkButton = () =>
 
 describe(sampleName, () => {
     it("executes commands and operations", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
