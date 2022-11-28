@@ -1,29 +1,5 @@
 .Daylight {
     background-color: var(--primaryBackground);
-    /**
-     * Web's rem size is 10px rather than the usual 16px. These are Esri's values
-     * multiplied by 1.6. 
-     */
-    --calcite-font-size--3: 1rem;
-    --calcite-font-size--2: 1.2rem;
-    --calcite-font-size--1: 1.4rem;
-    --calcite-font-size-0: 1.6rem;
-    --calcite-font-size-1: 1.8rem;
-    --calcite-font-size-2: 2rem;
-    --calcite-font-size-3: 2.6rem;
-    --calcite-font-size-4: 3.2rem;
-    --calcite-font-size-5: 4rem;
-    --calcite-font-size-6: 4.8rem;
-    --calcite-font-size-7: 5.6rem;
-    --calcite-font-size-8: 6.4rem;
-}
-
-.Daylight .esri-daylight__play-pause-button {
-    /**
-     * Same as above re: Web's rem size.
-     */
-    width: 3.2rem;
-    min-height: 3.2rem;
 }
 
 .Daylight-select {
