@@ -2,7 +2,7 @@ const sampleName = "basic-component";
 
 describe(sampleName, () => {
     it("controls model state using button", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();

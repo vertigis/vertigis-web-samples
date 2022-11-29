@@ -1,5 +1,5 @@
 import Box from "@vertigis/react-ui/Box";
-import marked from "marked";
+import { marked } from "marked";
 import { useEffect, useState } from "react";
 import Sample from "./Sample";
 

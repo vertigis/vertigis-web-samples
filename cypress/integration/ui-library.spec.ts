@@ -2,7 +2,7 @@ const sampleName = "ui-library";
 
 describe(sampleName, () => {
     it("has working buttons", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -12,7 +12,7 @@ describe(sampleName, () => {
     });
 
     it("has working tab navigation", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();

@@ -6,7 +6,7 @@ const sampleName = "iframe";
 // on the github build agent.
 xdescribe(sampleName, () => {
     it("sends message from parent to viewer and from viewer to parent", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getNestedViewer().find(`button[title="Close"]`).click();

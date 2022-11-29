@@ -48,7 +48,7 @@ xdescribe(sampleName, () => {
     // The following test depends on the web scene being used and the current
     // state of the mapillary database.
     it("synchronizes marker position with street view position", () => {
-        cy.visit(`http://localhost:3000/${sampleName}`);
+        cy.visit(sampleName);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
