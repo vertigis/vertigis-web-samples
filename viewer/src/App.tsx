@@ -10,7 +10,7 @@ import List from "@vertigis/react-ui/List";
 import ListItem from "@vertigis/react-ui/ListItem";
 import ListItemText from "@vertigis/react-ui/ListItemText";
 import { forwardRef, useEffect, useMemo, useState } from "react";
-import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import Sample from "./Sample";
 import SampleViewer from "./SampleViewer";
 
@@ -95,7 +95,7 @@ const theme = createTheme();
 
 function App() {
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     const selectedSampleId = location.pathname.replace(
         `${process.env.PUBLIC_URL}/`,
         ""
@@ -105,9 +105,11 @@ function App() {
     useEffect(() => {
         // Set default path if we're at the base path
         if (location.pathname === `${process.env.PUBLIC_URL}/`) {
-            history.replace(`${process.env.PUBLIC_URL}/${samples[0].id}`);
+            navigate(`${process.env.PUBLIC_URL}/${samples[0].id}`, {
+                replace: true,
+            });
         }
-    }, [location, history]);
+    }, [location, navigate]);
 
     useEffect(() => {
         if (!selectedSampleId) {
