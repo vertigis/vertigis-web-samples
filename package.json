@@ -7,14 +7,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/geocortex/vertigis-web-samples.git"
+        "url": "git+https://github.com/vertigis/vertigis-web-samples.git"
     },
     "author": "VertiGIS",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/geocortex/vertigis-web-samples/issues"
+        "url": "https://github.com/vertigis/vertigis-web-samples/issues"
     },
-    "homepage": "https://github.com/geocortex/vertigis-web-samples#readme",
+    "homepage": "https://github.com/vertigis/vertigis-web-samples#readme",
     "scripts": {
         "build": "yarn build:samples && yarn build:viewer",
         "build:samples": "yarn workspaces run build",

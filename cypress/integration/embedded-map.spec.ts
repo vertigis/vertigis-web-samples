@@ -56,7 +56,7 @@ xdescribe(sampleName, () => {
         // The use of `getPosition` from the mly API seems to be
         // non-deterministic as the logic appears to be using the camera to
         // calculate position instead of using the image directly.
-        // https://github.com/geocortex/vertigis-web-samples/pull/17/files/2688f92a704c8037ade11017df6d7c0319abbf81#r498361346
+        // https://github.com/vertigis/vertigis-web-samples/pull/17/files/2688f92a704c8037ade11017df6d7c0319abbf81#r498361346
         // https://github.com/mapillary/mapillary-js/blob/main/src/viewer/Viewer.ts#L610
         // Marker is set initially to match street view position.
         expectMapAndMarkerCenter(51.90797166666704, 4.489869999999996);

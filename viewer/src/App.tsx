@@ -51,10 +51,10 @@ async function getSampleData(sampleName: string): Promise<Sample> {
         library: library.default,
         parentPage: parentPage && parentPage.default,
         readme: readme.default,
-        repositoryBasePath: `https://github.com/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
+        repositoryBasePath: `https://github.com/vertigis/vertigis-web-samples/tree/master/samples/${sampleName}/`,
         codesandboxLink: !!parentPage
-            ? `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/?initialpath=/parent.html`
-            : `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${sampleName}/`,
+            ? `https://codesandbox.io/s/github/vertigis/vertigis-web-samples/tree/master/samples/${sampleName}/?initialpath=/parent.html`
+            : `https://codesandbox.io/s/github/vertigis/vertigis-web-samples/tree/master/samples/${sampleName}/`,
     };
 }
 

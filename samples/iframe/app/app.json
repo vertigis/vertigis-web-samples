@@ -3,7 +3,7 @@
     "items": [
         {
             "id": "viewer",
-            "$type": "geocortex-web-viewer",
+            "$type": "vertigis-web-viewer",
             "postMessageAllowedOrigin": "*"
         },
         {
