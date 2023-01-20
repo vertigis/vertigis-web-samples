@@ -12,8 +12,10 @@ const performExtentIdentify = (
 ) =>
     getMapCanvas()
         .trigger("pointermove", fromX, fromY)
+        .wait(100)
         .click()
         .trigger("pointermove", toX, toY)
+        .wait(100)
         .click();
 
 describe(sampleName, () => {
