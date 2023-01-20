@@ -28,7 +28,7 @@ describe(sampleName, () => {
 
         // Perform extent identify.
         cy.getViewer().contains("button", "Identify").click();
-        performExtentIdentify(400, 100, 600, 450);
+        performExtentIdentify(400, 100, 900, 450);
 
         // Graph should be visible and have nodes rendered.
         cy.getViewer()
