@@ -8,11 +8,11 @@
         "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
     },
     "dependencies": {
-        "@vertigis/web": "^5.20.0",
-        "react-force-graph": "^1.41.7"
+        "@vertigis/web": "^5.21.0",
+        "react-force-graph": "1.41.16"
     },
     "devDependencies": {
         "@vertigis/web-sdk": "^1.8.0",
-        "typescript": "~4.5.5"
+        "typescript": "~4.9.4"
     }
 }

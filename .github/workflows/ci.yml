@@ -15,10 +15,10 @@ jobs:
             # Fixes https://github.com/expo/expo-github-action/issues/20
             - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-            - name: Setup Node.js 14
+            - name: Setup Node.js 16
               uses: actions/setup-node@v2
               with:
-                  node-version: "14"
+                  node-version: "16"
 
             - run: yarn
 
