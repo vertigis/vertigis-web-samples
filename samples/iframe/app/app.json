@@ -3,7 +3,7 @@
     "items": [
         {
             "id": "viewer",
-            "$type": "vertigis-web-viewer",
+            "$type": "vertigis-web",
             "postMessageAllowedOrigin": "*"
         },
         {
