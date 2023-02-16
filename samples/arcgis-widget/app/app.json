@@ -11,6 +11,17 @@
             "$type": "map-extension",
             "id": "map-config-1",
             "webScene": "https://www.arcgis.com/home/item.html?id=94e00add11334767afb0abdce49c9a43"
+        },
+        {
+            "id": "viewer",
+            "version": "5.22.0",
+            "privacyPolicyInfo": "item://privacy/privacy-config",
+            "$type": "vertigis-web"
+        },
+        {
+            "id": "privacy-config",
+            "location": "app-footer",
+            "$type": "privacy"
         }
     ]
 }

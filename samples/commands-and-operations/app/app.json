@@ -44,6 +44,17 @@
             "id": "run-command-with-can-execute",
             "title": "Run command with canExecute",
             "action": "custom-service.command-with-can-execute"
+        },
+        {
+            "id": "viewer",
+            "version": "5.22.0",
+            "privacyPolicyInfo": "item://privacy/privacy-config",
+            "$type": "vertigis-web"
+        },
+        {
+            "id": "privacy-config",
+            "location": "app-footer",
+            "$type": "privacy"
         }
     ]
 }
