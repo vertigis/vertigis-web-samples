@@ -4,6 +4,8 @@
         {
             "id": "viewer",
             "$type": "vertigis-web",
+            "version": "5.22.0",
+            "privacyPolicyInfo": "item://privacy/privacy-config",
             "postMessageAllowedOrigin": "*"
         },
         {
@@ -25,12 +27,6 @@
             "id": "map-config",
             "$type": "map-extension",
             "webScene": "https://www.arcgis.com/home/item.html?id=9087ae6c5b34483c84e3d9b475bc5bae"
-        },
-        {
-            "id": "viewer",
-            "version": "5.22.0",
-            "privacyPolicyInfo": "item://privacy/privacy-config",
-            "$type": "vertigis-web"
         },
         {
             "id": "privacy-config",
