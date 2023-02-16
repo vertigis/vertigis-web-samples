@@ -54,6 +54,11 @@ describe(sampleName, () => {
     });
 
     it("has proper behavior for canExecute", () => {
+        cy.visit(sampleName);
+
+        // Close the licensing alert
+        cy.getViewer().find(`button[title="Close"]`).click();
+
         // Item should be disabled by default. Toggle to set it enabled.
         openIwtm();
         // Since it's just a `li` with a click handler, there isn't a `disabled`

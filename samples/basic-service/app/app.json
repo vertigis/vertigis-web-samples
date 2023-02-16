@@ -28,6 +28,17 @@
                     }
                 }
             }
+        },
+        {
+            "id": "viewer",
+            "version": "5.22.0",
+            "privacyPolicyInfo": "item://privacy/privacy-config",
+            "$type": "vertigis-web"
+        },
+        {
+            "id": "privacy-config",
+            "location": "app-footer",
+            "$type": "privacy"
         }
     ]
 }
