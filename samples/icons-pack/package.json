@@ -1,0 +1,20 @@
+{
+    "name": "sample-icons-pack",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "prepare": "npx ts-node-cwd --esm ./pipeline/registerIcons.ts",
+        "build": "vertigis-web-sdk build",
+        "start": "vertigis-web-sdk start",
+        "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
+    },
+    "dependencies": {
+        "@iconscout/react-unicons": "^2.0.2",
+        "@vertigis/web": "^5.21.0"
+    },
+    "devDependencies": {
+        "@vertigis/web-sdk": "^1.8.0",
+        "typescript": "~4.9.5",
+        "ts-node": "^10.9.1"
+    }
+}
