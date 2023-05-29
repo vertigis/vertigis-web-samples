@@ -25,6 +25,7 @@ const samples = [
     { id: "iframe", title: "Iframe Embedded" },
     { id: "third-party-lib", title: "3rd-party Library" },
     { id: "ui-library", title: "UI Library" },
+    { id: "icons-pack", title: "Icons Pack" },
 ] as const;
 
 async function getSampleData(sampleName: string): Promise<Sample> {
