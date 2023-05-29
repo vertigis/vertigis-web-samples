@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "prepare": "npx ts-node-cwd --esm ./pipeline/registerIcons.ts",
+        "prepare": "ts-node-cwd --esm ./pipeline/registerIcons.ts",
         "build": "vertigis-web-sdk build",
         "start": "vertigis-web-sdk start",
         "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
