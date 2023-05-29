@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "prepare": "ts-node-cwd --esm ./pipeline/registerIcons.ts",
-        "build": "vertigis-web-sdk build",
+        "build": "yarn prepare && vertigis-web-sdk build",
         "start": "vertigis-web-sdk start",
         "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
     },
