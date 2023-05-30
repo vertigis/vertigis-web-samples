@@ -19,7 +19,7 @@ export default function IconList(
 ): ReactElement {
     const { model } = props;
     const { getIcon } = useContext(UIContext);
-    const [showOnlyUnicons, setShowOnlyUnicons] = useState(true);
+    const [showOnlyUserIcons, setShowOnlyUserIcons] = useState(true);
     const [currentIcon, setCurrentIcon] = useState("");
     const Icon = currentIcon && getIcon(currentIcon);
 
@@ -31,20 +31,20 @@ export default function IconList(
                     <FormControlLabel
                         control={
                             <Checkbox
-                                checked={showOnlyUnicons}
+                                checked={showOnlyUserIcons}
                                 onChange={() =>
-                                    setShowOnlyUnicons(!showOnlyUnicons)
+                                    setShowOnlyUserIcons(!showOnlyUserIcons)
                                 }
                             />
                         }
-                        label="Show Only Unicons?"
+                        label="Show Only Custom Icons?"
                     />
                     <Box>
                         <List>
                             {model?.iconNames
                                 .filter((icon) =>
-                                    showOnlyUnicons
-                                        ? icon.startsWith("uil")
+                                    showOnlyUserIcons
+                                        ? icon.startsWith("custom-")
                                         : true
                                 )
                                 .map((icon) => {
@@ -67,7 +67,9 @@ export default function IconList(
                     </Box>
                 </Stack>
                 <Box margin={2}>
-                    {Icon && <Icon width="100" height="100" />}
+                    {Icon && (
+                        <Icon style={{ width: "100px", height: "100px " }} />
+                    )}
                 </Box>
             </Stack>
         </LayoutElement>
