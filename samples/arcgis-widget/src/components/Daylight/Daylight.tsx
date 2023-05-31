@@ -19,7 +19,7 @@ export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 const DaylightWidgetWrapper = createEsriMapWidget<
     DaylightModel & Accessor,
     EsriDaylight
->(EsriDaylight as MapWidgetConstructor<EsriDaylight>, true, false);
+>(EsriDaylight as MapWidgetConstructor<EsriDaylight>, true, true);
 
 const Daylight = (props: DaylightWidgetProps): ReactElement => {
     const [widget, setWidget] = useState<EsriDaylight | null>();
