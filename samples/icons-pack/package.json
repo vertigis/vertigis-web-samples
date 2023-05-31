@@ -10,7 +10,6 @@
     },
     "dependencies": {
         "@iconscout/react-unicons": "^2.0.2",
-        "@iconscout/unicons": "^4.0.8",
         "@vertigis/web": "^5.23.0"
     },
     "devDependencies": {

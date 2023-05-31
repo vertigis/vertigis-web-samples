@@ -19,7 +19,7 @@ fs.mkdirSync(outPath);
 
 // Remove these examples and add your own folders to create your own custom icon pack.
 const iconsDirs = [
-    "node_modules/@iconscout/unicons/svg/thinline",
+    "samples/icons-pack/svg",
     "node_modules/@iconscout/react-unicons/icons",
 ];
 
