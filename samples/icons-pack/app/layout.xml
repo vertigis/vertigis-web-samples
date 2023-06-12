@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="your.custom.namespace">
+    <custom:icon-list slot="top-center" padding="0.5"/>
+</layout>

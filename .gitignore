@@ -1,5 +1,6 @@
 node_modules
 build
 package-lock.json
+_support
 .DS_Store
 cypress/videos
