@@ -50,7 +50,7 @@ for (const iconsDir of iconsDirs) {
             registry.registerIcon({
                 id: "custom-${id}",
                 getComponentType: async () => (
-                    await import("${path.join(
+                    await import("${path.posix.join(
                         iconsDir.replace(/^node_modules\//, ""),
                         moduleName
                     )}")
