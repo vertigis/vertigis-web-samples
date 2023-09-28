@@ -5,7 +5,9 @@
             "id": "map-config",
             "$type": "map-extension",
             "onClick": "custom-route-service.add-point",
-            "map": {
+            "webMap": {
+                "version": "2.8",
+                "spatialReference": { "wkid": 102100 },
                 "baseMap": {
                     "baseMapLayers": [
                         {
@@ -16,15 +18,17 @@
                         }
                     ]
                 },
-                "$initialViewpoint": {
-                    "rotation": 0,
-                    "scale": 36111.909643,
-                    "targetGeometry": {
-                        "spatialReference": {
-                            "wkid": 4326
-                        },
-                        "x": -117.1611,
-                        "y": 32.7157
+                "initialState": {
+                    "viewpoint": {
+                        "rotation": 0,
+                        "scale": 36111.909643,
+                        "targetGeometry": {
+                            "spatialReference": {
+                                "wkid": 4326
+                            },
+                            "x": -117.1611,
+                            "y": 32.7157
+                        }
                     }
                 }
             }
