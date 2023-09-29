@@ -8,7 +8,7 @@
         "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
     },
     "dependencies": {
-        "@vertigis/web": "^5.21.0",
+        "@vertigis/web": "^5.23.0",
         "react-force-graph": "1.41.16"
     },
     "devDependencies": {

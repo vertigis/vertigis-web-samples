@@ -8,18 +8,18 @@ import MenuItem from "@vertigis/web/ui/MenuItem";
 import Select from "@vertigis/web/ui/Select";
 import {
     createEsriMapWidget,
+    MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
 import EsriDaylight from "@arcgis/core/widgets/Daylight";
 import DaylightModel from "./DaylightModel";
 import "./Daylight.css";
-
 export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 
 const DaylightWidgetWrapper = createEsriMapWidget<
     DaylightModel & Accessor,
     EsriDaylight
->(EsriDaylight, true, true);
+>(EsriDaylight as MapWidgetConstructor<EsriDaylight>, true, true);
 
 const Daylight = (props: DaylightWidgetProps): ReactElement => {
     const [widget, setWidget] = useState<EsriDaylight | null>();
