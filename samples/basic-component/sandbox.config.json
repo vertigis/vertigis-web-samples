@@ -6,6 +6,6 @@
     "port": 3000,
     "container": {
         "startScript": "start-in-sandbox",
-        "node": "16"
+        "node": "20"
     }
 }
