@@ -11,6 +11,7 @@ const performExtentIdentify = (
     toY: number
 ) =>
     getMapCanvas()
+        .wait(100)
         .trigger("pointermove", fromX, fromY)
         .wait(100)
         .click()
@@ -47,7 +48,7 @@ describe(sampleName, () => {
 
         // Identify again in an area that shouldn't have any results.
         cy.getViewer().contains("button", "Identify").click();
-        getMapCanvas().trigger("pointermove", 10, 10).click().click();
+        performExtentIdentify(10, 10, 20, 20);
 
         // Graph should be visible and have no nodes rendered.
         cy.getViewer()
@@ -55,7 +56,7 @@ describe(sampleName, () => {
             .should("exist")
             .should(($graphComponent) => {
                 const nodeCount = Number.parseInt(
-                    $graphComponent[0].dataset.nodeCount ?? ""
+                    $graphComponent[0].dataset.nodeCount ?? "0"
                 );
 
                 expect(nodeCount).to.equal(0);

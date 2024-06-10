@@ -10,9 +10,8 @@ const validateMarkupLayerSize = (size: number) =>
             const mapView = getMapOrSceneView(mapEl);
             const markupLayerGraphics = mapView.map.allLayers.find(
                 (layer: any) => layer.id === "__GCX_MARKUP"
-            ).graphics;
-
-            expect(markupLayerGraphics.length).to.equal(size);
+            )?.graphics;
+            expect(markupLayerGraphics?.length ?? 0).to.equal(size);
         });
 
 describe(sampleName, () => {

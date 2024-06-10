@@ -58,6 +58,9 @@ function loadSample(sample: Sample, iframe: HTMLIFrameElement) {
                     layout: getAbsoluteUrl(sample.layout),
                     libraries: libs.map((lib) => lib.default),
                     locale,
+                    applicationParams: [
+                        ["includeFunctionalTestHelpers", "true"],
+                    ],
                 };
                 webViewer.bootstrap(options);
             });
