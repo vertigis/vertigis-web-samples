@@ -1,11 +1,11 @@
-import { ComponentProps, ReactElement, useRef } from "react";
-import {
-    LayoutElement,
-    LayoutElementProperties,
-} from "@vertigis/web/components";
+import type { LayoutElementProperties } from "@vertigis/web/components";
+import { LayoutElement } from "@vertigis/web/components";
 import { useWatch, useWatchAndRerender } from "@vertigis/web/ui";
+import { useRef } from "react";
+import type { ComponentProps, ReactElement } from "react";
 import { ForceGraph3D } from "react-force-graph";
-import ThreeDimensionalGraphModel from "./ThreeDimensionalGraphModel";
+
+import type ThreeDimensionalGraphModel from "./ThreeDimensionalGraphModel";
 import useDimensions from "./useDimensions";
 import "./ThreeDimensionalGraph.css";
 

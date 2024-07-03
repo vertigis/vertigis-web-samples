@@ -7,9 +7,11 @@ import Input from "@vertigis/web/ui/Input";
 import MenuItem from "@vertigis/web/ui/MenuItem";
 import Radio from "@vertigis/web/ui/Radio";
 import RadioGroup from "@vertigis/web/ui/RadioGroup";
-import Select, { SelectChangeEvent } from "@vertigis/web/ui/Select";
+import type { SelectChangeEvent } from "@vertigis/web/ui/Select";
+import Select from "@vertigis/web/ui/Select";
 import Typography from "@vertigis/web/ui/Typography";
-import { ChangeEvent, ReactElement, useState } from "react";
+import type { ChangeEvent, ReactElement } from "react";
+import { useState } from "react";
 
 function CheckboxDemo() {
     const [state, setState] = useState({

@@ -1,9 +1,8 @@
-import {
-    ComponentModelBase,
+import type {
     ComponentModelProperties,
     PropertyDefs,
-    serializable,
 } from "@vertigis/web/models";
+import { ComponentModelBase, serializable } from "@vertigis/web/models";
 
 interface BasicComponentModelProperties extends ComponentModelProperties {
     hidden?: boolean;
@@ -15,7 +14,7 @@ export default class BasicComponentModel extends ComponentModelBase<BasicCompone
 
     // This method defines how the model will be serialized and deserialized into
     // an app item. We override it to include our new property `hidden`.
-    protected _getSerializableProperties(): PropertyDefs<BasicComponentModelProperties> {
+    protected override _getSerializableProperties(): PropertyDefs<BasicComponentModelProperties> {
         const props = super._getSerializableProperties();
         return {
             ...props,

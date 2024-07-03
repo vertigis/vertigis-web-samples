@@ -1,4 +1,5 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
+
 import Daylight, { DaylightModel } from "./components/Daylight";
 
 export default function registerLibrary(registry: LibraryRegistry): void {

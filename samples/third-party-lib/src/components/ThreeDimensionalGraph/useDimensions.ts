@@ -1,4 +1,5 @@
-import { useCallback, useLayoutEffect, useState, Ref } from "react";
+import type { Ref } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 
 export type UseDimensionsHook<T extends HTMLElement> = [
     /** The `React.Ref` function to be provided as the `ref` prop of the `HTMLElement` to measure. */
@@ -29,6 +30,8 @@ export default function useDimensions<
                 resizeObserver.disconnect();
             };
         }
+
+        return undefined;
     }, [node]);
 
     return [ref, dimensions];

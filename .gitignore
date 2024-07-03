@@ -1,6 +1,8 @@
+.DS_Store
 node_modules
-build
+**/build/*
+!viewer/build/index.html
+!viewer/build/_*
 package-lock.json
 _support
-.DS_Store
-cypress/videos
+.yarn

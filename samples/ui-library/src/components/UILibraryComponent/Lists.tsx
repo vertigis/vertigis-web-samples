@@ -1,6 +1,6 @@
 import MenuItem from "@vertigis/web/ui/MenuItem";
 import MenuList from "@vertigis/web/ui/MenuList";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 export default function Lists(): ReactElement {
     return (

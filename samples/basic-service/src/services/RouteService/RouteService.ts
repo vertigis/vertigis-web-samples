@@ -1,12 +1,12 @@
-import { ServiceBase } from "@vertigis/web/services";
-import Geometry from "@arcgis/core/geometry/Geometry";
 import Graphic from "@arcgis/core/Graphic";
-import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
-import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
+import type Geometry from "@arcgis/core/geometry/Geometry";
 import * as route from "@arcgis/core/rest/route";
 import FeatureSet from "@arcgis/core/rest/support/FeatureSet";
 import RouteParameters from "@arcgis/core/rest/support/RouteParameters";
+import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol";
+import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
 import { command } from "@vertigis/web/messaging";
+import { ServiceBase } from "@vertigis/web/services";
 
 const pointSymbol = new SimpleMarkerSymbol({
     outline: {

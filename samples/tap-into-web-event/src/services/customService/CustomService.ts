@@ -1,10 +1,11 @@
+import type { MapsLike, ViewpointLike } from "@vertigis/web/messaging";
+import { command } from "@vertigis/web/messaging";
 import { ServiceBase } from "@vertigis/web/services";
-import { command, MapsLike, ViewpointLike } from "@vertigis/web/messaging";
 
 const EXTENT_KEY = "vertigis_web_extent_key";
 
 export default class CustomService extends ServiceBase {
-    private _history: ViewpointLike[] = [];
+    private readonly _history: ViewpointLike[] = [];
     private _skipSaveNextViewpoint = false;
 
     @command("custom-service.push-viewpoint")
@@ -26,7 +27,7 @@ export default class CustomService extends ServiceBase {
         const lastViewpoint = localStorage.getItem(EXTENT_KEY);
         if (lastViewpoint) {
             await this.messages.commands.map.goToViewpoint.execute(
-                JSON.parse(lastViewpoint) as ViewpointLike 
+                JSON.parse(lastViewpoint) as ViewpointLike
             );
         }
     }
