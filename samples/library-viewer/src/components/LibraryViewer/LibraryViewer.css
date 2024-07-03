@@ -3,3 +3,7 @@
 .library-viewer > :not(style) ~ :not(style) {
     margin: 0;
 }
+
+.hide-nested-warning .MuiSnackbar-root {
+    visibility: hidden;
+}

@@ -28,13 +28,14 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
             <Stack sx={{ margin: 4 }}>
                 {hostPage ? (
                     <iframe
+                        height="100%"
                         src={hostPage}
                         onLoad={(event) => {
                             const nestedFrame =
                                 event.currentTarget.contentDocument.getElementById(
-                                    "viewer"
+                                    "embedded-viewer"
                                 ) as HTMLIFrameElement;
-                            model.handleHostFrameLoaded(nestedFrame);
+                            model.handleHostFrameLoaded?.(nestedFrame);
                         }}
                     ></iframe>
                 ) : (
