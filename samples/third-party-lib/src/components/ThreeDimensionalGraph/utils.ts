@@ -1,8 +1,7 @@
 import { Feature } from "@vertigis/arcgis-extensions/data/Feature";
-import { FeatureStream } from "@vertigis/arcgis-extensions/data/FeatureStream";
+import type { FeatureStream } from "@vertigis/arcgis-extensions/data/FeatureStream";
+import type { Features, HasFeatures } from "@vertigis/web/messaging";
 import {
-    Features,
-    HasFeatures,
     isFeatureStream,
     isFeature,
     isFeatureList,

@@ -1,4 +1,5 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
+
 import CustomService from "./services/CustomService";
 
 export default function registerLibrary(registry: LibraryRegistry): void {

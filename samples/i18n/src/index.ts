@@ -1,9 +1,10 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
+
 import TranslatableText, {
     TranslatableTextModel,
 } from "./components/TranslatableText";
-import enLanguageValues from "./en.json";
 import deLanguageValues from "./de.json";
+import enLanguageValues from "./en.json";
 
 export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerLanguageResources({

@@ -1,4 +1,5 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
+
 import ThreeDimensionalGraph, {
     ThreeDimensionalGraphModel,
 } from "./components/ThreeDimensionalGraph";

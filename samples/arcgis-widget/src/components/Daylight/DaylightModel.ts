@@ -1,11 +1,13 @@
+import type { MapModel } from "@vertigis/web/mapping/MapModel";
+import type {
+    ComponentModelProperties,
+    PropertyDefs,
+} from "@vertigis/web/models";
 import {
     ComponentModelBase,
-    ComponentModelProperties,
     importModel,
-    PropertyDefs,
     serializable,
 } from "@vertigis/web/models";
-import { MapModel } from "@vertigis/web/mapping/MapModel";
 
 export interface DaylightModelProperties extends ComponentModelProperties {
     dateOrSeason?: "season" | "date";
@@ -18,7 +20,7 @@ export default class DaylightModel extends ComponentModelBase<DaylightModelPrope
 
     dateOrSeason: DaylightModelProperties["dateOrSeason"];
 
-    protected _getSerializableProperties(): PropertyDefs<DaylightModelProperties> {
+    protected override _getSerializableProperties(): PropertyDefs<DaylightModelProperties> {
         const baseProperties = super._getSerializableProperties();
         return {
             ...baseProperties,

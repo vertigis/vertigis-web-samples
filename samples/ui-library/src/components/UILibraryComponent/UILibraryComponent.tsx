@@ -1,20 +1,19 @@
-import { ReactElement, ReactNode, useContext, useState } from "react";
-import {
-    LayoutElement,
-    LayoutElementProperties,
-} from "@vertigis/web/components";
+import type { LayoutElementProperties } from "@vertigis/web/components";
+import { LayoutElement } from "@vertigis/web/components";
+import { styled, UIContext, useWatchAndRerender } from "@vertigis/web/ui";
+import FormControlLabel from "@vertigis/web/ui/FormControlLabel";
+import Stack from "@vertigis/web/ui/Stack";
+import Switch from "@vertigis/web/ui/Switch";
 import Tab from "@vertigis/web/ui/Tab";
 import Tabs from "@vertigis/web/ui/Tabs";
-import Switch from "@vertigis/web/ui/Switch";
-import { styled, UIContext, useWatchAndRerender } from "@vertigis/web/ui";
+import { useContext, useState } from "react";
+import type { ReactElement, ReactNode } from "react";
 
-import UILibraryComponentModel from "./UILibraryComponentModel";
 import Buttons from "./Buttons";
 import FormControls from "./FormControls";
 import Lists from "./Lists";
 import TypographyDemo from "./Typography";
-import Stack from "@vertigis/web/ui/Stack";
-import FormControlLabel from "@vertigis/web/ui/FormControlLabel";
+import type UILibraryComponentModel from "./UILibraryComponentModel";
 
 function tabA11yProps(index: number) {
     return {

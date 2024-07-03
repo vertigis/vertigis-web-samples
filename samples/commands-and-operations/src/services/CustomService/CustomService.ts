@@ -1,9 +1,9 @@
-import { ServiceBase } from "@vertigis/web/services";
-import { AlertCommandArgs } from "@vertigis/viewer-spec/messaging/registry/ui";
+import type { AlertCommandArgs } from "@vertigis/viewer-spec/messaging/registry/ui";
 import { command, operation, canExecute } from "@vertigis/web/messaging";
+import { ServiceBase } from "@vertigis/web/services";
 
 export default class CustomService extends ServiceBase {
-    private _history: string[] = [];
+    private readonly _history: string[] = [];
     private _canExecuteCustomAlertCommand = false;
 
     @command("custom-service.send-message")

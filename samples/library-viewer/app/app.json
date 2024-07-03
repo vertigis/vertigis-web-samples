@@ -1,0 +1,62 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "$type": "library-viewer-model",
+            "id": "library-viewer-1",
+            "libraries": [
+                {
+                    "id": "arcgis-widget",
+                    "title": "ArcGIS Widget"
+                },
+                {
+                    "id": "basic-component",
+                    "title": "Basic Component"
+                },
+                {
+                    "id": "basic-service",
+                    "title": "Basic Service"
+                },
+                {
+                    "id": "commands-and-operations",
+                    "title": "Commands and Operations"
+                },
+                {
+                    "id": "tap-into-web-event",
+                    "title": "Tap into a Web event"
+                },
+                {
+                    "id": "embedded-map",
+                    "title": "Embedded Map"
+                },
+                {
+                    "id": "i18n",
+                    "title": "Internationalization"
+                },
+                {
+                    "id": "iframe",
+                    "title": "Iframe Embedded",
+                    "useHostPage": true
+                },
+                {
+                    "id": "third-party-lib",
+                    "title": "3rd-party Library"
+                },
+                {
+                    "id": "ui-library",
+                    "title": "UI Library"
+                },
+                {
+                    "id": "icons-pack",
+                    "title": "Icons Pack"
+                }
+            ]
+        },
+        {
+            "$type": "layout",
+            "id": "default",
+            "title": "Default",
+            "url": "./layout.xml"
+        }
+    ]
+}

@@ -1,18 +1,20 @@
-import { ReactElement, useCallback, useState } from "react";
-import { generateUuid } from "@vertigis/arcgis-extensions/utilities/uuid";
 import type Accessor from "@arcgis/core/core/Accessor";
+import EsriDaylight from "@arcgis/core/widgets/Daylight";
+import { generateUuid } from "@vertigis/arcgis-extensions/utilities/uuid";
 import { useWatch, useWatchAndRerender } from "@vertigis/web/ui";
 import FormControl from "@vertigis/web/ui/FormControl";
 import FormLabel from "@vertigis/web/ui/FormLabel";
 import MenuItem from "@vertigis/web/ui/MenuItem";
 import Select from "@vertigis/web/ui/Select";
-import {
-    createEsriMapWidget,
+import type {
     MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
-import EsriDaylight from "@arcgis/core/widgets/Daylight";
-import DaylightModel from "./DaylightModel";
+import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
+import { useCallback, useState } from "react";
+import type { ReactElement } from "react";
+
+import type DaylightModel from "./DaylightModel";
 import "./Daylight.css";
 export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 

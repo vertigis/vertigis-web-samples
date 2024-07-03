@@ -1,23 +1,24 @@
-import { Feature } from "@vertigis/arcgis-extensions/data/Feature";
+import type { Feature } from "@vertigis/arcgis-extensions/data/Feature";
 import { FeatureStream } from "@vertigis/arcgis-extensions/data/FeatureStream";
-import { LayerExtension } from "@vertigis/arcgis-extensions/mapping/LayerExtension";
-import { TableExtension } from "@vertigis/arcgis-extensions/data/TableExtension";
+import type { TableExtension } from "@vertigis/arcgis-extensions/data/TableExtension";
+import type { LayerExtension } from "@vertigis/arcgis-extensions/mapping/LayerExtension";
 import { QueryService } from "@vertigis/arcgis-extensions/tasks/query/QueryService";
-import {
-    ComponentModelBase,
-    serializable,
+import type { BrandingService } from "@vertigis/web/branding/BrandingService";
+import type { Features } from "@vertigis/web/messaging";
+import { command } from "@vertigis/web/messaging";
+import { ComponentModelBase, serializable } from "@vertigis/web/models";
+import type {
     PropertyDefs,
     ComponentModelProperties,
 } from "@vertigis/web/models";
-import { BrandingService } from "@vertigis/web/branding/BrandingService";
-import { command, Features } from "@vertigis/web/messaging";
-import { sanitizeHtml, stripHtml } from "@vertigis/web/ui";
 import { inject, FrameworkServiceType } from "@vertigis/web/services";
+import { sanitizeHtml, stripHtml } from "@vertigis/web/ui";
 import type {
     GraphData as ForceGraphData,
     LinkObject,
     NodeObject as ForceNodeObject,
 } from "force-graph";
+
 import { toFeatureArray } from "./utils";
 
 interface ThreeDimensionalGraphModelProperties
@@ -220,7 +221,7 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<Three
         this.graphData = newGraphData;
     }
 
-    protected _getSerializableProperties(): PropertyDefs<ThreeDimensionalGraphModelProperties> {
+    protected override _getSerializableProperties(): PropertyDefs<ThreeDimensionalGraphModelProperties> {
         return {
             ...super._getSerializableProperties(),
             // Specifying the serialize modes of these properties is necessary

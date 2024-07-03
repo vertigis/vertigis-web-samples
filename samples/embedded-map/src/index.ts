@@ -1,4 +1,5 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
+
 import EmbeddedMap, { EmbeddedMapModel } from "./components/EmbeddedMap";
 
 export default function (registry: LibraryRegistry): void {

@@ -1,12 +1,12 @@
-import { MapModel } from "@vertigis/web/mapping";
+import Point from "@arcgis/core/geometry/Point";
+import type { MapModel } from "@vertigis/web/mapping";
 import {
     ComponentModelBase,
     serializable,
     importModel,
 } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
-import Point from "@arcgis/core/geometry/Point";
-import { IViewer, LngLat, ViewerImageEvent } from "mapillary-js";
+import type { IViewer, LngLat, ViewerImageEvent } from "mapillary-js";
 
 /**
  *  Convert Mapillary bearing to a Scene's camera rotation.
@@ -101,16 +101,55 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // If an instance already exists, clean it up first.
         if (this._map) {
-            void this._unsyncMaps();
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            this._unsyncMaps();
         }
 
         this._map = instance;
 
         // A new instance is being set - sync the map.
         if (instance) {
-            void this._syncMaps();
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            this._syncMaps();
         }
     }
+
+    /**
+     * Handles pov changes once the image position is known.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    private readonly _onPerspectiveChange = throttle(async () => {
+        if (!this.map || !this.mapillary) {
+            return;
+        }
+
+        const { latitude, longitude, heading, tilt, fov } =
+            await this._getMapillaryCamera();
+
+        const centerPoint = new Point({
+            latitude,
+            longitude,
+        });
+
+        await Promise.all([
+            this.messages.commands.locationMarker.update.execute({
+                geometry: centerPoint,
+                heading,
+                tilt,
+                fov,
+                id: this.id,
+                maps: this.map,
+            }),
+            this.messages.commands.map.zoomToViewpoint.execute({
+                maps: this.map,
+                viewpoint: {
+                    rotation: getCameraRotationFromBearing(heading),
+                    targetGeometry: centerPoint,
+                    scale: 3000,
+                },
+            }),
+        ]);
+    }, 128);
 
     /**
      * Setup the initial state of the maps such as the location marker and map
@@ -161,7 +200,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
      * GPS value can be inaccurate and will not exactly match the observed
      * position of the camera.
      */
-    private _onImageChange = (event: ViewerImageEvent) => {
+    private readonly _onImageChange = (event: ViewerImageEvent) => {
         const { image } = event;
         if (image.merged) {
             this._currentImagePosition = image.lngLat;
@@ -176,43 +215,6 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             this.mapillary.off("pov", this._onPerspectiveChange);
         }
     };
-
-    /**
-     * Handles pov changes once the image position is known.
-     */
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    private _onPerspectiveChange = throttle(async () => {
-        if (!this.map || !this.mapillary) {
-            return;
-        }
-
-        const { latitude, longitude, heading, tilt, fov } =
-            await this._getMapillaryCamera();
-
-        const centerPoint = new Point({
-            latitude,
-            longitude,
-        });
-
-        await Promise.all([
-            this.messages.commands.locationMarker.update.execute({
-                geometry: centerPoint,
-                heading,
-                tilt,
-                fov,
-                id: this.id,
-                maps: this.map,
-            }),
-            this.messages.commands.map.zoomToViewpoint.execute({
-                maps: this.map,
-                viewpoint: {
-                    rotation: getCameraRotationFromBearing(heading),
-                    targetGeometry: centerPoint,
-                    scale: 3000,
-                },
-            }),
-        ]);
-    }, 128);
 
     /**
      * Gets the current POV of the mapillary camera

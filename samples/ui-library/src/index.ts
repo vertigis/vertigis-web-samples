@@ -1,4 +1,5 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
+
 import UILibraryComponent, {
     UILibraryComponentModel,
 } from "./components/UILibraryComponent";

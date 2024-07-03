@@ -1,13 +1,12 @@
-import { ReactElement, useEffect, useRef } from "react";
+import type { LayoutElementProperties } from "@vertigis/web/components";
+import { LayoutElement } from "@vertigis/web/components";
 import { Viewer, TransitionMode } from "mapillary-js";
-import {
-    LayoutElement,
-    LayoutElementProperties,
-} from "@vertigis/web/components";
+import type { ReactElement } from "react";
+import { useEffect, useRef } from "react";
 
 // Import the necessary CSS for the Mapillary viewer to be styled correctly.
 import "mapillary-js/dist/mapillary.css";
-import EmbeddedMapModel from "./EmbeddedMapModel";
+import type EmbeddedMapModel from "./EmbeddedMapModel";
 
 export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
