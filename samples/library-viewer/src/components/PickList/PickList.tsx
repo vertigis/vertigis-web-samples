@@ -18,6 +18,7 @@ export interface PickListProps extends LayoutElementProperties<PickListModel> {}
 const PickList: FC<PickListProps> = ({ model, title, ...layoutProps }) => {
     const { libraries, selectedLibrary } = model;
     useWatchAndRerender(model, "libraries");
+    useWatchAndRerender(model, "selectedLibrary");
 
     const onClick = useCallback(
         (library: LibraryConfig) => {

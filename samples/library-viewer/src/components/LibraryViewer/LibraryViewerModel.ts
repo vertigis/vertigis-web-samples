@@ -63,27 +63,16 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         // now. Otherwise we'll need to create the config and reload the app.
         const { hostElement } = this.appContext;
         if (hostElement.hasAttribute("library-loaded")) {
-            hostElement.style.display = "block";
+            this._restoreVisibility();
 
-            // When running in netlify this lets us show a loading spinner, see
-            // `viewer/build/index.html`
-            const iframe = parent.document.getElementById(
-                "vgs_web_library_viewer_iframe"
-            );
-            if (iframe) {
-                iframe.style.display = "block";
-            }
             // setTimeout is necessary here in order to make sure our custom
             // commands have initialized.
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             setTimeout(async () => {
                 await this._displayUI(this.selectedLibrary);
-                if (!parent.onhashchange) {
-                    parent.onhashchange = () => this._handleHashChangeEvent();
-                }
             }, 100);
         } else {
-            // hostElement.style.display = "none";
+            hostElement.style.display = "none";
             parent.location.hash = this.selectedLibrary;
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             setTimeout(() => this._loadLibrary(this.selectedLibrary), 100);
@@ -145,11 +134,15 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
                 )
             )?.default as string;
             this.handleHostFrameLoaded = (iframe: HTMLIFrameElement) => {
+                const embeddedHost =
+                    iframe.contentDocument.getElementById("gcx-app");
+                embeddedHost.classList.add("hide-nested-warning");
                 this._loadViewer({
                     frame: iframe.contentWindow as Window & typeof globalThis,
                     appConfig: sampleAppConfig?.default as AppConfig,
                     layout: sampleLayout?.default as LayoutXml,
                     customLibrary: customLibrary?.default as Library,
+                    hostElement: embeddedHost,
                 });
             };
         } else {
@@ -252,10 +245,8 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         appConfig: AppConfig;
         layout: LayoutXml;
         customLibrary: Library;
-        hostElement?: HTMLElement;
+        hostElement: HTMLElement;
     }): void {
-        // Bootstrap a new viewer application in the current iframe with the
-        // merged layout and config.
         (frame.require as any)(["require", "web"], (require, webViewer) => {
             require([
                 "@vertigis/web-libraries!/common",
@@ -297,6 +288,10 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             this.libraryUrl = constructedUrl;
         }
 
+        if (!parent.onhashchange) {
+            parent.onhashchange = () => this._handleHashChangeEvent();
+        }
+
         await Promise.all([
             this.messages
                 .command<SetLibraryArgs>("library-viewer.set-libraries")
@@ -317,6 +312,26 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             await this.messages
                 .command<LibraryConfig>("library-viewer.load-library")
                 .execute(library);
+
+            // If using a host page the application never restarts, so this
+            // needs to be taken care of here.
+            if (library.useHostPage) {
+                this._restoreVisibility();
+                await this._displayUI(selectedLibrary);
+            }
+        }
+    }
+
+    private _restoreVisibility(): void {
+        this.appContext.hostElement.style.display = "block";
+
+        // When running in netlify this lets us show a loading spinner, see
+        // `viewer/build/index.html`
+        const iframe = parent.document.getElementById(
+            "vgs_web_library_viewer_iframe"
+        );
+        if (iframe) {
+            iframe.style.display = "block";
         }
     }
 
