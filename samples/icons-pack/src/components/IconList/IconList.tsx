@@ -31,7 +31,7 @@ export default function IconList(
                     <FormControlLabel
                         control={
                             <Checkbox
-                                checked={showOnlyUserIcons}
+                                checked={showOnlyUserIcons ?? true}
                                 onChange={() =>
                                     setShowOnlyUserIcons(!showOnlyUserIcons)
                                 }
@@ -68,7 +68,7 @@ export default function IconList(
                 </Stack>
                 <Box margin={2}>
                     {Icon && (
-                        <Icon style={{ width: "100px", height: "100px " }} />
+                        <Icon style={{ width: "100px", height: "100px" }} />
                     )}
                 </Box>
             </Stack>

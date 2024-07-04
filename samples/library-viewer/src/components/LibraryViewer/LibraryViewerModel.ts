@@ -36,14 +36,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
     @inject(FrameworkServiceType.APP_CONTEXT)
     appContext: AppContext;
 
-    /**
-     * Configuration for the libraries in this collection that you'd like to be
-     * available through this viewer. The `id` is the name of a sibling folder
-     * with a library in it, and the `name` is whatever you'd like to show up as
-     * the title in the picklist.
-     */
     libraries: LibraryConfig[];
-
     selectedLibrary: string;
     libraryUrl: string;
     hostPage: string;
