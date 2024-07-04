@@ -20,6 +20,5 @@
         "@vertigis/web-sdk": "^1.10.0",
         "tsx": "4.7.2",
         "typescript": "~5.3.3"
-    },
-    "type": "module"
+    }
 }

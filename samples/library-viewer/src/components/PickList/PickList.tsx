@@ -15,6 +15,8 @@ import type { LibraryConfig } from "../LibraryViewer/LibraryViewerModel";
 
 export interface PickListProps extends LayoutElementProperties<PickListModel> {}
 
+const variantMapping = { h3: "h1", h6: "h2" };
+
 const PickList: FC<PickListProps> = ({ model, title, ...layoutProps }) => {
     const { libraries, selectedLibrary } = model;
     useWatchAndRerender(model, "libraries");
@@ -33,7 +35,9 @@ const PickList: FC<PickListProps> = ({ model, title, ...layoutProps }) => {
     return (
         <LayoutElement {...layoutProps} stretch className="pick-list">
             <Paper>
-                <Typography variant="h3">{title}</Typography>
+                <Typography variant="h3" variantMapping={variantMapping}>
+                    {title}
+                </Typography>
                 <MenuList>
                     {libraries?.map((library) => (
                         <ListItemButton
@@ -41,7 +45,11 @@ const PickList: FC<PickListProps> = ({ model, title, ...layoutProps }) => {
                             selected={selectedLibrary.includes(library.id)}
                             onClick={() => onClick(library)}
                         >
-                            <Typography variant="h4">
+                            <Typography
+                                variant="h6"
+                                variantMapping={variantMapping}
+                                sx={{ lineHeight: 2 }}
+                            >
                                 {library.title}
                             </Typography>
                         </ListItemButton>
