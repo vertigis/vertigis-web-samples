@@ -20,6 +20,8 @@ jobs:
               with:
                   node-version: 20.x
 
+            - run: corepack enable
+
             - run: yarn
 
             - run: yarn build
