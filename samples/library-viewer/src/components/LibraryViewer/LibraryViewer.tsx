@@ -19,13 +19,20 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
     children,
     ...layoutProps
 }) => {
-    const { selectedLibrary, libraryUrl, hostPage } = model;
+    const { selectedLibrary, codeSandboxUrl, hostPage } = model;
     useWatchAndRerender(model, "libraryUrl");
     useWatchAndRerender(model, "hostPage");
 
     return (
         <LayoutElement {...layoutProps} stretch className="library-viewer">
-            <Stack sx={{ margin: 4 }}>
+            <Stack
+                sx={{
+                    marginTop: 4,
+                    marginLeft: 4,
+                    marginBottom: 0,
+                    marginRight: 4,
+                }}
+            >
                 {hostPage ? (
                     <iframe
                         height="100%"
@@ -52,8 +59,12 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
                 >
                     View the source code on GitHub
                 </Link>
-                <Link href={libraryUrl} download={`${selectedLibrary}.js`}>
-                    Download this library
+                <Link
+                    href={codeSandboxUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Edit this sample in CodeSandbox
                 </Link>
             </Stack>
         </LayoutElement>
