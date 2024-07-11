@@ -3,5 +3,5 @@
     "compilerOptions": {
         "baseUrl": "."
     },
-    "include": [".eslintrc.js", "src"]
+    "include": [".eslintrc.js", "src", "pipeline"]
 }
