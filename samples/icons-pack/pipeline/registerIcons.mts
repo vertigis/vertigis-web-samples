@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from "url";
 
-import { createSvgIcon, pascalToKebabCase } from "./utilities.js";
+import { createSvgIcon, pascalToKebabCase } from "./utilities.mjs";
 
 // This script generates a function that invokes registerIcon() for every icon
 // exported by @iconscout/react-unicons
