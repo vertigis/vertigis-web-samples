@@ -16,14 +16,14 @@
     },
     "homepage": "https://github.com/vertigis/vertigis-web-samples#readme",
     "scripts": {
-        "build": "yarn build:samples && yarn build:viewer",
+        "build": "yarn build:samples && yarn build:viewer && node scripts/copy-static-files.js",
         "build:samples": "yarn workspaces foreach -Rt --from \"samples/!(library-viewer)\" run build",
         "build:viewer": "yarn workspace library-viewer run build",
         "prettier": "prettier --write \"**/*.ts\" \"**/*.json\" \"**/*.tsx\" \"**/*.js\"",
         "test": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress run --browser chrome\"",
         "test:watch": "concurrently -k -s first -n webpack,cypress \"yarn start\" \"cypress open\"",
         "start": "yarn workspace library-viewer start",
-        "serve-library-viewer": "node scripts/copy-static-files.js && node scripts/serve-library-viewer.js"
+        "serve-library-viewer": "node scripts/serve-library-viewer.js"
     },
     "devDependencies": {
         "@types/react": "^18.3.2",
@@ -42,6 +42,7 @@
         "http-proxy-middleware": "^3.0.0",
         "lint-staged": "^13.1.2",
         "prettier": "^2.8.4",
+        "raw-loader": "^4.0.2",
         "shx": "^0.3.4",
         "simple-git-hooks": "^2.8.1",
         "ts-loader": "^9.5.1",
