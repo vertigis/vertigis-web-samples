@@ -38,7 +38,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
 
     libraries: LibraryConfig[];
     selectedLibrary: string;
-    libraryUrl: string;
+    codeSandboxUrl: string;
     hostPage: string;
 
     handleHostFrameLoaded: (iframe: HTMLIFrameElement) => void;
@@ -264,22 +264,13 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         });
     }
 
-    private async _displayUI(selectedLibrary: string): Promise<void> {
-        const constructedUrl =
-            // This import makes the library download available at the constructed url.
-            (
-                await import(
-                    /* webpackExclude: /(node_modules|library-viewer)/ */
-                    `!!file-loader?{"name": "static/js/[name].[contenthash:8].[ext]"}!../../../../../samples/${selectedLibrary}/build/main.js`
-                )
-            )?.default as string;
-
-        // This happens in the production build for some reason.
-        if (constructedUrl.startsWith(".static")) {
-            this.libraryUrl = constructedUrl.replace(".", "../");
-        } else {
-            this.libraryUrl = constructedUrl;
-        }
+    private async _displayUI(
+        selectedLibrary: string,
+        useHostPage = false
+    ): Promise<void> {
+        this.codeSandboxUrl = useHostPage
+            ? `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${selectedLibrary}/?initialpath=parent.html`
+            : `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${selectedLibrary}`;
 
         if (!parent.onhashchange) {
             parent.onhashchange = () => this._handleHashChangeEvent();
@@ -310,7 +301,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             // needs to be taken care of here.
             if (library.useHostPage) {
                 this._restoreVisibility();
-                await this._displayUI(selectedLibrary);
+                await this._displayUI(selectedLibrary, true);
             }
         }
     }

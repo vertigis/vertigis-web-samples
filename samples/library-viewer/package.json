@@ -20,6 +20,10 @@
         "@vertigis/web-sdk": "^1.10.0",
         "typescript": "~5.3.3"
     },
+    "peerDependencies": {
+        "react": "*",
+        "react-dom": "*"
+    },
     "overrides": {
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
     }
