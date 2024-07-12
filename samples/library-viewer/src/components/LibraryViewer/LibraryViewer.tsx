@@ -36,6 +36,7 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
                 {hostPage ? (
                     <iframe
                         height="100%"
+                        name="host-frame"
                         src={hostPage}
                         onLoad={(event) => {
                             const nestedFrame =

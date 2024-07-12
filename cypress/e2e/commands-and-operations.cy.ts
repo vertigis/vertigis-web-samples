@@ -24,7 +24,7 @@ const clickDialogOkButton = () =>
 
 describe(sampleName, () => {
     it("executes commands and operations", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -54,7 +54,7 @@ describe(sampleName, () => {
     });
 
     it("has proper behavior for canExecute", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();

@@ -2,7 +2,7 @@ const sampleName = "i18n";
 
 describe(sampleName, () => {
     it("shows english text", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -11,7 +11,7 @@ describe(sampleName, () => {
     });
 
     it("shows german text", () => {
-        cy.visit(`http://localhost:3002/${sampleName}?locale=de`);
+        cy.visit(`http://localhost:3001/?locale=de#${sampleName}`);
 
         cy.getViewer()
             .contains("Dieser Text wird übersetzt.")

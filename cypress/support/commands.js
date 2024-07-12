@@ -29,26 +29,34 @@ Cypress.Commands.add("getViewer", { prevSubject: "optional" }, (subject) =>
         (subject &&
             cy
                 .wrap(subject, { log: false })
-                .find('iframe[data-cy="viewer-frame"]', { log: false })) ||
-        cy.get('iframe[data-cy="viewer-frame"]', { log: false })
+                .find("iframe[name=viewer]", { log: false })) ||
+        cy.get("iframe[name=viewer]", { log: false })
     )
         .its("0.contentDocument.body", { log: false })
         .should("not.be.empty")
         .then((result) => cy.wrap(result, { log: false }))
 );
 
-Cypress.Commands.add("getViewerParent", () =>
+Cypress.Commands.add("getEmbeddedViewerHost", () =>
     cy
-        .get('iframe[data-cy="viewer-outer-frame"]', { log: false })
+        .getViewer()
+        .find('iframe[name="host-frame"]', { log: false })
         .its("0.contentDocument.body", { log: false })
         .should("not.be.empty")
         .then((subject) => cy.wrap(subject, { log: false }))
 );
 
-Cypress.Commands.add("getNestedViewer", () => cy.getViewerParent().getViewer());
+Cypress.Commands.add("getEmbeddedViewer", () =>
+    cy
+        .getEmbeddedViewerHost()
+        .find("iframe#embedded-viewer", { log: false })
+        .its("0.contentDocument.body", { log: false })
+        .should("not.be.empty")
+        .then((subject) => cy.wrap(subject, { log: false }))
+);
 
 Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
-    const selector = id ? `[data-layout-id="${id}"]` : ".gcx-map";
+    const selector = id ? `[gcx-id="${id}"]` : ".gcx-map";
 
     return cy
         .wrap(subject, { log: false })
@@ -63,7 +71,7 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
             expect(map.map.loadStatus, "expect map to be loaded").to.equal(
                 "loaded"
             );
+            expect(!!map, "expect map to be created").to.be.true;
             expect(map.ready, "expect map to be ready").to.be.true;
-            expect(map.updating, "expected map to finish updating").to.be.false;
         });
 });

@@ -27,10 +27,7 @@ const expectMapAndMarkerCenter = (lat: number, lon: number) =>
 
             // Check location marker center
             const locationMarker = mapView.map.allLayers
-                .find(
-                    (layer: any) =>
-                        layer.id === "__GCX_MAP_CONTEXT_AND_GEOLOCATION"
-                )
+                .find((layer: any) => layer.id === "__GCX_MARKUP_1")
                 .graphics.getItemAt(0);
             expect(locationMarker.geometry.latitude).to.be.closeTo(
                 lat,
@@ -48,7 +45,7 @@ xdescribe(sampleName, () => {
     // The following test depends on the web scene being used and the current
     // state of the mapillary database.
     it("synchronizes marker position with street view position", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();

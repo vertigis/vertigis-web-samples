@@ -2,17 +2,16 @@ declare namespace Cypress {
     interface Chainable<Subject> {
         getMap(id?: string): Chainable<JQuery<HTMLDivElement>>;
         /**
-         * Get the `body` element from the viewer `iframe` when nested within a
-         * parent iframe.
+         * Get the `body` element from the embedded viewer `iframe`.
          */
-        getNestedViewer(): Chainable<JQuery<HTMLBodyElement>>;
+        getEmbeddedViewer(): Chainable<JQuery<HTMLBodyElement>>;
         /**
-         * Get the `body` element from the viewer `iframe`.
+         * Get the `body` element from the library viewer `iframe`.
          */
         getViewer(): Chainable<JQuery<HTMLBodyElement>>;
         /**
-         * Get the `body` element from the parent `iframe` of the viewer.
+         * Get the `body` element from the host `iframe` for the embedded viewer.
          */
-        getViewerParent(): Chainable<JQuery<HTMLBodyElement>>;
+        getEmbeddedViewerHost(): Chainable<JQuery<HTMLBodyElement>>;
     }
 }

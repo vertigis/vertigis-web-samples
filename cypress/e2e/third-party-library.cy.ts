@@ -21,7 +21,7 @@ const performExtentIdentify = (
 
 describe(sampleName, () => {
     it("renders graph as a result of performing an identify", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -31,7 +31,9 @@ describe(sampleName, () => {
 
         // Perform extent identify.
         cy.getViewer().contains("button", "Identify").click();
-        performExtentIdentify(400, 100, 900, 450);
+        cy.wait(2000);
+
+        performExtentIdentify(200, 50, 350, 200);
 
         // Graph should be visible and have nodes rendered.
         cy.getViewer()

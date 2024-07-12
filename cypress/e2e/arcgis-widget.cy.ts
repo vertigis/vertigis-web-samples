@@ -14,13 +14,18 @@ const expectLightingDate = (isoDate: string) =>
         });
 
 const findWidgetSelect = () =>
-    cy.getViewer().find('select[aria-label="Season"]');
+    cy
+        .getViewer()
+        .getMap()
+        .find(".esri-daylight__season-picker")
+        .shadow()
+        .find('select[aria-label="Season"]');
 
 // Temporarily skipped until we can figure out why the web scene isn't loading
 // on the github build agent.
 xdescribe(sampleName, () => {
     it("has the widget connected to the scene view", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -33,7 +38,7 @@ xdescribe(sampleName, () => {
     });
 
     it("controls the widget state from the date mode select", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -45,7 +50,7 @@ xdescribe(sampleName, () => {
         cy.getViewer()
             .contains("label", "Date Picker Mode")
             .parent()
-            .find('[role="button"]')
+            .find('[role="combobox"]')
             .click();
         cy.getViewer().contains('li[role="option"]', "Date").click();
 
