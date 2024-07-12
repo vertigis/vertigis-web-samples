@@ -1834,13 +1834,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.17.1":
-  version: 1.17.1
-  resolution: "@remix-run/router@npm:1.17.1"
-  checksum: 10c0/bee1631feb03975b64e1c7b574da432a05095dda2ff0f164c737e4952841a58d7b9861de87bd13a977fd970c74dcf8c558fc2d26c6ec01a9ae9041b1b4430869
-  languageName: node
-  linkType: hard
-
 "@sindresorhus/is@npm:^0.14.0":
   version: 0.14.0
   resolution: "@sindresorhus/is@npm:0.14.0"
@@ -8060,7 +8053,6 @@ __metadata:
     "@types/xml2js": "npm:^0.4.14"
     "@vertigis/web": "npm:^5.30.0"
     "@vertigis/web-sdk": "npm:^1.10.0"
-    react-router-dom: "npm:^6.24.1"
     typescript: "npm:~5.3.3"
     xml2js: "npm:^0.6.2"
   peerDependencies:
@@ -10342,30 +10334,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.24.1":
-  version: 6.24.1
-  resolution: "react-router-dom@npm:6.24.1"
-  dependencies:
-    "@remix-run/router": "npm:1.17.1"
-    react-router: "npm:6.24.1"
-  peerDependencies:
-    react: ">=16.8"
-    react-dom: ">=16.8"
-  checksum: 10c0/458c6c539304984c47b0ad8d5d5b1f8859cc0845e47591d530cb4fcb13498f70a89b42bc4daeea55d57cfa08408b453bcf601cabb2c987f554cdcac13805caa8
-  languageName: node
-  linkType: hard
-
-"react-router@npm:6.24.1":
-  version: 6.24.1
-  resolution: "react-router@npm:6.24.1"
-  dependencies:
-    "@remix-run/router": "npm:1.17.1"
-  peerDependencies:
-    react: ">=16.8"
-  checksum: 10c0/f50c78ca52c5154ab933c17708125e8bf71ccf2072993a80302526a0a23db9ceac6e36d5c891d62ccd16f13e60cd1b6533a2036523d1b09e0148ac49e34b2e83
-  languageName: node
-  linkType: hard
-
 "react-transition-group@npm:^4.4.5":
   version: 4.4.5
   resolution: "react-transition-group@npm:4.4.5"
@@ -11923,15 +11891,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"three-bmfont-text@github:dmarcos/three-bmfont-text#eed4878795be9b3e38cf6aec6b903f56acd1f695":
-  version: 3.0.0
-  resolution: "three-bmfont-text@https://github.com/dmarcos/three-bmfont-text.git#commit=eed4878795be9b3e38cf6aec6b903f56acd1f695"
+"three-bmfont-text@npm:3.0.1":
+  version: 3.0.1
+  resolution: "three-bmfont-text@npm:3.0.1"
   dependencies:
     array-shuffle: "npm:^1.0.1"
+    inherits: "npm:^2.0.1"
     layout-bmfont-text: "npm:^1.2.0"
     nice-color-palettes: "npm:^3.0.0"
+    object-assign: "npm:^4.0.1"
     quad-indices: "npm:^2.0.1"
-  checksum: 10c0/10d0d93cd035783fa747028adfa625f1a2a41d35a466a1aac974847ac0df3ce8fbbbaef8ef7af778080c6a49f0d9a9085c1c9fb7b7f72c81b63047e708491764
+  checksum: 10c0/69dd96ea7716ccc11e787a455f9e823fab420f299a6fad0acf0c4b0b194c7909895df6fe7be88174fd329ce961c5dba182bc2aebfa46ddf5f854121c7dff3a65
   languageName: node
   linkType: hard
 

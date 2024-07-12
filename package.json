@@ -60,7 +60,8 @@
     },
     "resolutions": {
         "@types/react": "^18.3.2",
-        "sax": "^1.4.1"
+        "sax": "^1.4.1",
+        "three-bmfont-text": "3.0.1"
     },
     "packageManager": "yarn@4.3.1"
 }

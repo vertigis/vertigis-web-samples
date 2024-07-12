@@ -67,7 +67,7 @@ export default class ReadMeModel extends ComponentModelBase<ComponentModelProper
             }
             const [, path] = url.split("viewer/");
             this.codePageTitle = path.split("/").pop();
-            this.codePage = `${"```"}\n${this.codePages[path]}\n${"```"}`;
+            this.codePage = `\`\`\`\n${this.codePages[path]}\n\`\`\``;
             return false;
         };
     }
