@@ -126,6 +126,9 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
                     /* webpackExclude: /node_modules/ */ `!!file-loader!../../../../../samples/${libraryId}/app/parent.html`
                 )
             )?.default as string;
+            if (this.hostPage.startsWith(".")) {
+                this.hostPage = this.hostPage.replace(".", "../");
+            }
             this.handleHostFrameLoaded = (iframe: HTMLIFrameElement) => {
                 const embeddedHost =
                     iframe.contentDocument.getElementById("gcx-app");

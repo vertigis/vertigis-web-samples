@@ -24,7 +24,7 @@ Run `yarn start` or `npm start` within the root of a sample directory. For examp
 
 ### Creating a new sample
 
-Each sample follows the same pattern as the VertiGIS Studio Web SDK. The easiest way to create a new sample is to copy an existing sample directory, and rename the `name` property in the `package.json` of your sample to suit. Once created you will need to add your sample to the samples viewer `samples` array in [the viewer source](viewer/src/App.tsx) to have it show up in the list of samples.
+Each sample follows the same pattern as the VertiGIS Studio Web SDK. The easiest way to create a new sample is to copy an existing sample directory, and rename the `name` property in the `package.json` of your sample to suit. Once created you will need to add your sample to the samples viewer `libraries` config in [samples/library-viewer/app/app.json](samples/library-viewer/app/app.json) to have it show up in the list of samples. 
 
 ### Testing
 
