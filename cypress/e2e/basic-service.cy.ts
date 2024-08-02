@@ -16,7 +16,7 @@ const validateMarkupLayerSize = (size: number) =>
 
 describe(sampleName, () => {
     it("plots drive route from map clicks", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
         cy.getViewer().find(`button[title="Close"]`).click();
@@ -29,7 +29,7 @@ describe(sampleName, () => {
         // One graphic for first stop
         validateMarkupLayerSize(1);
 
-        cy.getViewer().getMap().click(600, 350);
+        cy.getViewer().getMap().click(500, 200);
 
         // Two more graphics for second stop + route
         validateMarkupLayerSize(3);

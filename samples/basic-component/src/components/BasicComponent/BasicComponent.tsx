@@ -1,12 +1,11 @@
-import { ReactElement } from "react";
-import {
-    LayoutElement,
-    LayoutElementProperties,
-} from "@vertigis/web/components";
-import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
+import type { LayoutElementProperties } from "@vertigis/web/components";
+import { LayoutElement } from "@vertigis/web/components";
 import Button from "@vertigis/web/ui/Button";
 import Typography from "@vertigis/web/ui/Typography";
-import BasicComponentModel from "./BasicComponentModel";
+import { useWatchAndRerender } from "@vertigis/web/ui/hooks";
+import type { ReactElement } from "react";
+
+import type BasicComponentModel from "./BasicComponentModel";
 import "./BasicComponent.css";
 
 const BasicComponent = (

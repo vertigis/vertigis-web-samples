@@ -3,6 +3,7 @@ import { defineConfig } from "cypress";
 export default defineConfig({
     chromeWebSecurity: false,
     defaultCommandTimeout: 45000,
+    modifyObstructiveCode: false,
     responseTimeout: 45000,
     retries: {
         runMode: 3,
@@ -17,6 +18,5 @@ export default defineConfig({
         setupNodeEvents(on, config) {
             return require("./cypress/plugins/index.js")(on, config);
         },
-        baseUrl: "http://localhost:3002/",
     },
 });

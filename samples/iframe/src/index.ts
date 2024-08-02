@@ -1,4 +1,4 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function registerLibrary(registry: LibraryRegistry): void {

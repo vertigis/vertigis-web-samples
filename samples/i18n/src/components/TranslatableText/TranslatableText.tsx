@@ -1,18 +1,16 @@
-import { ReactElement, useContext } from "react";
-import {
-    LayoutElement,
-    LayoutElementProperties,
-} from "@vertigis/web/components";
+import type { LayoutElementProperties } from "@vertigis/web/components";
+import { LayoutElement } from "@vertigis/web/components";
 import { UIContext } from "@vertigis/web/ui";
 import Button from "@vertigis/web/ui/Button";
 import Typography from "@vertigis/web/ui/Typography";
-import TranslatableTextModel from "./TranslatableTextModel";
+import { useContext } from "react";
+import type { ReactElement } from "react";
+
+import type TranslatableTextModel from "./TranslatableTextModel";
 
 export default function TranslatableText(
     props: LayoutElementProperties<TranslatableTextModel>
 ): ReactElement {
-    // The type of the `UIContext` functions will be fixed in 5.8 to be arrow functions.
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { translate } = useContext(UIContext);
 
     return (

@@ -1,8 +1,9 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
+
+import { registerIcons } from "./_support/registerIcons";
 import IconList, { IconListModel } from "./components/IconList";
 // This import is auto-generated when you install packages or run 'yarn
 // prepare'.
-import { registerIcons } from "./_support/registerIcons";
 
 export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerComponent({

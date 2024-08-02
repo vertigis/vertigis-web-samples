@@ -9,5 +9,6 @@
         "Rerender",
         "serializable",
         "vertigis"
-    ]
+    ],
+    "eslint.workingDirectories": [{ "pattern": "./samples/*/" }]
 }

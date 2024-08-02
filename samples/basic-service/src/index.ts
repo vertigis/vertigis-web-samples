@@ -1,4 +1,5 @@
-import { LibraryRegistry } from "@vertigis/web/config";
+import type { LibraryRegistry } from "@vertigis/web/config";
+
 import RouteService from "./services/RouteService";
 
 export default function registerLibrary(registry: LibraryRegistry): void {

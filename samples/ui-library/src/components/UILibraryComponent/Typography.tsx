@@ -1,5 +1,5 @@
 import Typography from "@vertigis/web/ui/Typography";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 export default function TypographyDemo(): ReactElement {
     return (

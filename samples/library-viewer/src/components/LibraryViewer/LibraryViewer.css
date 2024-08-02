@@ -1,0 +1,18 @@
+.library-viewer {
+    min-height: calc(100% - 30rem);
+}
+
+/* Fixing a very odd bug created in the mapillary sample by a "clever" MUI
+   style. */
+.library-viewer > :not(style) ~ :not(style) {
+    margin: 0;
+}
+
+.gcx-readme {
+    overflow-y: auto;
+}
+
+/* Remove a double licensing popup from the iframe sample */
+.hide-nested-warning .MuiSnackbar-root {
+    visibility: hidden;
+}

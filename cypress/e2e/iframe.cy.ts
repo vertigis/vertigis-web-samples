@@ -6,12 +6,12 @@ const sampleName = "iframe";
 // on the github build agent.
 xdescribe(sampleName, () => {
     it("sends message from parent to viewer and from viewer to parent", () => {
-        cy.visit(sampleName);
+        cy.visit(`http://localhost:3001/#${sampleName}`);
 
         // Close the licensing alert
-        cy.getNestedViewer().find(`button[title="Close"]`).click();
+        cy.getViewer().find(`button[title="Close"]`).click();
 
-        cy.getNestedViewer()
+        cy.getEmbeddedViewer()
             .getMap()
             .should((map) => {
                 expectMapToBeStationary(map);
@@ -19,9 +19,9 @@ xdescribe(sampleName, () => {
                 expect(viewpoint.camera.position.z).not.to.equal(-250);
             });
 
-        cy.getViewerParent().contains("button", "Go!").click();
+        cy.getEmbeddedViewerHost().contains("button", "Go!").click();
 
-        cy.getNestedViewer()
+        cy.getEmbeddedViewer()
             .getMap()
             .should((map) => {
                 expectMapToBeStationary(map);
@@ -29,11 +29,11 @@ xdescribe(sampleName, () => {
                 expect(viewpoint.camera.position.z).to.equal(-250);
             });
 
-        cy.getViewerParent()
+        cy.getEmbeddedViewerHost()
             .contains("button", "Zoom to initial viewpoint")
             .click();
 
-        cy.getNestedViewer()
+        cy.getEmbeddedViewer()
             .getMap()
             .should((map) => {
                 expectMapToBeStationary(map);
@@ -41,20 +41,20 @@ xdescribe(sampleName, () => {
                 expect(viewpoint.camera.position.z).not.to.equal(-250);
             });
 
-        cy.getNestedViewer()
+        cy.getEmbeddedViewer()
             .contains("button", "Send message to parent")
             .click();
 
-        cy.getNestedViewer()
+        cy.getEmbeddedViewer()
             .contains('[role="dialog"]', "Enter the message")
             .find("input")
             .type("Hello world");
 
-        cy.getNestedViewer()
+        cy.getEmbeddedViewer()
             .contains('[role="dialog"]', "Enter the message")
             .contains("button", "OK")
             .click();
 
-        cy.getViewerParent().contains("Hello world");
+        cy.getEmbeddedViewerHost().contains("Hello world");
     });
 });
