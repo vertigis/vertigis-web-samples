@@ -54,7 +54,7 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
                     </LayoutElementContainer>
                 )}
                 <Link
-                    href={`https://github.com/vertigis/vertigis-web-samples/tree/main/samples/${selectedLibrary}/`}
+                    href={`https://github.com/vertigis/vertigis-web-samples/tree/master/samples/${selectedLibrary}/`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
