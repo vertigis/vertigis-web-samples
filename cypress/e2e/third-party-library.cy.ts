@@ -50,7 +50,7 @@ describe(sampleName, () => {
 
         // Identify again in an area that shouldn't have any results.
         cy.getViewer().contains("button", "Identify").click();
-        performExtentIdentify(10, 10, 20, 20);
+        performExtentIdentify(10, 100, 15, 105);
 
         // Graph should be visible and have no nodes rendered.
         cy.getViewer()
