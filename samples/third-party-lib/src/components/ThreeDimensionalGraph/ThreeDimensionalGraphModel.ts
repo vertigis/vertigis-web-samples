@@ -17,7 +17,7 @@ import type {
     GraphData as ForceGraphData,
     LinkObject,
     NodeObject as ForceNodeObject,
-} from "force-graph";
+} from "react-force-graph-3d";
 
 import { toFeatureArray } from "./utils";
 

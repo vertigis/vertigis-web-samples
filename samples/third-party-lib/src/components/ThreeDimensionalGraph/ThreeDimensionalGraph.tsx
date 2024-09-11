@@ -2,8 +2,8 @@ import type { LayoutElementProperties } from "@vertigis/web/components";
 import { LayoutElement } from "@vertigis/web/components";
 import { useWatch, useWatchAndRerender } from "@vertigis/web/ui";
 import { useRef } from "react";
-import type { ComponentProps, ReactElement } from "react";
-import { ForceGraph3D } from "react-force-graph";
+import type { MutableRefObject, ReactElement } from "react";
+import ForceGraph3D, { type ForceGraphMethods } from "react-force-graph-3d";
 
 import type ThreeDimensionalGraphModel from "./ThreeDimensionalGraphModel";
 import useDimensions from "./useDimensions";
@@ -14,7 +14,7 @@ export default function ThreeDimensionalGraph(
 ): ReactElement {
     const { model } = props;
     const [rootRef, rootDimensions] = useDimensions<HTMLDivElement>();
-    const graphRef: ComponentProps<typeof ForceGraph3D>["ref"] = useRef();
+    const graphRef: MutableRefObject<ForceGraphMethods> = useRef();
 
     useWatchAndRerender(model, "graphData");
     // Force the nodes/links to re-render when the selected survey changes. This
