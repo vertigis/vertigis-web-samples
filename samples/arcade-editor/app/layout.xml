@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="your.custom.namespace">
+    <map id="map-1" config="map-config-1">
+        <custom:arcade-editor slot="top-right" config="arcade-editor-config-1" width="50vw" height="70vh"/>
+    </map>
+</layout>
