@@ -3,5 +3,6 @@ module.exports = {
     parserOptions: {
         tsconfigRootDir: __dirname,
     },
+    ignorePatterns: ["src/_support/**"],
     rules: {},
 };
