@@ -16,7 +16,7 @@ setCalciteComponentsAssetPath(
 export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerComponent({
         name: "arcade-editor",
-        namespace: "vertigis.web.incubator",
+        namespace: "your.custom.namespace",
         getComponentType: () => ArcadeEditor,
         itemType: "arcade-editor-model",
         title: "language-web-incubator-arcade-editor-title",
