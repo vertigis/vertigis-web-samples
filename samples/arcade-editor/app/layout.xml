@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="your.custom.namespace">
     <map id="map-1" config="map-config-1">
-        <custom:arcade-editor slot="top-right" config="arcade-editor-config-1" width="50vw" height="70vh"/>
+        <panel id="panel-1" slot="top-start" config="panel-config-1" show-close-button="false" show-back-button="false" show-maximize-button="false" show-minimize-button="false">
+            <stack id="stack-1" config="stack-config-1" halign="center">
+                <text id="text-1" config="text-config-1" />
+                <button id="button-1" config="button-config-1" size="large" icon-position="above" foreground-color="#1a72c4" background-color="#ffffff" border="false" margin="0.7" />
+            </stack>
+        </panel>
+        <dialog id="dialog-1" config="dialog-config-1">
+            <custom:arcade-editor config="arcade-editor-config-1" />
+        </dialog>
     </map>
 </layout>

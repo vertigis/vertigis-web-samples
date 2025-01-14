@@ -1,6 +1,10 @@
+import FeatureSet from "@arcgis/core/rest/support/FeatureSet";
 import { isLayerExtension } from "@vertigis/arcgis-extensions/ItemType";
 import type { FeatureLayerExtension } from "@vertigis/arcgis-extensions/mapping/FeatureLayerExtension";
 import type { MapModel } from "@vertigis/web/mapping/MapModel";
+import type { HasFeatures } from "@vertigis/web/messaging";
+import { command } from "@vertigis/web/messaging";
+import { toFeatureArray } from "@vertigis/web/messaging/featureConversion";
 import { toLayerExtension } from "@vertigis/web/messaging/mapConversion";
 import type {
     ComponentModelProperties,
@@ -12,6 +16,12 @@ import {
     serializable,
 } from "@vertigis/web/models";
 
+export interface ArcadeEditorData {
+    webMap: __esri.WebMap;
+    featureLayer: __esri.FeatureLayer;
+    featureSet: __esri.FeatureSet;
+}
+
 interface ArcadeEditorModelProperties extends ComponentModelProperties {
     layerName?: string;
 }
@@ -21,6 +31,7 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
     @importModel("map-extension")
     map: MapModel;
 
+    data: ArcadeEditorData;
     layerName: string;
     featureLayer: __esri.FeatureLayer;
 
@@ -29,20 +40,18 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
         this.layerName = props.layerName;
     }
 
-    async loadData(): Promise<{
-        webMap: __esri.WebMap;
-        featureLayer: __esri.FeatureLayer;
-        featureSet: __esri.FeatureSet;
-    }> {
-        const featureSet = await this.featureLayer.queryFeatures({
-            where: "1=1",
-            outFields: ["*"],
-            returnGeometry: true,
-        });
-        return {
+    @command("sdk-samples.initialize-arcade-editor")
+    protected async _executeInitializeArcadeEditor(
+        args: HasFeatures
+    ): Promise<void> {
+        this.data = {
             webMap: this.map.webMap as unknown as __esri.WebMap,
             featureLayer: this.featureLayer,
-            featureSet,
+            featureSet: new FeatureSet({
+                features: (await toFeatureArray(args.features)).map((feature) =>
+                    feature.toGraphic()
+                ),
+            }),
         };
     }
 

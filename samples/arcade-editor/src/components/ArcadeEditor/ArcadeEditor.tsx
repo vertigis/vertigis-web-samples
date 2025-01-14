@@ -2,28 +2,19 @@ import { ArcgisArcadeEditor } from "@arcgis/coding-components-react";
 import { CalciteScrim } from "@esri/calcite-components-react";
 import type { LayoutElementProperties } from "@vertigis/web/components";
 import { LayoutElement } from "@vertigis/web/components";
+import { useWatchAndRerender } from "@vertigis/web/ui";
 import Paper from "@vertigis/web/ui/Paper";
-import { useEffect, useCallback, useState, type ReactElement } from "react";
+import { type ReactElement } from "react";
 
 import type ArcadeEditorModel from "./ArcadeEditorModel";
 
 import "./ArcadeEditor.css";
 
-const ArcadeEditor = (
-    props: LayoutElementProperties<ArcadeEditorModel>
-): ReactElement => {
-    const [data, setData] = useState(null);
+type ArcadeEditorProps = LayoutElementProperties<ArcadeEditorModel>;
 
-    // useCallback to prevent the function from being recreated when the component rebuilds
-    const initializeTheEditor = useCallback(async () => {
-        const data = await props.model.loadData();
-        setData(data);
-    }, [props.model]);
-
-    // Register a function that will execute after the current render cycle
-    useEffect(() => {
-        initializeTheEditor().catch(console.error);
-    }, [initializeTheEditor]);
+const ArcadeEditor = (props: ArcadeEditorProps): ReactElement => {
+    const { data } = props.model;
+    useWatchAndRerender(props.model, "data");
 
     return (
         <LayoutElement
@@ -35,7 +26,7 @@ const ArcadeEditor = (
                 {data ? (
                     <ArcgisArcadeEditor
                         // Set the script on the editor
-                        script="$feature"
+                        script="$featureSet"
                         // Log script change events
                         onArcgisScriptChange={async (e) => {
                             console.log("script:", e.detail);
@@ -45,27 +36,68 @@ const ArcadeEditor = (
                         onArcgisDiagnosticsChange={async (e) => {
                             console.log("diagnostics:", e.detail);
                         }}
-                        // Tells Arcade editor to use the 'popup' profile and provides the necessary data used as
-                        // definition for the profile variables. Feature Layer and Web Map instances are used by the
-                        // Editor UX to help users understand the structure of data used.
-                        // Note that for the $feature variable, we pass the feature layer instance as for definition
-                        // the editor needs the metadata of the feature not an actual feature.
+                        // Tells the Arcade editor to use a custom profile with
+                        // the defined variables and bundles loaded.
                         profile={{
-                            id: "popup",
-                            definitions: {
-                                $feature: data.featureLayer,
-                                $layer: data.featureLayer,
-                                $map: data.webMap,
-                                $datastore: data.featureLayer,
-                            },
+                            label: "My Custom Arcade Profile",
+                            variables: [
+                                {
+                                    name: "$feature",
+                                    description:
+                                        "Provide a single feature from a featureSet. Use the same definition as you would use for a featureSet.",
+                                    type: "feature",
+                                    definition: {
+                                        fields: data.featureLayer.fields,
+                                    },
+                                },
+                                {
+                                    name: "$featureSet",
+                                    description:
+                                        "Use a field collection as the definition for a featureSet to provide arbitrary data that isn't linked to a layer.",
+                                    type: "featureSet",
+                                    definition: {
+                                        fields: data.featureLayer.fields,
+                                    },
+                                },
+                                {
+                                    name: "$layer",
+                                    description:
+                                        "Use the portal id of a layer as the definition for a featureSet to provide data originating from that layer.",
+                                    type: "featureSet",
+                                    definition: {
+                                        portalItem: {
+                                            id: data.featureLayer.id,
+                                        },
+                                    },
+                                },
+                                {
+                                    name: "$map",
+                                    description:
+                                        "Use the id of a webmap as the definition for a featureSetCollection to access data from that webmap.",
+                                    type: "featureSetCollection",
+                                    definition: {
+                                        portalItem: {
+                                            id: "12391f2d60ca49c189114a837e508ca2",
+                                        },
+                                    },
+                                },
+                                {
+                                    name: "$datastore",
+                                    description:
+                                        "Use the url of a feature service as the definition for a featureSetCollection to access data from that service.",
+                                    type: "featureSetCollection",
+                                    definition: { url: data.featureLayer.url },
+                                },
+                            ],
+                            bundles: ["core", "data-access", "geometry"],
                         }}
-                        // Tells Arcade editor to the following test data. The data provided must match the expected data for the
-                        // profile used.
-                        // Note that for test data, the feature must an instance of a feature. This is not used for user experience
-                        // but for actually executing the the Arcade expression in the editor.
+                        // Tells Arcade editor to use the following test data.
+                        // The data provided must match the expected data for
+                        // the variables defined in the profile.
                         testData={{
                             profileVariableInstances: {
                                 $feature: data.featureSet.features[0],
+                                $featureSet: data.featureSet,
                                 $layer: data.featureLayer,
                                 $map: data.webMap,
                                 $datastore: data.featureLayer.url,

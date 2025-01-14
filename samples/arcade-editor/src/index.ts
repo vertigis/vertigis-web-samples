@@ -25,4 +25,8 @@ export default function registerLibrary(registry: LibraryRegistry): void {
         getModel: (config) => new ArcadeEditorModel(config),
         itemType: "arcade-editor-model",
     });
+    registry.registerCommand({
+        name: "sdk-samples.initialize-arcade-editor",
+        itemType: "arcade-editor-model",
+    });
 }

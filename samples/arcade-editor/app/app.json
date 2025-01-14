@@ -22,7 +22,45 @@
         {
             "id": "arcade-editor-config-1",
             "$type": "arcade-editor-model",
-            "layerName": "AirBnB NYC"
+            "layerName": "AirBnB NYC",
+            "title": "Arcade Editor"
+        },
+        {
+            "id": "panel-config-1",
+            "$type": "panel"
+        },
+        {
+            "id": "stack-config-1",
+            "$type": "stack"
+        },
+        {
+            "id": "text-config-1",
+            "text": "Use the Identify tool to select AirBnB locations in the New York City area. Your selection will be used to create a FeatureSet and open an Arcade Editor component where you can construct expressions using the data.",
+            "$type": "text"
+        },
+        {
+            "id": "button-config-1",
+            "iconId": "identify",
+            "title": "Identify",
+            "action": [
+                {
+                    "name": "sketching.capture-geometry",
+                    "arguments": {
+                        "geometryType": ["point", "extent"]
+                    }
+                },
+                "tasks.identify",
+                "sdk-samples.initialize-arcade-editor",
+                {
+                    "name": "ui.activate",
+                    "arguments": "item://dialog/dialog-config-1"
+                }
+            ],
+            "$type": "menu-item"
+        },
+        {
+            "id": "dialog-config-1",
+            "$type": "dialog"
         },
         {
             "$type": "layout",
