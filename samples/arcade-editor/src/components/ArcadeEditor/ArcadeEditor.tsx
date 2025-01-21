@@ -2,7 +2,7 @@ import { ArcgisArcadeEditor } from "@arcgis/coding-components-react";
 import { CalciteScrim } from "@esri/calcite-components-react";
 import type { LayoutElementProperties } from "@vertigis/web/components";
 import { LayoutElement } from "@vertigis/web/components";
-import { useWatchAndRerender } from "@vertigis/web/ui";
+import { useWatch } from "@vertigis/web/ui";
 import Paper from "@vertigis/web/ui/Paper";
 import { type ReactElement } from "react";
 
@@ -13,8 +13,10 @@ import "./ArcadeEditor.css";
 type ArcadeEditorProps = LayoutElementProperties<ArcadeEditorModel>;
 
 const ArcadeEditor = (props: ArcadeEditorProps): ReactElement => {
-    const { data } = props.model;
-    useWatchAndRerender(props.model, "data");
+    const { model } = props;
+    const { data } = model;
+
+    useWatch(model, "data", () => console.log(data));
 
     return (
         <LayoutElement
@@ -102,6 +104,7 @@ const ArcadeEditor = (props: ArcadeEditorProps): ReactElement => {
                                 $map: data.webMap,
                                 $datastore: data.featureLayer.url,
                             },
+                            spatialReference: data.featureSet.spatialReference,
                         }}
                     />
                 ) : (

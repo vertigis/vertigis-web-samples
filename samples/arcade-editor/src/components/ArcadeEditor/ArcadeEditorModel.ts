@@ -1,3 +1,5 @@
+import type WebMap from "@arcgis/core/WebMap";
+import type FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import FeatureSet from "@arcgis/core/rest/support/FeatureSet";
 import { isLayerExtension } from "@vertigis/arcgis-extensions/ItemType";
 import type { FeatureLayerExtension } from "@vertigis/arcgis-extensions/mapping/FeatureLayerExtension";
@@ -17,9 +19,9 @@ import {
 } from "@vertigis/web/models";
 
 export interface ArcadeEditorData {
-    webMap: __esri.WebMap;
-    featureLayer: __esri.FeatureLayer;
-    featureSet: __esri.FeatureSet;
+    webMap: WebMap;
+    featureLayer: FeatureLayer;
+    featureSet: FeatureSet;
 }
 
 interface ArcadeEditorModelProperties extends ComponentModelProperties {
@@ -44,14 +46,18 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
     protected async _executeInitializeArcadeEditor(
         args: HasFeatures
     ): Promise<void> {
+        const featureSet = new FeatureSet({
+            features: (await toFeatureArray(args.features)).map((feature) =>
+                feature.toGraphic()
+            ),
+            fields: this.featureLayer.fields,
+            geometryType: "point",
+            spatialReference: this.featureLayer.spatialReference,
+        });
         this.data = {
             webMap: this.map.webMap as unknown as __esri.WebMap,
             featureLayer: this.featureLayer,
-            featureSet: new FeatureSet({
-                features: (await toFeatureArray(args.features)).map((feature) =>
-                    feature.toGraphic()
-                ),
-            }),
+            featureSet,
         };
     }
 
@@ -67,6 +73,11 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
             ) {
                 this.featureLayer = (extension as FeatureLayerExtension).layer;
             }
+            this.data = {
+                webMap: this.map.webMap as unknown as __esri.WebMap,
+                featureLayer: this.featureLayer,
+                featureSet: new FeatureSet({ features: [] }),
+            };
             watchHandle.remove();
         });
     }

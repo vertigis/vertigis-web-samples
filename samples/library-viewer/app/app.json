@@ -7,7 +7,7 @@
             "libraries": [
                 {
                     "id": "arcade-editor",
-                    "title": "Arcade Editor WebComponent"
+                    "title": "Arcade Editor"
                 },
                 {
                     "id": "arcgis-widget",
