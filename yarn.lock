@@ -2147,7 +2147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/http-proxy@npm:^1.17.15":
+"@types/http-proxy@npm:^1.17.15, @types/http-proxy@npm:^1.17.8":
   version: 1.17.15
   resolution: "@types/http-proxy@npm:1.17.15"
   dependencies:
@@ -4650,7 +4650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.6":
+"debug@npm:4, debug@npm:^4.3.1":
   version: 4.4.0
   resolution: "debug@npm:4.4.0"
   dependencies:
@@ -4662,7 +4662,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4.3.4":
+"debug@npm:4.3.4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.2, debug@npm:^4.3.4":
   version: 4.3.4
   resolution: "debug@npm:4.3.4"
   dependencies:
@@ -4680,18 +4680,6 @@ __metadata:
   dependencies:
     ms: "npm:^2.1.1"
   checksum: 10c0/37d96ae42cbc71c14844d2ae3ba55adf462ec89fd3a999459dec3833944cd999af6007ff29c780f1c61153bcaaf2c842d1e4ce1ec621e4fc4923244942e4a02a
-  languageName: node
-  linkType: hard
-
-"debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.2, debug@npm:^4.3.4":
-  version: 4.3.4
-  resolution: "debug@npm:4.3.4"
-  dependencies:
-    ms: "npm:2.1.2"
-  peerDependenciesMeta:
-    supports-color:
-      optional: true
-  checksum: 10c0/cedbec45298dd5c501d01b92b119cd3faebe5438c3917ff11ae1bff86a6c722930ac9c8659792824013168ba6db7c4668225d845c633fbdafbbf902a6389f736
   languageName: node
   linkType: hard
 
@@ -7134,9 +7122,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-regex@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "is-regex@npm:1.1.4"
+"is-regex@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "is-regex@npm:1.2.1"
   dependencies:
     call-bound: "npm:^1.0.2"
     gopd: "npm:^1.2.0"
@@ -7998,7 +7986,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.0, micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5, micromatch@npm:^4.0.8":
+"micromatch@npm:4.0.5":
+  version: 4.0.5
+  resolution: "micromatch@npm:4.0.5"
+  dependencies:
+    braces: "npm:^3.0.2"
+    picomatch: "npm:^2.3.1"
+  checksum: 10c0/3d6505b20f9fa804af5d8c596cb1c5e475b9b0cd05f652c5b56141cf941bd72adaeb7a436fda344235cef93a7f29b7472efc779fcdb83b478eab0867b95cdeff
+  languageName: node
+  linkType: hard
+
+"micromatch@npm:^4.0.0, micromatch@npm:^4.0.2, micromatch@npm:^4.0.8":
   version: 4.0.8
   resolution: "micromatch@npm:4.0.8"
   dependencies:
