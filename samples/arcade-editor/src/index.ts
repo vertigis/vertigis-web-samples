@@ -26,7 +26,7 @@ export default function registerLibrary(registry: LibraryRegistry): void {
         itemType: "arcade-editor-model",
     });
     registry.registerCommand({
-        name: "sdk-samples.initialize-arcade-editor",
+        name: "arcade-editor.load-data",
         itemType: "arcade-editor-model",
     });
 }

@@ -43,6 +43,7 @@
             "iconId": "identify",
             "title": "Identify",
             "action": [
+                "highlights.clear",
                 {
                     "name": "sketching.capture-geometry",
                     "arguments": {
@@ -50,17 +51,10 @@
                     }
                 },
                 "tasks.identify",
-                "sdk-samples.initialize-arcade-editor",
-                {
-                    "name": "ui.activate",
-                    "arguments": "item://dialog/dialog-config-1"
-                }
+                "arcade-editor.load-data",
+                "highlights.add"
             ],
             "$type": "menu-item"
-        },
-        {
-            "id": "dialog-config-1",
-            "$type": "dialog"
         },
         {
             "$type": "layout",

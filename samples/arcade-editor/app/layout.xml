@@ -7,8 +7,6 @@
                 <button id="button-1" config="button-config-1" size="large" icon-position="above" foreground-color="#1a72c4" background-color="#ffffff" border="false" margin="0.7" />
             </stack>
         </panel>
-        <dialog id="dialog-1" config="dialog-config-1">
-            <custom:arcade-editor config="arcade-editor-config-1" />
-        </dialog>
+        <custom:arcade-editor slot="bottom-end" config="arcade-editor-config-1" />
     </map>
 </layout>

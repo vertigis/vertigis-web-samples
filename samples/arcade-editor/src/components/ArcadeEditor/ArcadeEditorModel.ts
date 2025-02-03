@@ -42,8 +42,8 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
         this.layerName = props.layerName;
     }
 
-    @command("sdk-samples.initialize-arcade-editor")
-    protected async _executeInitializeArcadeEditor(
+    @command("arcade-editor.load-data")
+    protected async _executeArcadeEditorLoadData(
         args: HasFeatures
     ): Promise<void> {
         const featureSet = new FeatureSet({
@@ -62,7 +62,7 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
     }
 
     protected override async _onInitialize(): Promise<void> {
-        const watchHandle = this.watch("map", () => {
+        const watchHandle = this.watch("map", async () => {
             if (!this.map) {
                 return undefined;
             }
@@ -73,12 +73,10 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
             ) {
                 this.featureLayer = (extension as FeatureLayerExtension).layer;
             }
-            this.data = {
-                webMap: this.map.webMap as unknown as __esri.WebMap,
-                featureLayer: this.featureLayer,
-                featureSet: new FeatureSet({ features: [] }),
-            };
             watchHandle.remove();
+            await this.messages
+                .command<HasFeatures>("arcade-editor.load-data")
+                .execute({ features: [] });
         });
     }
 

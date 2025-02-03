@@ -4,19 +4,13 @@
 /* Normally a light or dark calcite theme would also be imported here, but Web
 will take care of these styles itself. */
 
-.gcx-dialog {
-    max-width: calc(100% - 10vw);
-    min-width: 50vw;
-    width: auto;
-}
-
 .editor-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 500px;
-    min-width: 150px;
+    min-width: 50vw;
     max-height: 50vh;
-    max-width: 50vw;
+    max-width: 50vw !important;
     box-sizing: border-box;
     padding: 1rem;
 }
