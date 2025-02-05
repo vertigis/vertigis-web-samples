@@ -8,10 +8,7 @@ import type { HasFeatures } from "@vertigis/web/messaging";
 import { command } from "@vertigis/web/messaging";
 import { toFeatureArray } from "@vertigis/web/messaging/featureConversion";
 import { toLayerExtension } from "@vertigis/web/messaging/mapConversion";
-import type {
-    ComponentModelProperties,
-    PropertyDefs,
-} from "@vertigis/web/models";
+import type { ComponentModelProperties } from "@vertigis/web/models";
 import {
     ComponentModelBase,
     importModel,
@@ -78,12 +75,5 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
                 .command<HasFeatures>("arcade-editor.load-data")
                 .execute({ features: [] });
         });
-    }
-
-    protected override _getSerializableProperties(): PropertyDefs<ComponentModelProperties> {
-        const props = super._getSerializableProperties();
-        return {
-            ...props,
-        };
     }
 }

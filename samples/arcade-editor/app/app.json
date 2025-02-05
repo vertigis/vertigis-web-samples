@@ -43,7 +43,6 @@
             "iconId": "identify",
             "title": "Identify",
             "action": [
-                "highlights.clear",
                 {
                     "name": "sketching.capture-geometry",
                     "arguments": {
@@ -52,7 +51,9 @@
                 },
                 "tasks.identify",
                 "arcade-editor.load-data",
-                "highlights.add"
+                "highlights.clear",
+                "highlights.add",
+                "map.zoom-to-features"
             ],
             "$type": "menu-item"
         },

@@ -1,5 +1,4 @@
 import { ArcgisArcadeEditor } from "@arcgis/coding-components-react";
-import { CalciteScrim } from "@esri/calcite-components-react";
 import type { LayoutElementProperties } from "@vertigis/web/components";
 import { LayoutElement } from "@vertigis/web/components";
 import { useWatchAndRerender } from "@vertigis/web/ui";
@@ -24,19 +23,18 @@ const ArcadeEditor = (props: ArcadeEditorProps): ReactElement => {
             stretch
             className="arcade-editor-webcomponent"
         >
-            <Paper className="editor-wrapper">
-                {data ? (
+            {data?.featureSet.features.length > 0 ? (
+                <Paper className="editor-wrapper">
                     <ArcgisArcadeEditor
                         // Set the script on the editor
                         script="$featureSet"
-                        // Log script change events
+                        // Handle script change events
                         onArcgisScriptChange={async (e) => {
-                            console.log("script:", e.detail);
-                            // console.log("outputType on script:", await arcadeEditorElt.getOutputType());
+                            // console.log("script:", e.detail);
                         }}
                         // Log editor diagnostics
                         onArcgisDiagnosticsChange={async (e) => {
-                            console.log("diagnostics:", e.detail);
+                            // console.log("diagnostics:", e.detail);
                         }}
                         // Tells the Arcade editor to use a custom profile with
                         // the defined variables and bundles loaded.
@@ -107,10 +105,8 @@ const ArcadeEditor = (props: ArcadeEditorProps): ReactElement => {
                             spatialReference: data.featureSet.spatialReference,
                         }}
                     />
-                ) : (
-                    <CalciteScrim loading />
-                )}
-            </Paper>
+                </Paper>
+            ) : null}
         </LayoutElement>
     );
 };
