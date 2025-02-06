@@ -27,6 +27,7 @@ let registerIcons = `/**
  * NOTE: THIS CODE IS AUTO-GENERATED. DO NOT MODIFY BY HAND.
  */
 import type { LibraryRegistry } from "@vertigis/web/config";
+import type { SvgIconProps } from "@vertigis/web/ui/SvgIcon";
 
 export function registerIcons(registry: LibraryRegistry): void {`;
 
@@ -46,15 +47,13 @@ for (const iconsDir of iconsDirs) {
 
         if (ext === ".js") {
             // Add this icon to the list of registrations.
+            fs.copyFileSync(fullFilePath, path.join(outPath, file));
             registerIcons += `
             registry.registerIcon({
                 id: "custom-${id}",
                 getComponentType: async () => (
-                    await import("${path.posix.join(
-                        iconsDir.replace(/^node_modules\//, ""),
-                        moduleName
-                    )}")
-                ).default,
+                    await import("./${file}")
+                ).default as React.ComponentType<SvgIconProps>,
             });`;
         } else {
             // Create a React component from the raw svg and add it to the list

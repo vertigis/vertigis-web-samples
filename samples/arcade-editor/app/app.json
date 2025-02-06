@@ -1,0 +1,67 @@
+{
+    "schemaVersion": "1.0",
+    "items": [
+        {
+            "id": "map-config-1",
+            "$type": "map-extension",
+            "webMap": "https://latitudegeo.maps.arcgis.com/home/item.html?id=12391f2d60ca49c189114a837e508ca2",
+            "layerExtensions": ["item://layer-extension/air-bnb-nyc"]
+        },
+        {
+            "id": "air-bnb-nyc",
+            "$type": "layer-extension",
+            "layer": {
+                "$ref": {
+                    "id": "air-bnb-nyc-featurelayer",
+                    "title": "AirBnB NYC",
+                    "url": "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/WebChartTests_AirBnB_ChiCrime_MedicareCounty/FeatureServer/0"
+                },
+                "layerType": "ArcGISFeatureLayer"
+            }
+        },
+        {
+            "id": "arcade-editor-config-1",
+            "$type": "arcade-editor-model",
+            "layerName": "AirBnB NYC",
+            "title": "Arcade Editor"
+        },
+        {
+            "id": "panel-config-1",
+            "$type": "panel"
+        },
+        {
+            "id": "stack-config-1",
+            "$type": "stack"
+        },
+        {
+            "id": "text-config-1",
+            "text": "Use the Identify tool to select AirBnB locations in the New York City area. Your selection will be used to create a FeatureSet and open an Arcade Editor component where you can construct expressions using the data.",
+            "$type": "text"
+        },
+        {
+            "id": "button-config-1",
+            "iconId": "identify",
+            "title": "Identify",
+            "action": [
+                {
+                    "name": "sketching.capture-geometry",
+                    "arguments": {
+                        "geometryType": ["point", "extent"]
+                    }
+                },
+                "tasks.identify",
+                "arcade-editor.load-data",
+                "highlights.clear",
+                "highlights.add",
+                "map.zoom-to-features"
+            ],
+            "$type": "menu-item"
+        },
+        {
+            "$type": "layout",
+            "id": "default",
+            "title": "Default",
+            "url": "./layout.xml"
+        }
+    ]
+}

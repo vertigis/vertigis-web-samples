@@ -6,6 +6,10 @@
             "id": "library-viewer-1",
             "libraries": [
                 {
+                    "id": "arcade-editor",
+                    "title": "Arcade Editor"
+                },
+                {
                     "id": "arcgis-widget",
                     "title": "ArcGIS Widget"
                 },

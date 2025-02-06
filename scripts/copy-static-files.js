@@ -1,6 +1,7 @@
 const { exec } = require("child_process");
 
 const libraries = [
+    "arcade-editor",
     "arcgis-widget",
     "basic-component",
     "basic-service",
