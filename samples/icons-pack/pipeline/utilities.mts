@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-
 import svgr from "@svgr/core";
 
 export const createSvgIcon = (
@@ -51,10 +50,10 @@ export function pascalToKebabCase(str: string): string {
     );
 }
 
-const snakeToPascal = (string) => string
+const snakeToPascal = (string: string) => string
         .replace(".svg", "")
         .split(/-|_/)
         .map((str) => upperFirst(str.split("/").map(upperFirst).join("/")))
         .join("");
 
-const upperFirst = (string) => string.slice(0, 1).toUpperCase() + string.slice(1, string.length);
+const upperFirst = (string: string) => string.slice(0, 1).toUpperCase() + string.slice(1, string.length);

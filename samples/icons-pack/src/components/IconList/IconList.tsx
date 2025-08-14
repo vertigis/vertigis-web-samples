@@ -5,7 +5,7 @@ import Box from "@vertigis/web/ui/Box";
 import Checkbox from "@vertigis/web/ui/Checkbox";
 import FormControlLabel from "@vertigis/web/ui/FormControlLabel";
 import List from "@vertigis/web/ui/List";
-import ListItem from "@vertigis/web/ui/ListItem";
+import ListItemButton from "@vertigis/web/ui/ListItemButton";
 import ListItemIcon from "@vertigis/web/ui/ListItemIcon";
 import Stack from "@vertigis/web/ui/Stack";
 import Typography from "@vertigis/web/ui/Typography";
@@ -50,17 +50,17 @@ export default function IconList(
                                 .map((icon) => {
                                     const Icon = getIcon(icon);
                                     return (
-                                        <ListItem
+                                        <ListItemButton
                                             sx={{ cursor: "pointer" }}
                                             key={`icon-${icon}`}
-                                            selected={icon === currentIcon}
                                             onClick={() => setCurrentIcon(icon)}
+                                            selected={icon === currentIcon}
                                         >
                                             <ListItemIcon>
                                                 <Icon />
                                             </ListItemIcon>
                                             {icon}
-                                        </ListItem>
+                                        </ListItemButton>
                                     );
                                 })}
                         </List>
