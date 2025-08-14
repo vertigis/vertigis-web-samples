@@ -34,7 +34,7 @@ const Daylight = (props: DaylightWidgetProps): ReactElement => {
     useWatchAndRerender(props.model, "dateOrSeason");
     useWatch(props.model, "dateOrSeason", (newValue) => {
         if (widget) {
-            widget.dateOrSeason = newValue as "date" | "season";
+            widget.dateOrSeason = newValue;
         }
     });
 

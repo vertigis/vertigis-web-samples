@@ -1,6 +1,6 @@
 import { UIContext } from "@vertigis/web/ui";
 import Button from "@vertigis/web/ui/Button";
-import Stack, { StackProps } from "@vertigis/web/ui/Stack";
+import Stack, { type StackProps } from "@vertigis/web/ui/Stack";
 import TrashIcon from "@vertigis/web/ui/icons/Trash";
 import type { ReactElement } from "react";
 import { useContext } from "react";

@@ -3,10 +3,9 @@ import { FeatureStream } from "@vertigis/arcgis-extensions/data/FeatureStream";
 import type { TableExtension } from "@vertigis/arcgis-extensions/data/TableExtension";
 import type { LayerExtension } from "@vertigis/arcgis-extensions/mapping/LayerExtension";
 import { QueryService } from "@vertigis/arcgis-extensions/tasks/query/QueryService";
-import { toFeatureArray } from "@vertigis/web/messaging/featureConversion";
 import type { BrandingService } from "@vertigis/web/branding/BrandingService";
-import type { Features } from "@vertigis/web/messaging";
-import { command } from "@vertigis/web/messaging";
+import { type Features, command } from "@vertigis/web/messaging";
+import { toFeatureArray } from "@vertigis/web/messaging/featureConversion";
 import { ComponentModelBase, serializable } from "@vertigis/web/models";
 import type {
     PropertyDefs,

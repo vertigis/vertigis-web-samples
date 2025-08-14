@@ -3,7 +3,6 @@ import type FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import FeatureSet from "@arcgis/core/rest/support/FeatureSet";
 import { isLayerExtension } from "@vertigis/arcgis-extensions/ItemType";
 import type { FeatureLayerExtension } from "@vertigis/arcgis-extensions/mapping/FeatureLayerExtension";
-import { watch } from "@vertigis/arcgis-extensions/support/observableUtils";
 import type { MapModel } from "@vertigis/web/mapping/MapModel";
 import type { HasFeatures } from "@vertigis/web/messaging";
 import { command } from "@vertigis/web/messaging";
