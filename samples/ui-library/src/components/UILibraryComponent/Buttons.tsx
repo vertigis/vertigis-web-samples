@@ -1,11 +1,11 @@
 import { UIContext } from "@vertigis/web/ui";
 import Button from "@vertigis/web/ui/Button";
-import Stack from "@vertigis/web/ui/Stack";
+import Stack, { type StackProps } from "@vertigis/web/ui/Stack";
 import TrashIcon from "@vertigis/web/ui/icons/Trash";
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-const ButtonRow = (props) => (
+const ButtonRow = (props: StackProps) => (
     <Stack spacing={1} direction="row" alignItems="center" {...props} />
 );
 

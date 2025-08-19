@@ -20,7 +20,6 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
     ...layoutProps
 }) => {
     const { selectedLibrary, codeSandboxUrl, hostPage } = model;
-    useWatchAndRerender(model, "libraryUrl");
     useWatchAndRerender(model, "hostPage");
 
     return (

@@ -28,11 +28,20 @@ interface ArcadeEditorModelProperties extends ComponentModelProperties {
 @serializable
 export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorModelProperties> {
     @importModel("map-extension")
-    map: MapModel;
+    get map(): MapModel {
+        return this._map;
+    }
+    set map(value: MapModel) {
+        this._map = value;
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this._onMapChanged();
+    }
 
     data: ArcadeEditorData;
     layerName: string;
     featureLayer: __esri.FeatureLayer;
+
+    private _map: MapModel;
 
     constructor(props: ArcadeEditorModelProperties) {
         super(props);
@@ -58,22 +67,22 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
         };
     }
 
-    protected override async _onInitialize(): Promise<void> {
-        const watchHandle = this.watch("map", async () => {
-            if (!this.map) {
-                return undefined;
-            }
-            const extension = toLayerExtension(this.layerName, this.map);
-            if (
-                isLayerExtension(extension) &&
-                (extension as FeatureLayerExtension).layer.type === "feature"
-            ) {
-                this.featureLayer = (extension as FeatureLayerExtension).layer;
-            }
-            watchHandle.remove();
-            await this.messages
-                .command<HasFeatures>("arcade-editor.load-data")
-                .execute({ features: [] });
-        });
+    protected async _onMapChanged(): Promise<void> {
+        if (!this.map) {
+            return undefined;
+        }
+
+        const extension = toLayerExtension(this.layerName, this.map);
+
+        if (
+            isLayerExtension(extension) &&
+            (extension as FeatureLayerExtension).layer.type === "feature"
+        ) {
+            this.featureLayer = (extension as FeatureLayerExtension).layer;
+        }
+
+        await this.messages
+            .command<HasFeatures>("arcade-editor.load-data")
+            .execute({ features: [] });
     }
 }
