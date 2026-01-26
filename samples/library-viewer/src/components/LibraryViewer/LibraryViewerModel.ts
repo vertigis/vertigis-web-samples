@@ -1,6 +1,10 @@
 import type { AppConfig } from "@vertigis/web/AppConfig";
 import type { AppContext } from "@vertigis/web/AppContext";
-import type { Library } from "@vertigis/web/Application";
+import type {
+    Application,
+    ApplicationOptions,
+    Library,
+} from "@vertigis/web/Application";
 import type { LayoutXml } from "@vertigis/web/layout";
 import { command } from "@vertigis/web/messaging";
 import {
@@ -13,6 +17,25 @@ import { inject, FrameworkServiceType } from "@vertigis/web/services";
 import { Builder, parseStringPromise as parseString } from "xml2js";
 
 import type { SetLibraryArgs } from "../PickList/PickListModel";
+import { LibraryRegistry } from "@vertigis/web/config";
+
+interface WindowWithRequire extends Window {
+    require: ((...input: unknown[]) => unknown) & {
+        config: (...input: unknown[]) => unknown;
+        onError: (error: unknown) => void;
+    };
+}
+
+const hasRequire = (window?: object | null): window is WindowWithRequire =>
+    !!window?.hasOwnProperty("require");
+
+interface LibraryRegistryModule {
+    default: (registry: LibraryRegistry) => void;
+}
+
+interface WebViewer {
+    bootstrap(options: Partial<ApplicationOptions>): Promise<Application>;
+}
 
 export interface LibraryConfig {
     /** The id of the library. This will be the name of the containing folder. */
@@ -230,7 +253,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
      * and custom library. This method of loading is included for demonstration
      * purposes only and is not recommended for use in production.
      */
-    private _loadViewer({
+    private async _loadViewer({
         frame,
         appConfig,
         layout,
@@ -242,29 +265,40 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         layout: LayoutXml;
         customLibrary: Library;
         hostElement: HTMLElement;
-    }): void {
-        (frame.require as any)(["require", "web"], (require, webViewer) => {
-            require([
-                "@vertigis/web-libraries!/common",
-                "@vertigis/web-libraries!/web",
-                "/main.js",
-            ], (...libs) => {
-                const options = {
-                    appConfig,
-                    debugMode: true,
-                    hostElement,
-                    layout,
-                    libraries: [
-                        ...libs.map((lib) => lib.default),
-                        customLibrary,
+    }): Promise<void> {
+        if (!hasRequire(frame)) {
+            return;
+        }
+
+        const [require, webViewer] = (await new Promise((resolve) => {
+            (frame.require as any)(["require", "web"], (...libs) =>
+                resolve(libs)
+            );
+        })) as any[];
+
+        const libraries: LibraryRegistryModule[] = await new Promise(
+            (resolve) => {
+                frame.require(
+                    [
+                        "@vertigis/web-libraries!/common",
+                        "@vertigis/web-libraries!/web",
+                        "/main.js",
                     ],
-                    applicationParams: [
-                        ["includeFunctionalTestHelpers", "true"],
-                    ],
-                };
-                webViewer.bootstrap(options);
-            });
-        });
+                    (...libraries) => resolve(libraries)
+                );
+            }
+        );
+
+        const options: Partial<ApplicationOptions> = {
+            appConfig,
+            debugMode: true,
+            hostElement,
+            layout,
+            libraries: [...libraries.map((lib) => lib.default), customLibrary],
+            applicationParams: [["includeFunctionalTestHelpers", "true"]],
+        };
+
+        webViewer.bootstrap(options);
     }
 
     private async _displayUI(

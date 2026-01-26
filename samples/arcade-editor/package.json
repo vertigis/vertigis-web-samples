@@ -2,17 +2,18 @@
     "name": "sample-arcade-editor",
     "version": "0.0.0",
     "private": true,
+    "type": "module",
     "scripts": {
         "build": "vertigis-web-sdk build",
         "start": "vertigis-web-sdk start"
     },
     "dependencies": {
-        "@arcgis/coding-components-react": "4.33.14",
-        "@esri/calcite-components-react": "3.2.1"
+        "@arcgis/coding-components-react": "~4.34.9",
+        "@esri/calcite-components-react": "~3.3.3"
     },
     "devDependencies": {
-        "@vertigis/web": "^5.37.0",
-        "@vertigis/web-sdk": "~1.11.0",
-        "typescript": "~5.3.3"
+        "@vertigis/web": "~5.39.0",
+        "@vertigis/web-sdk": "^3.0.0",
+        "typescript": "~5.6.3"
     }
 }

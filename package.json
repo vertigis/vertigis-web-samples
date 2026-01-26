@@ -16,6 +16,7 @@
     },
     "homepage": "https://github.com/vertigis/vertigis-web-samples#readme",
     "scripts": {
+        "audit": "yarn npm audit --all --recursive --no-deprecations",
         "build": "yarn build:samples && yarn build:viewer && yarn copy-static-files",
         "build:samples": "yarn workspaces foreach -Rt --from \"samples/!(library-viewer)\" run build",
         "build:viewer": "yarn workspace library-viewer run build",
@@ -27,22 +28,23 @@
         "serve-library-viewer": "node scripts/serve-library-viewer.js"
     },
     "devDependencies": {
-        "@types/react": "^18.3.2",
-        "@types/react-dom": "^18.3.0",
+        "@types/react": "^19.2.9",
+        "@types/react-dom": "^19.2.3",
         "concurrently": "^7.6.0",
         "cross-env": "^7.0.3",
         "css-loader": "^7.1.2",
-        "cypress": "^13.3.0",
-        "eslint": "~8.56.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-import": "~2.29.1",
-        "eslint-plugin-only-warn": "^1.1.0",
-        "eslint-plugin-react": "^7.34.3",
-        "eslint-plugin-react-hooks": "~4.6.2",
+        "cypress": "^15.9.0",
+        "eslint": "^9.31.0",
+        "eslint-config-prettier": "~10.1.1",
+        "eslint-import-resolver-typescript": "~4.2.2",
+        "eslint-plugin-import": "~2.31.0",
+        "eslint-plugin-only-warn": "~1.1.0",
+        "eslint-plugin-react": "~7.37.4",
+        "eslint-plugin-react-hooks": "~5.2.0",
         "express": "^4.20.0",
         "file-loader": "^6.2.0",
         "http-proxy-middleware": "^3.0.3",
-        "lint-staged": "^13.1.2",
+        "lint-staged": "^16.2.7",
         "postcss": "^8.4.49",
         "postcss-loader": "^8.1.1",
         "prettier": "^2.8.4",
@@ -51,8 +53,8 @@
         "simple-git-hooks": "^2.8.1",
         "style-loader": "^4.0.0",
         "ts-loader": "^9.5.1",
-        "typescript": "~5.3.3",
-        "webpack": "~5.94.0"
+        "typescript": "~5.6.3",
+        "webpack": "^5.104.1"
     },
     "engines": {
         "node": ">= 20"
@@ -64,9 +66,9 @@
         "*.{css,scss,js,json,ts,tsx}": "prettier --write"
     },
     "resolutions": {
-        "@types/react": "^18.3.2",
+        "@types/react": "^19.2.9",
         "sax": "^1.4.1",
         "three-bmfont-text": "3.0.1"
     },
-    "packageManager": "yarn@4.5.1"
+    "packageManager": "yarn@4.12.0"
 }
