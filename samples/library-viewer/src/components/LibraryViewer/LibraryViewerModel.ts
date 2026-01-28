@@ -5,6 +5,7 @@ import type {
     ApplicationOptions,
     Library,
 } from "@vertigis/web/Application";
+import type { LibraryRegistry } from "@vertigis/web/config";
 import type { LayoutXml } from "@vertigis/web/layout";
 import { command } from "@vertigis/web/messaging";
 import {
@@ -17,7 +18,6 @@ import { inject, FrameworkServiceType } from "@vertigis/web/services";
 import { Builder, parseStringPromise as parseString } from "xml2js";
 
 import type { SetLibraryArgs } from "../PickList/PickListModel";
-import { LibraryRegistry } from "@vertigis/web/config";
 
 interface WindowWithRequire extends Window {
     require: ((...input: unknown[]) => unknown) & {
@@ -156,6 +156,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
                 const embeddedHost =
                     iframe.contentDocument.getElementById("gcx-app");
                 embeddedHost.classList.add("hide-nested-warning");
+                // eslint-disable-next-line @typescript-eslint/no-floating-promises
                 this._loadViewer({
                     frame: iframe.contentWindow as Window & typeof globalThis,
                     appConfig: sampleAppConfig?.default as AppConfig,
@@ -239,6 +240,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         await this.appContext.shutdown();
 
         // Bootstrap a new viewer application in the current iframe with the merged layout and config.
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         this._loadViewer({
             frame: window,
             appConfig,
@@ -270,11 +272,9 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             return;
         }
 
-        const [require, webViewer] = (await new Promise((resolve) => {
-            (frame.require as any)(["require", "web"], (...libs) =>
-                resolve(libs)
-            );
-        })) as any[];
+        const webViewer: WebViewer = await new Promise((resolve) => {
+            frame.require(["web"], resolve);
+        });
 
         const libraries: LibraryRegistryModule[] = await new Promise(
             (resolve) => {
@@ -298,6 +298,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             applicationParams: [["includeFunctionalTestHelpers", "true"]],
         };
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         webViewer.bootstrap(options);
     }
 

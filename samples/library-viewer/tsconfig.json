@@ -4,5 +4,5 @@
         "baseUrl": ".",
         "noImplicitAny": false
     },
-    "include": [".eslintrc.js", "src"]
+    "include": ["eslint.config.js", "src"]
 }
