@@ -5,7 +5,7 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"3d-force-graph@npm:^1.79":
+"3d-force-graph@npm:^1.73":
   version: 1.79.0
   resolution: "3d-force-graph@npm:1.79.0"
   dependencies:
@@ -10486,16 +10486,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-force-graph-3d@npm:^1.24.3":
-  version: 1.29.0
-  resolution: "react-force-graph-3d@npm:1.29.0"
+"react-force-graph-3d@npm:~1.24.3":
+  version: 1.24.6
+  resolution: "react-force-graph-3d@npm:1.24.6"
   dependencies:
-    3d-force-graph: "npm:^1.79"
+    3d-force-graph: "npm:^1.73"
     prop-types: "npm:15"
     react-kapsule: "npm:^2.5"
   peerDependencies:
     react: "*"
-  checksum: 10c0/c6ba6828486da968325b78be50a6da3cea8c69ff34f647a1917e85014fc1b6233de5e5e966079bce514532452a7848ee5f6a99d4883313774b29d042be8c3a3b
+  checksum: 10c0/cc9134c3ef8ac61bd1e5d22928260f22c67a45282c8577dd38be42df2351c7f6f9430fe9e94b7bf29b6ed319d45d47ea4f9b79e4c87d14609758bea57b4d333d
   languageName: node
   linkType: hard
 
@@ -11075,7 +11075,7 @@ __metadata:
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
     "@vertigis/web-sdk": "npm:^3.0.0"
-    react-force-graph-3d: "npm:^1.24.3"
+    react-force-graph-3d: "npm:~1.24.3"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft

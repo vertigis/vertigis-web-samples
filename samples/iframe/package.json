@@ -2,7 +2,6 @@
     "name": "sample-iframe",
     "version": "0.0.0",
     "private": true,
-    "type": "module",
     "scripts": {
         "build": "vertigis-web-sdk build",
         "start": "cross-env OPEN_PAGE=/parent.html vertigis-web-sdk start",

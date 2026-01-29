@@ -5,7 +5,6 @@
     "description": "",
     "license": "UNLICENSED",
     "author": "",
-    "type": "module",
     "scripts": {
         "build": "vertigis-web-sdk build",
         "start": "vertigis-web-sdk start",
