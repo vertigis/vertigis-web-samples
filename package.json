@@ -68,8 +68,7 @@
     "resolutions": {
         "@types/react": "^19.2.9",
         "sax": "^1.4.1",
-        "three-bmfont-text": "3.0.1",
-        "@vertigis/web-sdk": "portal:/home/yona/repos/vertigis-web-sdk"
+        "three-bmfont-text": "3.0.1"
     },
     "packageManager": "yarn@4.12.0"
 }

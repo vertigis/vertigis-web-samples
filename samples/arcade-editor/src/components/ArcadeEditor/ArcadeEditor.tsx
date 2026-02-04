@@ -1,4 +1,4 @@
-import { ArcgisArcadeEditor } from "@arcgis/coding-components-react/dist";
+import { ArcgisArcadeEditor } from "@arcgis/coding-components-react/dist/components";
 import type { LayoutElementProperties } from "@vertigis/web/components";
 import { LayoutElement } from "@vertigis/web/components";
 import { useWatchAndRerender } from "@vertigis/web/ui";

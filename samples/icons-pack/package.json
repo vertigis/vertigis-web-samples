@@ -17,7 +17,7 @@
         "@svgr/plugin-jsx": "^6.5.1",
         "@svgr/plugin-svgo": "^6.5.1",
         "@vertigis/web": "^5.39.0",
-        "@vertigis/web-sdk": "^3.0.0",
+        "@vertigis/web-sdk": "^3.0.1",
         "tsx": "~4.21.0",
         "typescript": "~5.6.3"
     }
