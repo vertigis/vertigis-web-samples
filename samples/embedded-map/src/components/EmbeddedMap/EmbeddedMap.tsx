@@ -12,7 +12,7 @@ export default function EmbeddedMap(
     props: LayoutElementProperties<EmbeddedMapModel>
 ): ReactElement {
     const { model } = props;
-    const mlyRootEl = useRef<HTMLDivElement>();
+    const mlyRootEl = useRef<HTMLDivElement>(undefined);
 
     useEffect(() => {
         const mapillary = new Viewer({

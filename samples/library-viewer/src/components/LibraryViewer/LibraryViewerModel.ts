@@ -1,6 +1,11 @@
 import type { AppConfig } from "@vertigis/web/AppConfig";
 import type { AppContext } from "@vertigis/web/AppContext";
-import type { Library } from "@vertigis/web/Application";
+import type {
+    Application,
+    ApplicationOptions,
+    Library,
+} from "@vertigis/web/Application";
+import type { LibraryRegistry } from "@vertigis/web/config";
 import type { LayoutXml } from "@vertigis/web/layout";
 import { command } from "@vertigis/web/messaging";
 import {
@@ -13,6 +18,24 @@ import { inject, FrameworkServiceType } from "@vertigis/web/services";
 import { Builder, parseStringPromise as parseString } from "xml2js";
 
 import type { SetLibraryArgs } from "../PickList/PickListModel";
+
+interface WindowWithRequire extends Window {
+    require: ((...input: unknown[]) => unknown) & {
+        config: (...input: unknown[]) => unknown;
+        onError: (error: unknown) => void;
+    };
+}
+
+const hasRequire = (window?: object | null): window is WindowWithRequire =>
+    !!window?.hasOwnProperty("require");
+
+interface LibraryRegistryModule {
+    default: (registry: LibraryRegistry) => void;
+}
+
+interface WebViewer {
+    bootstrap(options: Partial<ApplicationOptions>): Promise<Application>;
+}
 
 export interface LibraryConfig {
     /** The id of the library. This will be the name of the containing folder. */
@@ -133,6 +156,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
                 const embeddedHost =
                     iframe.contentDocument.getElementById("gcx-app");
                 embeddedHost.classList.add("hide-nested-warning");
+                // eslint-disable-next-line @typescript-eslint/no-floating-promises
                 this._loadViewer({
                     frame: iframe.contentWindow as Window & typeof globalThis,
                     appConfig: sampleAppConfig?.default as AppConfig,
@@ -216,6 +240,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         await this.appContext.shutdown();
 
         // Bootstrap a new viewer application in the current iframe with the merged layout and config.
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         this._loadViewer({
             frame: window,
             appConfig,
@@ -230,7 +255,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
      * and custom library. This method of loading is included for demonstration
      * purposes only and is not recommended for use in production.
      */
-    private _loadViewer({
+    private async _loadViewer({
         frame,
         appConfig,
         layout,
@@ -242,29 +267,39 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         layout: LayoutXml;
         customLibrary: Library;
         hostElement: HTMLElement;
-    }): void {
-        (frame.require as any)(["require", "web"], (require, webViewer) => {
-            require([
-                "@vertigis/web-libraries!/common",
-                "@vertigis/web-libraries!/web",
-                "/main.js",
-            ], (...libs) => {
-                const options = {
-                    appConfig,
-                    debugMode: true,
-                    hostElement,
-                    layout,
-                    libraries: [
-                        ...libs.map((lib) => lib.default),
-                        customLibrary,
-                    ],
-                    applicationParams: [
-                        ["includeFunctionalTestHelpers", "true"],
-                    ],
-                };
-                webViewer.bootstrap(options);
-            });
+    }): Promise<void> {
+        if (!hasRequire(frame)) {
+            return;
+        }
+
+        const webViewer: WebViewer = await new Promise((resolve) => {
+            frame.require(["web"], resolve);
         });
+
+        const libraries: LibraryRegistryModule[] = await new Promise(
+            (resolve) => {
+                frame.require(
+                    [
+                        "@vertigis/web-libraries!/common",
+                        "@vertigis/web-libraries!/web",
+                        "/main.js",
+                    ],
+                    (...libraries) => resolve(libraries)
+                );
+            }
+        );
+
+        const options: Partial<ApplicationOptions> = {
+            appConfig,
+            debugMode: true,
+            hostElement,
+            layout,
+            libraries: [...libraries.map((lib) => lib.default), customLibrary],
+            applicationParams: [["includeFunctionalTestHelpers", "true"]],
+        };
+
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        webViewer.bootstrap(options);
     }
 
     private async _displayUI(

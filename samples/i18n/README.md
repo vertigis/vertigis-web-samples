@@ -7,7 +7,7 @@ The [component in this sample](src/components/TranslatableText/TranslatableText.
 By default, VertiGIS Studio Web will detect the locale of the current device and display the content of the application in that locale if possible. To override the locale used by the application, you can add the `locale` URL parameter to force a specific locale. For example to load this sample in the `de` locale (German), add `?locale=de` to the URL like so:
 
 ```
-/i18n?locale=de
+/?locale=de#i18n
 ```
 
 We recommend using the React components provided by the VertiGIS Studio Web React UI library wherever possible as demonstrated in this sample. Using these components ensures that the styling and behavior matches the rest of the application, and also takes care of translating language string keys to the corresponding value depending on the current locale automatically!

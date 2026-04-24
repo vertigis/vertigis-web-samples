@@ -38,6 +38,10 @@
                     "title": "Internationalization"
                 },
                 {
+                    "id": "icons-pack",
+                    "title": "Icons Pack"
+                },
+                {
                     "id": "iframe",
                     "title": "Iframe Embedded",
                     "useHostPage": true
@@ -49,10 +53,6 @@
                 {
                     "id": "ui-library",
                     "title": "UI Library"
-                },
-                {
-                    "id": "icons-pack",
-                    "title": "Icons Pack"
                 }
             ]
         },
