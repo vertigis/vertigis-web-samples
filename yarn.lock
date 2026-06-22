@@ -3896,16 +3896,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertigis/web-sdk@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@vertigis/web-sdk@npm:3.0.1"
+"@vertigis/web-sdk@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@vertigis/web-sdk@npm:3.0.2"
   dependencies:
     "@vertigis/sdk-library": "npm:^2.0.1"
     html-webpack-plugin: "npm:^5.6.4"
     webpack-merge: "npm:~6.0.1"
   bin:
     vertigis-web-sdk: bin/vertigis-web-sdk.js
-  checksum: 10c0/ca608e4686417df4d2139da5f9c1b5521898ecd16f2b6c9bbb91efbfa82c56e9bbb3e3ea98462fc818718e27223b65f970e2480a7b3484a5026a33a641c3a1dc
+  checksum: 10c0/34d01d3ace5875644c4ea3572dbe0abbb877f2f7346c417299cd8eb219ac8ce22f6f1a794b5f296695780d336758b836fbaaac98428431e4b082b409bdad1023
   languageName: node
   linkType: hard
 
@@ -8601,7 +8601,7 @@ __metadata:
   dependencies:
     "@types/xml2js": "npm:^0.4.14"
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
     xml2js: "npm:^0.6.2"
   peerDependencies:
@@ -11154,7 +11154,7 @@ __metadata:
     "@arcgis/coding-components-react": "npm:4.33.14"
     "@esri/calcite-components-react": "npm:3.2.1"
     "@vertigis/web": "npm:~5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft
@@ -11164,7 +11164,7 @@ __metadata:
   resolution: "sample-arcgis-widget@workspace:samples/arcgis-widget"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft
@@ -11174,7 +11174,7 @@ __metadata:
   resolution: "sample-basic-component@workspace:samples/basic-component"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft
@@ -11184,7 +11184,7 @@ __metadata:
   resolution: "sample-basic-service@workspace:samples/basic-service"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft
@@ -11194,7 +11194,7 @@ __metadata:
   resolution: "sample-custom-commands-and-operations@workspace:samples/commands-and-operations"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft
@@ -11204,7 +11204,7 @@ __metadata:
   resolution: "sample-embedded-map@workspace:samples/embedded-map"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     mapillary-js: "npm:^4.0.0"
     typescript: "npm:~5.6.3"
   languageName: unknown
@@ -11215,7 +11215,7 @@ __metadata:
   resolution: "sample-i18n@workspace:samples/i18n"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft
@@ -11229,7 +11229,7 @@ __metadata:
     "@svgr/plugin-jsx": "npm:^6.5.1"
     "@svgr/plugin-svgo": "npm:^6.5.1"
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     tsx: "npm:~4.21.0"
     typescript: "npm:~5.6.3"
   languageName: unknown
@@ -11240,7 +11240,7 @@ __metadata:
   resolution: "sample-iframe@workspace:samples/iframe"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     cross-env: "npm:^7.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
@@ -11251,7 +11251,7 @@ __metadata:
   resolution: "sample-tap-into-web-event@workspace:samples/tap-into-web-event"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft
@@ -11261,7 +11261,7 @@ __metadata:
   resolution: "sample-third-party-lib@workspace:samples/third-party-lib"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     react-force-graph-3d: "npm:~1.24.3"
     typescript: "npm:~5.6.3"
   languageName: unknown
@@ -11272,7 +11272,7 @@ __metadata:
   resolution: "sample-ui-library@workspace:samples/ui-library"
   dependencies:
     "@vertigis/web": "npm:^5.39.0"
-    "@vertigis/web-sdk": "npm:^3.0.1"
+    "@vertigis/web-sdk": "npm:^3.0.2"
     typescript: "npm:~5.6.3"
   languageName: unknown
   linkType: soft
