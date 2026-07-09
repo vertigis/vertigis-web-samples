@@ -7,6 +7,7 @@ import FormLabel from "@vertigis/web/ui/FormLabel";
 import MenuItem from "@vertigis/web/ui/MenuItem";
 import Select from "@vertigis/web/ui/Select";
 import type {
+    MapWidget,
     MapWidgetConstructor,
     MapWidgetProps,
 } from "@vertigis/web/ui/esriUtils";
@@ -20,8 +21,8 @@ export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 
 const DaylightWidgetWrapper = createEsriMapWidget<
     DaylightModel & Accessor,
-    EsriDaylight
->(EsriDaylight as MapWidgetConstructor<EsriDaylight>, true, true);
+    MapWidget
+>(EsriDaylight as unknown as MapWidgetConstructor<MapWidget>, true, true);
 
 const Daylight = (props: DaylightWidgetProps): ReactElement => {
     const [widget, setWidget] = useState<EsriDaylight | null>();
@@ -41,11 +42,12 @@ const Daylight = (props: DaylightWidgetProps): ReactElement => {
     // Memoize the callbacks to avoid destroying and re-creating the widget
     // during every render of this component.
     const onWidgetCreated = useCallback(
-        (widget: EsriDaylight) => {
+        (widget: MapWidget) => {
             // Synchronize values from model
-            widget.dateOrSeason = props.model.dateOrSeason;
+            (widget as unknown as EsriDaylight).dateOrSeason =
+                props.model.dateOrSeason;
 
-            setWidget(widget);
+            setWidget(widget as unknown as EsriDaylight);
         },
         [props.model]
     );

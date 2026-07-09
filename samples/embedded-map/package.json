@@ -8,11 +8,10 @@
         "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
     },
     "dependencies": {
-        "@vertigis/web": "^5.23.0",
         "mapillary-js": "^4.0.0"
     },
     "devDependencies": {
-        "@vertigis/web": "^5.39.0",
+        "@vertigis/web": "^5.42.0",
         "@vertigis/web-sdk": "^3.0.2",
         "typescript": "~5.6.3"
     }
