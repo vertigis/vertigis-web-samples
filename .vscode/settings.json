@@ -10,5 +10,10 @@
         "serializable",
         "vertigis"
     ],
-    "eslint.workingDirectories": [{ "pattern": "./samples/*/" }]
+    "eslint.workingDirectories": [
+        {
+            "pattern": "./samples/*/"
+        }
+    ],
+    "js/ts.tsdk.path": "node_modules/typescript/lib"
 }

@@ -9,14 +9,13 @@
         "start-in-sandbox": "SOCK_PORT=443 vertigis-web-sdk start"
     },
     "dependencies": {
-        "@iconscout/react-unicons": "^2.2.1",
-        "@vertigis/web": "^5.33.0"
+        "@iconscout/react-unicons": "^2.2.1"
     },
     "devDependencies": {
         "@svgr/core": "^6.5.1",
         "@svgr/plugin-jsx": "^6.5.1",
         "@svgr/plugin-svgo": "^6.5.1",
-        "@vertigis/web": "^5.39.0",
+        "@vertigis/web": "^5.42.0",
         "@vertigis/web-sdk": "^3.0.2",
         "tsx": "~4.21.0",
         "typescript": "~5.6.3"
