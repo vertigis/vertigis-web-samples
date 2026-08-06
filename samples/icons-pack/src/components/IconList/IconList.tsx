@@ -3,13 +3,14 @@ import { LayoutElement } from "@vertigis/web/components";
 import { UIContext } from "@vertigis/web/ui";
 import Box from "@vertigis/web/ui/Box";
 import Checkbox from "@vertigis/web/ui/Checkbox";
+import DynamicIcon from "@vertigis/web/ui/DynamicIcon";
 import FormControlLabel from "@vertigis/web/ui/FormControlLabel";
 import List from "@vertigis/web/ui/List";
 import ListItemButton from "@vertigis/web/ui/ListItemButton";
 import ListItemIcon from "@vertigis/web/ui/ListItemIcon";
 import Stack from "@vertigis/web/ui/Stack";
 import Typography from "@vertigis/web/ui/Typography";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import type { ReactElement } from "react";
 
 import type TranslatableTextModel from "./IconListModel";
@@ -47,22 +48,19 @@ export default function IconList(
                                         ? icon.startsWith("custom-")
                                         : true
                                 )
-                                .map((icon) => {
-                                    const Icon = getIcon(icon);
-                                    return (
-                                        <ListItemButton
-                                            sx={{ cursor: "pointer" }}
-                                            key={`icon-${icon}`}
-                                            onClick={() => setCurrentIcon(icon)}
-                                            selected={icon === currentIcon}
-                                        >
-                                            <ListItemIcon>
-                                                <Icon />
-                                            </ListItemIcon>
-                                            {icon}
-                                        </ListItemButton>
-                                    );
-                                })}
+                                .map((icon) => (
+                                    <ListItemButton
+                                        sx={{ cursor: "pointer" }}
+                                        key={`icon-${icon}`}
+                                        onClick={() => setCurrentIcon(icon)}
+                                        selected={icon === currentIcon}
+                                    >
+                                        <ListItemIcon>
+                                            <DynamicIcon src={icon} />
+                                        </ListItemIcon>
+                                        {icon}
+                                    </ListItemButton>
+                                ))}
                         </List>
                     </Box>
                 </Stack>
