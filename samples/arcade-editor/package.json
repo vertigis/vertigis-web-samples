@@ -2,6 +2,9 @@
     "name": "sample-arcade-editor",
     "version": "0.0.0",
     "private": true,
+    "installConfig": {
+        "hoistingLimits": "workspaces"
+    },
     "scripts": {
         "build": "vertigis-web-sdk build",
         "start": "vertigis-web-sdk start"
@@ -12,7 +15,7 @@
     },
     "devDependencies": {
         "@vertigis/web": "~5.39.0",
-        "@vertigis/web-sdk": "^3.0.1",
+        "@vertigis/web-sdk": "^3.0.2",
         "typescript": "~5.6.3"
     }
 }
