@@ -45,7 +45,7 @@
         "file-loader": "^6.2.0",
         "http-proxy-middleware": "^3.0.3",
         "lint-staged": "^16.2.7",
-        "postcss": "^8.4.49",
+        "postcss": "^8.5.23",
         "postcss-loader": "^8.1.1",
         "prettier": "^2.8.4",
         "raw-loader": "^4.0.2",
