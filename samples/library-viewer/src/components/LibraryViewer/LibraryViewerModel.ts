@@ -1,10 +1,6 @@
 import type { AppConfig } from "@vertigis/web/AppConfig";
 import type { AppContext } from "@vertigis/web/AppContext";
-import type {
-    Application,
-    ApplicationOptions,
-    Library,
-} from "@vertigis/web/Application";
+import type { Application, ApplicationOptions, Library } from "@vertigis/web/Application";
 import type { LibraryRegistry } from "@vertigis/web/config";
 import type { LayoutXml } from "@vertigis/web/layout";
 import { command } from "@vertigis/web/messaging";
@@ -26,8 +22,7 @@ interface WindowWithRequire extends Window {
     };
 }
 
-const hasRequire = (window?: object | null): window is WindowWithRequire =>
-    !!window?.hasOwnProperty("require");
+const hasRequire = (window?: object | null): window is WindowWithRequire => !!window?.hasOwnProperty("require");
 
 interface LibraryRegistryModule {
     default: (registry: LibraryRegistry) => void;
@@ -111,36 +106,20 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
     }
 
     @command("library-viewer.load-library")
-    protected async _executeLoadLibrary(
-        libraryConfig: LibraryConfig
-    ): Promise<void> {
+    protected async _executeLoadLibrary(libraryConfig: LibraryConfig): Promise<void> {
         const { id: libraryId, useHostPage } = libraryConfig;
         const { hostElement } = this.appContext;
         const viewerId = "library-viewer";
 
         // Gather the materials needed for the library to load.
-        const [
-            sampleAppConfig,
-            sampleLayout,
-            customLibrary,
-            viewerAppConfig,
-            viewerLayout,
-        ] = await Promise.all([
-            import(
-                /* webpackExclude: /node_modules/ */ `../../../../../samples/${libraryId}/app/app.json`
-            ),
-            import(
-                /* webpackExclude: /node_modules/ */ `../../../../../samples/${libraryId}/app/layout.xml`
-            ),
+        const [sampleAppConfig, sampleLayout, customLibrary, viewerAppConfig, viewerLayout] = await Promise.all([
+            import(/* webpackExclude: /node_modules/ */ `../../../../../samples/${libraryId}/app/app.json`),
+            import(/* webpackExclude: /node_modules/ */ `../../../../../samples/${libraryId}/app/layout.xml`),
             import(
                 /* webpackExclude: /(node_modules|library-viewer)/ */ `../../../../../samples/${libraryId}/build/main.js`
             ),
-            import(
-                /* webpackExclude: /node_modules/ */ `../../../../../samples/${viewerId}/app/app.json`
-            ),
-            import(
-                /* webpackExclude: /node_modules/ */ `../../../../../samples/${viewerId}/app/layout.xml`
-            ),
+            import(/* webpackExclude: /node_modules/ */ `../../../../../samples/${viewerId}/app/app.json`),
+            import(/* webpackExclude: /node_modules/ */ `../../../../../samples/${viewerId}/app/layout.xml`),
         ]);
 
         if (useHostPage) {
@@ -153,8 +132,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
                 this.hostPage = this.hostPage.replace(".", "../");
             }
             this.handleHostFrameLoaded = (iframe: HTMLIFrameElement) => {
-                const embeddedHost =
-                    iframe.contentDocument.getElementById("gcx-app");
+                const embeddedHost = iframe.contentDocument.getElementById("gcx-app");
                 embeddedHost.classList.add("hide-nested-warning");
                 // eslint-disable-next-line @typescript-eslint/no-floating-promises
                 this._loadViewer({
@@ -194,19 +172,13 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
     }): Promise<void> {
         // Parse the currently loaded layout and the library sample layout into
         // JSON objects.
-        const [libraryXml, baseXml] = await Promise.all([
-            parseString(sampleLayout),
-            parseString(viewerLayout),
-        ]);
+        const [libraryXml, baseXml] = await Promise.all([parseString(sampleLayout), parseString(viewerLayout)]);
         // Merge their top level attributes to get all the namespaces.
         baseXml.layout.$ = { ...baseXml.layout.$, ...libraryXml.layout.$ };
 
         // Add the sample layout items as children of the library-viewer component.
-        const mergeRoot =
-            baseXml.layout.split[0].stack[0]["library:library-viewer"][0];
-        this._getChildElementNames(
-            libraryXml.layout as Record<string, unknown>
-        ).forEach(
+        const mergeRoot = baseXml.layout.split[0].stack[0]["library:library-viewer"][0];
+        this._getChildElementNames(libraryXml.layout as Record<string, unknown>).forEach(
             (element) => (mergeRoot[element] = libraryXml.layout[element])
         );
 
@@ -224,15 +196,9 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             if (!mergedItems.some((appItem) => appItem.id === item.id)) {
                 mergedItems.push(item);
             } else {
-                const existingItem = mergedItems.find(
-                    (appItem) => appItem.id === item.id
-                );
+                const existingItem = mergedItems.find((appItem) => appItem.id === item.id);
                 const mergedItem = { ...existingItem, ...item };
-                mergedItems.splice(
-                    mergedItems.indexOf(existingItem),
-                    1,
-                    mergedItem
-                );
+                mergedItems.splice(mergedItems.indexOf(existingItem), 1, mergedItem);
             }
         });
 
@@ -276,18 +242,12 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             frame.require(["web"], resolve);
         });
 
-        const libraries: LibraryRegistryModule[] = await new Promise(
-            (resolve) => {
-                frame.require(
-                    [
-                        "@vertigis/web-libraries!/common",
-                        "@vertigis/web-libraries!/web",
-                        "/main.js",
-                    ],
-                    (...libraries) => resolve(libraries)
-                );
-            }
-        );
+        const libraries: LibraryRegistryModule[] = await new Promise((resolve) => {
+            frame.require(
+                ["@vertigis/web-libraries!/common", "@vertigis/web-libraries!/web", "/main.js"],
+                (...libraries) => resolve(libraries)
+            );
+        });
 
         const options: Partial<ApplicationOptions> = {
             appConfig,
@@ -302,10 +262,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
         webViewer.bootstrap(options);
     }
 
-    private async _displayUI(
-        selectedLibrary: string,
-        useHostPage = false
-    ): Promise<void> {
+    private async _displayUI(selectedLibrary: string, useHostPage = false): Promise<void> {
         this.codeSandboxUrl = useHostPage
             ? `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${selectedLibrary}/?initialpath=parent.html`
             : `https://codesandbox.io/s/github/geocortex/vertigis-web-samples/tree/master/samples/${selectedLibrary}`;
@@ -318,22 +275,16 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
             this.messages
                 .command<SetLibraryArgs>("library-viewer.set-libraries")
                 .execute({ libraries: this.libraries, selectedLibrary }),
-            this.messages
-                .command<string>("library-viewer.display-readme")
-                .execute(selectedLibrary),
+            this.messages.command<string>("library-viewer.display-readme").execute(selectedLibrary),
         ]);
     }
 
     private async _loadLibrary(selectedLibrary: string): Promise<void> {
         const { hostElement } = this.appContext;
-        const library = this.libraries.find(
-            (library) => library.id === selectedLibrary
-        );
+        const library = this.libraries.find((library) => library.id === selectedLibrary);
         if (library) {
             hostElement.setAttribute("library-loaded", selectedLibrary);
-            await this.messages
-                .command<LibraryConfig>("library-viewer.load-library")
-                .execute(library);
+            await this.messages.command<LibraryConfig>("library-viewer.load-library").execute(library);
 
             // If using a host page the application never restarts, so this
             // needs to be taken care of here.
@@ -349,9 +300,7 @@ export default class LibraryViewerModel extends ComponentModelBase<LibraryViewer
 
         // When running in netlify this lets us show a loading spinner, see
         // `viewer/build/index.html`
-        const iframe = parent.document.getElementById(
-            "vgs_web_library_viewer_iframe"
-        );
+        const iframe = parent.document.getElementById("vgs_web_library_viewer_iframe");
         if (iframe) {
             iframe.style.display = "block";
         }

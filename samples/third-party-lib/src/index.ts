@@ -1,8 +1,6 @@
 import type { LibraryRegistry } from "@vertigis/web/config";
 
-import ThreeDimensionalGraph, {
-    ThreeDimensionalGraphModel,
-} from "./components/ThreeDimensionalGraph";
+import ThreeDimensionalGraph, { ThreeDimensionalGraphModel } from "./components/ThreeDimensionalGraph";
 
 export default function (registry: LibraryRegistry): void {
     registry.registerComponent({

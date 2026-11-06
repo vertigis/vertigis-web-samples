@@ -30,18 +30,10 @@ const ReadMe: FC<ReadMeProps> = ({ model, ...layoutProps }) => {
     return (
         <LayoutElement stretch {...layoutProps}>
             <Stack direction="row">
-                {readmeText && (
-                    <Markdown
-                        text={readmeText}
-                        sx={{ marginLeft: 4, marginRight: 4 }}
-                    />
-                )}
+                {readmeText && <Markdown text={readmeText} sx={{ marginLeft: 4, marginRight: 4 }} />}
                 {codePageText && (
                     <Stack sx={{ width: "100%" }}>
-                        <Typography
-                            variant="h5"
-                            sx={{ marginBottom: 1, marginLeft: 4 }}
-                        >
+                        <Typography variant="h5" sx={{ marginBottom: 1, marginLeft: 4 }}>
                             {codePageTitle}
                         </Typography>
                         <Markdown

@@ -9,11 +9,7 @@ import { command } from "@vertigis/web/messaging";
 import { toFeatureArray } from "@vertigis/web/messaging/featureConversion";
 import { toLayerExtension } from "@vertigis/web/messaging/mapConversion";
 import type { ComponentModelProperties } from "@vertigis/web/models";
-import {
-    ComponentModelBase,
-    importModel,
-    serializable,
-} from "@vertigis/web/models";
+import { ComponentModelBase, importModel, serializable } from "@vertigis/web/models";
 
 export interface ArcadeEditorData {
     webMap: WebMap;
@@ -49,13 +45,9 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
     }
 
     @command("arcade-editor.load-data")
-    protected async _executeArcadeEditorLoadData(
-        args: HasFeatures
-    ): Promise<void> {
+    protected async _executeArcadeEditorLoadData(args: HasFeatures): Promise<void> {
         const featureSet = new FeatureSet({
-            features: (await toFeatureArray(args.features)).map((feature) =>
-                feature.toGraphic()
-            ),
+            features: (await toFeatureArray(args.features)).map((feature) => feature.toGraphic()),
             fields: this.featureLayer.fields,
             geometryType: "point",
             spatialReference: this.featureLayer.spatialReference,
@@ -74,15 +66,10 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
 
         const extension = toLayerExtension(this.layerName, this.map);
 
-        if (
-            isLayerExtension(extension) &&
-            (extension as FeatureLayerExtension).layer.type === "feature"
-        ) {
+        if (isLayerExtension(extension) && (extension as FeatureLayerExtension).layer.type === "feature") {
             this.featureLayer = (extension as FeatureLayerExtension).layer;
         }
 
-        await this.messages
-            .command<HasFeatures>("arcade-editor.load-data")
-            .execute({ features: [] });
+        await this.messages.command<HasFeatures>("arcade-editor.load-data").execute({ features: [] });
     }
 }

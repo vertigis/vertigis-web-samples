@@ -63,33 +63,23 @@ function TabPanel(props: TabPanelProps) {
     );
 }
 
-export default function UILibraryComponent(
-    props: LayoutElementProperties<UILibraryComponentModel>
-): ReactElement {
+export default function UILibraryComponent(props: LayoutElementProperties<UILibraryComponentModel>): ReactElement {
     const [tabValue, setTabValue] = useState(0);
     const { commands, brandingService } = useContext(UIContext);
     useWatchAndRerender(brandingService, "activeTheme");
 
     return (
         <LayoutElement {...props} stretch>
-            <Stack
-                direction="column"
-                alignItems="initial"
-                sx={{ width: "100%", height: "100%" }}
-            >
+            <Stack direction="column" alignItems="initial" sx={{ width: "100%", height: "100%" }}>
                 <Stack direction="column" sx={{ p: 2 }}>
                     <FormControlLabel
                         label="Dark Mode"
                         control={
                             <Switch
-                                value={
-                                    brandingService.activeTheme.id === "dark"
-                                }
+                                value={brandingService.activeTheme.id === "dark"}
                                 onChange={(e, checked) => {
                                     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                                    commands.ui.setTheme.execute(
-                                        checked ? "dark" : "light"
-                                    );
+                                    commands.ui.setTheme.execute(checked ? "dark" : "light");
                                 }}
                             />
                         }
@@ -101,9 +91,7 @@ export default function UILibraryComponent(
                                 value={brandingService.density === "compact"}
                                 onChange={(e, checked) => {
                                     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                                    commands.ui.setDensity.execute(
-                                        checked ? "compact" : "standard"
-                                    );
+                                    commands.ui.setDensity.execute(checked ? "compact" : "standard");
                                 }}
                             />
                         }

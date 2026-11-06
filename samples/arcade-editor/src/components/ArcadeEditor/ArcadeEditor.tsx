@@ -18,11 +18,7 @@ const ArcadeEditor = (props: ArcadeEditorProps): ReactElement => {
     useWatchAndRerender(model, "data");
 
     return (
-        <LayoutElement
-            {...props}
-            stretch
-            className="arcade-editor-webcomponent"
-        >
+        <LayoutElement {...props} stretch className="arcade-editor-webcomponent">
             {data?.featureSet.features.length > 0 ? (
                 <Paper className="editor-wrapper">
                     <ArcgisArcadeEditor

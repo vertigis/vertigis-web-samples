@@ -31,37 +31,17 @@ function CheckboxDemo() {
             <FormControlLabel label="Checkbox" control={<Checkbox />} />
             <div>
                 <FormControl {...{ component: "fieldset" }}>
-                    <FormLabel {...{ component: "legend" }}>
-                        Assign responsibility
-                    </FormLabel>
+                    <FormLabel {...{ component: "legend" }}>Assign responsibility</FormLabel>
                     <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={gilad}
-                                onChange={handleChange}
-                                name="gilad"
-                            />
-                        }
+                        control={<Checkbox checked={gilad} onChange={handleChange} name="gilad" />}
                         label="Gilad Gray"
                     />
                     <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={jason}
-                                onChange={handleChange}
-                                name="jason"
-                            />
-                        }
+                        control={<Checkbox checked={jason} onChange={handleChange} name="jason" />}
                         label="Jason Killian"
                     />
                     <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={antoine}
-                                onChange={handleChange}
-                                name="antoine"
-                            />
-                        }
+                        control={<Checkbox checked={antoine} onChange={handleChange} name="antoine" />}
                         label="Antoine Llorca"
                     />
                 </FormControl>
@@ -81,21 +61,13 @@ function InputDemo() {
         <>
             <div>
                 <FormControl>
-                    <FormLabel htmlFor="input-controlled">
-                        Controlled Input
-                    </FormLabel>
-                    <Input
-                        value={value}
-                        onChange={handleChange}
-                        id="input-controlled"
-                    />
+                    <FormLabel htmlFor="input-controlled">Controlled Input</FormLabel>
+                    <Input value={value} onChange={handleChange} id="input-controlled" />
                 </FormControl>
             </div>
             <div>
                 <FormControl>
-                    <FormLabel htmlFor="input-uncontrolled">
-                        Uncontrolled Input
-                    </FormLabel>
+                    <FormLabel htmlFor="input-uncontrolled">Uncontrolled Input</FormLabel>
                     <Input id="input-uncontrolled" />
                 </FormControl>
             </div>
@@ -114,33 +86,11 @@ function RadioDemo() {
         // TODO: Remove spread once prop types are fixed
         <FormControl {...{ component: "fieldset" }}>
             <FormLabel {...{ component: "legend" }}>Gender</FormLabel>
-            <RadioGroup
-                aria-label="gender"
-                name="gender1"
-                value={value}
-                onChange={handleChange}
-            >
-                <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                />
-                <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                />
-                <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="Other"
-                />
-                <FormControlLabel
-                    value="disabled"
-                    disabled
-                    control={<Radio />}
-                    label="(Disabled option)"
-                />
+            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                <FormControlLabel value="male" control={<Radio />} label="Male" />
+                <FormControlLabel value="other" control={<Radio />} label="Other" />
+                <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
             </RadioGroup>
         </FormControl>
     );
@@ -172,9 +122,7 @@ function SelectDemo() {
             </div>
             <div>
                 <FormControl>
-                    <FormLabel id="demo-simple-select-helper-label">
-                        Age
-                    </FormLabel>
+                    <FormLabel id="demo-simple-select-helper-label">Age</FormLabel>
                     <FormHelperText>Some important helper text</FormHelperText>
                     <Select
                         labelId="demo-simple-select-helper-label"
@@ -211,9 +159,7 @@ function SelectDemo() {
             </div>
             <div>
                 <FormControl>
-                    <FormLabel id="demo-simple-select-placeholder-label-label">
-                        Age
-                    </FormLabel>
+                    <FormLabel id="demo-simple-select-placeholder-label-label">Age</FormLabel>
                     <FormHelperText>Label + placeholder</FormHelperText>
                     <Select
                         labelId="demo-simple-select-placeholder-label-label"
@@ -233,9 +179,7 @@ function SelectDemo() {
             </div>
             <div>
                 <FormControl disabled>
-                    <FormLabel id="demo-simple-select-disabled-label">
-                        Name
-                    </FormLabel>
+                    <FormLabel id="demo-simple-select-disabled-label">Name</FormLabel>
                     <FormHelperText>Disabled</FormHelperText>
                     <Select
                         labelId="demo-simple-select-disabled-label"
@@ -254,9 +198,7 @@ function SelectDemo() {
             </div>
             <div>
                 <FormControl error>
-                    <FormLabel id="demo-simple-select-error-label">
-                        Name
-                    </FormLabel>
+                    <FormLabel id="demo-simple-select-error-label">Name</FormLabel>
                     <FormHelperText>Error</FormHelperText>
                     <Select
                         labelId="demo-simple-select-error-label"
@@ -276,9 +218,7 @@ function SelectDemo() {
             </div>
             <div>
                 <FormControl>
-                    <FormLabel id="demo-simple-select-readonly-label">
-                        Name
-                    </FormLabel>
+                    <FormLabel id="demo-simple-select-readonly-label">Name</FormLabel>
                     <FormHelperText>Read only</FormHelperText>
                     <Select
                         labelId="demo-simple-select-readonly-label"
@@ -316,9 +256,7 @@ function SelectDemo() {
             </div>
             <div>
                 <FormControl required>
-                    <FormLabel id="demo-simple-select-required-label">
-                        Age
-                    </FormLabel>
+                    <FormLabel id="demo-simple-select-required-label">Age</FormLabel>
                     <FormHelperText>Required</FormHelperText>
                     <Select
                         labelId="demo-simple-select-required-label"

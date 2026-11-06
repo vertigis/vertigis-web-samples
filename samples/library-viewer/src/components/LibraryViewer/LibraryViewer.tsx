@@ -1,7 +1,4 @@
-import {
-    LayoutElement,
-    type LayoutElementProperties,
-} from "@vertigis/web/components";
+import { LayoutElement, type LayoutElementProperties } from "@vertigis/web/components";
 import LayoutElementContainer from "@vertigis/web/components/LayoutElementContainer";
 import { useWatchAndRerender } from "@vertigis/web/ui";
 import Link from "@vertigis/web/ui/Link";
@@ -11,14 +8,9 @@ import type { FC } from "react";
 import type LibraryViewerModel from "./LibraryViewerModel";
 import "./LibraryViewer.css";
 
-export interface LibraryViewerProps
-    extends LayoutElementProperties<LibraryViewerModel> {}
+export interface LibraryViewerProps extends LayoutElementProperties<LibraryViewerModel> {}
 
-const LibraryViewer: FC<LibraryViewerProps> = ({
-    model,
-    children,
-    ...layoutProps
-}) => {
+const LibraryViewer: FC<LibraryViewerProps> = ({ model, children, ...layoutProps }) => {
     const { selectedLibrary, codeSandboxUrl, hostPage } = model;
     useWatchAndRerender(model, "hostPage");
 
@@ -38,19 +30,14 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
                         name="host-frame"
                         src={hostPage}
                         onLoad={(event) => {
-                            const nestedFrame =
-                                event.currentTarget.contentDocument.getElementById(
-                                    "embedded-viewer"
-                                ) as HTMLIFrameElement;
+                            const nestedFrame = event.currentTarget.contentDocument.getElementById(
+                                "embedded-viewer"
+                            ) as HTMLIFrameElement;
                             model.handleHostFrameLoaded?.(nestedFrame);
                         }}
                     ></iframe>
                 ) : (
-                    <LayoutElementContainer
-                        sx={{ border: "1px solid lightgrey" }}
-                    >
-                        {children}
-                    </LayoutElementContainer>
+                    <LayoutElementContainer sx={{ border: "1px solid lightgrey" }}>{children}</LayoutElementContainer>
                 )}
                 <Link
                     href={`https://github.com/vertigis/vertigis-web-samples/tree/master/samples/${selectedLibrary}/`}
@@ -59,11 +46,7 @@ const LibraryViewer: FC<LibraryViewerProps> = ({
                 >
                     View the source code on GitHub
                 </Link>
-                <Link
-                    href={codeSandboxUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                <Link href={codeSandboxUrl} target="_blank" rel="noopener noreferrer">
                     Edit this sample in CodeSandbox
                 </Link>
             </Stack>

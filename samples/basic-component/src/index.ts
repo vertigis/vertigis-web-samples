@@ -1,8 +1,6 @@
 import type { LibraryRegistry } from "@vertigis/web/config";
 
-import BasicComponent, {
-    BasicComponentModel,
-} from "./components/BasicComponent";
+import BasicComponent, { BasicComponentModel } from "./components/BasicComponent";
 
 export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerComponent({

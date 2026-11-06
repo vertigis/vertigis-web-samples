@@ -30,9 +30,7 @@
             "id": "map-config-1",
             "$type": "map-extension",
             "webMap": "https://www.arcgis.com/home/item.html?id=0ba877a4185448cb832af9a661031e31",
-            "tableExtensions": [
-                "item://table-extension/victoria-fire-hydrant-surveys"
-            ],
+            "tableExtensions": ["item://table-extension/victoria-fire-hydrant-surveys"],
             "layerExtensions": [
                 "item://layer-extension/victoria-tax-parcels",
                 "item://layer-extension/victoria-buildings",

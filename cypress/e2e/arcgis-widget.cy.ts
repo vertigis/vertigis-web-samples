@@ -8,18 +8,11 @@ const expectLightingDate = (isoDate: string) =>
         .getMap()
         .should((mapEl) => {
             const mapView = getMapOrSceneView(mapEl);
-            expect(mapView.environment.lighting.date.toISOString()).to.equal(
-                isoDate
-            );
+            expect(mapView.environment.lighting.date.toISOString()).to.equal(isoDate);
         });
 
 const findWidgetSelect = () =>
-    cy
-        .getViewer()
-        .getMap()
-        .find(".esri-daylight__season-picker")
-        .shadow()
-        .find('select[aria-label="Season"]');
+    cy.getViewer().getMap().find(".esri-daylight__season-picker").shadow().find('select[aria-label="Season"]');
 
 // Temporarily skipped until we can figure out why the web scene isn't loading
 // on the github build agent.
@@ -47,11 +40,7 @@ xdescribe(sampleName, () => {
         findWidgetSelect().should("have.value", "spring");
 
         // Our date picker mode select should control the widget.
-        cy.getViewer()
-            .contains("label", "Date Picker Mode")
-            .parent()
-            .find('[role="combobox"]')
-            .click();
+        cy.getViewer().contains("label", "Date Picker Mode").parent().find('[role="combobox"]').click();
         cy.getViewer().contains('li[role="option"]', "Date").click();
 
         // Now should be in date mode.

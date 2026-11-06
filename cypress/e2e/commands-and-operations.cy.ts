@@ -1,13 +1,10 @@
 const sampleName = "commands-and-operations";
 
-const openIwtm = () =>
-    cy.getViewer().contains("button", "Execute Custom Action").click();
+const openIwtm = () => cy.getViewer().contains("button", "Execute Custom Action").click();
 
-const getMenuItem = (menuItemText: string) =>
-    cy.getViewer().contains('[role="menuitem"]', menuItemText);
+const getMenuItem = (menuItemText: string) => cy.getViewer().contains('[role="menuitem"]', menuItemText);
 
-const clickMenuItem = (menuItemText: string) =>
-    getMenuItem(menuItemText).click();
+const clickMenuItem = (menuItemText: string) => getMenuItem(menuItemText).click();
 
 const enterPromptText = (text: string) =>
     cy
@@ -19,8 +16,7 @@ const enterPromptText = (text: string) =>
         //  around this issue.
         .type(text, { force: true });
 
-const clickDialogOkButton = () =>
-    cy.getViewer().find('[role="dialog"]').contains("button", "OK").click();
+const clickDialogOkButton = () => cy.getViewer().find('[role="dialog"]').contains("button", "OK").click();
 
 describe(sampleName, () => {
     it("executes commands and operations", () => {
@@ -46,9 +42,7 @@ describe(sampleName, () => {
         clickMenuItem("View message history");
         cy.getViewer()
             .find('[role="alertdialog"]')
-            .contains(
-                `[ "Never gonna give you up", "Never gonna let you down" ]`
-            )
+            .contains(`[ "Never gonna give you up", "Never gonna let you down" ]`)
             .should("be.visible");
         clickDialogOkButton();
     });
@@ -64,28 +58,17 @@ describe(sampleName, () => {
         // Since it's just a `li` with a click handler, there isn't a `disabled`
         // attribute. If there were we could have used `should("be.disabled")`
         // instead.
-        getMenuItem("Run command with canExecute").should(
-            "have.attr",
-            "aria-disabled",
-            "true"
-        );
+        getMenuItem("Run command with canExecute").should("have.attr", "aria-disabled", "true");
 
         clickMenuItem("Toggle canExecute");
 
         // Item should be enabled
         openIwtm();
-        getMenuItem("Run command with canExecute").should(
-            "have.attr",
-            "data-test",
-            "enabled"
-        );
+        getMenuItem("Run command with canExecute").should("have.attr", "data-test", "enabled");
 
         // Click the item which should open a dialog
         clickMenuItem("Run command with canExecute");
-        cy.getViewer()
-            .find('[role="alertdialog"]')
-            .contains(`It worked!`)
-            .should("be.visible");
+        cy.getViewer().find('[role="alertdialog"]').contains(`It worked!`).should("be.visible");
     });
 });
 

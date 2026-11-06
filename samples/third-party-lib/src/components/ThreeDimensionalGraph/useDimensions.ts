@@ -8,9 +8,7 @@ export type UseDimensionsHook<T extends HTMLElement> = [
     DOMRect | undefined
 ];
 
-export default function useDimensions<
-    T extends HTMLElement = HTMLElement
->(): UseDimensionsHook<T> {
+export default function useDimensions<T extends HTMLElement = HTMLElement>(): UseDimensionsHook<T> {
     const [dimensions, setDimensions] = useState<DOMRect>();
     const [node, setNode] = useState<T>(null);
 

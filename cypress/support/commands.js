@@ -26,10 +26,7 @@
 
 Cypress.Commands.add("getViewer", { prevSubject: "optional" }, (subject) =>
     (
-        (subject &&
-            cy
-                .wrap(subject, { log: false })
-                .find("iframe[name=viewer]", { log: false })) ||
+        (subject && cy.wrap(subject, { log: false }).find("iframe[name=viewer]", { log: false })) ||
         cy.get("iframe[name=viewer]", { log: false })
     )
         .its("0.contentDocument.body", { log: false })
@@ -68,9 +65,7 @@ Cypress.Commands.add("getMap", { prevSubject: "element" }, (subject, id) => {
 
             // Wait for global map data to be available once initialized
             expect(!!map, "expect map to be created").to.be.true;
-            expect(map.map.loadStatus, "expect map to be loaded").to.equal(
-                "loaded"
-            );
+            expect(map.map.loadStatus, "expect map to be loaded").to.equal("loaded");
             expect(!!map, "expect map to be created").to.be.true;
             expect(map.ready, "expect map to be ready").to.be.true;
         });

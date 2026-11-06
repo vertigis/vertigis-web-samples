@@ -7,20 +7,12 @@ import type { BrandingService } from "@vertigis/web/branding/BrandingService";
 import { type Features, command } from "@vertigis/web/messaging";
 import { toFeatureArray } from "@vertigis/web/messaging/featureConversion";
 import { ComponentModelBase, serializable } from "@vertigis/web/models";
-import type {
-    PropertyDefs,
-    ComponentModelProperties,
-} from "@vertigis/web/models";
+import type { PropertyDefs, ComponentModelProperties } from "@vertigis/web/models";
 import { inject, FrameworkServiceType } from "@vertigis/web/services";
 import { sanitizeHtml, stripHtml } from "@vertigis/web/ui";
-import type {
-    GraphData as ForceGraphData,
-    LinkObject,
-    NodeObject as ForceNodeObject,
-} from "react-force-graph-3d";
+import type { GraphData as ForceGraphData, LinkObject, NodeObject as ForceNodeObject } from "react-force-graph-3d";
 
-interface ThreeDimensionalGraphModelProperties
-    extends ComponentModelProperties {
+interface ThreeDimensionalGraphModelProperties extends ComponentModelProperties {
     hydrantLayerExtension?: LayerExtension;
     surveyTableExtension?: TableExtension;
 }
@@ -79,11 +71,7 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<Three
 
     getNodeColor = (node: NodeObject): string => {
         if (node.type === "surveyor") {
-            return (
-                this.brandingService?.activeTheme.colors
-                    .get("primaryForeground")
-                    .toHex() ?? "white"
-            );
+            return this.brandingService?.activeTheme.colors.get("primaryForeground").toHex() ?? "white";
         } else if (node.id === this.selectedSurveyId) {
             // Show similar color as the focus highlight on the map
             // when the node is selected.
@@ -131,9 +119,7 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<Three
         await this.messages.commands.ui.activate.execute(this);
 
         const features = await toFeatureArray(inFeatures);
-        const hydrantFeatures = features.filter(
-            (feature) => feature.source === this.hydrantLayerExtension
-        );
+        const hydrantFeatures = features.filter((feature) => feature.source === this.hydrantLayerExtension);
         const hydrantIds = hydrantFeatures.map(
             (feature) =>
                 // Wrap in quotes as this field is a string type.
@@ -147,25 +133,16 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<Three
         if (hydrantIds.length) {
             // Query for the surveys.
             const queryService = new QueryService();
-            const result = queryService.query(
-                this.surveyTableExtension,
-                `HYDRANT_NUM IN (${hydrantIds.join(",")})`
-            );
+            const result = queryService.query(this.surveyTableExtension, `HYDRANT_NUM IN (${hydrantIds.join(",")})`);
             surveys = await toFeatureArray(new FeatureStream(result));
 
             // Parse the surveys and create the graph nodes/links.
             for (const survey of surveys) {
-                const hydrantNum = survey.attributes.get(
-                    "HYDRANT_NUM"
-                ) as string;
+                const hydrantNum = survey.attributes.get("HYDRANT_NUM") as string;
                 const surveyor = survey.attributes.get("SURVEYOR") as string;
                 const surveyId = survey.attributes.get("OBJECTID") as number;
-                const surveyResult = survey.attributes.get("RESULT") as
-                    | "PASS"
-                    | "FAIL";
-                const surveyDate = survey.attributes.get(
-                    "SURVEY_DATE"
-                ) as number;
+                const surveyResult = survey.attributes.get("RESULT") as "PASS" | "FAIL";
+                const surveyDate = survey.attributes.get("SURVEY_DATE") as number;
 
                 // Initialize an empty array for this inspector if it doesn't exist
                 // already.
@@ -198,24 +175,16 @@ export default class ThreeDimensionalGraphModel extends ComponentModelBase<Three
         }
 
         // Hold on to the features for easy access later on in click/hover events from the graph.
-        this.hydrants = hydrantFeatures.reduce<Record<string, Feature>>(
-            (acc, hydrant) => {
-                const hydrantNum = hydrant.attributes.get(
-                    "HYDRANT_NUM"
-                ) as string;
-                acc[hydrantNum] = hydrant;
-                return acc;
-            },
-            {}
-        );
-        this.surveys = surveys.reduce<Record<number, Feature>>(
-            (acc, survey) => {
-                const surveyId = survey.attributes.get("OBJECTID") as number;
-                acc[surveyId] = survey;
-                return acc;
-            },
-            {}
-        );
+        this.hydrants = hydrantFeatures.reduce<Record<string, Feature>>((acc, hydrant) => {
+            const hydrantNum = hydrant.attributes.get("HYDRANT_NUM") as string;
+            acc[hydrantNum] = hydrant;
+            return acc;
+        }, {});
+        this.surveys = surveys.reduce<Record<number, Feature>>((acc, survey) => {
+            const surveyId = survey.attributes.get("OBJECTID") as number;
+            acc[surveyId] = survey;
+            return acc;
+        }, {});
         this.graphData = newGraphData;
     }
 

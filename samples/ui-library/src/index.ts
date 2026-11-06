@@ -1,8 +1,6 @@
 import type { LibraryRegistry } from "@vertigis/web/config";
 
-import UILibraryComponent, {
-    UILibraryComponentModel,
-} from "./components/UILibraryComponent";
+import UILibraryComponent, { UILibraryComponentModel } from "./components/UILibraryComponent";
 
 export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerComponent({

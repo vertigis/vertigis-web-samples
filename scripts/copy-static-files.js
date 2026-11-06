@@ -19,7 +19,5 @@ exec("shx cp -r ./samples/library-viewer/{app,build}/* ./viewer/build");
 
 libraries.forEach((library) => {
     exec(`shx mkdir -p ./viewer/build/${library}`);
-    exec(
-        `shx cp -r ./samples/${library}/{app,build,README.md} ./viewer/build/${library}`
-    );
+    exec(`shx cp -r ./samples/${library}/{app,build,README.md} ./viewer/build/${library}`);
 });

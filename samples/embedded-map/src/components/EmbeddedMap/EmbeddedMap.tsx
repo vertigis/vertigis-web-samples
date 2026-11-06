@@ -8,9 +8,7 @@ import { useEffect, useRef } from "react";
 import "mapillary-js/dist/mapillary.css";
 import type EmbeddedMapModel from "./EmbeddedMapModel";
 
-export default function EmbeddedMap(
-    props: LayoutElementProperties<EmbeddedMapModel>
-): ReactElement {
+export default function EmbeddedMap(props: LayoutElementProperties<EmbeddedMapModel>): ReactElement {
     const { model } = props;
     const mlyRootEl = useRef<HTMLDivElement>(undefined);
 

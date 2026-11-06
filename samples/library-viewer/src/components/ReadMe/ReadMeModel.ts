@@ -19,9 +19,7 @@ export default class ReadMeModel extends ComponentModelBase<ComponentModelProper
     @command("library-viewer.display-readme")
     protected async _executeDisplayReadMe(libraryId: string): Promise<void> {
         this.readme = (
-            await import(
-                /* webpackExclude: /node_modules/ */ `../../../../../samples/${libraryId}/README.md`
-            )
+            await import(/* webpackExclude: /node_modules/ */ `../../../../../samples/${libraryId}/README.md`)
         )?.default;
 
         const localUrls = [...this.readme.matchAll(urlRegex)]

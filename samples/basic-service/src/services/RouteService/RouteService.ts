@@ -20,16 +20,13 @@ const routeSymbol = new SimpleLineSymbol({
     width: 3,
 });
 
-const ROUTE_URL =
-    "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route";
+const ROUTE_URL = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/NetworkAnalysis/SanDiego/NAServer/Route";
 
 export default class RouteService extends ServiceBase {
     stops = new FeatureSet();
 
     @command("custom-route-service.add-point")
-    protected async _handleAddPointCommand(result: {
-        geometry: Geometry;
-    }): Promise<void> {
+    protected async _handleAddPointCommand(result: { geometry: Geometry }): Promise<void> {
         const promises: Promise<void>[] = [];
 
         const graphic = new Graphic({

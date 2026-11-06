@@ -21,14 +21,8 @@ export default function ThreeDimensionalGraph(
     // will make sure the node color is correct.
     useWatch(model, "selectedSurveyId", () => graphRef.current.refresh());
 
-    const bgColor =
-        model.brandingService?.activeTheme.colors
-            .get("primaryBackground")
-            .toHex() ?? "black";
-    const fgColor =
-        model.brandingService?.activeTheme.colors
-            .get("primaryForeground")
-            .toHex() ?? "white";
+    const bgColor = model.brandingService?.activeTheme.colors.get("primaryBackground").toHex() ?? "black";
+    const fgColor = model.brandingService?.activeTheme.colors.get("primaryForeground").toHex() ?? "white";
 
     const { graphData } = model;
 
