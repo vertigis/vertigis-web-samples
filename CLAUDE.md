@@ -98,10 +98,10 @@ Run all commands from the root of the repository. The `yarn` version comes from 
 -   Attempt to keep the versions of `@vertigis/web`, `@vertigis/web-sdk`, and `typescript` the same in all samples and in the root
     `package.json`.
 
--   If a sample needs to be held back due to incompatibilities with the latest version of ESRI's api:
-    -   Pin or override the version of the API (or the dependency you are using) in that sample's `package.json`
-    -   Add `"installConfig": { "hoistingLimits": "workspaces" }` to that sample's `package.json`. 
-        This prevents the pinned version of ESRI JSAPI from affecting other samples.
+-   If a sample has dependencies that would bring in a separate version of ESRI's JSAPI than used in the others, 
+    add `"installConfig": { "hoistingLimits": "workspaces" }` to that sample's `package.json`. 
+    -   This prevents the extra version of ESRI's JSAPI from affecting other samples and preventing builds from completing. 
+    -   Note however that at runtime everything will be using the same version, so it still might not be compatible.
 
 -   Obey `.prettierrc` and the `eslint.config.js` of each sample.
 
