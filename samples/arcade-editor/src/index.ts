@@ -9,9 +9,7 @@ import "@arcgis/coding-components/components/arcgis-arcade-editor";
 import "@esri/calcite-components/components/calcite-scrim";
 
 // Set the asset path for calcite components
-setCalciteComponentsAssetPath(
-    "https://js.arcgis.com/calcite-components/2.8.6/assets"
-);
+setCalciteComponentsAssetPath("https://js.arcgis.com/calcite-components/2.8.6/assets");
 
 export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerComponent({

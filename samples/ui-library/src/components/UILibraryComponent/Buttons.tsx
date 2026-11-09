@@ -5,9 +5,7 @@ import TrashIcon from "@vertigis/web/ui/icons/Trash";
 import type { ReactElement } from "react";
 import { useContext } from "react";
 
-const ButtonRow = (props: StackProps) => (
-    <Stack spacing={1} direction="row" alignItems="center" {...props} />
-);
+const ButtonRow = (props: StackProps) => <Stack spacing={1} direction="row" alignItems="center" {...props} />;
 
 export default function Buttons(): ReactElement {
     const { commands } = useContext(UIContext);
@@ -62,20 +60,9 @@ export default function Buttons(): ReactElement {
                 </Button>
             </ButtonRow>
             <ButtonRow>
-                <Button
-                    onClick={handleClick}
-                    size="small"
-                    startIcon={<TrashIcon fontSize="small" />}
-                />
-                <Button
-                    onClick={handleClick}
-                    startIcon={<TrashIcon fontSize="medium" />}
-                />
-                <Button
-                    onClick={handleClick}
-                    size="large"
-                    startIcon={<TrashIcon fontSize="large" />}
-                />
+                <Button onClick={handleClick} size="small" startIcon={<TrashIcon fontSize="small" />} />
+                <Button onClick={handleClick} startIcon={<TrashIcon fontSize="medium" />} />
+                <Button onClick={handleClick} size="large" startIcon={<TrashIcon fontSize="large" />} />
                 <Button onClick={handleClick} startIcon={<TrashIcon />}>
                     Icon and Text
                 </Button>
@@ -90,29 +77,17 @@ export default function Buttons(): ReactElement {
                     size="small"
                     startIcon={<TrashIcon fontSize="small" />}
                 />
-                <Button
-                    onClick={handleClick}
-                    buttonStyle="round"
-                    startIcon={<TrashIcon fontSize="medium" />}
-                />
+                <Button onClick={handleClick} buttonStyle="round" startIcon={<TrashIcon fontSize="medium" />} />
                 <Button
                     onClick={handleClick}
                     buttonStyle="round"
                     size="large"
                     startIcon={<TrashIcon fontSize="large" />}
                 />
-                <Button
-                    onClick={handleClick}
-                    buttonStyle="round"
-                    startIcon={<TrashIcon />}
-                >
+                <Button onClick={handleClick} buttonStyle="round" startIcon={<TrashIcon />}>
                     Icon and Text
                 </Button>
-                <Button
-                    onClick={handleClick}
-                    buttonStyle="round"
-                    endIcon={<TrashIcon />}
-                >
+                <Button onClick={handleClick} buttonStyle="round" endIcon={<TrashIcon />}>
                     Text and Icon
                 </Button>
             </ButtonRow>

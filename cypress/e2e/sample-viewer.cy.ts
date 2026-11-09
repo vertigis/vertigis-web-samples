@@ -1,22 +1,13 @@
 const getIframeDocument = () => {
-    return cy
-        .get(`iframe[name="viewer"]`)
-        .its("0.contentDocument")
-        .should("exist");
+    return cy.get(`iframe[name="viewer"]`).its("0.contentDocument").should("exist");
 };
 
 const getIframeBody = () => {
-    return getIframeDocument()
-        .its("body")
-        .should("not.be.undefined")
-        .then(cy.wrap);
+    return getIframeDocument().its("body").should("not.be.undefined").then(cy.wrap);
 };
 
 const getApplication = () => {
-    return getIframeBody()
-        .find("#gcx-app")
-        .should("have.attr", "library-loaded")
-        .then(cy.wrap);
+    return getIframeBody().find("#gcx-app").should("have.attr", "library-loaded").then(cy.wrap);
 };
 
 const getMap = (id?: string) => {
@@ -49,9 +40,7 @@ describe("sample-viewer", () => {
 
     it("loads the correct sample", () => {
         cy.visit(`http://localhost:3001/#basic-component`);
-        getIframeBody()
-            .find(".gcx-readme")
-            .should("contain.text", "Basic Component");
+        getIframeBody().find(".gcx-readme").should("contain.text", "Basic Component");
     });
 
     it("loads a map", () => {

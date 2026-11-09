@@ -6,11 +6,7 @@ import FormControl from "@vertigis/web/ui/FormControl";
 import FormLabel from "@vertigis/web/ui/FormLabel";
 import MenuItem from "@vertigis/web/ui/MenuItem";
 import Select from "@vertigis/web/ui/Select";
-import type {
-    MapWidget,
-    MapWidgetConstructor,
-    MapWidgetProps,
-} from "@vertigis/web/ui/esriUtils";
+import type { MapWidget, MapWidgetConstructor, MapWidgetProps } from "@vertigis/web/ui/esriUtils";
 import { createEsriMapWidget } from "@vertigis/web/ui/esriUtils";
 import { useCallback, useState } from "react";
 import type { ReactElement } from "react";
@@ -19,10 +15,11 @@ import type DaylightModel from "./DaylightModel";
 import "./Daylight.css";
 export type DaylightWidgetProps = MapWidgetProps<DaylightModel & Accessor>;
 
-const DaylightWidgetWrapper = createEsriMapWidget<
-    DaylightModel & Accessor,
-    MapWidget
->(EsriDaylight as unknown as MapWidgetConstructor<MapWidget>, true, true);
+const DaylightWidgetWrapper = createEsriMapWidget<DaylightModel & Accessor, MapWidget>(
+    EsriDaylight as unknown as MapWidgetConstructor<MapWidget>,
+    true,
+    true
+);
 
 const Daylight = (props: DaylightWidgetProps): ReactElement => {
     const [widget, setWidget] = useState<EsriDaylight | null>();
@@ -44,8 +41,7 @@ const Daylight = (props: DaylightWidgetProps): ReactElement => {
     const onWidgetCreated = useCallback(
         (widget: MapWidget) => {
             // Synchronize values from model
-            (widget as unknown as EsriDaylight).dateOrSeason =
-                props.model.dateOrSeason;
+            (widget as unknown as EsriDaylight).dateOrSeason = props.model.dateOrSeason;
 
             setWidget(widget as unknown as EsriDaylight);
         },
@@ -66,8 +62,7 @@ const Daylight = (props: DaylightWidgetProps): ReactElement => {
                     <Select
                         id={selectId}
                         onChange={(event) => {
-                            props.model.dateOrSeason = event.target
-                                .value as any;
+                            props.model.dateOrSeason = event.target.value as any;
                         }}
                         value={props.model.dateOrSeason}
                     >

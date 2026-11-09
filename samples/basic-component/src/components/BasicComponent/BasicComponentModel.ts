@@ -1,7 +1,4 @@
-import type {
-    ComponentModelProperties,
-    PropertyDefs,
-} from "@vertigis/web/models";
+import type { ComponentModelProperties, PropertyDefs } from "@vertigis/web/models";
 import { ComponentModelBase, serializable } from "@vertigis/web/models";
 
 interface BasicComponentModelProperties extends ComponentModelProperties {

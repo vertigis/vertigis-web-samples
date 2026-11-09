@@ -13,9 +13,7 @@ describe(sampleName, () => {
     it("shows german text", () => {
         cy.visit(`http://localhost:3001/?locale=de#${sampleName}`);
 
-        cy.getViewer()
-            .contains("Dieser Text wird übersetzt.")
-            .should("be.visible");
+        cy.getViewer().contains("Dieser Text wird übersetzt.").should("be.visible");
     });
 });
 

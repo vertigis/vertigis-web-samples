@@ -4,12 +4,7 @@ const sampleName = "third-party-lib";
 
 const getMapCanvas = () => cy.getViewer().getMap().find("canvas");
 
-const performExtentIdentify = (
-    fromX: number,
-    fromY: number,
-    toX: number,
-    toY: number
-) =>
+const performExtentIdentify = (fromX: number, fromY: number, toX: number, toY: number) =>
     getMapCanvas()
         .wait(100)
         .trigger("pointermove", fromX, fromY)
@@ -40,9 +35,7 @@ describe(sampleName, () => {
             .find(".ThreeDimensionalGraph")
             .should("exist")
             .should(($graphComponent) => {
-                const nodeCount = Number.parseInt(
-                    $graphComponent[0].dataset.nodeCount ?? ""
-                );
+                const nodeCount = Number.parseInt($graphComponent[0].dataset.nodeCount ?? "");
 
                 // Minimum would be one surveyor and one survey.
                 expect(nodeCount).to.be.at.least(2);
@@ -57,9 +50,7 @@ describe(sampleName, () => {
             .find(".ThreeDimensionalGraph")
             .should("exist")
             .should(($graphComponent) => {
-                const nodeCount = Number.parseInt(
-                    $graphComponent[0].dataset.nodeCount ?? "0"
-                );
+                const nodeCount = Number.parseInt($graphComponent[0].dataset.nodeCount ?? "0");
 
                 expect(nodeCount).to.equal(0);
             });

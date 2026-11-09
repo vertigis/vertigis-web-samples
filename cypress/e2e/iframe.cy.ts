@@ -29,9 +29,7 @@ xdescribe(sampleName, () => {
                 expect(viewpoint.camera.position.z).to.equal(-250);
             });
 
-        cy.getEmbeddedViewerHost()
-            .contains("button", "Zoom to initial viewpoint")
-            .click();
+        cy.getEmbeddedViewerHost().contains("button", "Zoom to initial viewpoint").click();
 
         cy.getEmbeddedViewer()
             .getMap()
@@ -41,19 +39,11 @@ xdescribe(sampleName, () => {
                 expect(viewpoint.camera.position.z).not.to.equal(-250);
             });
 
-        cy.getEmbeddedViewer()
-            .contains("button", "Send message to parent")
-            .click();
+        cy.getEmbeddedViewer().contains("button", "Send message to parent").click();
 
-        cy.getEmbeddedViewer()
-            .contains('[role="dialog"]', "Enter the message")
-            .find("input")
-            .type("Hello world");
+        cy.getEmbeddedViewer().contains('[role="dialog"]', "Enter the message").find("input").type("Hello world");
 
-        cy.getEmbeddedViewer()
-            .contains('[role="dialog"]', "Enter the message")
-            .contains("button", "OK")
-            .click();
+        cy.getEmbeddedViewer().contains('[role="dialog"]', "Enter the message").contains("button", "OK").click();
 
         cy.getEmbeddedViewerHost().contains("Hello world");
     });

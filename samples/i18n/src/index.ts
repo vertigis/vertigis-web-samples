@@ -1,8 +1,6 @@
 import type { LibraryRegistry } from "@vertigis/web/config";
 
-import TranslatableText, {
-    TranslatableTextModel,
-} from "./components/TranslatableText";
+import TranslatableText, { TranslatableTextModel } from "./components/TranslatableText";
 import deLanguageValues from "./de.json";
 import enLanguageValues from "./en.json";
 

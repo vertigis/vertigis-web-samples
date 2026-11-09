@@ -15,9 +15,7 @@ import type { ReactElement } from "react";
 
 import type TranslatableTextModel from "./IconListModel";
 
-export default function IconList(
-    props: LayoutElementProperties<TranslatableTextModel>
-): ReactElement {
+export default function IconList(props: LayoutElementProperties<TranslatableTextModel>): ReactElement {
     const { model } = props;
     const { getIcon } = useContext(UIContext);
     const [showOnlyUserIcons, setShowOnlyUserIcons] = useState(true);
@@ -33,9 +31,7 @@ export default function IconList(
                         control={
                             <Checkbox
                                 checked={showOnlyUserIcons ?? true}
-                                onChange={() =>
-                                    setShowOnlyUserIcons(!showOnlyUserIcons)
-                                }
+                                onChange={() => setShowOnlyUserIcons(!showOnlyUserIcons)}
                             />
                         }
                         label="Show Only Custom Icons?"
@@ -43,11 +39,7 @@ export default function IconList(
                     <Box>
                         <List>
                             {model?.iconNames
-                                .filter((icon) =>
-                                    showOnlyUserIcons
-                                        ? icon.startsWith("custom-")
-                                        : true
-                                )
+                                .filter((icon) => (showOnlyUserIcons ? icon.startsWith("custom-") : true))
                                 .map((icon) => (
                                     <ListItemButton
                                         sx={{ cursor: "pointer" }}
@@ -64,11 +56,7 @@ export default function IconList(
                         </List>
                     </Box>
                 </Stack>
-                <Box margin={2}>
-                    {Icon && (
-                        <Icon style={{ width: "100px", height: "100px" }} />
-                    )}
-                </Box>
+                <Box margin={2}>{Icon && <Icon style={{ width: "100px", height: "100px" }} />}</Box>
             </Stack>
         </LayoutElement>
     );

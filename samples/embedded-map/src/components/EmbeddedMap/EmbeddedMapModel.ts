@@ -1,10 +1,6 @@
 import Point from "@arcgis/core/geometry/Point";
 import type { MapModel } from "@vertigis/web/mapping";
-import {
-    ComponentModelBase,
-    serializable,
-    importModel,
-} from "@vertigis/web/models";
+import { ComponentModelBase, serializable, importModel } from "@vertigis/web/models";
 import { throttle } from "@vertigis/web/ui";
 import type { IViewer, LngLat, ViewerImageEvent } from "mapillary-js";
 
@@ -29,8 +25,7 @@ interface MapillaryCamera {
 export default class EmbeddedMapModel extends ComponentModelBase {
     // For demonstration purposes only.
     // Replace this with your own client ID from mapillary.com
-    readonly mapillaryKey =
-        "MLY|4371038552987952|3051b8de90b9a19c55ba2e5edd9376db";
+    readonly mapillaryKey = "MLY|4371038552987952|3051b8de90b9a19c55ba2e5edd9376db";
 
     // The computed position of the current Mapillary image
     private _currentImagePosition: LngLat;
@@ -123,8 +118,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
             return;
         }
 
-        const { latitude, longitude, heading, tilt, fov } =
-            await this._getMapillaryCamera();
+        const { latitude, longitude, heading, tilt, fov } = await this._getMapillaryCamera();
 
         const centerPoint = new Point({
             latitude,
@@ -162,8 +156,7 @@ export default class EmbeddedMapModel extends ComponentModelBase {
 
         // Create location marker based on current location from Mapillary and
         // pan/zoom VertiGIS Studio map to the location.
-        const { latitude, longitude, heading, tilt, fov } =
-            await this._getMapillaryCamera();
+        const { latitude, longitude, heading, tilt, fov } = await this._getMapillaryCamera();
 
         const centerPoint = new Point({ latitude, longitude });
         await Promise.all([
