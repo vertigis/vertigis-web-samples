@@ -1,8 +1,6 @@
 import type { LibraryRegistry } from "@vertigis/web/config";
 
 import Daylight, { DaylightModel } from "./components/Daylight";
-import { DaylightWidgetProps } from "./components/Daylight/Daylight";
-import { FC } from "react";
 
 export default function registerLibrary(registry: LibraryRegistry): void {
     registry.registerComponent({

@@ -12,7 +12,6 @@ export default class DaylightModel extends ComponentModelBase<DaylightModelPrope
     map: MapModel | undefined;
 
     dateOrSeason: DaylightModelProperties["dateOrSeason"];
-
     protected override _getSerializableProperties(): PropertyDefs<DaylightModelProperties> {
         const baseProperties = super._getSerializableProperties();
         return {

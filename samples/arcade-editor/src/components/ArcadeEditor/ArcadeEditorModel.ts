@@ -29,7 +29,6 @@ export default class ArcadeEditorModel extends ComponentModelBase<ArcadeEditorMo
     }
     set map(value: MapModel) {
         this._map = value;
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         this._onMapChanged();
     }
 

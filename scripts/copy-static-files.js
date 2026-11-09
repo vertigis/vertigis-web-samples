@@ -1,23 +1,17 @@
-const { exec } = require("child_process");
+const { execSync } = require("child_process");
+const viewerAppConfig = require("../samples/library-viewer/app/app.json");
 
-const libraries = [
-    "arcade-editor",
-    "arcgis-widget",
-    "basic-component",
-    "basic-service",
-    "commands-and-operations",
-    "embedded-map",
-    "i18n",
-    "icons-pack",
-    "iframe",
-    "tap-into-web-event",
-    "third-party-lib",
-    "ui-library",
-];
+// Use the same list of libraries as the library viewer.
+const samples = viewerAppConfig.items
+    .filter((item) => item.$type === "library-viewer-model")
+    .flatMap((item) => item.libraries.map((library) => library.id));
 
-exec("shx cp -r ./samples/library-viewer/{app,build}/* ./viewer/build");
+// Run each command in sequence, and stop the build if a command fails.
+const run = (command) => execSync(command, { stdio: "inherit" });
 
-libraries.forEach((library) => {
-    exec(`shx mkdir -p ./viewer/build/${library}`);
-    exec(`shx cp -r ./samples/${library}/{app,build,README.md} ./viewer/build/${library}`);
-});
+run("shx cp -r ./samples/library-viewer/{app,build}/* ./viewer/build");
+
+for (const sample of samples) {
+    run(`shx mkdir -p ./viewer/build/${sample}`);
+    run(`shx cp -r ./samples/${sample}/{app,build,README.md} ./viewer/build/${sample}`);
+}
